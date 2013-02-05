@@ -1,0 +1,12 @@
+ref/*
+mondriaan
+*.o
+*.a
+*~
+Mondriaan3.11/src/include/
+Mondriaan3.11/tools/Mondriaan
+Mondriaan3.11/tools/MondriaanPlot
+Mondriaan3.11/tools/Profile
+Mondriaan3.11/tools/.*
+Mondriaan3.11/tools/MatlabMondriaan.mexa64
+matrices/*
