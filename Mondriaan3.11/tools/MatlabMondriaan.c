@@ -126,7 +126,7 @@ int DoMondriaan(struct sparsematrix *A, long int *u, long int *v, struct Mondria
 		}
 	}
 	if (SplitStrategy != -1){
-		if(SplitStrategy <= 7) Options.SplitStrategy = SplitStrategy;
+		if(SplitStrategy <= 8) Options.SplitStrategy = SplitStrategy;
 		else fprintf(stderr, "oh snap! something is wrong with the custom split strategy!\n");
 	}
 

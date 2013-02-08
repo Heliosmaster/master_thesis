@@ -1,7 +1,7 @@
 # Mondriaan default settings: 
 LoadbalanceStrategy                            constant 
 LoadbalanceAdjust                              yes 
-SplitStrategy                                  localbest
+SplitStrategy                                  twodim 
 Alternate_FirstDirection                       ratio 
 SplitMethod                                    KLFM 
 Partitioner                                    mondriaan 
@@ -32,6 +32,6 @@ VectorPartition_MaxNrLoops                     10
 VectorPartition_MaxNrGreedyImproves            10 
 OutputFormat                                   original 
 OutputMode                                     original 
-Seed                                           -1 
+Seed                                           -1
 Permute                                        SBD 
 EnforceSymmetricPermutation                    no 

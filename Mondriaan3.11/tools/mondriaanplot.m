@@ -104,9 +104,10 @@ for i=1:NumProcessors
     hold on
 end
 
+hold off;
 %Print some basic statistics.
 [m, n] = size(A);
-xlabel(['m = ', int2str(m), ', n = ', int2str(n), ', nz = ', int2str(nnz(A)), ', p = ', int2str(NumProcessors), ', eps = ', num2str(s(2)), ', max. com. = ', num2str(s(3)), ', com. vol. = ', num2str(s(4))]);
+xlabel(['m = ', int2str(m), ', n = ', int2str(n), ', nz = ', int2str(nnz(A)), ', p = ', int2str(NumProcessors), ', eps = ', num2str(s(2)), ', max. com. = ', num2str(s(3)), ', com. vol. = ', num2str(s(4)), ', split=', int2str(SplitStrategy)]);
 
 set(gca, 'xlim', [0 n+1], 'ylim', [0 m+1], 'grid', 'none', 'plotboxaspectratio', [n+1 m+1 1], 'ydir', 'reverse');
 
