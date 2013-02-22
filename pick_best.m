@@ -44,23 +44,32 @@ for i=2:iter
 %     Ar = I-2*Ac;
     
     % creating the matrix B as in the model
-    B = create_B(Ar,Ac,m,n);
+    B1 = create_B(Ar,Ac,m,n);
+    B2 = create_B(Ac,Ar,m,n);
     %figure(i);
     
     % splitting B with the row-net model (onedimcol = 5 in SplitStrategy)
-    [I2, s, p, q, r, c, rh, ch, B, u, v] = mondriaan(B,2,0.03,0,0,5);
+    [I1, s1, p, q, r, c, rh, ch, ~, u, v] = mondriaan(B1,2,0.03,0,0,5);
+    [I2, s2, p, q, r, c, rh, ch, ~, u, v] = mondriaan(B2,2,0.03,0,0,5);
+    if s1(4) < s2(4)
+        I = I1;
+        s = s1;
+    else
+        I=I2;
+        s=s2;
+    end
     results(i) = s(4);
-    fprintf('%g: comm. vol. = %g\n',i,s(4));
+    fprintf('%g: vol = %g\n',i,s(4));
     
     % cleaning the diagonal elements
     for k = 1:m+n
-        I2(k,k) = 0;
+        I(k,k) = 0;
     end
     
     % getting back the original Ar and Ac, with new partitioning
     
-    Ar2 = I2(1:n,n+1:end)';
-    Ac2 = I2(n+1:end,1:n);
+    Ar2 = I(1:n,n+1:end)';
+    Ac2 = I(n+1:end,1:n);
     
     % reassembling the original matrix, with new partitioning
     A2 = Ar2+Ac2;
@@ -95,4 +104,4 @@ for i=2:iter
 end
 
 [best,k] = min(results);
-fprintf('best=%g at iteration %g\n',best,k);
+fprintf('best: %g at iter %g\n',best,k);
