@@ -11,18 +11,21 @@ clear str
 iter = 100;
 i=1;
 results = zeros(1,iter);
+results0 = zeros(1,iter);
 
 %initial split (8 = twodim)
 [I, s, p, q, r, c, rh, ch, B, u, v] = mondriaan(A,2,0.03,0,0,8);
 results(1) = s(4);
+results0(1) = s(4);
 fprintf('%g: comm. vol. = %g\n',1,s(4));
 
 %separating the two parts as S1 and S2
 [m,n] = size(A);
 [i1,j1,s1] = find(I==1);
-Ar = sparse(i1,j1,s1,m,n);
+Ar0 = sparse(i1,j1,s1,m,n);
 [i2,j2,s2] = find(I==2);
-Ac = sparse(i2,j2,s2,m,n);
+Ac0 = sparse(i2,j2,s2,m,n);
+[Ac,Ar] = localview(A);
 
 %  figure(ceil(i/2));
 %  j = mod(i,2);
@@ -45,16 +48,20 @@ for i=2:iter
     
     % creating the matrix B as in the model
     B = create_B(Ar,Ac,m,n);
+    B0 = create_B(Ar0,Ac0,m,n);
     %figure(i);
     
     % splitting B with the row-net model (onedimcol = 5 in SplitStrategy)
     [I2, s, p, q, r, c, rh, ch, B, u, v] = mondriaan(B,2,0.03,0,0,5);
+    [I20, s0, p0, q0, r0, c0, rh0, ch0, B0, u0, v0] = mondriaan(B0,2,0.03,0,0,5);
     results(i) = s(4);
-    fprintf('%g: comm. vol. = %g\n',i,s(4));
+    results0(i) = s0(4);
+    fprintf('%g: comm. vol. = %g\t %g\n',i,s(4), s0(4));
     
     % cleaning the diagonal elements
     for k = 1:m+n
         I2(k,k) = 0;
+        I20(k,k) = 0;
     end
     
     % getting back the original Ar and Ac, with new partitioning
@@ -65,21 +72,29 @@ for i=2:iter
     % reassembling the original matrix, with new partitioning
     A2 = Ar2+Ac2;
     
+    Ar20 = I20(1:n,n+1:end)';
+    Ac20 = I20(n+1:end,1:n);
+    
+    % reassembling the original matrix, with new partitioning
+    A20 = Ar20+Ac20;
+    
+    
     % getting the new Ar and Ac based on new partitioning
-    [i1,j1,s1] = find(A2==1);
-    Ar = sparse(i1,j1,s1,m,n);
-    [i2,j2,s2] = find(A2==2);
-    Ac = sparse(i2,j2,s2,m,n);
+    [Ac,Ar] = localview(A2);
+     [i1,j1,s1] = find(A20==1);
+     Ar0 = sparse(i1,j1,s1,m,n);
+     [i2,j2,s2] = find(A20==2);
+     Ac0 = sparse(i2,j2,s2,m,n);
     
     %visualizing new partioning
-    
-    if(s(4)==10)
-        figure(9);
-        lab = ['iter: ' int2str(i) '   comm: ' int2str(s(4)) '  Ar/Ac: ' int2str(nnz(Ar)) '/' int2str(nnz(Ac))];
-        spy(Ar,'r'); hold on;
-        spy(Ac,'g'); hold off;
-        xlabel(lab); 
-    end
+%     
+%     if(s(4)==10)
+%         figure(9);
+%         lab = ['iter: ' int2str(i) '   comm: ' int2str(s(4)) '  Ar/Ac: ' int2str(nnz(Ar)) '/' int2str(nnz(Ac))];
+%         spy(Ar,'r'); hold on;
+%         spy(Ac,'g'); hold off;
+%         xlabel(lab); 
+%     end
     
 %     figure(ceil(i/2));
 %     j = mod(i,2);
@@ -96,3 +111,6 @@ end
 
 [best,k] = min(results);
 fprintf('best=%g at iteration %g\n',best,k);
+figure(1)
+plot(results); hold on;
+plot(results0,'g');

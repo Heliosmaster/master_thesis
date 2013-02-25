@@ -3,8 +3,9 @@
 %       breaking ties randomly (for the 1st case)?
 
 function [Bc,Br]=localview(A)
-    Br = sparse(0,0);
-    Bc = sparse(0,0);
+    [m,n] = size(A);
+    Br = sparse(m,n);
+    Bc = sparse(m,n);
     [m,n] = size(A);
     [i1,j1,s1] = find(A==1);
     A1 = sparse(i1,j1,s1,m,n);

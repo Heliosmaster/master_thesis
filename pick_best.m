@@ -105,3 +105,5 @@ end
 
 [best,k] = min(results);
 fprintf('best: %g at iter %g\n',best,k);
+figure(1)
+plot(results);
