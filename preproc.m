@@ -8,7 +8,7 @@ A = mmread(str);
 clear str
 
 %iteration number
-iter = 100;
+iter = 2;
 i=1;
 results = zeros(1,iter);
 results0 = zeros(1,iter);
@@ -48,43 +48,56 @@ for i=2:iter
     
     % creating the matrix B as in the model
     B = create_B(Ar,Ac,m,n);
-    B0 = create_B(Ar0,Ac0,m,n);
+   % B0 = create_B(Ar0,Ac0,m,n);
+   % B0 = globalview(B0,m,n);
     %figure(i);
     
     % splitting B with the row-net model (onedimcol = 5 in SplitStrategy)
-    [I2, s, p, q, r, c, rh, ch, B, u, v] = mondriaan(B,2,0.03,0,0,5);
-    [I20, s0, p0, q0, r0, c0, rh0, ch0, B0, u0, v0] = mondriaan(B0,2,0.03,0,0,5);
+    [I2, s, ~, ~, ~, ~, ~, ~, ~, ~, ~] = mondriaan(B,2,0.03,0,0,5);
+    %[I20, s0, ~, ~, ~, ~, ~, ~, ~, ~, ~] = mondriaan(B0,2,0.03,0,0,5);
     results(i) = s(4);
-    results0(i) = s0(4);
-    fprintf('%g: comm. vol. = %g\t %g\n',i,s(4), s0(4));
+    %results0(i) = s0(4);
+    fprintf('%g: comm. vol. = %g\n',i,s(4));
     
     % cleaning the diagonal elements
     for k = 1:m+n
         I2(k,k) = 0;
-        I20(k,k) = 0;
+     %   I20(k,k) = 0;
     end
+    
+   % figure(i); spy(I2);
     
     % getting back the original Ar and Ac, with new partitioning
     
     Ar2 = I2(1:n,n+1:end)';
     Ac2 = I2(n+1:end,1:n);
     
+
+    
     % reassembling the original matrix, with new partitioning
     A2 = Ar2+Ac2;
+    figure(199+i); spy(A2);
+%     
+%     Ar20 = I20(1:n,n+1:end)';
+%     Ac20 = I20(n+1:end,1:n);
+%     
+%     % reassembling the original matrix, with new partitioning
+%     A20 = Ar20+Ac20;
     
-    Ar20 = I20(1:n,n+1:end)';
-    Ac20 = I20(n+1:end,1:n);
-    
-    % reassembling the original matrix, with new partitioning
-    A20 = Ar20+Ac20;
-    
+        figure(i);
+    lab = ['iter: ' int2str(i) '   comm: ' int2str(s(4)) '  Ar/Ac: ' int2str(nnz(Ar2)) '/' int2str(nnz(Ac2))];
+    spy(Ar2,'r'); hold on;
+    spy(Ac2,'g'); hold off;
+    xlabel(lab);
     
     % getting the new Ar and Ac based on new partitioning
     [Ac,Ar] = localview(A2);
-     [i1,j1,s1] = find(A20==1);
-     Ar0 = sparse(i1,j1,s1,m,n);
-     [i2,j2,s2] = find(A20==2);
-     Ac0 = sparse(i2,j2,s2,m,n);
+%     [i1,j1,s1] = find(A20==1);
+%     Ar0 = sparse(i1,j1,s1,m,n);
+%     [i2,j2,s2] = find(A20==2);
+%     Ac0 = sparse(i2,j2,s2,m,n);
+
+    
     
     %visualizing new partioning
 %     
@@ -111,6 +124,6 @@ end
 
 [best,k] = min(results);
 fprintf('best=%g at iteration %g\n',best,k);
-figure(1)
-plot(results); hold on;
-plot(results0,'g');
+figure(101)
+plot(results); 
+%hold on; plot(results0,'g');

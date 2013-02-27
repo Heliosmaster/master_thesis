@@ -1,4 +1,4 @@
-clear all; close all; clc;
+clear all; clc;
 
 % read the input sparse matrix
 matrix = 'impcol_b';
@@ -49,8 +49,8 @@ for i=2:iter
     %figure(i);
     
     % splitting B with the row-net model (onedimcol = 5 in SplitStrategy)
-    [I1, s1, p, q, r, c, rh, ch, ~, u, v] = mondriaan(B1,2,0.03,0,0,5);
-    [I2, s2, p, q, r, c, rh, ch, ~, u, v] = mondriaan(B2,2,0.03,0,0,5);
+    [I1, s1, ~,~,~,~,~,~,~,~,~] = mondriaan(B1,2,0.03,0,0,5);
+    [I2, s2, ~,~,~,~,~,~,~,~,~] = mondriaan(B2,2,0.03,0,0,5);
     if s1(4) < s2(4)
         I = I1;
         s = s1;
@@ -82,13 +82,13 @@ for i=2:iter
     
     %visualizing new partioning
     
-    if(s(4)==10)
-        figure(9);
-        lab = ['iter: ' int2str(i) '   comm: ' int2str(s(4)) '  Ar/Ac: ' int2str(nnz(Ar)) '/' int2str(nnz(Ac))];
-        spy(Ar,'r'); hold on;
-        spy(Ac,'g'); hold off;
-        xlabel(lab); 
-    end
+%     if(s(4)==10)
+%         figure(9);
+%         lab = ['iter: ' int2str(i) '   comm: ' int2str(s(4)) '  Ar/Ac: ' int2str(nnz(Ar)) '/' int2str(nnz(Ac))];
+%         spy(Ar,'r'); hold on;
+%         spy(Ac,'g'); hold off;
+%         xlabel(lab); 
+%     end
     
 %     figure(ceil(i/2));
 %     j = mod(i,2);
@@ -105,5 +105,5 @@ end
 
 [best,k] = min(results);
 fprintf('best: %g at iter %g\n',best,k);
-figure(1)
-plot(results);
+figure(101); hold on;
+plot(results,'r');

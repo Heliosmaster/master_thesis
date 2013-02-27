@@ -1,6 +1,6 @@
 function B=create_B(Ar,Ac,m,n)
     %diagonal part
-    dia = sparse([],[],[],m+n,m+n);
+    dia = sparse(m+n,m+n);
     for i=1:m
         if((nnz(Ar(i,:))) && (nnz(Ac(i,:))))
             dia(n+i,n+i) = 1;
