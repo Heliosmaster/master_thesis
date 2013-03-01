@@ -67,5 +67,11 @@ function B=globalview(B,m,n)
                % fprintf('Row %g emptied!\n',i);
             end
         end
+        
+        for i=1:m+n
+            if nnz(B(i,:)) && nnz(B(:,i))
+                B(i,i) = 1;
+            end
+        end
     end        
 end
