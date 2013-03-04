@@ -2,7 +2,7 @@ clear all; close all; clc;
 
 printIteration = 0;
 % read the input sparse matrix
-matrix = 'impcol_b';
+matrix = 'cage6';
 str = ['matrices/' matrix '.mtx'];
 A = mmread(str);
 %A = sprand(30,30,0.3);
@@ -43,8 +43,9 @@ for i=2:iter
    
     % creating the matrix B as in the model
     B = create_B(Ar,Ac,m,n);
+    B = globalview(B,m,n);
     if i ~= 2 && (results(i-1) == results(i-2))
-        B = globalview(B,m,n);
+        %B = globalview(B,m,n);
     end
    
     

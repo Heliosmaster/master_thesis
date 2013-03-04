@@ -100,7 +100,7 @@ for i=1:NumProcessors
     % The following code is based on spy.m, included with Matlab.
     %spy(C, Colours(i,:));
     [k, l] = find(C);
-    plot(l, k, 'marker', '.', 'markersize', 5, 'linestyle', 'none', 'color', Colours(i,:));
+    plot(l, k, 'marker', '.', 'markersize', 6, 'linestyle', 'none', 'color', Colours(i,:));
     hold on
 end
 
