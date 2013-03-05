@@ -1,6 +1,5 @@
 % A = sparse matrix with values 1 and 2
-% TODO: construction of sparse matrices by indices and 'sparse' to speed up
-%       Breaking ties randomly (for the 1st case)?
+% TODO: Breaking ties randomly (for the 1st case)?
 
 function [Ac,Ar]=localview(A)
     [m,n] = size(A);

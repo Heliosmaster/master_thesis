@@ -15,7 +15,7 @@ results = zeros(1,iter);
 results0 = zeros(1,iter);
 
 %initial split (8 = twodim)
-[I, s, p, q, r, c, rh, ch, B, u, v] = mondriaan(A,2,0.03,0,0,8);
+[I, s, p, q, r, c, rh, ch, B, u, v] = mondriaan(A,2,0.03,2,0,8);
 results(1) = s(4);
 results0(1) = s(4);
 fprintf('%g: comm. vol. = %g\n',1,s(4));
@@ -24,10 +24,11 @@ fprintf('%g: comm. vol. = %g\n',1,s(4));
 [m,n] = size(A);
 
 if printIteration
-    showIteration(I,s,1,1)
+    showIteration(I,s,1,1);
 end
 
-[Ac,Ar] = localview(A);
+%[Ac,Ar] = localview(A);
+[Ar,Ac]=sbdview(I,p,q,r,c);
 
 %  figure(ceil(i/2));
 %  j = mod(i,2);
@@ -50,7 +51,7 @@ for i=2:iter
    
     
     % splitting B with the row-net model (onedimcol = 5 in SplitStrategy)
-    [I2, s, p, q, r, c, rh, ch, B, u, v] = mondriaan(B,2,0.03,0,0,5);
+    [I2, s, p, q, r, c, rh, ch, B, u, v] = mondriaan(B,2,0.03,2,0,5);
     results(i) = s(4);
     fprintf('%g: comm. vol. = %g\n',i,s(4));
     
@@ -78,8 +79,8 @@ for i=2:iter
 
 
     % getting the new Ar and Ac based on new partitioning
-    [Ac,Ar] = localview(A2);
-
+   [Ac,Ar] = localview(A2);
+%     [Ar,Ac]=sbdview(A2,p,q,r,c);
   
     
 end
