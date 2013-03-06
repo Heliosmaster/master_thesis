@@ -27,6 +27,8 @@ if printIteration
     showIteration(I,s,1,1);
 end
 
+counterglobalview = 3;
+
 %[Ac,Ar] = localview(A);
 [Ar,Ac]=sbdview(I,p,q,r,c);
 
@@ -44,9 +46,9 @@ for i=2:iter
    
     % creating the matrix B as in the model
     B = create_B(Ar,Ac,m,n);
-    B = globalview(B,m,n);
-    if i ~= 2 && (results(i-1) == results(i-2))
-        %B = globalview(B,m,n);
+    if i ~= 2 && (results(i-1) == results(i-2)) && counterglobalview < 3;
+        B = globalview(B,m,n);
+        counterglobalview = counterglobalview+1;
     end
    
     
@@ -77,9 +79,10 @@ for i=2:iter
     end
     
 
-
-    % getting the new Ar and Ac based on new partitioning
-   [Ac,Ar] = localview(A2);
+    [p,q,r,c] = sbd(A2);
+    [Ar,Ac]=sbdview(A2,p,q,r,c);
+%     % getting the new Ar and Ac based on new partitioning
+%  [Ac,Ar] = localview(A2);
 %     [Ar,Ac]=sbdview(A2,p,q,r,c);
   
     
