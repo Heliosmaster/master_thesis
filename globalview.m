@@ -22,8 +22,9 @@ function B=globalview(B,m,n)
 
         %computation of the nonzeros of the rows of B
         nzi = zeros(m+n,1);
+        B2 = B';
         for i=1:m+n
-            nzi(i) = nnz(B(i,:));
+            nzi(i) = nnz(B2(:,i));
         end
 
         % finds the minimum number of nonzeros in row that have a diagonal
@@ -60,16 +61,17 @@ function B=globalview(B,m,n)
         end
 
         B = sparse(row,col,val,m+n,m+n);
+        B2 = B';
 
         for i=1:m+n
-            if (nnz(B(i,:)) == 1 || nnz(B(:,i))==1 ) && (B(i,i) == 1)
+            if (nnz(B2(:,i)) == 1 || nnz(B(:,i))==1 ) && (B(i,i) == 1)
                 B(i,i) = 0;
                % fprintf('Row %g emptied!\n',i);
             end
         end
         
         for i=1:m+n
-            if nnz(B(i,:)) && nnz(B(:,i))
+            if nnz(B2(:,i)) && nnz(B(:,i))
                 B(i,i) = 1;
             end
         end

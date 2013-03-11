@@ -14,6 +14,7 @@
 % part 5 uncut col (green), cut row
 % part 6, uncut row (green), cut col
 % part 7, uncut row+col (green)
+
 function [P1,P2,P3,P4,P5,P6,P7] = split_subparts(I,p,q,r,c)
     P = (I(p,q));
     P1 = P(1:r(2)-1,1:c(2)-1);

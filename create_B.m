@@ -1,8 +1,10 @@
 function B=create_B(Ar,Ac,m,n)
     %diagonal part
     dia = sparse(m+n,m+n);
+    Ar2 = Ar';
+    Ac2 = Ac';
     for i=1:m
-        if((nnz(Ar(i,:))) && (nnz(Ac(i,:))))
+        if((nnz(Ar2(:,i))) && (nnz(Ac2(:,i))))
             dia(n+i,n+i) = 1;
         end
     end
@@ -25,6 +27,6 @@ function B=create_B(Ar,Ac,m,n)
     Ar = sparse(ir,jr,sr,m+n,m+n);
     
     B = Ac+Ar+dia;
-
+end
     
     
