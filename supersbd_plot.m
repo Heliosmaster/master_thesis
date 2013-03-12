@@ -11,6 +11,22 @@ function supersbd_plot(I,p,q,r,c)
     mi = [r(2)-r(1),r(3)-r(2),r(4)-r(3),r(5)-r(4),r(6)-r(5)];
     ni = [c(2)-c(1),c(3)-c(2),c(4)-c(3),c(5)-c(4),c(6)-c(5)];
     
+    num_nz = zeros(13,1);
+    num_nz(1) = nnz(P1);
+    num_nz(2) = nnz(P2);
+    num_nz(3) = nnz(P3);
+    num_nz(4) = nnz(P4);
+    num_nz(5) = nnz(P5);
+    num_nz(6) = nnz(P6);
+    num_nz(7) = nnz(P7);
+    num_nz(8) = nnz(P8);
+    num_nz(9) = nnz(P9);
+    num_nz(10) = nnz(P10);
+    num_nz(11) = nnz(P11);
+    num_nz(12) = nnz(P12);
+    num_nz(13) = nnz(P13);
+    
+    
     % converting to vectors
     [i1,j1,~] = find(P1);
     [i2,j2,~] = find(P2);
@@ -92,4 +108,15 @@ function supersbd_plot(I,p,q,r,c)
     spy(A11,'c');
     spy(A12,'m');
     spy(A13,'y');
+    
+    step = m/1000;
+    
+    plot(0:step:n+1,r(2)-0.5,'k');
+    plot(0:step:n+1,r(3)-0.5,'k');
+    plot(0:step:n+1,r(4)-0.5,'k');
+    plot(0:step:n+1,r(5)-0.5,'k');
+    plot(c(2)-0.5,0:step:m+1,'k');
+    plot(c(3)-0.5,0:step:m+1,'k');
+    plot(c(4)-0.5,0:step:m+1,'k');
+    plot(c(5)-0.5,0:step:m+1,'k');
     hold off;

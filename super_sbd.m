@@ -17,7 +17,6 @@ function [p,q,r,c]=super_sbd(I)
     nz3 = zeros(n1,1);
     nz5 = zeros(n3,1);
     nz6 = zeros(m3,1);
-
   
     for i=1:m1
     nz2(i) = logical(nnz(P2(i,:)));
@@ -43,11 +42,17 @@ function [p,q,r,c]=super_sbd(I)
     % sorting in reverse block 5 and 6 for the lower right corner (block 7) 
     [zp5,p5] = sort(nz5,'descend');
     [zp6,p6] = sort(nz6,'descend');
+    
 
     % permutation vectors: the central part is the identity permutation
     % because they don't get sorted in that dimension
-    p = [p2; (m1+1:m1+m2)'; m1+m2+p6];
-    q = [p3; (n1+1:n1+n2)'; n1+n2+p5];
+    p1 = [p2; (m1+1:m1+m2)'; m1+m2+p6];
+    q1 = [p3; (n1+1:n1+n2)'; n1+n2+p5];
+    
+    p=p(p1);
+    q=q(q1);
+    
+    spy(I(p,q))
 
     % bookkeeping of the sizes of the new subparts
     r(1) = 1;

@@ -3,7 +3,7 @@ clear all; close all; clc;
 % read the input sparse matrix
 %matrix = 'dfl001';
 %matrix = 'cage6';
-matrix = 'sherman1';
+matrix = 'impcol_b';
 str = ['matrices/' matrix '.mtx'];
 A = mmread(str);
 %A = sprand(30,30,0.3);
