@@ -24,8 +24,6 @@
 
 function [P1,P2,P3,P4,P5,P6,P7,P8,P9,P10,P11,P12,P13] = supersplit_subparts(I,p,q,r,c)
     P = (I(p,q));
-    nnz(I)
-    
     P1 = P(1:r(2)-1,1:c(2)-1);
     P2 = P(1:r(2)-1,c(2):c(3)-1);
     P3 = P(r(2):r(3)-1,1:c(2)-1);

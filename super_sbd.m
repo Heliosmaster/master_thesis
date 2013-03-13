@@ -52,8 +52,6 @@ function [p,q,r,c]=super_sbd(I)
     p=p(p1);
     q=q(q1);
     
-    spy(I(p,q))
-
     % bookkeeping of the sizes of the new subparts
     r(1) = 1;
     r(2) = length(find(zp2==0))+r(1);

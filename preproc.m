@@ -1,23 +1,22 @@
-clear all; close all; clc;
+%clear all; close all; clc;
 
 printIteration = 0;
 % read the input sparse matrix
-matrix = 'tbdlinux';
+matrix = 'dfl001';
 str = ['matrices/' matrix '.mtx'];
 A = mmread(str);
 %A = sprand(30,30,0.3);
 clear str
 
 %iteration number
-iter = 2;
+iter = 10;
 i=1;
 results = zeros(1,iter);
 results0 = zeros(1,iter);
 
 %initial split (8 = twodim)
-[I, s, p, q, r, c, rh, ch, B, u, v] = mondriaan(A,2,0.03,2,0,8);
+[I, s, ~, ~ , ~, ~, ~, ~, ~, ~, ~] = mondriaan(A,2,0.03,2,0,8);
 results(1) = s(4);
-results0(1) = s(4);
 fprintf('%g: comm. vol. = %g\n',1,s(4));
 
 %separating the two parts as S1 and S2
@@ -27,10 +26,11 @@ fprintf('%g: comm. vol. = %g\n',1,s(4));
 %     showIteration(I,s,1,1);
 % end
 
-counterglobalview = 0;
+% counterglobalview = 0;
 
-%[Ac,Ar] = localview(A);
-[Ar,Ac]=sbdview(I,p,q,r,c);
+[Ac,Ar] = localview(A);
+% [p,q,r,c] = super_sbd(I);
+% [Ar,Ac]=super_sbdview(I,p,q,r,c);
 
 %  figure(ceil(i/2));
 %  j = mod(i,2);
@@ -53,7 +53,7 @@ for i=2:iter
    
     
     % splitting B with the row-net model (onedimcol = 5 in SplitStrategy)
-    [I2, s, p, q, r, c, rh, ch, B, u, v] = mondriaan(B,2,0.03,0,0,5);
+    [I2, s, ~, ~, ~, ~, ~, ~, ~, ~, ~] = mondriaan(B,2,0.03,0,0,5);
     results(i) = s(4);
     fprintf('%g: comm. vol. = %g\n',i,s(4));
     
@@ -79,10 +79,10 @@ for i=2:iter
 %     end
     
 
-    [p,q,r,c] = sbd(A2);
-    [Ar,Ac]=sbdview(A2,p,q,r,c);
+%     [p,q,r,c] = super_sbd(A2);
+%     [Ar,Ac]=super_sbdview(A2,p,q,r,c);
 %     % getting the new Ar and Ac based on new partitioning
-%  [Ac,Ar] = localview(A2);
+ [Ac,Ar] = localview(A2);
   
     
 end

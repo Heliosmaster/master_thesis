@@ -23,6 +23,21 @@ function [Ar,Ac]=sbdview(I,p,q,r,c)
     [i6,j6,~] = find(P6);
     [i7,j7,~] = find(P7);
     
+    i1 = i1(:);
+    i2 = i2(:);
+    i3 = i3(:);
+    i5 = i5(:);
+    i6 = i6(:);
+    i7 = i7(:);
+    
+    
+    j1 = j1(:);
+    j2 = j2(:);
+    j3 = j3(:);
+    j5 = j5(:);
+    j6 = j6(:);
+    j7 = j7(:);
+    
     % shifting
     j2 = j2 + ni(1);
     

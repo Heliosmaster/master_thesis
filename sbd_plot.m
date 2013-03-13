@@ -56,4 +56,11 @@ function sbd_plot(I,p,q,r,c)
     spy(A5,'m');
     spy(A6,'y');
     spy(A7,'k');
+    
+    step = m/1000;
+    
+    plot(0:step:n+1,r(2)-0.5,'k');
+    plot(0:step:n+1,r(3)-0.5,'k');
+    plot(c(2)-0.5,0:step:m+1,'k');
+    plot(c(3)-0.5,0:step:m+1,'k');
     hold off;
