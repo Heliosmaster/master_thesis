@@ -127,7 +127,7 @@ int DoMondriaan(struct sparsematrix *A, long int *u, long int *v, struct Mondria
 	}
 	if (SplitStrategy != -1){
 		if(SplitStrategy <= 8) Options.SplitStrategy = SplitStrategy;
-		else fprintf(stderr, "oh snap! something is wrong with the custom split strategy!\n");
+		else fprintf(stderr, "Invalid value for the split strategy!\n");
 	}
 
 	/* Set desired permutation ordering. */
@@ -566,7 +566,7 @@ void mexFunction(int nlhs, mxArray *plhs[], int nrhs, const mxArray *prhs[]) {
 	long i;
 	
 	/* Check that the input parameters are valid. */
-	if (nrhs != 7) mexErrMsgTxt("We require seven input variables: the sparse matrix, the number of processors, the imbalance factor, the maximum number of iterations, the permutation type, and a symmetry boolean! Also, if it works, the splitStrategy");
+	if (nrhs != 7) mexErrMsgTxt("We require seven input variables: the sparse matrix, the number of processors, the imbalance factor, the maximum number of iterations, the permutation type, a symmetry boolean and the split strategy!");
 	else if (nlhs < 2 || nlhs > 11) mexErrMsgTxt("We require at least two and at most eleven output variables!");
 	else if (!mxIsSparse(prhs[0])) mexErrMsgTxt("The matrix on which we work needs to be sparse!");
 	
@@ -575,7 +575,7 @@ void mexFunction(int nlhs, mxArray *plhs[], int nrhs, const mxArray *prhs[]) {
 	Imbalance = ExtractDouble (prhs[2]);
 	MaxIterations = (int)ExtractDouble (prhs[3]);
 	Permutation = (int)ExtractDouble (prhs[4]);
-        Symm = (int)ExtractDouble (prhs[5]);
+  Symm = (int)ExtractDouble (prhs[5]);
 	SplitStrategy = (int)ExtractDouble(prhs[6]);
 
 	/* If not able to return any permute-related output variables, set permutation to none. */
@@ -605,7 +605,7 @@ void mexFunction(int nlhs, mxArray *plhs[], int nrhs, const mxArray *prhs[]) {
 		MondriaanV = NULL;
 	}
 	
-	if (!DoMondriaan(MondriaanMatrix, MondriaanU, MondriaanV, &Stats, NumProcessors, Imbalance, Permutation, Symm,SplitStrategy)) mexErrMsgTxt("Unable to run the Mondriaan algorithm!");
+	if (!DoMondriaan(MondriaanMatrix, MondriaanU, MondriaanV, &Stats, NumProcessors, Imbalance, Permutation, Symm, SplitStrategy)) mexErrMsgTxt("Unable to run the Mondriaan algorithm!");
 
 	/* And we convert the Mondriaan matrix back to Matlab. */
 	/* Return processor index matrix. */

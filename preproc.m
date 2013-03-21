@@ -9,10 +9,9 @@ A = mmread(str);
 clear str
 
 %iteration number
-iter = 10;
+iter = 100;
 i=1;
 results = zeros(1,iter);
-results0 = zeros(1,iter);
 
 %initial split (8 = twodim)
 [I, s, ~, ~ , ~, ~, ~, ~, ~, ~, ~] = mondriaan(A,2,0.03,2,0,8);
@@ -75,7 +74,7 @@ for i=2:iter
         
 
 %     if printIteration || s(4) == 10
-%         showIteration(A2,s,i,1)
+%       showIteration(A2,s,1,0.5)
 %     end
     
 

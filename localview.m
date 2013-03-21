@@ -61,7 +61,7 @@ function [Ac,Ar]=localview(A)
         %check whether both A1 and A2 have nonzeros at row i, i.e. row is
         %split
         
-         rowsplit = (nz1r(i)) && (nz2r(i));
+        rowsplit = (nz1r(i)) && (nz2r(i));
         
         %check whether both A1 and A2 have nonzeros at col j, i.e. col j is
         %split
