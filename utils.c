@@ -140,6 +140,6 @@ struct sparsematrix reorder_col_incr(struct sparsematrix matrix){
     newmatrix.j = J;
     newmatrix.ReValue = Val;
     newmatrix.NrNzElts = length;
-    free(tempArray);
+    vecfreel(tempArray);
     return newmatrix;
 }
