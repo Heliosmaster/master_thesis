@@ -1,7 +1,7 @@
-close all;
+close all; clc; clear all;
 matrix = 'test_matrix';
 str = ['matrices/' matrix '.mtx'];
 A = mmread(str);
 [Ac,Ar]=localview(A);
-Ac
-Ar
+[Ac1,Ar1]=MatlabLocalview(A);
+%[a,M] = MatlabLocalview(A);

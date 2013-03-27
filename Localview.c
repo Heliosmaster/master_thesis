@@ -13,7 +13,8 @@ struct TwoParts {
 
 void print_matrix(struct sparsematrix matrix){
   int k;
-  for(k=0;k<matrix.NrNzElts;k++) printf("(%ld,%ld)=%f\n", matrix.i[k]+1,matrix.j[k]+1,matrix.ReValue[k]);
+  for(k=0;k<matrix.NrNzElts;k++)
+    printf("(%ld,%ld)=%f\n", matrix.i[k]+1,matrix.j[k]+1,matrix.ReValue[k]);
 }
 
 void print_vectorl(long* vec, int length){
@@ -57,18 +58,21 @@ struct TwoParts split1and2(struct sparsematrix A){
   int max1=0;
   int max2=0;
 
-  // initial sweep of the matrix to see how long should be the vectors
-  for(k=0;k<A.NrNzElts;k++) (A.ReValue[k] == 2.0) ? max2++ : max1++;
+  /* initial sweep of the matrix to see how long should be the vectors*/
+  for(k=0;k<A.NrNzElts;k++) 
+    (A.ReValue[k] == 2.0) ? max2++ : max1++;
 
-  //initialization of the vectors
+  /*initialization of the vectors */
   long *i1 = vecallocl(max1);
   long *j1 = vecallocl(max1);
   double *v1 = vecallocd(max1);
+  double *c1 = vecallocd(max1);
   long *i2 = vecallocl(max2);
   long *j2 = vecallocl(max2);
   double *v2 = vecallocd(max2);
+  double *c2 = vecallocd(max2);
 
-  // indices to populate i and j
+  /* population of the vectors */
   int index1=0;
   int index2=0;
   for(k=0;k<A.NrNzElts;k++){
@@ -76,12 +80,14 @@ struct TwoParts split1and2(struct sparsematrix A){
       i2[index2] = A.i[k];
       j2[index2] = A.j[k];
       v2[index2] = 2.0;
+      c2[index2] = 0.0;
       index2++;
     }
     else {
       i1[index1] = A.i[k];
       j1[index1] = A.j[k];
       v1[index1] = 1.0;
+      c1[index1] = 0.0;
       index1++;
     }
   }
@@ -102,7 +108,10 @@ struct TwoParts split1and2(struct sparsematrix A){
   A2.j = j2;
 
   A1.ReValue = v1;
+  A1.ImValue = c1;
+
   A2.ReValue = v2;
+  A2.ImValue = c2;
 
   output.Ar = A1;
   output.Ac = A2;
@@ -134,10 +143,12 @@ long* nnz(long* input, int NrNzElts, int size){
 */
 struct TwoParts localview(struct sparsematrix matrix){
 
-  // dividing between A1 and A2
+  /* dividing between A1 and A2 */
   struct TwoParts A = split1and2(matrix);
   struct sparsematrix A1 = A.Ar;
   struct sparsematrix A2 = A.Ac;
+
+  struct TwoParts output;
 
   int m = matrix.m;
   int n = matrix.n;
@@ -156,7 +167,7 @@ struct TwoParts localview(struct sparsematrix matrix){
   long* nz2c = nnz(A2.j, A2.NrNzElts, A2.n);
   long* nzc = nnz(matrix.j, matrix.NrNzElts, matrix.n);
 
-  // storing the number of nonzeros that have to be assigned
+  /* storing the number of nonzeros that have to be assigned */
   int len = matrix.NrNzElts;
 
   /* 
@@ -169,7 +180,7 @@ struct TwoParts localview(struct sparsematrix matrix){
   long* ic = vecallocl(len);
   long* jc = vecallocl(len);
 
-  // counters for filling of ir,jr and ic,jc
+  /* counters for filling of ir,jr and ic,jc */
   int index_r = 0;
   int index_c = 0;
   
@@ -177,18 +188,19 @@ struct TwoParts localview(struct sparsematrix matrix){
   k = 0;
   while(len>0){
 
-    // k randomly chosen between 0 and len
-    k = randi(len);
+    /* TODO k randomly chosen between 0 and len */
+    /* k = 0; */
+    /* k = randi(len); */
 
-    // computing explicitly row and column of the k-th element of the matrix
+    /* computing explicitly row and column of the k-th element of the matrix */
     i = matrix.i[k];
     j = matrix.j[k];
-  
-    // computing whether i,j are split
+
+    /* computing whether i,j are split */
     int rowsplit = (nz1r[i] && nz2r[i]);
     int colsplit = (nz1c[j] && nz2c[j]);
 
-    // actual assignment of the nonzero
+    /* actual assignment of the nonzero */
     if (!xor(rowsplit,colsplit)){
       if (nzr[i]<nzc[j]){
         ir[index_r] = i;
@@ -214,36 +226,45 @@ struct TwoParts localview(struct sparsematrix matrix){
     * putting the last element that could be chosen instead of the
     * k-th one, and we reduce the interval for randi by 1
     */
-    matrix.i[k] = matrix.i[len-1];
-    matrix.j[k] = matrix.j[len-1];
+     /* matrix.i[k] = matrix.i[len-1];
+    matrix.j[k] = matrix.j[len-1]; */
+    k++;
     len--;
   }
 
-  // creation of vectors of the right size
+  /* creation of vectors of the right size */
   long* ir_n = vecallocl(index_r);
   long* jr_n = vecallocl(index_r);
   long* ic_n = vecallocl(index_c);
   long* jc_n = vecallocl(index_c);
 
-  // copying only the filled part
+  /* copying only the filled part */
   memcpy(ir_n,ir,index_r*SZLONG);
   memcpy(jr_n,jr,index_r*SZLONG);
   memcpy(ic_n,ic,index_c*SZLONG);
   memcpy(jc_n,jc,index_c*SZLONG);
 
-  // creating the (dummy) values for the nonzeros
+  /* creating the (dummy) values for the nonzeros */
   double* val_r = vecallocd(index_r);
+  double* valc_r = vecallocd(index_r);
   double* val_c = vecallocd(index_c);
+  double* valc_c = vecallocd(index_c);
 
-  for(k=0;k<index_r;k++)
+  for(k=0;k<index_r;k++){
     val_r[k] = 1.0;
-  for(k=0;k<index_c;k++)
+    valc_r[k] = 0.0;
+  }
+  for(k=0;k<index_c;k++){
     val_c[k] = 1.0;
+    valc_c[k] = 0.0;
+  }
 
-  // explicit creation of the final matrices
+  /* explicit creation of the final matrices */
   struct sparsematrix Ar;
   Ar.NrNzElts = index_r;
   Ar.i = ir_n;
+  Ar.m = A1.m;
+  Ar.n = A1.n;
   Ar.j = jr_n;
   Ar.ReValue = val_r;
 
@@ -251,10 +272,11 @@ struct TwoParts localview(struct sparsematrix matrix){
   Ac.NrNzElts = index_c;
   Ac.i = ic_n;
   Ac.j = jc_n;
+  Ac.m = A1.m;
+  Ac.n = A1.n;
   Ac.ReValue = val_c;
   
-  // freeing memory from unnecessary arrays
-
+  /* freeing memory from unnecessary arrays */
   vecfreel(ir);
   vecfreel(jr);
   vecfreel(ic);
@@ -268,8 +290,7 @@ struct TwoParts localview(struct sparsematrix matrix){
   vecfreel(nz2r);
   vecfreel(nzr);
 
-  // explicit construction of the output
-  struct TwoParts output;
+  /* explicit construction of the output */
   output.Ar = Ar;
   output.Ac = Ac;
 
@@ -285,7 +306,6 @@ int main(){
   fclose(File);
 
   struct TwoParts two = localview(matrix);
-
   printf("===Ar===\n");
   print_matrix(reorder_col_incr(two.Ar));
   printf("\n\n");
