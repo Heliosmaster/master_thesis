@@ -113,8 +113,8 @@ void matfreed(double **ppd){
 
 } /* end matfreed */
 
-struct sparsematrix reorder_col_incr(struct sparsematrix matrix){
-    long length = matrix.NrNzElts;
+struct sparsematrix reorder_col_incr(struct sparsematrix* matrix){
+    long length = matrix->NrNzElts;
     long* I = vecallocl(length);
     long* J = vecallocl(length);
     double* Val = vecallocd(length);
@@ -122,7 +122,7 @@ struct sparsematrix reorder_col_incr(struct sparsematrix matrix){
     int k,l;
 
     long* tempArray = vecallocl(length);
-    for(k=0;k<length;k++) tempArray[k] = matrix.j[k];
+    for(k=0;k<length;k++) tempArray[k] = matrix->j[k];
 
     struct sparsematrix newmatrix;
 
@@ -130,9 +130,9 @@ struct sparsematrix reorder_col_incr(struct sparsematrix matrix){
 
     for(l=0;l<length;l++){
         k = indices[length-l-1];
-        I[l] = matrix.i[k];
-        J[l] = matrix.j[k];
-        Val[l] = matrix.ReValue[k];
+        I[l] = matrix->i[k];
+        J[l] = matrix->j[k];
+        Val[l] = matrix->ReValue[k];
 
     }
 
@@ -140,6 +140,7 @@ struct sparsematrix reorder_col_incr(struct sparsematrix matrix){
     newmatrix.j = J;
     newmatrix.ReValue = Val;
     newmatrix.NrNzElts = length;
+    vecfreel(indices);
     vecfreel(tempArray);
     return newmatrix;
 }

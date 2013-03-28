@@ -14,8 +14,27 @@ struct TwoParts {
 void print_matrix(struct sparsematrix matrix){
   int k;
   for(k=0;k<matrix.NrNzElts;k++)
-    printf("(%ld,%ld)=%f\n", matrix.i[k]+1,matrix.j[k]+1,matrix.ReValue[k]);
+    printf("(%ld,%ld)=%f,%f\n", matrix.i[k]+1,matrix.j[k]+1,matrix.ReValue[k],matrix.ImValue[k]);
 }
+
+void print_mat_to_file(char* name, struct sparsematrix matrix){
+  FILE* File;
+  File = fopen(name, "w");
+  int k;
+  for(k=0;k<matrix.NrNzElts;k++) fprintf(File,"%ld %ld %f\n",matrix.i[k]+1,matrix.j[k]+1,matrix.ReValue[k]);
+  fclose(File);
+}
+
+void print_vec_to_file(char* name, long* vec, int length){
+  FILE* File;
+  File = fopen(name, "a");
+  int i;
+  for(i=0;i<length;i++)
+    fprintf(File,"%ld ",vec[i]);
+  fprintf(File,"\n");
+  fclose(File);
+}
+
 
 void print_vectorl(long* vec, int length){
   int i;
@@ -48,7 +67,7 @@ int xor(int a, int b){
 * method that splits the two parts of A which have value 1
 * and value two
 */
-struct TwoParts split1and2(struct sparsematrix A){
+struct TwoParts split1and2(struct sparsematrix* A){
 
   int k;
   struct TwoParts output;
@@ -59,57 +78,54 @@ struct TwoParts split1and2(struct sparsematrix A){
   int max2=0;
 
   /* initial sweep of the matrix to see how long should be the vectors*/
-  for(k=0;k<A.NrNzElts;k++) 
-    (A.ReValue[k] == 2.0) ? max2++ : max1++;
+  for(k=0;k<A->NrNzElts;k++) 
+    (A->ReValue[k] == 2.0) ? max2++ : max1++;
 
   /*initialization of the vectors */
   long *i1 = vecallocl(max1);
   long *j1 = vecallocl(max1);
   double *v1 = vecallocd(max1);
   double *c1 = vecallocd(max1);
+
   long *i2 = vecallocl(max2);
   long *j2 = vecallocl(max2);
   double *v2 = vecallocd(max2);
   double *c2 = vecallocd(max2);
 
+
   /* population of the vectors */
   int index1=0;
   int index2=0;
-  for(k=0;k<A.NrNzElts;k++){
-    if (A.ReValue[k] == 2.0 ){
-      i2[index2] = A.i[k];
-      j2[index2] = A.j[k];
+  for(k=0;k<A->NrNzElts;k++){
+    if (A->ReValue[k] == 2.0 ){
+      i2[index2] = A->i[k];
+      j2[index2] = A->j[k];
       v2[index2] = 2.0;
       c2[index2] = 0.0;
       index2++;
     }
     else {
-      i1[index1] = A.i[k];
-      j1[index1] = A.j[k];
+      i1[index1] = A->i[k];
+      j1[index1] = A->j[k];
       v1[index1] = 1.0;
       c1[index1] = 0.0;
       index1++;
     }
   }
 
-  A1.m = A.m;
-  A2.m = A.m;
-
-  A1.n = A.n;
-  A2.n = A.n;
-  
+  A1.m = A->m;
+  A1.n = A->n;
   A1.NrNzElts = max1;
-  A2.NrNzElts = max2;
-
   A1.i = i1;
   A1.j = j1;
-
-  A2.i = i2;
-  A2.j = j2;
-
   A1.ReValue = v1;
   A1.ImValue = c1;
 
+  A2.NrNzElts = max2;
+  A2.m = A->m;
+  A2.n = A->n;
+  A2.i = i2;
+  A2.j = j2;
   A2.ReValue = v2;
   A2.ImValue = c2;
 
@@ -131,6 +147,9 @@ struct TwoParts split1and2(struct sparsematrix A){
 long* nnz(long* input, int NrNzElts, int size){
   int index = 0;
   long* nonz = vecallocl(size);
+  for(index=0;index<size;index++)
+    nonz[index] = 0;
+  index = 0;
   while(index<NrNzElts){
     nonz[input[index]]++;
     index++;
@@ -141,17 +160,18 @@ long* nnz(long* input, int NrNzElts, int size){
 /*
 * function that assigns the nonzeros of matrix either to Ar or Ac
 */
-struct TwoParts localview(struct sparsematrix matrix){
+struct TwoParts localview(struct sparsematrix* matrix){
 
   /* dividing between A1 and A2 */
   struct TwoParts A = split1and2(matrix);
-  struct sparsematrix A1 = A.Ar;
-  struct sparsematrix A2 = A.Ac;
+
+  struct sparsematrix* A1 = &(A.Ar);
+  struct sparsematrix* A2 = &(A.Ac);
 
   struct TwoParts output;
 
-  int m = matrix.m;
-  int n = matrix.n;
+  int m = matrix->m;
+  int n = matrix->n;
 
   /* 
   * building the bookkeeping vectors
@@ -159,17 +179,17 @@ struct TwoParts localview(struct sparsematrix matrix){
   * nzXc = nonzeros in the columns of AX
   * nzr,nzc = nonzeros in row/col of matrix
   */
-  long* nz1r = nnz(A1.i, A1.NrNzElts, A1.m);
-  long* nz2r = nnz(A2.i, A2.NrNzElts, A2.m);
-  long* nzr = nnz(matrix.i, matrix.NrNzElts, matrix.m);
+  long* nz1r = nnz(A1->i, A1->NrNzElts, m);
+  long* nz2r = nnz(A2->i, A2->NrNzElts, m);
+  long* nzr = nnz(matrix->i, matrix->NrNzElts, m);
 
-  long* nz1c = nnz(A1.j, A1.NrNzElts, A1.n);
-  long* nz2c = nnz(A2.j, A2.NrNzElts, A2.n);
-  long* nzc = nnz(matrix.j, matrix.NrNzElts, matrix.n);
+  long* nz1c = nnz(A1->j, A1->NrNzElts, n);
+  long* nz2c = nnz(A2->j, A2->NrNzElts, n);
+  long* nzc = nnz(matrix->j, matrix->NrNzElts, n);
 
   /* storing the number of nonzeros that have to be assigned */
-  int len = matrix.NrNzElts;
-
+  int len = matrix->NrNzElts;
+  
   /* 
   * initialization of the new vectors to be populated
   * assuming everything is assigned to one and the other stays empty
@@ -189,12 +209,11 @@ struct TwoParts localview(struct sparsematrix matrix){
   while(len>0){
 
     /* TODO k randomly chosen between 0 and len */
-    /* k = 0; */
     /* k = randi(len); */
 
     /* computing explicitly row and column of the k-th element of the matrix */
-    i = matrix.i[k];
-    j = matrix.j[k];
+    i = matrix->i[k];
+    j = matrix->j[k];
 
     /* computing whether i,j are split */
     int rowsplit = (nz1r[i] && nz2r[i]);
@@ -262,19 +281,21 @@ struct TwoParts localview(struct sparsematrix matrix){
   /* explicit creation of the final matrices */
   struct sparsematrix Ar;
   Ar.NrNzElts = index_r;
+  Ar.m = m;
+  Ar.n = n;
   Ar.i = ir_n;
-  Ar.m = A1.m;
-  Ar.n = A1.n;
   Ar.j = jr_n;
   Ar.ReValue = val_r;
+  Ar.ImValue = valc_r;
 
   struct sparsematrix Ac;
   Ac.NrNzElts = index_c;
   Ac.i = ic_n;
   Ac.j = jc_n;
-  Ac.m = A1.m;
-  Ac.n = A1.n;
+  Ac.m = m;
+  Ac.n = n;
   Ac.ReValue = val_c;
+  Ac.ImValue = valc_c;
   
   /* freeing memory from unnecessary arrays */
   vecfreel(ir);
@@ -301,15 +322,14 @@ int main(){
   srand(time(NULL));
   FILE* File;
   struct sparsematrix matrix;
-  if (!(File = fopen("matrices/test_matrix.mtx", "r"))) printf("Unable to open input matrix! Make sure it's the first parameter to the program\n");
+  File = fopen("matrices/test_matrix.mtx", "r");
   if (!MMReadSparseMatrix(File, &matrix)) printf("Unable to read input matrix!\n");
   fclose(File);
 
-  struct TwoParts two = localview(matrix);
+  struct TwoParts two = localview(&matrix);
   printf("===Ar===\n");
-  print_matrix(reorder_col_incr(two.Ar));
-  printf("\n\n");
+  print_matrix(two.Ar);
+  printf("\n");
   printf("===Ac===\n");
-  print_matrix(reorder_col_incr(two.Ac));
-  
+  print_matrix(two.Ac);
 }

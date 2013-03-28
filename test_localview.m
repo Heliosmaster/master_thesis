@@ -4,4 +4,3 @@ str = ['matrices/' matrix '.mtx'];
 A = mmread(str);
 [Ac,Ar]=localview(A);
 [Ac1,Ar1]=MatlabLocalview(A);
-%[a,M] = MatlabLocalview(A);

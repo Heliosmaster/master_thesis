@@ -512,23 +512,26 @@ void mexFunction(int nlhs, mxArray *plhs[], int nrhs, const mxArray *prhs[]) {
   struct sparsematrix *MondriaanMatrix;
   MondriaanMatrix = ConvertMatlabToMondriaan(prhs[0]);
   
-  struct TwoParts lw = localview(*MondriaanMatrix);
+  struct TwoParts lw = localview(MondriaanMatrix);
 
   struct sparsematrix matrix = lw.Ar;
   struct sparsematrix matrix2 = lw.Ac;
-  
-  printf("\n\n");
+  /*
+  printf("\n===Ar===\n");
   int k;
-  for(k=0;k<matrix.NrNzElts;k++) printf("(%ld,%ld)=%f\n", matrix.i[k]+1,matrix.j[k]+1,matrix.ReValue[k]);
-  printf("=====\n");
-  for(k=0;k<matrix2.NrNzElts;k++) printf("(%ld,%ld)=%f\n", matrix2.i[k]+1,matrix2.j[k]+1,matrix2.ReValue[k]);
-  
+  printf("%d %d %d\n",matrix.NrNzElts,matrix.m,matrix.n);
+  for(k=0;k<matrix.NrNzElts;k++) 
+    printf("(%ld,%ld)=%f,%f\n", matrix.i[k]+1,matrix.j[k]+1,matrix.ReValue[k],matrix.ImValue[k]);
+  printf("\n===Ac===\n");
+  printf("%d %d %d\n",matrix.NrNzElts,matrix.m,matrix.n);
+  for(k=0;k<matrix2.NrNzElts;k++) 
+    printf("(%ld,%ld)=%f,%f\n", matrix2.i[k]+1,matrix2.j[k]+1,matrix2.ReValue[k],matrix2.ImValue[k]);
+  */
   /* And we convert the Mondriaan matrix back to Matlab. */
   /* Return processor index matrix.  */
-  /*plhs[0] = ConvertMondriaanToMatlab(&(lw.Ac));
-  plhs[1] = ConvertMondriaanToMatlab(&(lw.Ar));
-  */
-
+  plhs[0] = ConvertMondriaanToMatlab(&matrix2);
+  plhs[1] = ConvertMondriaanToMatlab(&matrix);
+  
   MMDeleteSparseMatrix(MondriaanMatrix);
-  }
+}
 
