@@ -9,7 +9,7 @@ A = mmread(str);
 clear str
 
 %iteration number
-iter = 100;
+iter = 10;
 i=1;
 results = zeros(1,iter);
 
@@ -27,7 +27,7 @@ fprintf('%g: comm. vol. = %g\n',1,s(4));
 
 % counterglobalview = 0;
 
-[Ac,Ar] = localview(A);
+[Ac,Ar] = MatlabLocalview(A);
 % [p,q,r,c] = super_sbd(I);
 % [Ar,Ac]=super_sbdview(I,p,q,r,c);
 
@@ -81,7 +81,7 @@ for i=2:iter
 %     [p,q,r,c] = super_sbd(A2);
 %     [Ar,Ac]=super_sbdview(A2,p,q,r,c);
 %     % getting the new Ar and Ac based on new partitioning
- [Ac,Ar] = localview(A2);
+ [Ac,Ar] = MatlabLocalview(A2);
   
     
 end

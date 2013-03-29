@@ -7,14 +7,31 @@
 #include <Mondriaan.h>
 #include "utils.c"
 
-struct TwoParts {
+struct twomatrices {
   struct sparsematrix Ar, Ac;
 };
+
+/*
+* methods for debugging: printint out to stdout or to file (for mex debugging)
+*/
 
 void print_matrix(struct sparsematrix matrix){
   int k;
   for(k=0;k<matrix.NrNzElts;k++)
     printf("(%ld,%ld)=%f,%f\n", matrix.i[k]+1,matrix.j[k]+1,matrix.ReValue[k],matrix.ImValue[k]);
+}
+
+void print_vec(long* vec, int length){
+  int i;
+  for(i=0;i<length;i++)
+    printf("%d: %ld",i+1,vec[i]);
+}
+
+void print_vec_inline(long* vec, int length){
+  int i;
+  for(i=0;i<length;i++)
+    printf("%ld ",vec[i]);
+  printf("\n");
 }
 
 void print_mat_to_file(char* name, struct sparsematrix matrix){
@@ -35,20 +52,6 @@ void print_vec_to_file(char* name, long* vec, int length){
   fclose(File);
 }
 
-
-void print_vectorl(long* vec, int length){
-  int i;
-  for(i=0;i<length;i++)
-    printf("%d: %ld",i+1,vec[i]);
-}
-
-void print_vec2(long* vec, int length){
-  int i;
-  for(i=0;i<length;i++)
-    printf("%ld ",vec[i]);
-  printf("\n");
-}
-
 /*
 * method that returns a random integer in [0,bound]
 */
@@ -67,12 +70,9 @@ int xor(int a, int b){
 * method that splits the two parts of A which have value 1
 * and value two
 */
-struct TwoParts split1and2(struct sparsematrix* A){
+struct twomatrices split1and2(struct sparsematrix* A){
 
   int k;
-  struct TwoParts output;
-
-  struct sparsematrix A1, A2;
 
   int max1=0;
   int max2=0;
@@ -81,7 +81,7 @@ struct TwoParts split1and2(struct sparsematrix* A){
   for(k=0;k<A->NrNzElts;k++) 
     (A->ReValue[k] == 2.0) ? max2++ : max1++;
 
-  /*initialization of the vectors */
+  /* initialization of the vectors */
   long *i1 = vecallocl(max1);
   long *j1 = vecallocl(max1);
   double *v1 = vecallocd(max1);
@@ -91,7 +91,6 @@ struct TwoParts split1and2(struct sparsematrix* A){
   long *j2 = vecallocl(max2);
   double *v2 = vecallocd(max2);
   double *c2 = vecallocd(max2);
-
 
   /* population of the vectors */
   int index1=0;
@@ -113,6 +112,9 @@ struct TwoParts split1and2(struct sparsematrix* A){
     }
   }
 
+  /* construction of the output */
+  struct sparsematrix A1, A2;
+
   A1.m = A->m;
   A1.n = A->n;
   A1.NrNzElts = max1;
@@ -129,6 +131,7 @@ struct TwoParts split1and2(struct sparsematrix* A){
   A2.ReValue = v2;
   A2.ImValue = c2;
 
+  struct twomatrices output;
   output.Ar = A1;
   output.Ac = A2;
 
@@ -145,10 +148,15 @@ struct TwoParts split1and2(struct sparsematrix* A){
 * size = m/n
 */
 long* nnz(long* input, int NrNzElts, int size){
-  int index = 0;
+  /* initialization of the output vector */
   long* nonz = vecallocl(size);
+
+  /* filling out the vector with 0s (o/w MATLAB does not empty it) */
+  int index;
   for(index=0;index<size;index++)
     nonz[index] = 0;
+
+  /* sweep of the input vector: increased the counter for every index found */
   index = 0;
   while(index<NrNzElts){
     nonz[input[index]]++;
@@ -160,16 +168,15 @@ long* nnz(long* input, int NrNzElts, int size){
 /*
 * function that assigns the nonzeros of matrix either to Ar or Ac
 */
-struct TwoParts localview(struct sparsematrix* matrix){
+struct twomatrices localview(struct sparsematrix* matrix){
 
   /* dividing between A1 and A2 */
-  struct TwoParts A = split1and2(matrix);
+  struct twomatrices A = split1and2(matrix);
 
   struct sparsematrix* A1 = &(A.Ar);
   struct sparsematrix* A2 = &(A.Ac);
 
-  struct TwoParts output;
-
+  /* explicit saving of m,n for brevity */
   int m = matrix->m;
   int n = matrix->n;
 
@@ -312,6 +319,8 @@ struct TwoParts localview(struct sparsematrix* matrix){
   vecfreel(nzr);
 
   /* explicit construction of the output */
+  struct twomatrices output;
+
   output.Ar = Ar;
   output.Ac = Ac;
 
@@ -319,14 +328,18 @@ struct TwoParts localview(struct sparsematrix* matrix){
 }
 
 int main(){
-  srand(time(NULL));
+  /* srand(time(NULL)); */
+  /* reading the matrix from file */
   FILE* File;
   struct sparsematrix matrix;
   File = fopen("matrices/test_matrix.mtx", "r");
   if (!MMReadSparseMatrix(File, &matrix)) printf("Unable to read input matrix!\n");
   fclose(File);
 
-  struct TwoParts two = localview(&matrix);
+  /* actual split */
+  struct twomatrices two = localview(&matrix);
+
+  /* print out for checking */
   printf("===Ar===\n");
   print_matrix(two.Ar);
   printf("\n");

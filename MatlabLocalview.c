@@ -345,26 +345,26 @@ mxArray *ConvertBoundaryIndicesToVector(const struct remembrance *m) {
 
 /* This function converts a vector assignment to a vector of appropriate size. */
 mxArray *ConvertBoundaryHierarchyToVector(const struct remembrance *m) {
-        mxArray *w;
-        size_t i;
-        double *wp;
+  mxArray *w;
+  size_t i;
+  double *wp;
 
-        if (m == NULL) mexErrMsgTxt("Null variable pointer!");
+  if (m == NULL) mexErrMsgTxt("Null variable pointer!");
 
-        w = mxCreateDoubleMatrix(m->size-1, 1, mxREAL);
+  w = mxCreateDoubleMatrix(m->size-1, 1, mxREAL);
 
-        if (w == NULL) mexErrMsgTxt("Unable to allocate Matlab vector!");
+  if (w == NULL) mexErrMsgTxt("Unable to allocate Matlab vector!");
 
-        wp = mxGetPr(w);
+  wp = mxGetPr(w);
 
-        for (i = 0; i < m->size-1; i++)
+  for (i = 0; i < m->size-1; i++)
     if (m->vector[i].parent == ULONG_MAX)
       wp[i] = 0;
     else
       wp[i] = (double)(m->vector[i].parent + 1);
 
-        return w;
-}
+    return w;
+  }
 
 /* This function converts a vector assignment to a vector of appropriate size. */
 mxArray *ConvertLongIndicesToVector(const long *v, const size_t Size) {
@@ -510,27 +510,20 @@ mxArray *ConvertMondriaanProcIndToMatlab(const struct sparsematrix *B) {
 /* This function provides the actual Matlab interface. */
 void mexFunction(int nlhs, mxArray *plhs[], int nrhs, const mxArray *prhs[]) {
   struct sparsematrix *MondriaanMatrix;
+
+  /* converting from Matlab to Mondriaan */
   MondriaanMatrix = ConvertMatlabToMondriaan(prhs[0]);
   
-  struct TwoParts lw = localview(MondriaanMatrix);
+  /* performing split */
+  struct twomatrices lw = localview(MondriaanMatrix);
 
-  struct sparsematrix matrix = lw.Ar;
-  struct sparsematrix matrix2 = lw.Ac;
-  /*
-  printf("\n===Ar===\n");
-  int k;
-  printf("%d %d %d\n",matrix.NrNzElts,matrix.m,matrix.n);
-  for(k=0;k<matrix.NrNzElts;k++) 
-    printf("(%ld,%ld)=%f,%f\n", matrix.i[k]+1,matrix.j[k]+1,matrix.ReValue[k],matrix.ImValue[k]);
-  printf("\n===Ac===\n");
-  printf("%d %d %d\n",matrix.NrNzElts,matrix.m,matrix.n);
-  for(k=0;k<matrix2.NrNzElts;k++) 
-    printf("(%ld,%ld)=%f,%f\n", matrix2.i[k]+1,matrix2.j[k]+1,matrix2.ReValue[k],matrix2.ImValue[k]);
-  */
-  /* And we convert the Mondriaan matrix back to Matlab. */
-  /* Return processor index matrix.  */
-  plhs[0] = ConvertMondriaanToMatlab(&matrix2);
-  plhs[1] = ConvertMondriaanToMatlab(&matrix);
+  /* separating the two parts */
+  struct sparsematrix matrix = lw.Ac;
+  struct sparsematrix matrix2 = lw.Ar;
+  
+  /* converting back from Mondriaan to Matlab */
+  plhs[0] = ConvertMondriaanToMatlab(&matrix);
+  plhs[1] = ConvertMondriaanToMatlab(&matrix2);
   
   MMDeleteSparseMatrix(MondriaanMatrix);
 }
