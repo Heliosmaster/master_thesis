@@ -44,7 +44,8 @@ for i=2:iter
     %pause(1)
    
     % creating the matrix B as in the model
-    B = create_B(Ar,Ac,m,n);
+    %B = create_B(Ar,Ac,m,n);
+    B = MatlabCreateB(Ac,Ar);
 %     if i ~= 2 && (results(i-1) == results(i-2)) && counterglobalview < 3;
 %         B = globalview(B,m,n);
 %         counterglobalview = counterglobalview+1;

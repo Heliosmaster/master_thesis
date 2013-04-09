@@ -12,47 +12,6 @@ struct twomatrices {
 };
 
 /*
-* methods for debugging: printint out to stdout or to file (for mex debugging)
-*/
-
-void print_matrix(struct sparsematrix matrix){
-  int k;
-  for(k=0;k<matrix.NrNzElts;k++)
-    printf("(%ld,%ld)=%f,%f\n", matrix.i[k]+1,matrix.j[k]+1,matrix.ReValue[k],matrix.ImValue[k]);
-}
-
-void print_vec(long* vec, int length){
-  int i;
-  for(i=0;i<length;i++)
-    printf("%d: %ld",i+1,vec[i]);
-}
-
-void print_vec_inline(long* vec, int length){
-  int i;
-  for(i=0;i<length;i++)
-    printf("%ld ",vec[i]);
-  printf("\n");
-}
-
-void print_mat_to_file(char* name, struct sparsematrix matrix){
-  FILE* File;
-  File = fopen(name, "w");
-  int k;
-  for(k=0;k<matrix.NrNzElts;k++) fprintf(File,"%ld %ld %f\n",matrix.i[k]+1,matrix.j[k]+1,matrix.ReValue[k]);
-  fclose(File);
-}
-
-void print_vec_to_file(char* name, long* vec, int length){
-  FILE* File;
-  File = fopen(name, "a");
-  int i;
-  for(i=0;i<length;i++)
-    fprintf(File,"%ld ",vec[i]);
-  fprintf(File,"\n");
-  fclose(File);
-}
-
-/*
 * method that returns a random integer in [0,bound]
 */
 int randi(int bound){
@@ -327,22 +286,3 @@ struct twomatrices localview(struct sparsematrix* matrix){
   return output;
 }
 
-int main(){
-  /* srand(time(NULL)); */
-  /* reading the matrix from file */
-  FILE* File;
-  struct sparsematrix matrix;
-  File = fopen("matrices/test_matrix.mtx", "r");
-  if (!MMReadSparseMatrix(File, &matrix)) printf("Unable to read input matrix!\n");
-  fclose(File);
-
-  /* actual split */
-  struct twomatrices two = localview(&matrix);
-
-  /* print out for checking */
-  printf("===Ar===\n");
-  print_matrix(two.Ar);
-  printf("\n");
-  printf("===Ac===\n");
-  print_matrix(two.Ac);
-}

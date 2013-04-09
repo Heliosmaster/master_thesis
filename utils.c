@@ -1,3 +1,5 @@
+
+
 #define SZINT (sizeof(int))
 #define SZDBL (sizeof(double))
 #define SZLONG (sizeof(long))
@@ -143,4 +145,47 @@ struct sparsematrix reorder_col_incr(struct sparsematrix* matrix){
     vecfreel(indices);
     vecfreel(tempArray);
     return newmatrix;
+}
+
+void print_matrix(struct sparsematrix matrix){
+  int k;
+  for(k=0;k<matrix.NrNzElts;k++)
+    printf("(%ld,%ld)=%f\n", matrix.i[k]+1,matrix.j[k]+1,matrix.ReValue[k]);
+}
+
+void print_cplx_matrix(struct sparsematrix matrix){
+  int k;
+  for(k=0;k<matrix.NrNzElts;k++)
+    printf("(%ld,%ld)=%f,%f\n", matrix.i[k]+1,matrix.j[k]+1,matrix.ReValue[k],matrix.ImValue[k]);
+}
+
+void print_vec(long* vec, int length){
+  int i;
+  for(i=0;i<length;i++)
+    printf("%d: %ld",i+1,vec[i]);
+}
+
+void print_vec_inline(long* vec, int length){
+  int i;
+  for(i=0;i<length;i++)
+    printf("%ld ",vec[i]);
+  printf("\n");
+}
+
+void print_mat_to_file(char* name, struct sparsematrix matrix){
+  FILE* File;
+  File = fopen(name, "w");
+  int k;
+  for(k=0;k<matrix.NrNzElts;k++) fprintf(File,"%ld %ld - %f %f\n",matrix.i[k]+1,matrix.j[k]+1,matrix.ReValue[k],matrix.ImValue[k]);
+  fclose(File);
+}
+
+void print_vec_to_file(char* name, long* vec, int length){
+  FILE* File;
+  File = fopen(name, "a");
+  int i;
+  for(i=0;i<length;i++)
+    fprintf(File,"%ld ",vec[i]);
+  fprintf(File,"\n");
+  fclose(File);
 }
