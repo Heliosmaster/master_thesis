@@ -48,13 +48,15 @@ function [Ac,Ar]=localview(A)
      
      index_r = 1;
      index_c = 1;
+     k=0;
 %     
     % until there's something yet to assign to either Ar or Ac
     while(len>0) 
         
         % choose a random number between 1 and len. we have the nonzero
         % (i,j)
-        k = ceil(len*rand(1)); %apparently much faster than k = randi([1,len]); 0.01s vs 0.3s
+        %k = ceil(len*rand(1)); %apparently much faster than k = randi([1,len]); 0.01s vs 0.3s
+        k = k+1;
         i = I(k);
         j = J(k);
         
@@ -62,40 +64,45 @@ function [Ac,Ar]=localview(A)
         %split
         
         rowsplit = (nz1r(i)) && (nz2r(i));
-        
+
         %check whether both A1 and A2 have nonzeros at col j, i.e. col j is
         %split
         colsplit = (nz1c(j)) && (nz2c(j));
-        
+
         % check whether they are bot split or both unsplit
         if (~xor(rowsplit,colsplit))
-            
-            %check whether the row is shorter than the col
-            if nzr(i) < nzc(j)
-%                Ar(i,j) = 1;
-               ir(index_r) = i;
-               jr(index_r) = j;
-               index_r = index_r+1;
-            else
-%                 Ac(i,j) = 1;
-               ic(index_c) = i;
-               jc(index_c) = j;
-               index_c = index_c+1;
-            end
+               if (nz1r(i) == 1 || nz2r(i) == 1)
+                    ic(index_c) = i;
+                    jc(index_c) = j;
+                    index_c = index_c+1;
+               elseif (nz1c(j) == 1 || nz2c(j) == 1)
+                    ir(index_r) = i;
+                    jr(index_r) = j;
+                    index_r = index_r+1;
+
+                else
+                    %check whether the row is shorter than the col
+                    if nzr(i) < nzc(j)
+                       ir(index_r) = i;
+                       jr(index_r) = j;
+                       index_r = index_r+1;
+                    else
+                       ic(index_c) = i;
+                       jc(index_c) = j;
+                       index_c = index_c+1;
+                    end
+               end
         else
             %if only the row is split, assign to column
             if rowsplit
-%                Ac(i,j) = 1;
                ic(index_c) = i;
                jc(index_c) = j;
                index_c = index_c+1;
             else
             %if only col is split, assign to row
-%                 Ar(i,j) = 1;
                ir(index_r) = i;
                jr(index_r) = j;
                index_r = index_r+1;
-
             end
         end
         
