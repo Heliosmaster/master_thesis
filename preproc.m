@@ -27,7 +27,7 @@ fprintf('%g: comm. vol. = %g\n',1,s(4));
 
 % counterglobalview = 0;
 
-[Ac,Ar] = localview(A);
+[Ac,Ar] = MatlabLocalview(A);
 % [p,q,r,c] = super_sbd(I);
 % [Ar,Ac]=super_sbdview(I,p,q,r,c);
 
@@ -58,9 +58,9 @@ for i=2:iter
     fprintf('%g: comm. vol. = %g\n',i,s(4));
     
     % cleaning the diagonal elements
-    for k = 1:m+n
-        I2(k,k) = 0;
-    end
+%     for k = 1:m+n
+%         I2(k,k) = 0;
+%     end
     
             
     % getting back the original Ar and Ac, with new partitioning
@@ -82,7 +82,7 @@ for i=2:iter
 %     [p,q,r,c] = super_sbd(A2);
 %     [Ar,Ac]=super_sbdview(A2,p,q,r,c);
 %     % getting the new Ar and Ac based on new partitioning
- [Ac,Ar] = localview(A2);
+ [Ac,Ar] = MatlabLocalview(A2);
   
     
 end
