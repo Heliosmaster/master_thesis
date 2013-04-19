@@ -19,6 +19,8 @@ uncut_rows = uncut(uncut<=m);
 uncut_cols = uncut(uncut>m);
 lr = length(uncut_rows);
 lc = length(uncut_cols);
+uncut_rows = uncut_rows(randperm(lr));
+uncut_cols = uncut_cols(randperm(lc));
 v1 = zeros(1,2*max(lr,lc));
 if ~ord
     v1(1:2:2*lr) = uncut_rows;
@@ -33,6 +35,8 @@ cut_rows = cut(cut<=m);
 cut_cols = cut(cut>m);
 lr = length(cut_rows);
 lc = length(cut_cols);
+cut_rows = cut_rows(randperm(lr));
+cut_cols = cut_cols(randperm(lc));
 v2 = zeros(1,2*max(lr,lc));
 v2(1:2:2*lr) = cut_rows;
 v2(2:2:2*lc) = cut_cols;
