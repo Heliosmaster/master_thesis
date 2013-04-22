@@ -1,10 +1,12 @@
-function [srt,idx] = sort_mix(in,m,varargin)
+function [srt,idx] = sort_alternate(in,m,varargin)
 if nargin < 3
     ord = 'ascend';
     ord2 = 0;
 elseif nargin < 4
     ord2 = 0;
+    ord = varargin{1};
 else
+    ord = varargin{1}; 
     if strcmp(varargin{2},'col');
         ord2 = 1;
     elseif strcmp(varargin{2},'row')
@@ -31,19 +33,7 @@ while(index <= l)
         index2 = index2+1;
     end
     len = index2 - index;
-    lr = length(rows);
-    rows = rows(randperm(lr));
-    lc = length(cols);
-    cols = cols(randperm(lc));
-    v1 = zeros(1,2*max(lr,lc));
-    if ~ord2
-        v1(1:2:2*lr) = rows;
-        v1(2:2:2*lc) = cols;
-    else
-        v1(1:2:2*lc) = cols;
-        v1(2:2:2*lr) = rows;
-    end
-    v1 = nonzeros(v1)';
+    v1 = mix_alternate(rows,cols,ord);
     idx = [idx v1];
     index = index+len;
 end
