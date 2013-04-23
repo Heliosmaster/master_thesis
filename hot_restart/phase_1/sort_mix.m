@@ -1,20 +1,4 @@
-function [srt,idx] = sort_alternate(in,m,varargin)
-if nargin < 3
-    ord = 'ascend';
-    ord2 = 0;
-elseif nargin < 4
-    ord2 = 0;
-    ord = varargin{1};
-else
-    ord = varargin{1}; 
-    if strcmp(varargin{2},'col');
-        ord2 = 1;
-    elseif strcmp(varargin{2},'row')
-        ord2 = 0;
-    else
-        error('syntax error: try ''col'' or ''row'' as second parameter');
-    end
-end
+function [srt,idx] = sort_mix(in,m,strategy,ord,ord2)
 l = length(in);
 [srt,idx2] =sort(in,ord);
 index = 1;
@@ -33,7 +17,15 @@ while(index <= l)
         index2 = index2+1;
     end
     len = index2 - index;
-    v1 = mix_alternate(rows,cols,ord);
+    if ~strategy
+        v1 = mix_alternate(rows,cols,ord);
+    else
+        if length(cols)<length(rows)
+            v1 = mix_spread(cols,rows,1-ord2);
+        else
+            v1 = mix_spread(cols,rows,ord2);
+        end
+    end
     idx = [idx v1];
     index = index+len;
 end

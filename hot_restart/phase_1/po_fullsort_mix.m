@@ -1,4 +1,4 @@
-function [v] = po_fullsort_spread(A,varargin)
+function [v] = po_fullsort_mix(A,strategy,varargin)
 if nargin < 2
     ord = 'ascend';
     ord2 = 0;
@@ -11,5 +11,5 @@ else
 end
 [m,~]=size(A);
 nz=get_nnz(A);
-[~,iu] = sort_spread(nz,m,ord,ord2);
+[~,iu] = sort_mix(nz,m,strategy,ord,ord2);
 v = nz(iu);

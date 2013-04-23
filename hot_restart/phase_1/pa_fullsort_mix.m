@@ -1,4 +1,4 @@
-function [v,l] = pa_fullsort_alternate(A,varargin)
+function [v,l] = pa_fullsort_mix(A,strategy,varargin)
 if nargin < 2
     ord = 'ascend';
     ord2 = 'row';
@@ -13,6 +13,6 @@ end
 [uncut,cut]=uncut_before_cut(A);
 l = length(uncut);
 nz=get_nnz(A);
-[~,iu] = sort_alternate(nz(uncut),m,ord,ord2);
-[~,ic] = sort_alternate(nz(cut),m,ord,ord2);
+[~,iu] = sort_mix(nz(uncut),m,strategy,ord,ord2);
+[~,ic] = sort_mix(nz(cut),m,strategy,ord,ord2);
 v = [uncut(iu) cut(ic)];
