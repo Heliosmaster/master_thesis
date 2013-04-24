@@ -1,10 +1,12 @@
-function [v,l]=pa_simple(A,ord)
+function [v,l]=pa_simple(A,varargin)
+if nargin < 2
+    ord = 'ascend';
+else
+    ord = varargin{1};
+end
 [uncut,cut]=uncut_before_cut(A);
 l =length(uncut);
-if ~ord
-    v=[sort(uncut) sort(cut)];
-else
-    v=[sort(uncut,'descend') sort(cut,'descend')];
-end
+v=[sort(uncut,ord) sort(cut,ord)];
+
     
 

@@ -21,4 +21,3 @@ if widow
     r = nnz(val==1);
     v = [v(r+1:end) v(1:r)];
 end
-
