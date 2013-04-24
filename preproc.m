@@ -9,7 +9,7 @@ A = mmread(str);
 clear str
 
 %iteration number
-iter = 100;
+iter = 10;
 i=1;
 results = zeros(1,iter);
 

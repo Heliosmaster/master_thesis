@@ -1,4 +1,4 @@
-%function [v,l] = pa_sort_mix(A,strategy,varargin)
+function [v,l] = pa_sort_mix(A,strategy,varargin)
 if nargin < 3
     widow = 1;
     ord = 'ascend';
