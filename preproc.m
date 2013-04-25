@@ -2,14 +2,14 @@
 
 printIteration = 0;
 % read the input sparse matrix
-matrix = 'dfl001';
+matrix = 'impcol_b';
 str = ['matrices/' matrix '.mtx'];
 A = mmread(str);
 %A = sprand(30,30,0.3);
 clear str
 
 %iteration number
-iter = 100;
+iter = 10;
 i=1;
 results = zeros(1,iter);
 
@@ -27,7 +27,9 @@ fprintf('%g: comm. vol. = %g\n',1,s(4));
 
 % counterglobalview = 0;
 
-[Ac,Ar] = MatlabLocalview(A);
+[v,l] = pa_sort_mix(A,0);
+[Ac,Ar] = overpainting(A,v);
+% [Ac,Ar] = MatlabLocalview(A);
 % [p,q,r,c] = super_sbd(I);
 % [Ar,Ac]=super_sbdview(I,p,q,r,c);
 
@@ -82,7 +84,9 @@ for i=2:iter
 %     [p,q,r,c] = super_sbd(A2);
 %     [Ar,Ac]=super_sbdview(A2,p,q,r,c);
 %     % getting the new Ar and Ac based on new partitioning
- [Ac,Ar] = MatlabLocalview(A2);
+[v,l] = pa_sort_mix(A2,0);
+[Ac,Ar] = overpainting(A2,v);
+%  [Ac,Ar] = MatlabLocalview(A2);
   
     
 end
