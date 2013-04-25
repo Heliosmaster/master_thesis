@@ -14,7 +14,7 @@ for z=m+n:-1:1;
         s(i==k) = 10;
     else
         %it's a column
-        s(j==k-m) = 11;
+        s(j==(k-m)) = 11;
         
     end
 end
