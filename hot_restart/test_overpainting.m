@@ -1,10 +1,10 @@
 clear all; close all; clc;
-<<<<<<< HEAD
-A = mmread('/home/students/3776123/mthesis/matrices/dfl001.mtx');
-[v,l] = pa_sort_mix(A,0);
+%A = mmread('/home/students/3776123/mthesis/matrices/test_matrix.mtx');
+A = mmread('/home/davide/projects/mthesis/matrices/test_matrix.mtx');
+%[v,l] = pa_sort_mix(A,0);
+v = [3 4 11 12 16 6 2 7 15 14 9 8 10 1 13 17 18 5];
+[Ac1,Ar1] = MatlabOverpaint(A,v);
 [Ac,Ar] = overpainting(A,v);
-=======
-A = mmread('/home/davide/projects/mthesis/matrices/dfl001.mtx');
-[v,l] = pa_sort_mix(A,0);
-[Ac,Ar] = overpainting(A,v);
->>>>>>> a9f9a5552443bda3532ae18363353f8c55bda3e9
+Ar
+Ar1
+      

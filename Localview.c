@@ -7,10 +7,6 @@
 #include <Mondriaan.h>
 #include "utils.c"
 
-struct twomatrices {
-  struct sparsematrix Ar, Ac;
-};
-
 /*
 * method that returns a random integer in [0,bound]
 */
@@ -25,77 +21,7 @@ int xor(int a, int b){
   return (!a && b) || (a && !b);
 }
 
-/*
-* method that splits the two parts of A which have value 1
-* and value two
-*/
-struct twomatrices split1and2(struct sparsematrix* A){
 
-  int k;
-
-  int max1=0;
-  int max2=0;
-
-  /* initial sweep of the matrix to see how long should be the vectors*/
-  for(k=0;k<A->NrNzElts;k++) 
-    (A->ReValue[k] == 2.0) ? max2++ : max1++;
-
-  /* initialization of the vectors */
-  long *i1 = vecallocl(max1);
-  long *j1 = vecallocl(max1);
-  double *v1 = vecallocd(max1);
-  double *c1 = vecallocd(max1);
-
-  long *i2 = vecallocl(max2);
-  long *j2 = vecallocl(max2);
-  double *v2 = vecallocd(max2);
-  double *c2 = vecallocd(max2);
-
-  /* population of the vectors */
-  int index1=0;
-  int index2=0;
-  for(k=0;k<A->NrNzElts;k++){
-    if (A->ReValue[k] == 2.0 ){
-      i2[index2] = A->i[k];
-      j2[index2] = A->j[k];
-      v2[index2] = 2.0;
-      c2[index2] = 0.0;
-      index2++;
-    }
-    else {
-      i1[index1] = A->i[k];
-      j1[index1] = A->j[k];
-      v1[index1] = 1.0;
-      c1[index1] = 0.0;
-      index1++;
-    }
-  }
-
-  /* construction of the output */
-  struct sparsematrix A1, A2;
-
-  A1.m = A->m;
-  A1.n = A->n;
-  A1.NrNzElts = max1;
-  A1.i = i1;
-  A1.j = j1;
-  A1.ReValue = v1;
-  A1.ImValue = c1;
-
-  A2.NrNzElts = max2;
-  A2.m = A->m;
-  A2.n = A->n;
-  A2.i = i2;
-  A2.j = j2;
-  A2.ReValue = v2;
-  A2.ImValue = c2;
-
-  struct twomatrices output;
-  output.Ar = A1;
-  output.Ac = A2;
-
-  return output;
-}
 
 /*
 * methods to find out which rows/cols 
@@ -130,7 +56,7 @@ long* nnz(long* input, int NrNzElts, int size){
 struct twomatrices localview(struct sparsematrix* matrix){
 
   /* dividing between A1 and A2 */
-  struct twomatrices A = split1and2(matrix);
+  struct twomatrices A = split_matrix(matrix,1.0,2.0);
 
   struct sparsematrix* A1 = &(A.Ar);
   struct sparsematrix* A2 = &(A.Ac);

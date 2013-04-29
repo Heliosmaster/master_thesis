@@ -18,6 +18,7 @@ for z=m+n:-1:1;
         
     end
 end
+
 ir = i(s==10);
 jr = j(s==10);
 

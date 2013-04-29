@@ -1,5 +1,3 @@
-
-
 #define SZINT (sizeof(int))
 #define SZDBL (sizeof(double))
 #define SZLONG (sizeof(long))
@@ -115,7 +113,57 @@ void matfreed(double **ppd){
 
 } /* end matfreed */
 
-struct sparsematrix reorder_col_incr(struct sparsematrix* matrix){
+/**********************************************************/
+
+struct twomatrices {
+  struct sparsematrix Ar, Ac;
+};
+
+struct sparsematrixplus {
+    struct sparsematrix matrix;
+    long* perm;
+};
+
+
+struct sparsematrixplus reorder_row_incr(struct sparsematrix* matrix){
+    long length = matrix->NrNzElts;
+    long* I = vecallocl(length);
+    long* J = vecallocl(length);
+    double* Val = vecallocd(length);
+
+    int k,l;
+
+    long* tempArray = vecallocl(length);
+    for(k=0;k<length;k++) tempArray[k] = matrix->i[k];
+
+    struct sparsematrix newmatrix;
+
+    long* indices = QSort(tempArray,length);
+    long* indices2 = vecallocl(length);
+
+    for(l=0;l<length;l++){
+        k = indices[length-l-1];
+        indices2[l] = k;
+        I[l] = matrix->i[k];
+        J[l] = matrix->j[k];
+        Val[l] = matrix->ReValue[k];
+
+    }
+
+    newmatrix.m = matrix->m;
+    newmatrix.n = matrix->n;
+    newmatrix.i = I;
+    newmatrix.j = J;
+    newmatrix.ReValue = Val;
+    newmatrix.NrNzElts = length;
+    vecfreel(tempArray);
+    struct sparsematrixplus output;
+    output.matrix = newmatrix;
+    output.perm = indices2;
+    return output;
+}
+
+struct sparsematrixplus reorder_col_incr(struct sparsematrix* matrix){
     long length = matrix->NrNzElts;
     long* I = vecallocl(length);
     long* J = vecallocl(length);
@@ -129,22 +177,29 @@ struct sparsematrix reorder_col_incr(struct sparsematrix* matrix){
     struct sparsematrix newmatrix;
 
     long* indices = QSort(tempArray,length);
+    long* indices2 = vecallocl(length);
 
     for(l=0;l<length;l++){
         k = indices[length-l-1];
+        indices2[l] = k;
         I[l] = matrix->i[k];
         J[l] = matrix->j[k];
         Val[l] = matrix->ReValue[k];
 
     }
 
+    newmatrix.m = matrix->m;
+    newmatrix.n = matrix->n;
     newmatrix.i = I;
     newmatrix.j = J;
     newmatrix.ReValue = Val;
     newmatrix.NrNzElts = length;
-    vecfreel(indices);
+    
     vecfreel(tempArray);
-    return newmatrix;
+    struct sparsematrixplus output;
+    output.matrix = newmatrix;
+    output.perm = indices2;
+    return output;
 }
 
 void print_matrix(struct sparsematrix matrix){
@@ -176,7 +231,7 @@ void print_mat_to_file(char* name, struct sparsematrix matrix){
   FILE* File;
   File = fopen(name, "w");
   int k;
-  for(k=0;k<matrix.NrNzElts;k++) fprintf(File,"%ld %ld - %f %f\n",matrix.i[k]+1,matrix.j[k]+1,matrix.ReValue[k],matrix.ImValue[k]);
+  for(k=0;k<matrix.NrNzElts;k++) fprintf(File,"%ld %ld - %f\n",matrix.i[k]+1,matrix.j[k]+1,matrix.ReValue[k]);
   fclose(File);
 }
 
@@ -188,4 +243,143 @@ void print_vec_to_file(char* name, long* vec, int length){
     fprintf(File,"%ld ",vec[i]);
   fprintf(File,"\n");
   fclose(File);
+}
+
+long* reverse_perm(long* input, int length){
+    long* output = vecallocl(length);
+    int i;
+    for (i=0;i<length;i++)
+        output[input[i]] = i;
+    return output;
+}
+
+
+/*
+* method that splits the two parts of A which have value "first"
+* and value "second"
+*/
+struct twomatrices split_matrix(struct sparsematrix* A, double first, double second){
+
+  int k;
+
+  int max1=0;
+  int max2=0;
+
+  /* initial sweep of the matrix to see how long should be the vectors*/
+  for(k=0;k<A->NrNzElts;k++) 
+    (A->ReValue[k] == second) ? max2++ : max1++;
+
+  /* initialization of the vectors */
+  long *i1 = vecallocl(max1);
+  long *j1 = vecallocl(max1);
+  double *v1 = vecallocd(max1);
+  double *c1 = vecallocd(max1);
+
+  long *i2 = vecallocl(max2);
+  long *j2 = vecallocl(max2);
+  double *v2 = vecallocd(max2);
+  double *c2 = vecallocd(max2);
+
+  /* population of the vectors */
+  int index1=0;
+  int index2=0;
+  for(k=0;k<A->NrNzElts;k++){
+    if (A->ReValue[k] == second ){
+      i2[index2] = A->i[k];
+      j2[index2] = A->j[k];
+      v2[index2] = second;
+      c2[index2] = 0.0;
+      index2++;
+    }
+    else {
+      i1[index1] = A->i[k];
+      j1[index1] = A->j[k];
+      v1[index1] = first;
+      c1[index1] = 0.0;
+      index1++;
+    }
+  }
+
+  /* construction of the output */
+  struct sparsematrix A1, A2;
+
+  A1.m = A->m;
+  A1.n = A->n;
+  A1.NrNzElts = max1;
+  A1.i = i1;
+  A1.j = j1;
+  A1.ReValue = v1;
+  A1.ImValue = c1;
+
+  A2.NrNzElts = max2;
+  A2.m = A->m;
+  A2.n = A->n;
+  A2.i = i2;
+  A2.j = j2;
+  A2.ReValue = v2;
+  A2.ImValue = c2;
+
+  struct twomatrices output;
+  output.Ar = A1;
+  output.Ac = A2;
+
+  return output;
+}
+
+void update_rows(struct sparsematrix* A, int i, double value/*, FILE* File*/){
+  /* requires matrix with ascending rows */
+  int k = 0;
+  while(A->i[k] < i){
+    k++;
+  }
+  while(A->i[k] == i){
+    A->ReValue[k] = value;
+    /*fprintf(File,"## (%ld,%ld)=%f\n",A->i[k]+1,A->j[k]+1,value); */
+    k++;
+  }
+}
+
+void update_cols(struct sparsematrix* A, int j, double value){
+  /* requires matrix with ascending cols*/
+  int k = 0;
+  while(A->j[k] < j){
+    k++;
+  }
+  while(A->j[k] == j){
+    A->ReValue[k] = value;
+    k++;
+  }
+}
+
+void update_rows_link(struct sparsematrix* A, struct sparsematrix* B, int i, double value, long* link){
+  /* A = ascending rows, B = ascending columns */
+  int k = 0;
+  while(A->i[k] < i){
+    k++;
+  }
+  while(A->i[k] == i){
+    B->ReValue[link[k]] = value;
+    k++;
+  }
+}
+
+void update_cols_link(struct sparsematrix* A, struct sparsematrix* B, int j, double value, long* link/*, FILE* File*/){
+  /* A = ascending cols, B = ascending rows */
+  int k = 0;
+  while(A->j[k] < j){
+    k++;
+  }
+  while(A->j[k] == j){
+    B->ReValue[link[k]] = value;
+    /*fprintf(File,"## (%ld,%ld)=%f\n",B->i[link[k]]+1,B->j[link[k]]+1,value);*/
+    k++;
+  }
+}
+
+long* double_array_to_long(double* input, int length){
+    long* output = vecallocl(length);
+    int i=0;
+    for(i=0;i<length;i++)
+        output[i] = (long)input[i];
+    return output;
 }
