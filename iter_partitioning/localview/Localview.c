@@ -5,7 +5,7 @@
 #include <stdlib.h>
 #include <time.h>
 #include <Mondriaan.h>
-#include "utils.c"
+#include "../utils/utils.c"
 
 /*
 * method that returns a random integer in [0,bound]
@@ -21,34 +21,6 @@ int xor(int a, int b){
   return (!a && b) || (a && !b);
 }
 
-
-
-/*
-* methods to find out which rows/cols 
-* (depending on whether the input vector is i or j)
-* are empty / nonempty (and how many nonzeros they have)
-*
-* input = i/j
-* NrNzElts = length(input)
-* size = m/n
-*/
-long* nnz(long* input, int NrNzElts, int size){
-  /* initialization of the output vector */
-  long* nonz = vecallocl(size);
-
-  /* filling out the vector with 0s (o/w MATLAB does not empty it) */
-  int index;
-  for(index=0;index<size;index++)
-    nonz[index] = 0;
-
-  /* sweep of the input vector: increased the counter for every index found */
-  index = 0;
-  while(index<NrNzElts){
-    nonz[input[index]]++;
-    index++;
-  }
-  return nonz;
-}
 
 /*
 * function that assigns the nonzeros of matrix either to Ar or Ac

@@ -3,7 +3,7 @@
 printIteration = 0;
 % read the input sparse matrix
 matrix = 'impcol_b';
-str = ['matrices/' matrix '.mtx'];
+str = ['../matrices/' matrix '.mtx'];
 A = mmread(str);
 %A = sprand(30,30,0.3);
 clear str

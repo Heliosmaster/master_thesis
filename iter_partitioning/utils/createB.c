@@ -1,4 +1,11 @@
-#include "Localview.c"
+#include <stdlib.h>
+#include <stdio.h>
+#include <memory.h>
+#include <math.h>
+#include <stdlib.h>
+#include <time.h>
+#include <Mondriaan.h>
+#include "../utils/utils.c"
 
 struct sparsematrix createB(struct sparsematrix* Ac, struct sparsematrix* Ar){
 
@@ -101,7 +108,7 @@ int main(){
   /* reading the matrix from file */
   FILE* File;
   struct sparsematrix matrix;
-  File = fopen("matrices/test_matrix.mtx", "r");
+  File = fopen("../../matrices/test_matrix.mtx", "r");
   if (!MMReadSparseMatrix(File, &matrix)) printf("Unable to read input matrix!\n");
   fclose(File);
 

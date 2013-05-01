@@ -5,7 +5,7 @@
 #include <stdlib.h>
 #include <time.h>
 #include <Mondriaan.h>
-#include "../utils.c"
+#include "../utils/utils.c"
 
 /*
 * Given a priority vector "vec" of length m+n, for rows (1,...,m) and columns (m+1,...,m+n),
