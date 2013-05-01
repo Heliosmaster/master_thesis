@@ -5,7 +5,7 @@ printIteration = 0;
 matrix = 'impcol_b';
 str = ['../matrices/' matrix '.mtx'];
 A = mmread(str);
-%A = sprand(30,30,0.3);
+
 clear str
 
 %iteration number
@@ -93,5 +93,5 @@ end
 
 [best,k] = min(results);
 fprintf('best=%g at iteration %g \t avg: %g\n',best,k,mean(results));
-figure(101)
-plot(results); 
+%figure(101)
+%plot(results); 
