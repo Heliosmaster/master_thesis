@@ -1,7 +1,7 @@
 #include "overpainting.c"
 
 int main(){
-  /* srand(time(NULL)); */
+  
   /* reading the matrix from file */
   FILE* File;
   struct sparsematrix matrix;
@@ -9,15 +9,13 @@ int main(){
   if (!MMReadSparseMatrix(File, &matrix)) printf("Unable to read input matrix!\n");
   fclose(File);
 
-  struct sparsematrixplus matrix2 = reorder_col_incr(&matrix);
-  //struct sparsematrixplus matrix3 = reorder_row_incr(&(matrix2.matrix));
-
+  /* creating explicitly a particular priority vector vec */
   int m = matrix.m;
   int n = matrix.n;
 
   long* vec = vecallocl(m+n);
   int i;  
-  /*for(i=0;i<m+n;i++) vec[i] = m+n-i-1; */
+
   vec[0]= 2;
   vec[1]= 3;
   vec[2]= 10;
@@ -37,30 +35,12 @@ int main(){
   vec[16]=17;
   vec[17]=4;
 
-  //print_vec_inline(vec,m+n);
-
-  /*struct twomatrices two = overpaint_col(&matrix2,vec);*/
+  /* explicit computation of Ar and Ac with the overpaint method */
   struct twomatrices two = overpaint(&matrix,vec);
 
-  
+  /* printing out the values */
   printf("===A===\n");
   print_matrix(two.Ar);
   printf("===B===\n");
   print_matrix(two.Ac);
-
-
-/*  printf("===A===\n");
-  print_matrix(matrix);
-  printf("===B===\n");
-  print_matrix(matrix2.matrix);
-  printf("===C===\n");
-  print_matrix(matrix3.matrix);*/
-
-  
-  // //update_rows_link(&matrix, &matrix2.matrix,0,10,reverse_perm(matrix2.perm,matrix.NrNzElts));
-  // //update_cols_link(&matrix2.matrix, &matrix,0,10,matrix2.perm);
-  // print_matrix(matrix2.matrix);
-  // printf("\n");
-  // print_vec_inline(matrix2.perm,matrix.NrNzElts);
-  // print_vec_inline(reverse_perm(matrix2.perm,matrix.NrNzElts),matrix.NrNzElts);
 }

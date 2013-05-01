@@ -512,23 +512,26 @@ void mexFunction(int nlhs, mxArray *plhs[], int nrhs, const mxArray *prhs[]) {
   struct sparsematrix* MondriaanMatrix;
   int i;
 
-  /* converting from Matlab to Mondriaan */
+  /* converting the matrix from Matlab to Mondriaan */
   MondriaanMatrix = ConvertMatlabToMondriaan(prhs[0]);
+
+  /* computing the length of the priority vector */
   int length = MondriaanMatrix->m+MondriaanMatrix->n;
+
+  /* getting the vector as double* */
   double* inputVec = mxGetPr(prhs[1]);
+
+  /* switching from mondriaan numbering of rows/cols to C */
   for(i=0;i<length;i++) inputVec[i] -= 1.0;
+
+  /* explicit conversion of double* to long* */
   long* vec = double_array_to_long(inputVec,length);
   
-  for(i=0;i<length;i++){
-    printf("vec[%d]=%ld\n",i,vec[i]);
-  }
-
+  /* switching from Matlab matrix storage (ascending columns) to ascending rows */
   struct sparsematrixplus mat = reorder_row_incr(MondriaanMatrix);
   
   /* performing split */
   struct twomatrices two = overpaint(&(mat.matrix),vec); 
-
-  
 
   /* separating the two parts */
   struct sparsematrix matrix = two.Ac;
@@ -538,6 +541,8 @@ void mexFunction(int nlhs, mxArray *plhs[], int nrhs, const mxArray *prhs[]) {
   plhs[0] = ConvertMondriaanToMatlab(&matrix);
   plhs[1] = ConvertMondriaanToMatlab(&matrix2);
   
+  vecfreed(inputVec);
+  vecfreel(vec);
   MMDeleteSparseMatrix(MondriaanMatrix);
 }
 

@@ -256,7 +256,7 @@ long* reverse_perm(long* input, int length){
 
 /*
 * method that splits the two parts of A which have value "first"
-* and value "second"
+* and value "second", assigning them respectively to Ar and Ac
 */
 struct twomatrices split_matrix(struct sparsematrix* A, double first, double second){
 
@@ -371,7 +371,6 @@ void update_cols_link(struct sparsematrix* A, struct sparsematrix* B, int j, dou
   }
   while(A->j[k] == j){
     B->ReValue[link[k]] = value;
-    /*fprintf(File,"## (%ld,%ld)=%f\n",B->i[link[k]]+1,B->j[link[k]]+1,value);*/
     k++;
   }
 }

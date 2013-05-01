@@ -7,55 +7,48 @@
 #include <Mondriaan.h>
 #include "../utils.c"
 
+/*
+* Given a priority vector "vec" of length m+n, for rows (1,...,m) and columns (m+1,...,m+n),
+* assigns the nonzero (i,j) to "row" if i<j (wrt the order in vec), to "column" otherwise.
+*
+* The complexity is reduced by not checking the priority for every nonzero, but by simply following
+* the order imposed by vec backwards, assigning two times each nonzero (the last one will stick,
+* which refers to the row/column with higher priority)
+*
+* The matrix A is supposed to be stored by increasing rows
+*/
 
 struct twomatrices overpaint(struct sparsematrix* A, long* vec){
+
+  /* explicit storage of the matrix dimension in local variables */
   int m = A->m;
   int n = A->n;
 
+  /* creation and storage of a copy of the matrix with increasing columns */
   struct sparsematrixplus matrixplus = reorder_col_incr(A);
   struct sparsematrix* B = &(matrixplus.matrix);
+
+  /* explicit storage of the permutation vector of the reordering */
   long* BtoA = matrixplus.perm;
 
   int i,k;
 
+  /* main loop, iterating through vec backwards */
   for(i=m+n-1;i>=0;i--){
+    /* k is the considered row/column */
     k = vec[i];
     if (k<m){
-      /* it's a row*/
+      /* it's a row, set their value as 10 */
       update_rows(A,k,10.0);
     } else {
-      /* it's a column */
+      /* it's a column, set their nonzero value as 11 */
       update_cols_link(B,A,k-m,11.0,BtoA);
     }
   }
 
+  /* 
+  * starting from the matrix A with nonzero values 10 and 11, split the two subparts, creating
+  * a sparsematrix struct
+  */
   return split_matrix(A,10.0,11.0);
 }
-/*
-struct twomatrices overpaint_col(struct sparsematrix* A, long* vec){
-  int m = A->m;
-  int n = A->n;
-  int length = A->NrNzElts;
-
-  struct sparsematrixplus matrixplus = reorder_row_incr(A);
-  struct sparsematrix* B = &(matrixplus.matrix);
-  long* BtoA = matrixplus.perm;
-  int i,k;
- 
-
-  for(i=length-1;i>=0;i--){
-    k = vec[i];
-    if (k<m){
-      // it's a row
-      update_rows_link(B,A,k,10.0,BtoA);
-    } else {
-      // it's a column 
-      update_cols(A,k-m,11.0);
-    }
-    printf("===%d===\n",length-i-1);
-    print_matrix(*A);
-  }
-
-
-  return split_matrix(A,10.0,11.0);
-}*/
