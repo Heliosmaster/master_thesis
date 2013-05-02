@@ -152,6 +152,58 @@ long* nnz(long* input, int NrNzElts, int size){
   return nonz;
 }
 
+long* CSortVec(long *J, long length, long maxval) {
+
+    /* This function sorts the items J[lo..hi] by increasing value val,
+       using a counting sort.
+       Items with the same value retain the original order.
+       maxval >= 0 is the maximum value that can occur;
+       0 is the minimum value */
+
+    long t, j, r, total, tmp, *start, *C, *indices;
+    
+    C = (long *)malloc(length*sizeof(long));
+    start = (long *)malloc((maxval+1)*sizeof(long));
+    indices = vecallocl(length);
+    
+    if (C == NULL || start == NULL) {
+        fprintf(stderr, "CSortVec(): Not enough memory!\n");
+        return FALSE;
+    }
+
+    for (r=0; r<=maxval; r++)
+        start[r] = 0;
+
+    /* First pass. Count the number of items for each value. */
+    for (t=0; t<length; t++)
+        start[J[t]]++;
+
+    /* Make start cumulative */
+    total = 0;
+    for (r=0; r<=maxval; r++) {
+        tmp = total;
+        total += start[r];
+        start[r] = tmp;
+    }
+
+    /* Second pass. Copy the items into C. */
+    for (t=0; t<length; t++) {
+        j = J[t];	
+        C[start[j]]= j;
+	indices[start[j]]=t;
+	/*indexes[t]=start[j];*/
+        start[j]++;
+    }
+
+    /* Third pass. Copy the items from C back into J. */
+    for (t=0; t<length; t++)
+        J[t]= C[t];
+
+    free(start);
+    free(C);
+    
+    return indices;
+}
 
 struct sparsematrixplus reorder_row_incr(struct sparsematrix* matrix){
     long length = matrix->NrNzElts;
@@ -165,14 +217,12 @@ struct sparsematrixplus reorder_row_incr(struct sparsematrix* matrix){
     for(k=0;k<length;k++) tempArray[k] = matrix->i[k];
 
     struct sparsematrix newmatrix;
-
-    long* indices = QSort(tempArray,length);
-    long* indices2 = vecallocl(length);
+    
+    long* indices = CSortVec(tempArray,length,matrix->m);
 
     for(l=0;l<length;l++){
-        k = indices[length-l-1];
-        indices2[l] = k;
-        I[l] = matrix->i[k];
+        k = indices[l];
+	I[l] = matrix->i[k];
         J[l] = matrix->j[k];
         Val[l] = matrix->ReValue[k];
 
@@ -187,7 +237,7 @@ struct sparsematrixplus reorder_row_incr(struct sparsematrix* matrix){
     vecfreel(tempArray);
     struct sparsematrixplus output;
     output.matrix = newmatrix;
-    output.perm = indices2;
+    output.perm = indices;
     return output;
 }
 
@@ -204,12 +254,10 @@ struct sparsematrixplus reorder_col_incr(struct sparsematrix* matrix){
 
     struct sparsematrix newmatrix;
 
-    long* indices = QSort(tempArray,length);
-    long* indices2 = vecallocl(length);
+    long* indices = CSortVec(tempArray,length,matrix->n);
 
     for(l=0;l<length;l++){
-        k = indices[length-l-1];
-        indices2[l] = k;
+	k = indices[l];
         I[l] = matrix->i[k];
         J[l] = matrix->j[k];
         Val[l] = matrix->ReValue[k];
@@ -226,9 +274,11 @@ struct sparsematrixplus reorder_col_incr(struct sparsematrix* matrix){
     vecfreel(tempArray);
     struct sparsematrixplus output;
     output.matrix = newmatrix;
-    output.perm = indices2;
+    output.perm = indices;
     return output;
 }
+
+
 
 void print_matrix(struct sparsematrix matrix){
   int k;

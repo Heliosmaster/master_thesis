@@ -15,3 +15,5 @@ Mondriaan3.11/mondriaan.mk
 *.mexa64
 createB
 Overpaint
+test_csort
+test_reorder

@@ -5,7 +5,7 @@ int main(){
   /* reading the matrix from file */
   FILE* File;
   struct sparsematrix matrix;
-  File = fopen("../../matrices/test_matrix.mtx", "r");
+  File = fopen("../../matrices/m_testbed/coAuthorsCiteseer.mtx", "r");
   if (!MMReadSparseMatrix(File, &matrix)) printf("Unable to read input matrix!\n");
   fclose(File);
 
@@ -15,7 +15,8 @@ int main(){
 
   long* vec = vecallocl(m+n);
   int i;  
-
+  for(i=0;i<m+n;i++) vec[i] = i;
+ /*
   vec[0]= 2;
   vec[1]= 3;
   vec[2]= 10;
@@ -34,13 +35,13 @@ int main(){
   vec[15]=16;
   vec[16]=17;
   vec[17]=4;
-
+*/
   /* explicit computation of Ar and Ac with the overpaint method */
   struct twomatrices two = overpaint(&matrix,vec);
 
-  /* printing out the values */
+  /* printing out the values 
   printf("===A===\n");
   print_matrix(two.Ar);
   printf("===B===\n");
-  print_matrix(two.Ac);
+  print_matrix(two.Ac);*/
 }
