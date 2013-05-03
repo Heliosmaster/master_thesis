@@ -24,9 +24,13 @@ struct twomatrices overpaint(struct sparsematrix* A, long* vec){
   int m = A->m;
   int n = A->n;
 
+
   /* creation and storage of a copy of the matrix with increasing columns */
   struct sparsematrixplus matrixplus = reorder_col_incr(A);
   struct sparsematrix* B = &(matrixplus.matrix);
+
+  long* incr_cols = get_increment_cols(B);
+  long* incr_rows = get_increment_rows(A);
 
   /* explicit storage of the permutation vector of the reordering */
   long* BtoA = matrixplus.perm;
@@ -39,16 +43,17 @@ struct twomatrices overpaint(struct sparsematrix* A, long* vec){
     k = vec[i];
     if (k<m){
       /* it's a row, set their value as 10 */
-      update_rows(A,k,10.0);
+      update_rows(A,incr_rows,k,10.0);
     } else {
       /* it's a column, set their nonzero value as 11 */
-      update_cols_link(B,A,k-m,11.0,BtoA);
+      update_cols_link(B,A,incr_cols,k-m,11.0,BtoA);
     }
   }
 
   /* 
-  * starting from the matrix A with nonzero values 10 and 11, split the two subparts, creating
+  * starting from the matrix A with nonzero values 10 and 11, splitting the two subparts, creating
   * a sparsematrix struct
   */
+
   return split_matrix(A,10.0,11.0);
 }

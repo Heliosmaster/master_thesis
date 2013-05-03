@@ -112,7 +112,11 @@ int main(){
   if (!MMReadSparseMatrix(File, &matrix)) printf("Unable to read input matrix!\n");
   fclose(File);
 
+  /* splitting the matrix following the nonzero values (1 and 2) */
+
   struct twomatrices A = split_matrix(&matrix,1.0,2.0);
+
+  /* creating the B matrix and printing it */
   struct sparsematrix B = createB(&(A.Ac),&(A.Ar));
   print_matrix(reorder_col_incr(&B).matrix);
 }

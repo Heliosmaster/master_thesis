@@ -16,8 +16,12 @@ int main(){
   if (!MMReadSparseMatrix(File, &matrix)) printf("Unable to read input matrix!\n");
   fclose(File);
 
+  /* reordering the columns, then the row again */
+
   struct sparsematrix matrix2 = reorder_col_incr(&matrix).matrix;
   struct sparsematrix matrix3 = reorder_row_incr(&matrix2).matrix;
+
+  /* printing out all the matrices, first and third should be the same */
 
   print_matrix(matrix);
 

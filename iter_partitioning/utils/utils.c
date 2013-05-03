@@ -152,15 +152,17 @@ long* nnz(long* input, int NrNzElts, int size){
   return nonz;
 }
 
+/*
+* This function sorts all the items of J by increasing value val, using a counting sort.
+* Stable: (items with the same value retain the original order)
+* 0 <= J[i] <= maxval, for every i.
+*/
+
 long* CSortVec(long *J, long length, long maxval) {
-
-    /* This function sorts the items J[lo..hi] by increasing value val,
-       using a counting sort.
-       Items with the same value retain the original order.
-       maxval >= 0 is the maximum value that can occur;
-       0 is the minimum value */
-
+  
     long t, j, r, total, tmp, *start, *C, *indices;
+
+    /* initialization of the memory */
     
     C = (long *)malloc(length*sizeof(long));
     start = (long *)malloc((maxval+1)*sizeof(long));
@@ -170,6 +172,8 @@ long* CSortVec(long *J, long length, long maxval) {
         fprintf(stderr, "CSortVec(): Not enough memory!\n");
         return FALSE;
     }
+
+    /* emptying out the "buckets" vector */
 
     for (r=0; r<=maxval; r++)
         start[r] = 0;
@@ -191,21 +195,29 @@ long* CSortVec(long *J, long length, long maxval) {
         j = J[t];	
         C[start[j]]= j;
 	indices[start[j]]=t;
-	/*indexes[t]=start[j];*/
+	/*indexes[t]=start[j]; -- this to have the reverse permutation */
         start[j]++;
     }
 
     /* Third pass. Copy the items from C back into J. */
-    for (t=0; t<length; t++)
-        J[t]= C[t];
+    for (t=0; t<length; t++){
+      J[t]= C[t];
+    }
 
+    /* freeing memory */
     free(start);
     free(C);
     
     return indices;
 }
 
+/*
+* Method that sorts the nonzeros of a struct sparsematrix such that the rows are in ascending order
+*/
+
 struct sparsematrixplus reorder_row_incr(struct sparsematrix* matrix){
+
+    /* allocating memory */
     long length = matrix->NrNzElts;
     long* I = vecallocl(length);
     long* J = vecallocl(length);
@@ -213,28 +225,34 @@ struct sparsematrixplus reorder_row_incr(struct sparsematrix* matrix){
 
     int k,l;
 
+    /* creating a temporary array for storing the values to be sorted (rows) */
     long* tempArray = vecallocl(length);
     for(k=0;k<length;k++) tempArray[k] = matrix->i[k];
 
-    struct sparsematrix newmatrix;
-    
+    /* sorting tempArray with Counting Sort and getting back the permutation indices */
     long* indices = CSortVec(tempArray,length,matrix->m);
 
+    /* creation of the vectors of the permuted rows, columns, value */
     for(l=0;l<length;l++){
-        k = indices[l];
-	I[l] = matrix->i[k];
-        J[l] = matrix->j[k];
-        Val[l] = matrix->ReValue[k];
-
+      k = indices[l];
+	    I[l] = matrix->i[k];
+      J[l] = matrix->j[k];
+      Val[l] = matrix->ReValue[k];
     }
 
+    /* creating the matrix part of the */
+    struct sparsematrix newmatrix;
     newmatrix.m = matrix->m;
     newmatrix.n = matrix->n;
     newmatrix.i = I;
     newmatrix.j = J;
     newmatrix.ReValue = Val;
     newmatrix.NrNzElts = length;
+
+    /* removing the temporary array */
     vecfreel(tempArray);
+
+    /* creating the final output */
     struct sparsematrixplus output;
     output.matrix = newmatrix;
     output.perm = indices;
@@ -242,6 +260,8 @@ struct sparsematrixplus reorder_row_incr(struct sparsematrix* matrix){
 }
 
 struct sparsematrixplus reorder_col_incr(struct sparsematrix* matrix){
+
+    /* allocating memory */
     long length = matrix->NrNzElts;
     long* I = vecallocl(length);
     long* J = vecallocl(length);
@@ -249,36 +269,43 @@ struct sparsematrixplus reorder_col_incr(struct sparsematrix* matrix){
 
     int k,l;
 
+    /* creating a temporary array for storing the values to be sorted (rows) */
     long* tempArray = vecallocl(length);
     for(k=0;k<length;k++) tempArray[k] = matrix->j[k];
 
-    struct sparsematrix newmatrix;
-
+    /* sorting tempArray with Counting Sort and getting back the permutation indices */
     long* indices = CSortVec(tempArray,length,matrix->n);
 
+    /* creation of the vectors of the permuted rows, columns, value */
     for(l=0;l<length;l++){
-	k = indices[l];
-        I[l] = matrix->i[k];
-        J[l] = matrix->j[k];
-        Val[l] = matrix->ReValue[k];
-
+      k = indices[l];
+      I[l] = matrix->i[k];
+      J[l] = matrix->j[k];
+      Val[l] = matrix->ReValue[k];
     }
 
+    /* creating the matrix part of the */
+    struct sparsematrix newmatrix;
     newmatrix.m = matrix->m;
     newmatrix.n = matrix->n;
     newmatrix.i = I;
     newmatrix.j = J;
     newmatrix.ReValue = Val;
     newmatrix.NrNzElts = length;
-    
+
+    /* removing the temporary array */
     vecfreel(tempArray);
+
+    /* creating the final output */
     struct sparsematrixplus output;
     output.matrix = newmatrix;
     output.perm = indices;
     return output;
 }
 
-
+/*
+* Printing methods used for debugging, self-explanatory
+*/
 
 void print_matrix(struct sparsematrix matrix){
   int k;
@@ -331,7 +358,6 @@ long* reverse_perm(long* input, int length){
     return output;
 }
 
-
 /*
 * method that splits the two parts of A which have value "first"
 * and value "second", assigning them respectively to Ar and Ac
@@ -340,6 +366,7 @@ struct twomatrices split_matrix(struct sparsematrix* A, double first, double sec
 
   int k;
 
+  /* initialization of the counters */
   int max1=0;
   int max2=0;
 
@@ -358,10 +385,11 @@ struct twomatrices split_matrix(struct sparsematrix* A, double first, double sec
   double *v2 = vecallocd(max2);
   double *c2 = vecallocd(max2);
 
+
   /* population of the vectors */
   int index1=0;
   int index2=0;
-  for(k=0;k<A->NrNzElts;k++){
+  for(k=0;k<(A->NrNzElts);k++){
     if (A->ReValue[k] == second ){
       i2[index2] = A->i[k];
       j2[index2] = A->j[k];
@@ -377,6 +405,7 @@ struct twomatrices split_matrix(struct sparsematrix* A, double first, double sec
       index1++;
     }
   }
+
 
   /* construction of the output */
   struct sparsematrix A1, A2;
@@ -404,55 +433,108 @@ struct twomatrices split_matrix(struct sparsematrix* A, double first, double sec
   return output;
 }
 
-void update_rows(struct sparsematrix* A, int i, double value/*, FILE* File*/){
-  /* requires matrix with ascending rows */
-  int k = 0;
-  while(A->i[k] < i){
-    k++;
+/*
+* method that gets the indices of the first element of a given row for a matrix with incremental row
+* i.e. gets the increment for the Incremental Row Storage
+*/
+long* get_increment_rows(struct sparsematrix* A){
+
+  /* allocation of the memory */
+  long* increment = vecallocl(A->m);
+  int k,index = 0;
+  
+  /* first row is always pointed by first element */
+  increment[0] = 0;
+
+  /* loops that iterates through the list of nonzeros, registers row increment
+  */
+  for(k=0;k<A->NrNzElts;k++){
+    if(A->i[k] != A->i[increment[index]]){
+      index++;
+      increment[index] = k;
+    }
   }
+  
+  return increment;
+}
+
+/*
+* method that gets the indices of the first element of a given column for a matrix with incremental columns
+* i.e. gets the increment for the Incremental Column Storage
+*/
+long* get_increment_cols(struct sparsematrix* A){
+
+  /* allocation of the memory */
+  long* increment = vecallocl(A->n);
+  int k,index = 0;
+  
+  /* first column is always pointed by first element */
+  increment[0] = 0;
+
+  /* loops that iterates through the list of nonzeros, registers column increment
+  */
+  for(k=0;k<A->NrNzElts;k++){
+    if(A->j[k] != A->j[increment[index]]){
+      index++;
+      increment[index] = k;
+    }
+  }
+  
+  return increment;
+}
+
+/*
+* method that updates the values of all elements in a particular row for a matrix stored with IRS.
+*/
+void update_rows(struct sparsematrix* A, long* increment_rows, int i, double value){
+  int k = increment_rows[i];
   while(A->i[k] == i){
     A->ReValue[k] = value;
-    /*fprintf(File,"## (%ld,%ld)=%f\n",A->i[k]+1,A->j[k]+1,value); */
     k++;
   }
 }
 
-void update_cols(struct sparsematrix* A, int j, double value){
+/*
+* method that updates the values of all elements in a particular column for a matrix stored with ICS.
+*/
+void update_cols(struct sparsematrix* A, long* increment_cols, int j, double value){
   /* requires matrix with ascending cols*/
-  int k = 0;
-  while(A->j[k] < j){
-    k++;
-  }
+  int k = increment_cols[j];
   while(A->j[k] == j){
     A->ReValue[k] = value;
     k++;
   }
 }
 
-void update_rows_link(struct sparsematrix* A, struct sparsematrix* B, int i, double value, long* link){
+/*
+* method that updates the values of all elements in a particular row for a matrix stored with ICS, using
+* the fast access provided by the same matrix stored with IRS and a link between them.
+*/
+void update_rows_link(struct sparsematrix* A, struct sparsematrix* B, long* increment_rows, int i, double value, long* link){
   /* A = ascending rows, B = ascending columns */
-  int k = 0;
-  while(A->i[k] < i){
-    k++;
-  }
+  int k = increment_rows[i];
   while(A->i[k] == i){
     B->ReValue[link[k]] = value;
     k++;
   }
 }
 
-void update_cols_link(struct sparsematrix* A, struct sparsematrix* B, int j, double value, long* link/*, FILE* File*/){
+/*
+* method that updates the values of all elements in a particular column for a matrix stored with IRS, using
+* the fast access provided by the same matrix stored with ICS and a link between them.
+*/
+void update_cols_link(struct sparsematrix* A, struct sparsematrix* B, long* increment_cols, int j, double value, long* link/*, FILE* File*/){
   /* A = ascending cols, B = ascending rows */
-  int k = 0;
-  while(A->j[k] < j){
-    k++;
-  }
+  int k = increment_cols[j];
   while(A->j[k] == j){
     B->ReValue[link[k]] = value;
     k++;
   }
 }
 
+/*
+* method that converts an array of doubles to an array of long
+*/
 long* double_array_to_long(double* input, int length){
     long* output = vecallocl(length);
     int i=0;
