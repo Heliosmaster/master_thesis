@@ -5,7 +5,8 @@ int main(){
   /* reading the matrix from file */
   FILE* File;
   struct sparsematrix matrix;
-  File = fopen("../../matrices/tbdlinux.mtx", "r");
+  File = fopen("../../matrices/m_testbed/dfl001.mtx", "r");
+  /* File = fopen("../../matrices/tbdlinux.mtx", "r"); */
   if (!MMReadSparseMatrix(File, &matrix)) printf("Unable to read input matrix!\n");
   fclose(File);
 
@@ -38,7 +39,9 @@ int main(){
   vec[17]=4; */
 
   /* explicit computation of Ar and Ac with the overpaint method */
-  matrix = reorder_row_incr(&matrix).matrix;
-  struct twomatrices two = overpaint(&matrix,vec);
+  struct sparsematrix matrix2 = reorder_row_incr(&matrix).matrix;
+  struct twomatrices two = overpaint(&matrix2,vec);
 
+  MMDeleteSparseMatrix(&matrix);
+  MMDeleteSparseMatrix(&matrix2);
 }

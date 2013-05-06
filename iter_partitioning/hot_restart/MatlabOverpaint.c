@@ -223,16 +223,16 @@ void mexFunction(int nlhs, mxArray *plhs[], int nrhs, const mxArray *prhs[]) {
   long* vec = double_array_to_long(inputVec,length);
   
   /* switching from Matlab matrix storage (ascending columns) to ascending rows */
-  struct sparsematrixplus mat = reorder_row_incr(MondriaanMatrix);
+  struct sparsematrix mat = reorder_row_incr(MondriaanMatrix).matrix;
   
   /* performing split */
-  struct twomatrices two = overpaint(&(mat.matrix),vec); 
+  struct twomatrices two = overpaint(&mat,vec);
 
   /* separating the two parts */
   struct sparsematrix matrix = two.Ac;
   struct sparsematrix matrix2 = two.Ar;
   
-  /* converting back from Mondriaan to Matlab   */
+  /* converting back from Mondriaan to Matlab */  
   plhs[0] = ConvertMondriaanToMatlab(&matrix);
   plhs[1] = ConvertMondriaanToMatlab(&matrix2);
   

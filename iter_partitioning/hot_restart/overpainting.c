@@ -29,11 +29,11 @@ struct twomatrices overpaint(struct sparsematrix* A, long* vec){
   struct sparsematrixplus matrixplus = reorder_col_incr(A);
   struct sparsematrix* B = &(matrixplus.matrix);
 
-  long* incr_cols = get_increment_cols(B);
-  long* incr_rows = get_increment_rows(A);
-
   /* explicit storage of the permutation vector of the reordering */
   long* BtoA = matrixplus.perm;
+
+  long* incr_cols = get_increment_cols(B);
+  long* incr_rows = get_increment_rows(A);
 
   int i,k;
 
@@ -55,5 +55,8 @@ struct twomatrices overpaint(struct sparsematrix* A, long* vec){
   * a sparsematrix struct
   */
 
+  vecfreel(BtoA);
+  vecfreel(incr_rows);
+  vecfreel(incr_cols);
   return split_matrix(A,10.0,11.0);
 }

@@ -15,9 +15,13 @@ reorder:
 	@echo ==Building test_reorder==
 	gcc -O3 -o test_reorder test_reorder.c -I../../Mondriaan3.11/src/include -L../../Mondriaan3.11/src/lib -lMondriaan3 -lm
 
+split:
+	@echo ==Building test_split==
+	gcc -O3 -o test_split test_split.c -I../../Mondriaan3.11/src/include -L../../Mondriaan3.11/src/lib -lMondriaan3 -lm
+
 update:
 	@echo ==Building test_update_matrix==
-	gcc -O3 -o test_update_matrix test_update_matrix.c -I../../Mondriaan3.11/src/include -L../../Mondriaan3.11/src/lib -lMondriaan3 -lm
+	gcc -O3 -g -o test_update_matrix test_update_matrix.c -I../../Mondriaan3.11/src/include -L../../Mondriaan3.11/src/lib -lMondriaan3 -lm
 
 clean: clean_createB
 

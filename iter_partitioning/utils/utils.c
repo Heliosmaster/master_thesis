@@ -38,16 +38,15 @@ int *vecalloci(int n){
 
 long *vecallocl(int n){
     /* This function allocates a vector of longs of length n */
-    long *pi;
+    long *pl;
 
     if (n==0){
-        pi= NULL; 
+        pl= NULL; 
     } else { 
-        pi= (long *)malloc(n*SZLONG);
-        if (pi==NULL)
-            printf("vecalloci: not enough memory\n");
+        pl= (long *)malloc(n*SZLONG);
+        if (pl==NULL) printf("vecallocl: not enough memory\n");
     }
-    return pi;
+    return pl;
 
 } /* end vecalloci */
 
@@ -164,8 +163,8 @@ long* CSortVec(long *J, long length, long maxval) {
 
     /* initialization of the memory */
     
-    C = (long *)malloc(length*sizeof(long));
-    start = (long *)malloc((maxval+1)*sizeof(long));
+    C = vecallocl(length);
+    start = vecallocl(maxval+1);
     indices = vecallocl(length);
     
     if (C == NULL || start == NULL) {
@@ -205,8 +204,8 @@ long* CSortVec(long *J, long length, long maxval) {
     }
 
     /* freeing memory */
-    free(start);
-    free(C);
+    vecfreel(start);
+    vecfreel(C);
     
     return indices;
 }
@@ -235,7 +234,7 @@ struct sparsematrixplus reorder_row_incr(struct sparsematrix* matrix){
     /* creation of the vectors of the permuted rows, columns, value */
     for(l=0;l<length;l++){
       k = indices[l];
-	    I[l] = matrix->i[k];
+      I[l] = matrix->i[k];
       J[l] = matrix->j[k];
       Val[l] = matrix->ReValue[k];
     }
@@ -523,7 +522,7 @@ void update_rows_link(struct sparsematrix* A, struct sparsematrix* B, long* incr
 * method that updates the values of all elements in a particular column for a matrix stored with IRS, using
 * the fast access provided by the same matrix stored with ICS and a link between them.
 */
-void update_cols_link(struct sparsematrix* A, struct sparsematrix* B, long* increment_cols, int j, double value, long* link/*, FILE* File*/){
+void update_cols_link(struct sparsematrix* A, struct sparsematrix* B, long* increment_cols, int j, double value, long* link){
   /* A = ascending cols, B = ascending rows */
   int k = increment_cols[j];
   while(A->j[k] == j){

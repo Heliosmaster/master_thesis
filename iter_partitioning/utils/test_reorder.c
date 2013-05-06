@@ -35,4 +35,8 @@ int main(){
 
   printf("---------------------\n");
 
+  MMDeleteSparseMatrix(&matrix);
+  MMDeleteSparseMatrix(&matrix2);
+  MMDeleteSparseMatrix(&matrix3);
+
 }

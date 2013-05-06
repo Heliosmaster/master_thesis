@@ -51,5 +51,11 @@ int main(){
   printf("Trying to put 10 in the 3rd row of B using link\n");
   update_rows_link(&matrix,&matrix2,incr_rows,3,10,perm2);
   print_matrix(matrix2);
-  printf("-----------------\n");  
+  printf("-----------------\n"); 
+
+  MMDeleteSparseMatrix(&matrix);
+  MMDeleteSparseMatrix(&matrix2);
+  vecfreel(incr_rows);
+  vecfreel(incr_cols);
+  vecfreel(perm2); 
 }
