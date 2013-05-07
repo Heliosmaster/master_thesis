@@ -1,5 +1,4 @@
 ref/*
-mondriaan
 *.o
 *.a
 *~
@@ -18,3 +17,5 @@ Overpaint
 test_csort
 test_reorder
 *.swp
+test_*
+!*.c

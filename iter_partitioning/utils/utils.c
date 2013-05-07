@@ -541,3 +541,18 @@ long* double_array_to_long(double* input, int length){
         output[i] = (long)input[i];
     return output;
 }
+
+long* random_permutation(long length){
+  long* a = vecallocl(length);
+  int i,j;
+  long temp;
+  for(i=0;i<length;i++) a[i]=i;
+  for(i=0;i<length;i++){
+    j = rand()%length;
+    temp = a[j];
+    a[j] = a[i];
+    a[i] = temp;
+  }
+  return a;
+
+}

@@ -13,7 +13,12 @@ increment:
 
 reorder:
 	@echo ==Building test_reorder==
-	gcc -O3 -o test_reorder test_reorder.c -I../../Mondriaan3.11/src/include -L../../Mondriaan3.11/src/lib -lMondriaan3 -lm
+	gcc -g -O3 -o test_reorder test_reorder.c -I../../Mondriaan3.11/src/include -L../../Mondriaan3.11/src/lib -lMondriaan3 -lm
+
+randperm:
+	@echo ==Building test_random_permutation==
+	gcc -O3 -o test_random_permutation test_random_permutation.c -I../../Mondriaan3.11/src/include -L../../Mondriaan3.11/src/lib -lMondriaan3 -lm
+
 
 split:
 	@echo ==Building test_split==

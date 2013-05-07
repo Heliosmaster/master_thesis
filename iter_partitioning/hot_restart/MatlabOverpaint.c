@@ -236,8 +236,9 @@ void mexFunction(int nlhs, mxArray *plhs[], int nrhs, const mxArray *prhs[]) {
   plhs[0] = ConvertMondriaanToMatlab(&matrix);
   plhs[1] = ConvertMondriaanToMatlab(&matrix2);
   
-  vecfreed(inputVec);
+  /* vecfreed(inputVec); */
   vecfreel(vec);
   MMDeleteSparseMatrix(MondriaanMatrix);
+  /* MMDeleteSparseMatrix(&mat);*/
 }
 

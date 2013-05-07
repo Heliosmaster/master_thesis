@@ -12,7 +12,7 @@ int main(){
   /* reading the matrix from file */
   FILE* File;
   struct sparsematrix matrix;
-  File = fopen("../../matrices/test_matrix.mtx", "r");
+  File = fopen("../../matrices/m_testbed/dfl001.mtx", "r");
   if (!MMReadSparseMatrix(File, &matrix)) printf("Unable to read input matrix!\n");
   fclose(File);
 
@@ -22,7 +22,7 @@ int main(){
   struct sparsematrix matrix3 = reorder_row_incr(&matrix2).matrix;
 
   /* printing out all the matrices, first and third should be the same */
-
+/*
   print_matrix(matrix);
 
   printf("---------------------\n");
@@ -34,7 +34,7 @@ int main(){
   print_matrix(matrix3);
 
   printf("---------------------\n");
-
+*/
   MMDeleteSparseMatrix(&matrix);
   MMDeleteSparseMatrix(&matrix2);
   MMDeleteSparseMatrix(&matrix3);
