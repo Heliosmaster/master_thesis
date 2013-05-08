@@ -33,6 +33,7 @@ int main(){
 	print_vec_inline(vec,10);
 	print_vec_inline(indices,10);
 	printf("------------------\n");
+	printf("QSort\n");
 
 	/* restoring the unsorted order */
 	vec[0] = 7;
@@ -46,13 +47,15 @@ int main(){
 	vec[8] = 4;
 	vec[9] = 8;
 
-
 	/* sorting it with Quick Sort and retrieving indices */
-	indices = QSort(vec,10);
+	long* indices2 = QSort(vec,10);
 
 	/* printing it out the sorting and the indices */
 	print_vec_inline(vec,10);
-	print_vec_inline(indices,10);
-
+	print_vec_inline(indices2,10);
+	
+	vecfreel(vec);
+	vecfreel(indices);
+	vecfreel(indices2);
 }
 

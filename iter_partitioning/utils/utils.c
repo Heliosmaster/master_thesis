@@ -241,6 +241,7 @@ struct sparsematrixplus reorder_row_incr(struct sparsematrix* matrix){
 
     /* creating the matrix part of the */
     struct sparsematrix newmatrix;
+    MMSparseMatrixInit(&newmatrix);
     newmatrix.m = matrix->m;
     newmatrix.n = matrix->n;
     newmatrix.i = I;
@@ -285,6 +286,8 @@ struct sparsematrixplus reorder_col_incr(struct sparsematrix* matrix){
 
     /* creating the matrix part of the */
     struct sparsematrix newmatrix;
+    MMSparseMatrixInit(&newmatrix);
+
     newmatrix.m = matrix->m;
     newmatrix.n = matrix->n;
     newmatrix.i = I;
@@ -408,7 +411,8 @@ struct twomatrices split_matrix(struct sparsematrix* A, double first, double sec
 
   /* construction of the output */
   struct sparsematrix A1, A2;
-
+  MMSparseMatrixInit(&A1);
+  MMSparseMatrixInit(&A2); 
   A1.m = A->m;
   A1.n = A->n;
   A1.NrNzElts = max1;

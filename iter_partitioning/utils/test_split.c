@@ -20,4 +20,8 @@ int main(){
   print_matrix(two.Ar);
   printf("------------\n");
   print_matrix(two.Ac);
+
+  MMDeleteSparseMatrix(&matrix);
+  MMDeleteSparseMatrix(&two.Ar);
+  MMDeleteSparseMatrix(&two.Ac);
 }

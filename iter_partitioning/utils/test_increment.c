@@ -12,14 +12,20 @@ int main(){
   /* reading the matrix from file */
   FILE* File;
   struct sparsematrix matrix;
-  File = fopen("../../matrices/dfl001.mtx", "r");
+  File = fopen("../../matrices/m_testbed/dfl001.mtx", "r");
   if (!MMReadSparseMatrix(File, &matrix)) printf("Unable to read input matrix!\n");
   fclose(File);
 
   /* making sure its rows are incremental */
-  struct sparsematrix matrix2 = reorder_row_incr(&matrix).matrix;
+  struct sparsematrixplus m2plus = reorder_row_incr(&matrix);
+  struct sparsematrix matrix2 = m2plus.matrix;
 
   /* getting the increment */
-  get_increment_rows(&matrix2);
+  long* increment = get_increment_rows(&matrix2);
+  
+  MMDeleteSparseMatrix(&matrix);
+  MMDeleteSparseMatrix(&matrix2);
+  vecfreel(m2plus.perm);
+  vecfreel(increment);
 
 }

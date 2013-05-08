@@ -55,6 +55,7 @@ int main(){
 
   MMDeleteSparseMatrix(&matrix);
   MMDeleteSparseMatrix(&matrix2);
+  vecfreel(reordering.perm);
   vecfreel(incr_rows);
   vecfreel(incr_cols);
   vecfreel(perm2); 

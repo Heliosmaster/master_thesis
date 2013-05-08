@@ -18,8 +18,10 @@ int main(){
 
   /* reordering the columns, then the row again */
 
-  struct sparsematrix matrix2 = reorder_col_incr(&matrix).matrix;
-  struct sparsematrix matrix3 = reorder_row_incr(&matrix2).matrix;
+  struct sparsematrixplus m2plus = reorder_col_incr(&matrix);
+  struct sparsematrix matrix2 = m2plus.matrix;
+  struct sparsematrixplus m3plus  = reorder_row_incr(&matrix2);
+  struct sparsematrix matrix3 = m3plus.matrix;
 
   /* printing out all the matrices, first and third should be the same */
 /*
@@ -37,6 +39,7 @@ int main(){
 */
   MMDeleteSparseMatrix(&matrix);
   MMDeleteSparseMatrix(&matrix2);
+  vecfreel(m2plus.perm);
   MMDeleteSparseMatrix(&matrix3);
-
+  vecfreel(m3plus.perm);
 }
