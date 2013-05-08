@@ -8,21 +8,6 @@
 #include "../utils/utils.c"
 
 /*
-* method that returns a random integer in [0,bound]
-*/
-int randi(int bound){
-  return ceil(rand()*1.0/RAND_MAX*bound);
-}
-
-/*
-* adding xor functionality to C (which does not support operator overloading)
-*/
-int xor(int a, int b){
-  return (!a && b) || (a && !b);
-}
-
-
-/*
 * function that assigns the nonzeros of matrix either to Ar or Ac
 */
 struct twomatrices localview(struct sparsematrix* matrix){
@@ -144,6 +129,7 @@ struct twomatrices localview(struct sparsematrix* matrix){
 
   /* explicit creation of the final matrices */
   struct sparsematrix Ar;
+  MMSparseMatrixInit(&Ar);
   Ar.NrNzElts = index_r;
   Ar.m = m;
   Ar.n = n;
@@ -153,6 +139,7 @@ struct twomatrices localview(struct sparsematrix* matrix){
   Ar.ImValue = valc_r;
 
   struct sparsematrix Ac;
+  MMSparseMatrixInit(&Ac);
   Ac.NrNzElts = index_c;
   Ac.i = ic_n;
   Ac.j = jc_n;
@@ -174,6 +161,9 @@ struct twomatrices localview(struct sparsematrix* matrix){
   vecfreel(nz1r);
   vecfreel(nz2r);
   vecfreel(nzr);
+
+  MMDeleteSparseMatrix(A1);
+  MMDeleteSparseMatrix(A2);
 
   /* explicit construction of the output */
   struct twomatrices output;

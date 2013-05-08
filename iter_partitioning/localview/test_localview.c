@@ -6,7 +6,7 @@ int main(){
   FILE* File;
   struct sparsematrix matrix;
 //File = fopen("../../matrices/test_matrix.mtx", "r");
-  File = fopen("../../matrices/m_testbed/tbdlinux.mtx", "r");
+  File = fopen("../../matrices/m_testbed/dfl001.mtx", "r");
 
   if (!MMReadSparseMatrix(File, &matrix)) printf("Unable to read input matrix!\n");
   fclose(File);
@@ -20,4 +20,8 @@ int main(){
   printf("\n");
   printf("===Ac===\n");
   print_matrix(two.Ac); */
+
+  MMDeleteSparseMatrix(&matrix);
+  MMDeleteSparseMatrix(&two.Ar);
+  MMDeleteSparseMatrix(&two.Ac);
 }

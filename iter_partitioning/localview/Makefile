@@ -3,7 +3,7 @@ all: localview
 
 localview:
 	@echo "==Building localview=="
-	gcc -O3 -o test_localview test_localview.c -I../../Mondriaan3.11/src/include -L../../Mondriaan3.11/src/lib -lMondriaan3 -lm
+	gcc -O3 -o test_localview test_localview.c -g -I../../Mondriaan3.11/src/include -L../../Mondriaan3.11/src/lib -lMondriaan3 -lm
 	/usr/local/matlab/bin/mex -o MatlabLocalview.mexa64 MatlabLocalview.c -I../../Mondriaan3.11/src/include -L../../Mondriaan3.11/src/lib -lMondriaan3 -lm -largeArrayDims
 
 clean: clean_localview

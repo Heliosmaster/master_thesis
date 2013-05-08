@@ -58,5 +58,6 @@ struct twomatrices overpaint(struct sparsematrix* A, long* vec){
   vecfreel(BtoA);
   vecfreel(incr_rows);
   vecfreel(incr_cols);
+  MMDeleteSparseMatrix(B);
   return split_matrix(A,10.0,11.0);
 }

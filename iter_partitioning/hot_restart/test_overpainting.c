@@ -36,12 +36,18 @@ int main(){
   vec[17]=4; */
 
   /* explicit computation of Ar and Ac with the overpaint method */
-  struct sparsematrix matrix2 = reorder_row_incr(&matrix).matrix;
+  struct sparsematrixplus m2plus = reorder_row_incr(&matrix);
+  struct sparsematrix matrix2 = m2plus.matrix;
   struct twomatrices two = overpaint(&matrix2,vec);
 
   print_matrix(two.Ar);
   print_matrix(two.Ac);
 
+  vecfreel(vec);
+  vecfreel(m2plus.perm);
+
   MMDeleteSparseMatrix(&matrix);
   MMDeleteSparseMatrix(&matrix2);
+  MMDeleteSparseMatrix(&two.Ar);
+  MMDeleteSparseMatrix(&two.Ac);
 }
