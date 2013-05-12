@@ -19,3 +19,4 @@ test_reorder
 *.swp
 test_*
 !*.c
+*.log
