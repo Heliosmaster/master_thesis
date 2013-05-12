@@ -4,8 +4,8 @@
 #include <math.h>
 #include <stdlib.h>
 #include <time.h>
-#include <Mondriaan.h>
-#include "utils.c"
+#include <Mondriaan.h> 
+#include "utils.h"
 
 int main(){
   /* srand(time(NULL)); */

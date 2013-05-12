@@ -1,6 +1,7 @@
 #include <stdlib.h>
 #include <time.h>
-#include "overpainting.c"
+#include "overpaint.h"
+#include "../utils/utils.h"
 
 /* Matlab include files. */
 #include "mex.h"

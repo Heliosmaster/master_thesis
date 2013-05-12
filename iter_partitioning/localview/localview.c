@@ -1,11 +1,4 @@
-#include <stdlib.h>
-#include <stdio.h>
-#include <memory.h>
-#include <math.h>
-#include <stdlib.h>
-#include <time.h>
-#include <Mondriaan.h>
-#include "../utils/utils.c"
+#include "localview.h"
 
 /*
 * function that assigns the nonzeros of matrix either to Ar or Ac
@@ -173,4 +166,3 @@ struct twomatrices localview(struct sparsematrix* matrix){
 
   return output;
 }
-

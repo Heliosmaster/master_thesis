@@ -5,14 +5,14 @@
 #include <stdlib.h>
 #include <time.h>
 #include <Mondriaan.h>
-#include "utils.c"
+#include "utils.h"
 
 int main(){
   /* srand(time(NULL)); */
   /* reading the matrix from file */
   FILE* File;
   struct sparsematrix matrix;
-  File = fopen("../../matrices/m_testbed/dfl001.mtx", "r");
+  File = fopen("../../matrices/dfl001.mtx", "r");
   if (!MMReadSparseMatrix(File, &matrix)) printf("Unable to read input matrix!\n");
   fclose(File);
 

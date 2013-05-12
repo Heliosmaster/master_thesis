@@ -1,42 +1,27 @@
-.SILENT:
+include ../init.mk
 
-all: createB increment reorder randperm split update csort
+CFLAGS:= ${CFLAGS} -fPIC
 
-createB:
-	@echo ==Building createB==
-	gcc -O3 -g -o createB createB.c -I../../Mondriaan3.11/src/include -L../../Mondriaan3.11/src/lib -lMondriaan3 -lm
-	/usr/local/matlab/bin/mex -o MatlabCreateB.mexa64 MatlabCreateB.c -I../../Mondriaan3.11/src/include -L../../Mondriaan3.11/src/lib -lMondriaan3 -lm -largeArrayDims
+all: test_create_B test_csort test_increment test_random_permutation test_reorder test_split test_update_matrix matlab_createB
 
-increment:
-	@echo ==Building test_increment==
-	gcc -O3 -g -o test_increment test_increment.c -I../../Mondriaan3.11/src/include -L../../Mondriaan3.11/src/lib -lMondriaan3 -lm
+.c.o:
+	${CC} ${CFLAGS} -c $< -o $@
 
-reorder:
-	@echo ==Building test_reorder==
-	gcc -g -O3 -g -o test_reorder test_reorder.c -I../../Mondriaan3.11/src/include -L../../Mondriaan3.11/src/lib -lMondriaan3 -lm
+test_create_B: createB.o test_create_B.o utils.o
+	${CC} -o test_create_B test_create_B.o createB.o utils.o ${CFLAGS}
 
-randperm:
-	@echo ==Building test_random_permutation==
-	gcc -O3 -g -o test_random_permutation test_random_permutation.c -I../../Mondriaan3.11/src/include -L../../Mondriaan3.11/src/lib -lMondriaan3 -lm
+test_%: test_%.o utils.o
+	@echo "* Building $@"
+	${CC} -o $@ $< utils.o ${CFLAGS}
 
-split:
-	@echo ==Building test_split==
-	gcc -O3 -g -o test_split test_split.c -I../../Mondriaan3.11/src/include -L../../Mondriaan3.11/src/lib -lMondriaan3 -lm
+%.mex.o: %.c
+	${CC} ${MATLABCFLAGS} -c $< -o $@
 
-csort:
-	@echo ==Building test_csort==
-	gcc -O3 -g -o test_csort test_csort.c -I../../Mondriaan3.11/src/include -L../../Mondriaan3.11/src/lib -lMondriaan3 -lm
+matlab_createB: MatlabCreateB.mex.o utils.o
+	@echo "* Building matlab_localview"
+	${MATLABCC} -largeArrayDims -o MatlabCreateB.mexa64 MatlabCreateB.mex.o utils.o ${LIBFLAGS} -largeArrayDims
 
-update:
-	@echo ==Building test_update_matrix==
-	gcc -O3 -g -o test_update_matrix test_update_matrix.c -I../../Mondriaan3.11/src/include -L../../Mondriaan3.11/src/lib -lMondriaan3 -lm
-
-clean: 
-	rm createB;
-	rm test_increment;
-	rm test_reorder;
-	rm test_random_permutation;
-	rm test_split;
-	rm test_csort;
-	rm test_update_matrix;
+clean:
+	@echo "* Cleaning up utils"
+	rm -f test_create_B test_increment test_random_permutation test_reorder test_split test_update_matrix *.o MatlabCreateB.mexa64
 

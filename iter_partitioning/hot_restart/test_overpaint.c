@@ -1,4 +1,4 @@
-#include "overpainting.c"
+#include "overpaint.h"
 
 int main(){
   

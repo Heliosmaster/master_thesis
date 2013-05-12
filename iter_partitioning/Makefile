@@ -1,13 +1,18 @@
-.SILENT:
-all: createB local_view
+include ./init.mk
 
-local_view:
-	(cd localview; make all)
+all: lw hr ut
 
-createB:
-	(cd utils; make createB)
+hr:
+	cd hot_restart; make all
+
+lw:
+	cd localview; make all
+
+ut:
+	cd utils; make all
+
 
 clean:
-	@echo "==Cleaning=="
-	(cd localview; make clean)
-	(cd utils; make clean)
+	cd hot_restart; make clean
+	cd localview; make clean
+	cd utils; make clean

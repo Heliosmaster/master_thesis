@@ -1,12 +1,4 @@
-#include <stdlib.h>
-#include <stdio.h>
-#include <memory.h>
-#include <math.h>
-#include <stdlib.h>
-#include <time.h>
-#include <Mondriaan.h>
-#include "../utils/utils.c"
-
+#include "overpaint.h"
 /*
 * Given a priority vector "vec" of length m+n, for rows (1,...,m) and columns (m+1,...,m+n),
 * assigns the nonzero (i,j) to "row" if i<j (wrt the order in vec), to "column" otherwise.

@@ -1,11 +1,4 @@
-#include <stdlib.h>
-#include <stdio.h>
-#include <memory.h>
-#include <math.h>
-#include <stdlib.h>
-#include <time.h>
-#include <Mondriaan.h>
-#include "../utils/utils.c"
+#include "createB.h"
 
 struct sparsematrix createB(struct sparsematrix* Ac, struct sparsematrix* Ar){
 
@@ -57,6 +50,12 @@ struct sparsematrix createB(struct sparsematrix* Ac, struct sparsematrix* Ar){
     }
   }
 
+  /* freeing the vector used for the diagonal part */
+  vecfreel(nzrc);
+  vecfreel(nzcc);
+  vecfreel(nzrr);
+  vecfreel(nzcr);
+
   /* bottom left corner (row shifted by n) */
   for(i=0;i<Ac->NrNzElts;i++){
     bi[k] = Ac->i[i]+n;
@@ -84,39 +83,19 @@ struct sparsematrix createB(struct sparsematrix* Ac, struct sparsematrix* Ar){
 
   /* creation of the (dummy) values */
   double* bval = vecallocd(k);
-  double* bim = vecallocd(k);
 
   for(i=0;i<k;i++){
     bval[i] = 1.0;
-   /* bim[i] = 0.0; */
   } 
 
   struct sparsematrix B;
+  MMSparseMatrixInit(&B);
   B.i = bi_n;
   B.m = m+n;
   B.n = m+n;
   B.j = bj_n;
   B.ReValue = bval;
-  B.ImValue = bim;
   B.NrNzElts = (long)k;
 
   return B;
-}
-
-int main(){
-  /* srand(time(NULL)); */
-  /* reading the matrix from file */
-  FILE* File;
-  struct sparsematrix matrix;
-  File = fopen("../../matrices/test_matrix.mtx", "r");
-  if (!MMReadSparseMatrix(File, &matrix)) printf("Unable to read input matrix!\n");
-  fclose(File);
-
-  /* splitting the matrix following the nonzero values (1 and 2) */
-
-  struct twomatrices A = split_matrix(&matrix,1.0,2.0);
-
-  /* creating the B matrix and printing it */
-  struct sparsematrix B = createB(&(A.Ac),&(A.Ar));
-  print_matrix(reorder_col_incr(&B).matrix);
 }

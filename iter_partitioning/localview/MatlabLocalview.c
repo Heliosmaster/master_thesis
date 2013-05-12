@@ -1,6 +1,7 @@
 #include <stdlib.h>
 #include <time.h>
-#include "Localview.c"
+#include "localview.h"
+#include "../utils/utils.h"
 
 /* Matlab include files. */
 #include "mex.h"

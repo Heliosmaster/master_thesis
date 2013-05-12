@@ -1,6 +1,5 @@
-#define SZINT (sizeof(int))
-#define SZDBL (sizeof(double))
-#define SZLONG (sizeof(long))
+#include "utils.h"
+
 
 /* These functions can be used to allocate and deallocate vectors and matrices.
    If not enough memory available, one processor halts them all.
@@ -85,11 +84,11 @@ void vecfreed(double *pd){
 
 } /* end vecfreed */
 
-void vecfreel(long *pd){
+void vecfreel(long *pl){
     /* This function frees a vector of longs */
 
-    if (pd!=NULL)
-        free(pd);
+    if (pl!=NULL)
+        free(pl);
 
 } /* end vecfreel */
 
@@ -114,14 +113,54 @@ void matfreed(double **ppd){
 
 /**********************************************************/
 
-struct twomatrices {
-  struct sparsematrix Ar, Ac;
-};
+/*
+* Printing methods used for debugging, self-explanatory
+*/
 
-struct sparsematrixplus {
-    struct sparsematrix matrix;
-    long* perm;
-};
+void print_matrix(struct sparsematrix matrix){
+  int k;
+  for(k=0;k<matrix.NrNzElts;k++)
+    printf("(%ld,%ld)=%f\n", matrix.i[k]+1,matrix.j[k]+1,matrix.ReValue[k]);
+}
+
+void print_cplx_matrix(struct sparsematrix matrix){
+  int k;
+  for(k=0;k<matrix.NrNzElts;k++)
+    printf("(%ld,%ld)=%f,%f\n", matrix.i[k]+1,matrix.j[k]+1,matrix.ReValue[k],matrix.ImValue[k]);
+}
+
+void print_vec(long* vec, int length){
+  int i;
+  for(i=0;i<length;i++)
+    printf("%d: %ld",i+1,vec[i]);
+}
+
+void print_vec_inline(long* vec, int length){
+  int i;
+  for(i=0;i<length;i++)
+    printf("%ld ",vec[i]);
+  printf("\n");
+}
+
+void print_mat_to_file(char* name, struct sparsematrix matrix){
+  FILE* File;
+  File = fopen(name, "w");
+  int k;
+  for(k=0;k<matrix.NrNzElts;k++) fprintf(File,"%ld %ld - %f\n",matrix.i[k]+1,matrix.j[k]+1,matrix.ReValue[k]);
+  fclose(File);
+}
+
+void print_vec_to_file(char* name, long* vec, int length){
+  FILE* File;
+  File = fopen(name, "a");
+  int i;
+  for(i=0;i<length;i++)
+    fprintf(File,"%ld ",vec[i]);
+  fprintf(File,"\n");
+  fclose(File);
+}
+
+/**********************************************************/
 
 
 /*
@@ -305,61 +344,6 @@ struct sparsematrixplus reorder_col_incr(struct sparsematrix* matrix){
     struct sparsematrixplus output;
     output.matrix = newmatrix;
     output.perm = indices;
-    return output;
-}
-
-/*
-* Printing methods used for debugging, self-explanatory
-*/
-
-void print_matrix(struct sparsematrix matrix){
-  int k;
-  for(k=0;k<matrix.NrNzElts;k++)
-    printf("(%ld,%ld)=%f\n", matrix.i[k]+1,matrix.j[k]+1,matrix.ReValue[k]);
-}
-
-void print_cplx_matrix(struct sparsematrix matrix){
-  int k;
-  for(k=0;k<matrix.NrNzElts;k++)
-    printf("(%ld,%ld)=%f,%f\n", matrix.i[k]+1,matrix.j[k]+1,matrix.ReValue[k],matrix.ImValue[k]);
-}
-
-void print_vec(long* vec, int length){
-  int i;
-  for(i=0;i<length;i++)
-    printf("%d: %ld",i+1,vec[i]);
-}
-
-void print_vec_inline(long* vec, int length){
-  int i;
-  for(i=0;i<length;i++)
-    printf("%ld ",vec[i]);
-  printf("\n");
-}
-
-void print_mat_to_file(char* name, struct sparsematrix matrix){
-  FILE* File;
-  File = fopen(name, "w");
-  int k;
-  for(k=0;k<matrix.NrNzElts;k++) fprintf(File,"%ld %ld - %f\n",matrix.i[k]+1,matrix.j[k]+1,matrix.ReValue[k]);
-  fclose(File);
-}
-
-void print_vec_to_file(char* name, long* vec, int length){
-  FILE* File;
-  File = fopen(name, "a");
-  int i;
-  for(i=0;i<length;i++)
-    fprintf(File,"%ld ",vec[i]);
-  fprintf(File,"\n");
-  fclose(File);
-}
-
-long* reverse_perm(long* input, int length){
-    long* output = vecallocl(length);
-    int i;
-    for (i=0;i<length;i++)
-        output[input[i]] = i;
     return output;
 }
 
@@ -580,3 +564,10 @@ int xor(int a, int b){
   return (!a && b) || (a && !b);
 }
 
+long* reverse_perm(long* input, int length){
+    long* output = vecallocl(length);
+    int i;
+    for (i=0;i<length;i++)
+        output[input[i]] = i;
+    return output;
+}

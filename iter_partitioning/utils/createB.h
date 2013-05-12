@@ -7,14 +7,5 @@
 #include <Mondriaan.h>
 #include "utils.h"
 
-int main(){
-   srand(time(NULL));
+struct sparsematrix createB(struct sparsematrix* Ac, struct sparsematrix* Ar);
 
-   int i;
-   for(i=0;i<5;i++){
-	long* vec = random_permutation(10);
-	print_vec_inline(vec,10);
-	vecfreel(vec);
-   } 
-  
-}
