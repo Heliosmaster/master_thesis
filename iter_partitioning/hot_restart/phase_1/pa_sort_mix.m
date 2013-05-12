@@ -8,9 +8,11 @@ elseif nargin < 4
     ord = 'ascend';
     ord2 = 0;
 elseif nargin < 5
+    widow = varargin{1};
     ord = varargin{2};
     ord2 = 0;
 else
+    widow = varargin{1};
     ord = varargin{2};
     ord2 = varargin{3};
 end

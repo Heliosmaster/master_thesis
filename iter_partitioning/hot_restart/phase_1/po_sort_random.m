@@ -4,6 +4,7 @@ if nargin < 2
     ord = 'ascend';
 elseif nargin < 3
     widow = varargin{1};
+    ord = 'ascend'
 else
     widow = varargin{1};
     ord = varargin{2};

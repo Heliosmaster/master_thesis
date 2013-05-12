@@ -7,8 +7,10 @@ if nargin < 2
 else
     ord = varargin{1};
 end
+rows = 1:m;
+cols = (m+1):m+n;
 if ~strategy
-    v = mix_alternate(1:m,m+1:n,ord);
+    v = mix_alternate(rows,cols,ord);
 else
-    v = mix_spread(1:m,m+1:n,ord);
+    v = mix_spread(rows,cols,ord);
 end
