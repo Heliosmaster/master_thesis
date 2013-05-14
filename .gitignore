@@ -20,3 +20,6 @@ test_reorder
 test_*
 !*.c
 *.log
+test_increment
+test_split
+test_update_matrix
