@@ -1,0 +1,54 @@
+#!/bin/bash
+
+REPO='https://svn.science.uu.nl/repos/project.mondriaan'
+
+if [ $# -ne 2 ]
+then
+	echo "Usage: $0 <path> <distname>"
+	echo "Will create a Mondriaan distribution tarball at the given file path."
+	echo "Example use: $0 ~/temp/ Mondriaan3"
+	echo "This will create ~/temp/Mondriaan3.tar.gz packing a directory called Mondriaan3"
+	echo "WARNING: will use a local '(./)tempdist' directory, if the directory exists any files there will be lost!"
+	echo "WARNING: will erase the local <distname> directory, if exists!"
+	exit;
+fi
+rm -rf tempdist
+echo "You may be prompted for your username + password for the ${REPO} repository"
+svn export ${REPO}/trunk tempdist/
+if [ ! -d tempdist ]
+then
+	echo "Error during checkout!"
+	exit
+fi
+
+mv tempdist/docs/extendedMM.tex docs/
+cd docs
+pdflatex extendedMM
+pdflatex extendedMM
+cp extendedMM.pdf ../tempdist/docs/
+cd ..
+cd tempdist
+rm -rf extra
+rm -f makedist
+cd ../tools
+mv Mondriaan.defaults Mondriaan.defaults.bak
+if [ ! -f Mondriaan.defaults ]
+then
+	(cd ..;make tool)
+	./Mondriaan ../tests/test_Mondriaan.mtx 1 0.1
+fi
+cd ../tempdist
+cp ../tools/Mondriaan.defaults tools/
+mv ../tools/Mondriaan.defaults.bak ../tools/Mondriaan.defaults
+chmod a-x mondriaan.mk
+chmod a-x docs/MATLAB.html
+chmod a-x docs/style.css
+chmod a-x src/*
+chmod a-x tests/*.c
+chmod a-x tools/*.m
+cd ..
+rm -rf $2
+mv tempdist $2
+tar cvfz $1/$2.tar.gz $2
+mv $2 tempdist
+echo "You can check the $1/$2.tar.gz distribution by inspecting ./tempdist"
