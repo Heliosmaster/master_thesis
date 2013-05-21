@@ -14,17 +14,10 @@ test_localview: localview.o test_localview.o ../utils/utils.o
 %.mex.o: %.c
 	${CC} ${MATLABCFLAGS} -c $< -o $@
 
-matlab_localview: MatlabLocalview.mex.o ../utils/utils.o localview.o
+matlab_localview: MatlabLocalview.mex.o ../utils/utils.o localview.o ../utils/MatlabHelper.mex.o
 	@echo "* Building matlab_localview"
-	${MATLABCC} -largeArrayDims -o MatlabLocalview.mexa64 MatlabLocalview.mex.o localview.o ../utils/utils.o ${LIBFLAGS} -largeArrayDims
+	${MATLABCC} -largeArrayDims -o MatlabLocalview.mexa64 MatlabLocalview.mex.o localview.o ../utils/MatlabHelper.mex.o ../utils/utils.o ${LIBFLAGS} -largeArrayDims
 
 clean:
 	@echo "* Cleaning up localview"
 	rm -f test_localview MatlabLocalview.mexa64 *.o
-
-tr:
-	@echo $(MAKEFILE_LIST)
-	@echo $(lastword $(MAKEFILE_LIST))
-	@echo $(dir $(lastword $(MAKEFILE_LIST)))
-	@echo $(abspath $(dir $(lastword $(MAKEFILE_LIST))))
-	@echo ${SRC}

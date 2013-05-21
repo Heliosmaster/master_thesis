@@ -15,9 +15,9 @@ test_overpaint: overpaint.o test_overpaint.o ../utils/utils.o
 %.mex.o: %.c
 	${CC} ${MATLABCFLAGS} -c $< -o $@
 
-matlab_overpaint: MatlabOverpaint.mex.o ../utils/utils.o overpaint.o
+matlab_overpaint: MatlabOverpaint.mex.o ../utils/utils.o overpaint.o ../utils/MatlabHelper.mex.o
 	@echo "* Building matlab_Overpaint"
-	${MATLABCC} -largeArrayDims -o MatlabOverpaint.mexa64 MatlabOverpaint.mex.o overpaint.o ../utils/utils.o ${LIBFLAGS} -largeArrayDims
+	${MATLABCC} -largeArrayDims -o MatlabOverpaint.mexa64 MatlabOverpaint.mex.o overpaint.o ../utils/utils.o ../utils/MatlabHelper.mex.o ${LIBFLAGS} -largeArrayDims
 
 clean:
 	@echo "* Cleaning up overpaint"
