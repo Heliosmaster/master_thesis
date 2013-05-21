@@ -19,7 +19,6 @@ test_reorder
 *.swp
 test_*
 !*.c
-*.log
 test_increment
 test_split
 test_update_matrix
