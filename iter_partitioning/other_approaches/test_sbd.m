@@ -2,9 +2,10 @@ clear all; close all; clc;
 
 % read the input sparse matrix
 %matrix = 'dfl001';
-matrix = 'cage6';
+%matrix = 'cage7';
 %matrix = 'impcol_b';
-str = ['matrices/' matrix '.mtx'];
+matrix = 'sherman1';
+str = ['../../matrices/testbed2/' matrix '.mtx'];
 A = mmread(str);
 %A = sprand(30,30,0.3);
 [m,n]= size(A);

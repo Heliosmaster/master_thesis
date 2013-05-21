@@ -18,7 +18,7 @@ test_%: test_%.o utils.o
 	${CC} ${MATLABCFLAGS} -c $< -o $@
 
 matlab_createB: MatlabCreateB.mex.o utils.o
-	@echo "* Building matlab_localview"
+	@echo "* Building matlab_createB"
 	${MATLABCC} -largeArrayDims -o MatlabCreateB.mexa64 MatlabCreateB.mex.o utils.o ${LIBFLAGS} -largeArrayDims
 
 clean:

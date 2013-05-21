@@ -5,7 +5,7 @@ int main(){
   /* reading the matrix from file */
   FILE* File;
   struct sparsematrix matrix;
-  File = fopen("../../matrices/test_matrix.mtx", "r");
+	  File = fopen("../../matrices/m_testbed/tbdlinux.mtx", "r");
   /* File = fopen("../../matrices/tbdlinux.mtx", "r"); */
   if (!MMReadSparseMatrix(File, &matrix)) printf("Unable to read input matrix!\n");
   fclose(File);
@@ -39,10 +39,10 @@ int main(){
   struct sparsematrixplus m2plus = reorder_row_incr(&matrix);
   struct sparsematrix matrix2 = m2plus.matrix;
   struct twomatrices two = overpaint(&matrix2,vec);
-
+/*
   print_matrix(two.Ar);
   print_matrix(two.Ac);
-
+*/
   vecfreel(vec);
   vecfreel(m2plus.perm);
 

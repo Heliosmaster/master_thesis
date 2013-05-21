@@ -21,3 +21,10 @@ matlab_localview: MatlabLocalview.mex.o ../utils/utils.o localview.o
 clean:
 	@echo "* Cleaning up localview"
 	rm -f test_localview MatlabLocalview.mexa64 *.o
+
+tr:
+	@echo $(MAKEFILE_LIST)
+	@echo $(lastword $(MAKEFILE_LIST))
+	@echo $(dir $(lastword $(MAKEFILE_LIST)))
+	@echo $(abspath $(dir $(lastword $(MAKEFILE_LIST))))
+	@echo ${SRC}

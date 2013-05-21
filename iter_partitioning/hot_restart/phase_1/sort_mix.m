@@ -17,15 +17,22 @@ while(index <= l)
         index2 = index2+1;
     end
     len = index2 - index;
-    if ~strategy
-        v1 = mix_alternate(rows,cols,ord);
+    if isempty(rows)
+        v1 = cols;
+    elseif isempty(cols)
+        v1 = rows;
     else
-        if length(cols)<length(rows)
-            v1 = mix_spread(cols,rows,1-ord2);
+        if ~strategy
+            v1 = mix_alternate(rows,cols,ord);
         else
-            v1 = mix_spread(cols,rows,ord2);
+            if length(cols)<length(rows)
+                v1 = mix_spread(cols,rows,1-ord2);
+            else
+                v1 = mix_spread(cols,rows,ord2);
+            end
         end
     end
+    
     idx = [idx v1];
     index = index+len;
 end

@@ -11,7 +11,6 @@ lw:
 ut:
 	cd utils; make all
 
-
 clean:
 	cd hot_restart; make clean
 	cd localview; make clean
