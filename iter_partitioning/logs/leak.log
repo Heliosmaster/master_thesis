@@ -1,0 +1,12 @@
+==13830== LEAK SUMMARY:
+==13830==    definitely lost: 177,084 bytes in 3,400 blocks
+==13830==    indirectly lost: 252,128 bytes in 3,101 blocks
+==13830==      possibly lost: 52,893,848 bytes in 2,602 blocks
+==13830==    still reachable: 16,683,513 bytes in 62,642 blocks
+==13830==         suppressed: 0 bytes in 0 blocks
+==13830== Reachable blocks (those to which a pointer was found) are not shown.
+==13830== To see them, rerun with: --leak-check=full --show-reachable=yes
+==13830== 
+==13830== For counts of detected and suppressed errors, rerun with: -v
+==13830== Use --track-origins=yes to see where uninitialised values come from
+==13830== ERROR SUMMARY: 3165 errors from 2914 contexts (suppressed: 11 from 3)
