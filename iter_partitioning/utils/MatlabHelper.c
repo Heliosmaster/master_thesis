@@ -199,7 +199,7 @@ Finally the CI array is the most complicated: CI[i] is the index in RI and D of 
 So if we would have the 16x5 matrix A with non-zero entries A(2, 2) = 9, A(4, 2) = 7, A(13, 5) = 2, then
 RI = 2 4 13
 D = 9 7 2
-CI = 0 0 2 2 2 3 (no elements in first column, two elements in second column, no elements in third and fourth column, one if fifth column).
+CI = 0 0 2 2 2 3 (no elements in first column, two elements in second column, no elements in third and fourth column, one if fifth column). TODO
 
 Note that this corresponds to the CCS format.
 */

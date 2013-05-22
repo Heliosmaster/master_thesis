@@ -1,5 +1,5 @@
 /*
-MatlabHelper.h
+ratlabHelper.h
 
 Created by Bas Fagginger Auer, based on the work done by Ken Stanley.
 Some extentions by Albert-Jan N. Yzelman, Davide Taviani.
@@ -16,9 +16,6 @@ It should be included in the actual wrapper, along with the function "void mexFu
 #include <time.h>
 #include <Mondriaan.h>
 
-#ifndef USE_MATLAB
-#error To be able to use the Matlab interface of Mondriaan, please make the appropriate changes in ../mondriaan.mk.
-#endif
 
 /* Matlab include files. */
 #include "mex.h"
