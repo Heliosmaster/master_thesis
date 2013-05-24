@@ -1,6 +1,6 @@
 %close all; clc; clear all;
-matrix = '../../matrices/test_matrix';
-str = ['matrices/' matrix '.mtx'];
+matrix = '../../matrices/test_matrix.mtx';
+%str = ['matrices/' matrix '.mtx'];
 A = mmread(str);
 [m,n] = size(A);
 Ar = double((A==1));

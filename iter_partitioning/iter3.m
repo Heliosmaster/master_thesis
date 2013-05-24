@@ -10,7 +10,7 @@ d = dir('../matrices/m_testbed/*.mtx');
 for k=1:length(d)
     matrix = d(k).name;
     % matrix = 'impcol_b';
-    str = ['../matrices/new_testbed/' matrix]; % '.mtx'];
+    str = ['../matrices/m_testbed/' matrix]; % '.mtx'];
     A = mmread(str);
 
     clear str

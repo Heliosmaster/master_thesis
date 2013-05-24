@@ -2,7 +2,9 @@ include ../init.mk
 
 CFLAGS:= ${CFLAGS} -fPIC
 
-all: test_create_B test_csort test_increment test_random_permutation test_reorder test_split test_update_matrix matlab_createB MatlabHelper.mex.o matlab_convert
+all: test_create_B test_csort test_increment test_random_permutation test_reorder test_split test_update_matrix matlab_createB MatlabHelper.mex.o matlab_convert cnv
+
+cnv: MondriaanToMatlab MatlabToMondriaan
 
 .c.o:
 	${CC} ${CFLAGS} -c $< -o $@
@@ -24,6 +26,14 @@ matlab_createB: MatlabCreateB.mex.o utils.o MatlabHelper.mex.o
 matlab_convert: utils.o MatlabHelper.mex.o MatlabConvert.mex.o
 	@echo "* Building matlab_convert"
 	${MATLABCC} -largeArrayDims -o MatlabConvert.mexa64 MatlabConvert.mex.o MatlabHelper.mex.o utils.o ${LIBFLAGS} -largeArrayDims
+
+MondriaanToMatlab: MatlabHelper.mex.o MondriaanToMatlab.mex.o
+	@echo "* Building MondriaanToMatlab"
+	${MATLABCC} -largeArrayDims -o MondriaanToMatlab.mexa64 MondriaanToMatlab.mex.o MatlabHelper.mex.o ${LIBFLAGS} -largeArrayDims
+
+MatlabToMondriaan: MatlabHelper.mex.o MatlabToMondriaan.mex.o
+	@echo "* Building MatlabToMondriaan"
+	${MATLABCC} -largeArrayDims -o MatlabToMondriaan.mexa64 MatlabToMondriaan.mex.o MatlabHelper.mex.o ${LIBFLAGS} -largeArrayDims
 
 clean:
 	@echo "* Cleaning up utils"
