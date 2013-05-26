@@ -1,0 +1,18 @@
+# Introduction
+## Sparse matrix partitioning
+## Hypergraph partitioning
+## Mondriaan
+
+# Medium Grain
+
+# Heuristic methods for iterative sparse matrix partitioning
+## Localview
+## Hot restart
+### Creation of the priority vector
+### Overpainting
+## Other approaches
+### Globalview
+### SBDview
+### Super-SBDview
+
+## Numerical experiments

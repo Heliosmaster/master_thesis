@@ -1,0 +1,9 @@
+*.aux
+*.tex~
+*.bbl
+*.tex.backup
+*.tex.bak
+*.blg
+*.log
+*.out
+*.toc

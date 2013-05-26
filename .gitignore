@@ -19,6 +19,3 @@ test_reorder
 *.swp
 test_*
 !*.c
-test_increment
-test_split
-test_update_matrix
