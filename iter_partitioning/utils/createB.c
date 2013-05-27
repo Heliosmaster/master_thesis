@@ -84,9 +84,7 @@ struct sparsematrix createB(struct sparsematrix* Ac, struct sparsematrix* Ar){
   /* creation of the (dummy) values */
   double* bval = vecallocd(k);
 
-  for(i=0;i<k;i++){
-    bval[i] = 1.0;
-  } 
+  for(i=0;i<k;i++) bval[i] = 1.0;
 
   struct sparsematrix B;
   MMSparseMatrixInit(&B);

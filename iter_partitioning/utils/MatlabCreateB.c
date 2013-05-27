@@ -12,11 +12,12 @@ void mexFunction(int nlhs, mxArray *plhs[], int nrhs, const mxArray *prhs[]) {
   Ac = ConvertMatlabToMondriaan(prhs[0]);
   Ar = ConvertMatlabToMondriaan(prhs[1]);
  
-  struct sparsematrix B = createB(Ac,Ar); 
+  struct sparsematrix B = createB(Ac,Ar);
 
   /* converting back from Mondriaan to Matlab */
   plhs[0] = ConvertMondriaanToMatlab(&B);
-  
+
+  MMDeleteSparseMatrix(&B);
   MMDeleteSparseMatrix(Ac);
   MMDeleteSparseMatrix(Ar);
 }

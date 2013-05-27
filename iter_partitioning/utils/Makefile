@@ -4,7 +4,7 @@ CFLAGS:= ${CFLAGS} -fPIC
 
 all: test_create_B test_csort test_increment test_random_permutation test_reorder test_split test_update_matrix matlab_createB MatlabHelper.mex.o matlab_convert cnv
 
-cnv: MondriaanToMatlab MatlabToMondriaan
+cnv: MondriaanToMatlab MatlabToMondriaan MatlabToMondriaanToMatlab
 
 .c.o:
 	${CC} ${CFLAGS} -c $< -o $@
@@ -34,6 +34,10 @@ MondriaanToMatlab: MatlabHelper.mex.o MondriaanToMatlab.mex.o
 MatlabToMondriaan: MatlabHelper.mex.o MatlabToMondriaan.mex.o
 	@echo "* Building MatlabToMondriaan"
 	${MATLABCC} -largeArrayDims -o MatlabToMondriaan.mexa64 MatlabToMondriaan.mex.o MatlabHelper.mex.o ${LIBFLAGS} -largeArrayDims
+
+MatlabToMondriaanToMatlab: MatlabHelper.mex.o MatlabToMondriaanToMatlab.mex.o
+	@echo "* Building MatlabToMondriaanToMatlab"
+	${MATLABCC} -largeArrayDims -o MatlabToMondriaanToMatlab.mexa64 MatlabToMondriaanToMatlab.mex.o MatlabHelper.mex.o ${LIBFLAGS} -largeArrayDims
 
 clean:
 	@echo "* Cleaning up utils"

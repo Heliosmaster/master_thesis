@@ -1,5 +1,5 @@
 clear all; close all; clc;
-A = mmread('/home/students/3776123/mthesis/matrices/test_matrix.mtx');
+A = mmread('../../matrices/m_testbed/tbdlinux.mtx');
 % [uncut,cut] = uncut_before_cut(A);
 % l = length(uncut);
 % u1 = pa_rowcol(A);
