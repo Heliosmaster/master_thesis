@@ -1,9 +1,10 @@
-function [srt,idx] = sort_mix(in,m,strategy,ord,ord2)
+% strategy = 0 ? mix : spr
+% colFirst = 0 ? row : col
+function [srt,idx] = sort_mix(in,m,strategy,colFirst)
 l = length(in);
-[srt,idx2] =sort(in,ord);
+[srt,idx2] =sort(in,'ascend');
 index = 1;
 idx = [];
-%idx = zeros(1,l);
 while(index <= l)
     index2 = index;
     rows = [];
@@ -23,16 +24,15 @@ while(index <= l)
         v1 = rows;
     else
         if ~strategy
-            v1 = mix_alternate(rows,cols,ord);
+            v1 = mix_alternate(rows,cols,colFirst);
         else
             if length(cols)<length(rows)
-                v1 = mix_spread(cols,rows,1-ord2);
+                v1 = mix_spread(cols,rows,1-colFirst);
             else
-                v1 = mix_spread(cols,rows,ord2);
+                v1 = mix_spread(cols,rows,colFirst);
             end
         end
     end
-    
     idx = [idx v1];
     index = index+len;
 end
