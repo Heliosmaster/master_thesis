@@ -28,7 +28,6 @@ struct twomatrices overpaint(struct sparsematrix* A, long* vec){
   long* incr_rows = get_increment_rows(A);
 
   int i,k;
-
   /* main loop, iterating through vec backwards */
   for(i=m+n-1;i>=0;i--){
     /* k is the considered row/column */

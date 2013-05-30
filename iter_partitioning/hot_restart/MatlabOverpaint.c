@@ -18,12 +18,12 @@ void mexFunction(int nlhs, mxArray *plhs[], int nrhs, const mxArray *prhs[]) {
   /* getting the vector as double*, DO NOT FREE (the memory is allocated in Matlab!) */
   double* inputVec = mxGetPr(prhs[1]);
 
-  /* switching from mondriaan numbering of rows/cols to C */
-  for(i=0;i<length;i++) inputVec[i] -= 1.0;
-
   /* explicit conversion of double* to long* */
   long* vec = double_array_to_long(inputVec,length);
-  
+ 
+  /* switching from mondriaan numbering of rows/cols to C */
+  for(i=0;i<length;i++) vec[i]--;
+
   /* switching from Matlab matrix storage (ascending columns) to ascending rows */
   struct sparsematrixplus matplus = reorder_row_incr(MondriaanMatrix);
   struct sparsematrix mat = matplus.matrix;

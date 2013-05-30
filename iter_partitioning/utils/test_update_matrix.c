@@ -20,36 +20,45 @@ int main(){
 
   struct sparsematrixplus reordering = reorder_col_incr(&matrix);
 
+  int m = matrix.m;
+  int n = matrix.n;
+
   struct sparsematrix matrix2 = reordering.matrix;
 
   /* getting the increments */
   long* incr_rows = get_increment_rows(&matrix);
   long* incr_cols = get_increment_cols(&matrix2);
 
+  print_vec_inline(incr_rows,m);
+  print_vec_inline(incr_cols,n);
+
   /* print out */
 
-  printf("Original matrix:\n");
+  printf("Original matrices:\n");
+  printf("A: row incremental\n");
   print_matrix(matrix);
-  printf("-----------------\n");
-
-  printf("Trying to put 10 in the 3rd row of A\n");
-  update_rows(&matrix,incr_rows,3,10);
-  print_matrix(matrix);
-  printf("-----------------\n");
- 
-  printf("Trying to put 11 in the 2nd col of B\n");
-  update_cols(&matrix2,incr_cols,2,11);
+  printf("\nB: col incremental\n");
   print_matrix(matrix2);
   printf("-----------------\n");
 
-  printf("Trying to put 11 in the 2nd col of A using link\n");
-  update_cols_link(&matrix2,&matrix,incr_cols,2,11,reordering.perm);
+  printf("Trying to put 10 in the 9th row of A\n");
+  update_rows(&matrix,incr_rows,8,10);
+  print_matrix(matrix);
+  printf("-----------------\n");
+ 
+  printf("Trying to put 11 in the 9rd col of B\n");
+  update_cols(&matrix2,incr_cols,8,11);
+  print_matrix(matrix2);
+  printf("-----------------\n");
+
+  printf("Trying to put 11 in the 9rd col of A using link\n");
+  update_cols_link(&matrix2,&matrix,incr_cols,8,11,reordering.perm);
   print_matrix(matrix);
   printf("-----------------\n");  
 
   long* perm2 = reverse_perm(reordering.perm,matrix2.NrNzElts);
-  printf("Trying to put 10 in the 3rd row of B using link\n");
-  update_rows_link(&matrix,&matrix2,incr_rows,3,10,perm2);
+  printf("Trying to put 10 in the 9th row of B using link\n");
+  update_rows_link(&matrix,&matrix2,incr_rows,8,10,perm2);
   print_matrix(matrix2);
   printf("-----------------\n"); 
 

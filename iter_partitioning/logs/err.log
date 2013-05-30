@@ -1,0 +1,12 @@
+{??? Undefined function or variable "A".
+
+Error in ==> mmread at 210
+   A = A + A.' - diag(diag(A));
+
+Error in ==> iter2 at 12
+    A = mmread(str);
+
+Error in ==> batch_partitioning at 1
+iter2;
+} 
+

@@ -2,7 +2,7 @@
 
 printIteration = 0;
 % read the input sparse matrix
-strdir = '../matrices/small_matrices/';
+strdir = '../matrices/m_testbed/';
 d = dir([strdir '*.mtx']);
 %d = dir('../matrices/new_testbed/*.mtx');
 

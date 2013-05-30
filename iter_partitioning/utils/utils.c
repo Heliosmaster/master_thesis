@@ -478,7 +478,7 @@ long* get_increment_cols(struct sparsematrix* A){
 */
 void update_rows(struct sparsematrix* A, long* increment_rows, int i, double value){
   int k = increment_rows[i];
-  while(A->i[k] == i && k < A->m){
+  while(A->i[k] == i && k < A->NrNzElts){
     A->ReValue[k] = value;
     k++;
   }
@@ -490,7 +490,7 @@ void update_rows(struct sparsematrix* A, long* increment_rows, int i, double val
 void update_cols(struct sparsematrix* A, long* increment_cols, int j, double value){
   /* requires matrix with ascending cols*/
   int k = increment_cols[j];
-  while(A->j[k] == j && k < A->n){
+  while(A->j[k] == j && k < A->NrNzElts){
     A->ReValue[k] = value;
     k++;
   }
@@ -503,7 +503,7 @@ void update_cols(struct sparsematrix* A, long* increment_cols, int j, double val
 void update_rows_link(struct sparsematrix* A, struct sparsematrix* B, long* increment_rows, int i, double value, long* link){
   /* A = ascending rows, B = ascending columns */
   int k = increment_rows[i];
-  while(A->i[k] == i && k < A->m){
+  while(A->i[k] == i && k < A->NrNzElts){
     B->ReValue[link[k]] = value;
     k++;
   }
@@ -516,7 +516,7 @@ void update_rows_link(struct sparsematrix* A, struct sparsematrix* B, long* incr
 void update_cols_link(struct sparsematrix* A, struct sparsematrix* B, long* increment_cols, int j, double value, long* link){
   /* A = ascending cols, B = ascending rows */
   int k = increment_cols[j];
-  while(A->j[k] == j && k < A->n){
+  while(A->j[k] == j && k < A->NrNzElts){
     B->ReValue[link[k]] = value;
     k++;
   }
