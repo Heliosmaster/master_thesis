@@ -1,8 +1,8 @@
 \section{Hot restart}
 
-In the last section we discussed a somewhat fine-grained method for assigning nonzeros to either $A_r$ and $A_c$, as we make $N$ independent choices (one for each nonzeros) and reuse some of the partitioning information (namely, whether a row or a column is cut or uncut).
+In the last section we discussed a somewhat fine-grained method for assigning nonzeros to either $A_r$ and $A_c$, as we make $N$ independent choices (one for each nonzero) and reuse some of the partitioning information (namely, whether a row or a column is cut or uncut).
 
-It is possibile, however, to take a coarser approach and decide for more than one nonzero at a time: the ``hot restart'' heuristic does precisely so, making choices for a subset of a row or a column of $A$: in particular, we do not only take into account whether a row/column is cut or uncut, but also reuse information on which subsets of rows and column were assigned to the same partition.
+It is possibile, however, to take a coarser approach and decide for more than one nonzero at a time: the ``hot restart'' heuristic does precisely so, making choices for a subset of a row or a column of $A$: in particular, we do not only take into account whether a row/column is cut or uncut, but also reuse information on which subsets of rows and columns were assigned to the same partition.
 
 The outline of this heuristic is the following:
 
@@ -14,7 +14,7 @@ The outline of this heuristic is the following:
  \end{enumerate}
 \end{algorithm}
 
-The general idea is that we compute te vector $v$, which is simply a permutation of the sequence of integers $0,\dots,m+n-1$: the numbers $0,\dots,m-1$ represent the $m$ rows of $A$, while $m,\dots,m+n-1$ represent the $n$ columns of the matrix.
+The general idea is that we compute the vector $v$, which is simply a permutation of the sequence of integers $0,\dots,m+n-1$: the numbers $0,\dots,m-1$ represent the $m$ rows of $A$, while $m,\dots,m+n-1$ represent the $n$ columns of the matrix.
 
 This priority vector is necessary for the true core of this heuristic, which is the overpainting algorithm and it is described  as follows:
 
@@ -25,24 +25,45 @@ This priority vector is necessary for the true core of this heuristic, which is 
 \REQUIRE Vector of priorities $v$ (a permutation of the vector $[0,\dots,m+n-1]$)
 \ENSURE $A_r$,$A_c$
 \STATE
-\FOR{$i=0,\dots,m+n-1$}
-\STATE Mark all the unmarked nonzeros in row/column $i$
+\STATE $A_r = A_c = \varnothing$
+\FOR{$i=m+n-1,\dots,0$}
 \IF{$v_i < m$}
-\STATE Assign the marked nonzeros to $A_r$
+\STATE Add the nonzeros of the row $i$ to $A_r$
 \ELSE
-\STATE Assign the marked nonzeros to $A_c$
+\STATE Add the nonzeros of the column $i$ to $A_c$
 \ENDIF
 \ENDFOR
 \end{algorithmic}
 \end{algorithm}
 
-To better explain the functioning of this algorithm, we start iterating through the elements of $v$: if $0 \leq i < m$, $i$ represents a row, and therefore we assign all of the nonzeros (not previously assigned) of $i$ to $A_r$, otherwise $i$ represents a column and we assign its nonzeros to $A_c$; in any case, all of the nonzeros considered in this step are going to be together in the next partioning.
+Because every nonzero has both a row and a column, we have that each nonzero will get assigned (or ``painted'' of an imaginary color which corresponds either to $A_r$ or $A_c$) and then re-assigned (``painted over'') a second time.
 
-Algorithm \ref{alg:overpainting} is just one of the possible ways of describing the same idea. In another, we could consider (again) individually each nonzero $a_{ij}$ and look up $v$ and see whether $i < j$ (where $<$ is to be intended as ``$i$ precedes $j$'' and not as the comparison of the values) or the other way around; in the first case, the row has more priority and we assign $a_{ij}$ to $A_r$, otherwise we assign it to $A_c$.
+It is possible also to give an alternative formulation for this algorithm in which we iterate forward through $v$, described as follows:
 
-Alternatively, we could iterate through $v$ \emph{backwards} and forget about the marking of the nonzeros: whenever we consider the integer $i$, we assign all of its nonzeros together (to $A_r$ or $A_c$, depending on the identity of $i$); in each subsequent assignment we are free to reassign nonzeros, and it will happen exactly twice for each of them. The assignment that will stick to each nonzero will be then the last one performed, which represent the row/column that precedes the other in $v$. This is the variant that we implemented and that gave the name of the algorithm: each nonzero is ``painted'' and then ``painted over'' a second time.
+\begin{algorithm}[H]
+\caption{Different formulation of Algorithm \ref{alg:overpainting}.} \label{alg:overpainting-2}
+\begin{algorithmic}
+\STATE
+\REQUIRE Vector of priorities $v$ (a permutation of the vector $[0,\dots,m+n-1]$)
+\ENSURE $A_r$,$A_c$
+\STATE 
+\STATE $A_r = A_c = \varnothing$
+\FOR{$i=0,\dots,m+n-1$}
+\STATE Mark all the unmarked nonzeros as ``evaluated'' in row/column $i$
+\IF{$v_i < m$}
+\STATE Add these nonzeros to $A_r$
+\ELSE
+\STATE Add these nonzeros to $A_c$
+\ENDIF
+\ENDFOR
+\end{algorithmic}
+\end{algorithm}
 
-Note that this overpainting algorithm is completely deterministic: $A_r$ and $A_c$ are uniquely determined by the vector $v$ and therefore the heuristic part of it lies entirely in the choice of this priority vector, as described in the next Section.
+This formulation differs substantially from the previous one, as in this case every assignment to either $A_r$ or $A_c$ is final.
+
+Lastly, another different formulation is possible:  we could consider (again) individually each nonzero $a_{ij}$ and look up $v$ and see whether $i < j$ (where $<$ is to be intended as ``$i$ precedes $j$'' and not as the comparison of the values) or the other way around; in the first case, the row has more priority and we assign $a_{ij}$ to $A_r$, otherwise we assign it to $A_c$.
+
+Note that, in any case, this overpainting algorithm is completely deterministic: $A_r$ and $A_c$ are uniquely determined by $v$ and therefore the heuristic part of it lies entirely in the choice of this priority vector, as described in the next section.
 
 \section{Computation of the priority vector}
 
@@ -51,56 +72,62 @@ At the beginning of the previous section, we claimed that the hot restart heuris
 In particular, we defined several \emph{generating schemes}, which can be summarized as any path in the directed graph shown in Figure \ref{fig:digraph}. Each one of these generating schemes has three phases\footnote{the verbatim words are the labels used to represent that element in both Figure \ref{fig:digraph} and the Tables with the numerical results.}:
 
 \begin{enumerate}
- \item \textbf{Use of previous partitioning}: as our final goal is to build an iterative algorithm, it is quite straightforward that we have to re-employ some of the information obtained with the previous iteration. However, in order to understand its effectiveness, a comparison also with a full restart might be convenient. Therefore, we distinguish between:
+ \item \textbf{Use of previous partitioning}: as our final goal is to build an iterative algorithm, it is quite straightforward that we have to re-employ some of the information obtained with the previous iteration. In order to understand the effectiveness of such approach, a comparison with a full restart (therefore, discarding all the information) might be convenient. We distinguish between:
  
   \begin{itemize}
- \item partition aware (\verb|pa|): the set $[0,\dots,m+n-1]$ is divided in two, uncut rows/columns before cut rows/columns (so with an higher priority). The next phases of the heuristic are performed in each of these two subset independently, and they are never mixed again.
- \item partition oblivious (\verb|po|): the set $[0,\dots,m+n-1]$ is kept in one piece.
+ \item \verb|pa| (partition aware): the set $[0,\dots,m+n-1]$ is divided into two, uncut rows/columns before cut rows/columns (so with an higher priority). The next phases of the heuristic are performed in each of these two subsets independently, and they are never mixed again.
+ \item \verb|po| (partition oblivious): the set $[0,\dots,m+n-1]$ is kept in one piece.
  \end{itemize}
 
  \item \textbf{Sorting}: as $v$ expresses priority, we want to have an effective way of ordering the rows/columns. A possible method is to look at the number of nonzeros and use that as criterium for sorting the rows/columns. Therefore we distinguish between:
  
  \begin{itemize}
-  \item \verb|unsorted|: we keep the array from the previous phase untouched, and consider as all of the row/columns are tied.
-  \item \verb|sorted|: we perform a sorting, which can be either in ascending order (\verb|asc|) or descending order (\verb|desc|). Then, we can decide to move all row/columns that have exactly 1 nonzero at the back of the block, thus giving them the lowest priority. From a theoretical point of view, this is always convenient because by assigning such nonzeros to the row/column where they are not the only element, never yields a communication cost. To denote this process we make a comparison with typography and call these row/columns \emph{widows}: if the heuristic perform this move, we denote it as \verb|w|, otherwise as \verb|nw|.
+  \item \verb|unsorted|: we keep the array from the previous phase untouched, and consider all of the row/columns as ties.
+  \item \verb|sorted|: we perform a sorting, which can be either in ascending order (\verb|asc|) or descending order (\verb|desc|). Then, we can decide to move all row/columns that have exactly 1 nonzero at the back of the block, thus giving them the lowest priority.
+  
+  From a theoretical point of view, this is always convenient because by assigning such nonzeros to the row/column where they are not the only element, we never have communication. To denote this process we make a comparison with typography and call these row/columns \emph{widows}: if the heuristic perform this move, we denote it as \verb|w|, otherwise as \verb|nw|.
  \end{itemize}
 
- \item \textbf{Tie-breaking}: we can find a finder method of arranging the elements of $v$, especially where, according to the previous phase, there were elements tied. We use three methods for tie-breaking:
+ \item \textbf{Tie-breaking}: we can find a finer method of arranging the elements of $v$, especially where, according to the previous phase, there were elements tied:
  
  \begin{itemize}
-  \item \verb|simple|: no actual tie-breaking is performed. The vector is left as-is from the previous phase.
+  \item \verb|simple|: no actual tie-breaking is performed and the sorted vector is left as-is.
+  \item \verb|concat|: the unsorted vector is simply a concatenation of the rows and the columns: in order to obtain the vector that yields a complete assignment of the nonzeros to $A_r$ or to $A_c$, we allow a choice (\verb|row| or \verb|col|), which represents whether this concatenation is ``rows-columns'' or ``columns-rows''. 
+  
   \item \verb|random|: the tied elements are shuffled randomly.
-  \item \verb|mix|: we try to get, as much as possible, that rows and columns are equally distributed. This is a move toward balancing of the number of nonzeros of $A_r$ and $A_c$. In order to achieve such distribution, there are two main ways: alternation (\verb|alt|) and spread (\verb|spr|); suppose there are $k$ rows and $2k$ columns tied and we start with a row: with the first distribution we have that the first $2k$ elements are rows and column alternated, and then $k$ columns $(r,c,r,c,r,c,\dots,c,c,c,c)$, whereas with the second one we get $k$ sequences of row, column, column $(r,c,c,r,c,c,\dots,r,c,c)$. We still have to decide whether to start this distribution with a \verb|row|, or with a column (\verb|col|).
+  \item \verb|mix|: we try to get, as much as possible, that rows and columns are equally distributed. This is a move toward balancing of the number of nonzeros of $A_r$ and $A_c$. 
+  
+  In order to achieve such distribution, there are two main ways: alternation (\verb|alt|) and spread (\verb|spr|); suppose there are $k$ rows and $2k$ columns tied and we start with a row: with the first distribution we have that the first $2k$ elements are rows and column alternated, and then $k$ columns $(r,c,r,c,r,c,\dots,c,c,c,c)$, whereas with the second one we get $k$ sequences of row, column, column $(r,c,c,r,c,c,\dots,r,c,c)$. We still have to decide whether to start this distribution with a \verb|row|, or with a column (\verb|col|).
  \end{itemize}
 
+Therefore, as an example, the generating scheme \verb|pa-sorted-w-mix-alt-row|, has to be interpreted as: using previous partitioning, sorting the rows/columns with respect to their number of nonzeros, moving all those with one nonzero at the back, and resolving ties by an alternation of rows and columns, starting with a row.
+ 
 \end{enumerate}
 
-
-\begin{figure}
+\begin{figure}[h]
 \begin{center}
 \begin{tikzpicture}[every path/.style={>=latex}]
-%\draw [help lines] (0,-5) grid (14,14);
-\node (start) at (7,14) {START};
-\node (po) at (5.5,12.5)  { PO };
-\node (pa) at (8.5,12.5) { PA };
-\node (d1) at (7,11) {$\bullet$};
-\node (sorted) at (3.5,9.5) {sorted};
+\node (start) at (6,14) {START};
+\node (po) at (4.5,12.5)  { PO };
+\node (pa) at (7.5,12.5) { PA };
+\node (d1) at (6,11) {$\bullet$};
+\node (sorted) at (3,9.5) {sorted};
 \node (unsorted) at (10.5,9.5) {unsorted};
-\node (asc) at (1.5,8) {asc};
-\node (desc) at (5.5,8) {desc};
-\node (d2) at (3.5,6.5) {$\bullet$};
-\node (w) at (1.5,5) {w};
-\node (nw) at (5.5,5) {nw};
-\node (d3) at (7,3.5) {$\bullet$};
-\node (random) at (7,2) {random}; 
-\node (mix) at (3,2) {mix};
-\node (simple) at (11,2) {simple};
-\node (alt) at (1,0.5) {alt};
-\node (spr) at (5,0.5) {spr};
-\node (d4) at (3,-1) {$\bullet$};
-\node (row) at (1,-2.5) {row};
-\node (col) at (5,-2.5) {col};
-\node (end) at (7,-4) {END};
+\node (d2) at (3,8.5) {$\bullet$};
+\node (w) at (2,7.25) {w};
+\node (nw) at (4,7.25) {nw};
+\node (d3pre) at (3,6) {$\bullet$};
+\node (d3) at (5,5) {$\bullet$};
+\node (simple) at (10.5,3) {concat}; 
+\node (mix) at (7,3) {mix};
+\node (random) at (3.5,3) {random};
+\node (simple2) at (1,3) {simple};
+\node (alt) at (6,2) {alt};
+\node (spr) at (8,2) {spr};
+\node (d4) at (8,0.5) {$\bullet$};
+\node (row) at (7,-1) {row};
+\node (col) at (9,-1) {col};
+\node (end) at (6,-3.5) {END};
 
 \draw[->] (start) edge (po);
 \draw[->] (start) edge (pa);
@@ -111,45 +138,45 @@ In particular, we defined several \emph{generating schemes}, which can be summar
 \draw[->] (d1) edge (sorted);
 \draw[->] (d1) edge (unsorted);
 
-\draw[->] (sorted) edge (asc);
-\draw[->] (sorted) edge (desc);
-
-\draw[->] (asc) edge (d2);
-\draw[->] (desc) edge (d2);
+\draw[->] (sorted) edge (d2);
 
 \draw[->] (d2) edge (w);
 \draw[->] (d2) edge (nw);
 
 \draw[->] (unsorted) edge (d3);
-\draw[->] (w) edge (d3);
-\draw[->] (nw) edge (d3);
+\draw[->] (w) edge (d3pre);
+\draw[->] (nw) edge (d3pre);
+\draw[->] (d3pre) edge (d3);
+\draw[->] (d3pre) edge (simple2);
 
 \draw[->] (d3) edge (mix);
 \draw[->] (d3) edge (random);
-\draw[->] (d3) edge (simple);
+
+\draw[->] (unsorted) edge (simple);
 
 \draw[->] (mix) edge (alt);
 \draw[->] (mix) edge (spr);
 
 \draw[->] (alt) edge (d4);
 \draw[->] (spr) edge (d4);
+\draw[->] (simple) edge (d4);
 
 \draw[->] (d4) edge (row);
 \draw[->] (d4) edge (col);
 
 \draw[->] (row) edge (end);
 \draw[->] (col) edge (end);
-\draw[->] (simple) edge (end);
+\draw[->] (simple2) edge (end);
 \draw[->] (random) edge (end);
 
-\draw[dashed] (0,13.5) -- (13,13.5);
-\draw[dashed] (0,10.5) -- (13,10.5);
-\draw[dashed] (0,4) -- (13,4);
-\draw[dashed] (0,-3) -- (13,-3);
+\draw[dashed] (0,13.5) -- (12,13.5);
+\draw[dashed] (0,10.5) -- (12,10.5);
+\draw[dashed] (0,4) -- (12,4);
+\draw[dashed] (0,-2.5) -- (12,-2.5);
 
-\node[align=left,draw] at (12,12.5) {use of previous \\partitioning};
-\node[align=left,draw] at (12,6.5) {sorting};
-\node[align=left,draw] at (12,-1) {tie-breaking};
+\node[align=left,draw] at (12,12) {use of previous \\partitioning};
+\node[align=left,draw] at (12,7) {sorting};
+\node[align=left,draw] at (12,0.5) {tie-breaking};
 \end{tikzpicture}
 \end{center}
 \caption{Directed graph that represents the family of heuristics used (any path from START to END). Dummy nodes (the ones without any label) were added in order to reduce the number of edges and ease legibility.} \label{fig:digraph}
