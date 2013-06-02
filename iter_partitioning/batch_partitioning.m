@@ -1,2 +1,2 @@
-iter2;
+hr_testall;
 exit;
