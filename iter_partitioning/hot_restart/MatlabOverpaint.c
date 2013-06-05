@@ -24,6 +24,12 @@ void mexFunction(int nlhs, mxArray *plhs[], int nrhs, const mxArray *prhs[]) {
   /* switching from mondriaan numbering of rows/cols to C */
   for(i=0;i<length;i++) vec[i]--;
 
+  if(MondriaanMatrix->ReValue == NULL){
+    MondriaanMatrix->ReValue = vecallocd(MondriaanMatrix->NrNzElts);
+    int j;
+    for(j=0;j<MondriaanMatrix->NrNzElts;j++) MondriaanMatrix->ReValue[j] = 0.0;
+  }
+
   /* switching from Matlab matrix storage (ascending columns) to ascending rows */
   struct sparsematrixplus matplus = reorder_row_incr(MondriaanMatrix);
   struct sparsematrix mat = matplus.matrix;

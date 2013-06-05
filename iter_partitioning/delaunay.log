@@ -1,0 +1,40 @@
+[?1h=
+                                                                   < M A T L A B (R) >
+                                                         Copyright 1984-2010 The MathWorks, Inc.
+                                                      Version 7.12.0.635 (R2011a) 64-bit (glnxa64)
+                                                                     March 18, 2011
+
+ 
+  To get started, type one of these: helpwin, helpdesk, or demo.
+  For product information, visit www.mathworks.com.
+ 
+{Warning: Name is nonexistent or not a directory: /home/davide/projects/mthesis/Mondriaan3.11/tools.} 
+> In path at 110
+  In addpath at 87
+  In startup at 2
+  In matlabrc at 222
+
+delaunay_n15.mtx
+
+pa-unsorted-simple-row:		 320   367   349   363   353   361   349   346   351   350 	 (avg 350.90 time 12.924 s)
+pa-unsorted-simple-col:		 320   361   361   351   342   383   359   347   346   352 	 (avg 352.20 time 25.1268 s)
+pa-unsorted-random:		 320   367   391   404   411   387   412   417   402   394 	 (avg 390.50 time 30.1329 s)
+pa-unsorted-mix-alt-row:	 320   427   418   387   412   387   416   412   382   394 	 (avg 395.50 time 33.848 s)
+pa-unsorted-mix-alt-col:	 320   398   392   386   414   393   410   414   394   406 	 (avg 392.70 time 33.9767 s)
+pa-unsorted-mix-spr-row:	 320   414   392   399   374   434   408   426   391   404 	 (avg 396.20 time 24.9339 s)
+pa-unsorted-mix-spr-col:	 320   372   370   411   380   388   401   409   375   434 	 (avg 386.00 time 25.556 s)
+
+pa-sorted-nw-simple:		 320   325   343   323   321   340   331   323   346   341 	 (avg 331.30 time 18.5056 s)
+pa-sorted-nw-random:		 320   370   352   349   339   344   343   345   333   337 	 (avg 343.20 time 31.1831 s)
+pa-sorted-nw-mix-alt-row:	 320   325   332   324   332   312   338   329   329   322 	 (avg 326.30 time 20.2847 s)
+pa-sorted-nw-mix-alt-col:	 320   322   320   325   333   344   358   335   340   332 	 (avg 332.90 time 20.3416 s)
+pa-sorted-nw-mix-spr-row:	 320   336   330   331   300   309   336   352   336   350 	 (avg 330.00 time 20.1388 s)
+pa-sorted-nw-mix-spr-col:	 320   309   338   353   327   324   337   319   321   340 	 (avg 328.80 time 19.9185 s)
+
+pa-sorted-w-simple:		 320   343   338   327   336   314   341   346   316   328 	 (avg 330.90 time 18.0955 s)
+pa-sorted-w-random:		 320   353   352   352   368   378   351   356   344   339 	 (avg 351.30 time 25.2998 s)
+pa-sorted-w-mix-alt-row:	 320   334   343   339   325   321   345   342   318   301 	 (avg 328.80 time 20.1733 s)
+pa-sorted-w-mix-alt-col:	 320   320   352   325   333   372   341   317   345   330 	 (avg 335.50 time 23.8585 s)
+pa-sorted-w-mix-spr-row:	 320   340   311   332   303   320   342   317   351   330 	 (avg 326.60 time 20.518 s)
+pa-sorted-w-mix-spr-col:	 320   330   322   351   333   341   339   320   335   334 	 (avg 332.50 time 21.8777 s)
+[?1l>

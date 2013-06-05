@@ -428,10 +428,10 @@ struct twomatrices split_matrix(struct sparsematrix* A, double first, double sec
 * i.e. gets the increment for the Incremental Row Storage
 */
 long* get_increment_rows(struct sparsematrix* A){
-
   /* allocation of the memory */
   long* increment = vecallocl(A->m);
-  int k,index = 0;
+  int k;
+  int index = 1;
   
   /* first row is always pointed by first element */
   increment[0] = 0;
@@ -439,12 +439,10 @@ long* get_increment_rows(struct sparsematrix* A){
   /* loops that iterates through the list of nonzeros, registers row increment
   */
   for(k=0;k<A->NrNzElts;k++){
-    if(A->i[k] != A->i[increment[index]]){
-      index++;
-      increment[index] = k;
+    if(A->i[k] != A->i[increment[index-1]]){
+      increment[index++] = k;
     }
   }
-  
   return increment;
 }
 
@@ -469,16 +467,15 @@ long* get_increment_cols(struct sparsematrix* A){
       increment[index] = k;
     }
   }
-  
   return increment;
 }
 
 /*
 * method that updates the values of all elements in a particular row for a matrix stored with IRS.
 */
-void update_rows(struct sparsematrix* A, long* increment_rows, int i, double value){
+void update_rows(struct sparsematrix* A, long* increment_rows, long i, double value){
   int k = increment_rows[i];
-  while(A->i[k] == i && k < A->NrNzElts){
+  while(k < A->NrNzElts && A->i[k] == i){
     A->ReValue[k] = value;
     k++;
   }
@@ -487,10 +484,10 @@ void update_rows(struct sparsematrix* A, long* increment_rows, int i, double val
 /*
 * method that updates the values of all elements in a particular column for a matrix stored with ICS.
 */
-void update_cols(struct sparsematrix* A, long* increment_cols, int j, double value){
+void update_cols(struct sparsematrix* A, long* increment_cols, long j, double value){
   /* requires matrix with ascending cols*/
   int k = increment_cols[j];
-  while(A->j[k] == j && k < A->NrNzElts){
+  while(k < A->NrNzElts && A->j[k] == j){
     A->ReValue[k] = value;
     k++;
   }
@@ -500,10 +497,10 @@ void update_cols(struct sparsematrix* A, long* increment_cols, int j, double val
 * method that updates the values of all elements in a particular row for a matrix stored with ICS, using
 * the fast access provided by the same matrix stored with IRS and a link between them.
 */
-void update_rows_link(struct sparsematrix* A, struct sparsematrix* B, long* increment_rows, int i, double value, long* link){
+void update_rows_link(struct sparsematrix* A, struct sparsematrix* B, long* increment_rows, long i, double value, long* link){
   /* A = ascending rows, B = ascending columns */
   int k = increment_rows[i];
-  while(A->i[k] == i && k < A->NrNzElts){
+  while(k < A->NrNzElts && A->i[k] == i){
     B->ReValue[link[k]] = value;
     k++;
   }
@@ -513,10 +510,10 @@ void update_rows_link(struct sparsematrix* A, struct sparsematrix* B, long* incr
 * method that updates the values of all elements in a particular column for a matrix stored with IRS, using
 * the fast access provided by the same matrix stored with ICS and a link between them.
 */
-void update_cols_link(struct sparsematrix* A, struct sparsematrix* B, long* increment_cols, int j, double value, long* link){
+void update_cols_link(struct sparsematrix* A, struct sparsematrix* B, long* increment_cols, long j, double value, long* link){
   /* A = ascending cols, B = ascending rows */
   int k = increment_cols[j];
-  while(A->j[k] == j && k < A->NrNzElts){
+  while(k < A->NrNzElts && A->j[k] == j){
     B->ReValue[link[k]] = value;
     k++;
   }

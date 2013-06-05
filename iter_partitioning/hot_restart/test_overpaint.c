@@ -5,7 +5,7 @@ int main(){
   /* reading the matrix from file */
   FILE* File;
   struct sparsematrix matrix;
-  File = fopen("../../matrices/test_matrix.mtx", "r");
+  File = fopen("../../matrices/cre_b.mtx", "r");
   /* File = fopen("../../matrices/tbdlinux.mtx", "r"); */
   if (!MMReadSparseMatrix(File, &matrix)) printf("Unable to read input matrix!\n");
   fclose(File);
@@ -13,6 +13,12 @@ int main(){
   /* creating explicitly a particular priority vector vec */
   int m = matrix.m;
   int n = matrix.n;
+
+  if(matrix.ReValue == NULL){
+    matrix.ReValue = vecallocd(matrix.NrNzElts);
+    int j;
+    for(j=0;j<matrix.NrNzElts;j++) matrix.ReValue[j] = 0.0;
+  }
 
   /*long* vec = random_permutation(m+n); */
   int i;
@@ -25,8 +31,8 @@ int main(){
   struct twomatrices two = overpaint(&matrix2,vec);
 
   printf("---------------\n");
-  print_matrix(two.Ar);
-  print_matrix(two.Ac);
+/*print_matrix(two.Ar);
+  print_matrix(two.Ac); */
 
   vecfreel(vec);
   vecfreel(m2plus.perm);

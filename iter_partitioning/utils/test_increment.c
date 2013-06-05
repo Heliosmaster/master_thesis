@@ -12,7 +12,7 @@ int main(){
   /* reading the matrix from file */
   FILE* File;
   struct sparsematrix matrix;
-  File = fopen("../../matrices/m_testbed/dfl001.mtx", "r");
+  File = fopen("../../matrices/cre_b.mtx", "r");
   if (!MMReadSparseMatrix(File, &matrix)) printf("Unable to read input matrix!\n");
   fclose(File);
 

@@ -50,10 +50,10 @@ struct sparsematrixplus reorder_col_incr(struct sparsematrix* matrix);
 struct twomatrices split_matrix(struct sparsematrix* A, double first, double second);
 long* get_increment_rows(struct sparsematrix* A);
 long* get_increment_cols(struct sparsematrix* A);
-void update_rows(struct sparsematrix* A, long* increment_rows, int i, double value);
-void update_cols(struct sparsematrix* A, long* increment_cols, int i, double value);
-void update_rows_link(struct sparsematrix* A, struct sparsematrix* B, long* increment_rows, int i, double value, long* link);
-void update_cols_link(struct sparsematrix* A, struct sparsematrix* B, long* increment_cols, int i, double value, long* link);
+void update_rows(struct sparsematrix* A, long* increment_rows, long i, double value);
+void update_cols(struct sparsematrix* A, long* increment_cols, long i, double value);
+void update_rows_link(struct sparsematrix* A, struct sparsematrix* B, long* increment_rows, long i, double value, long* link);
+void update_cols_link(struct sparsematrix* A, struct sparsematrix* B, long* increment_cols, long i, double value, long* link);
 
 /* misc */
 long* double_array_to_long(double* input, int length);

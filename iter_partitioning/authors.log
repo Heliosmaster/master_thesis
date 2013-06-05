@@ -1,0 +1,40 @@
+[?1h=
+                                                                   < M A T L A B (R) >
+                                                         Copyright 1984-2010 The MathWorks, Inc.
+                                                      Version 7.12.0.635 (R2011a) 64-bit (glnxa64)
+                                                                     March 18, 2011
+
+ 
+  To get started, type one of these: helpwin, helpdesk, or demo.
+  For product information, visit www.mathworks.com.
+ 
+{Warning: Name is nonexistent or not a directory: /home/davide/projects/mthesis/Mondriaan3.11/tools.} 
+> In path at 110
+  In addpath at 87
+  In startup at 2
+  In matlabrc at 222
+
+coAuthorsCiteseer.mtx
+
+pa-unsorted-simple-row:		 9874  9658 10020 10398 10758 11069 11258 11063 12563 12491 	 (avg 10915.20 time 247.843 s)
+pa-unsorted-simple-col:		 9874  9842 10030 11444 11473 11036 11431 11639 11777 11873 	 (avg 11041.90 time 254.79 s)
+pa-unsorted-random:		 9874 10178  9896  9637 10409  9717  9458  9441  9248  9680 	 (avg 9753.80 time 192.876 s)
+pa-unsorted-mix-alt-row:	 9874  9879  9582  9355  9596  9257  9409  9213  9183  9165 	 (avg 9451.30 time 203.341 s)
+pa-unsorted-mix-alt-col:	 9874  9692  9691  9406  9651  9582  9318 10363 10074 10108 	 (avg 9775.90 time 168.453 s)
+pa-unsorted-mix-spr-row:	 9874 10053  9670  9613  9538  9321  9267  9297  9318 10348 	 (avg 9629.90 time 283.954 s)
+pa-unsorted-mix-spr-col:	 9874  9967  9739  9519  9381  9750  9329  9355  9189  9192 	 (avg 9529.50 time 182.129 s)
+
+pa-sorted-nw-simple:		 9874  9725  9720  9597  9951 10502  9761  9545  9809  9841 	 (avg 9832.50 time 178.207 s)
+pa-sorted-nw-random:		 9874 16522 17104 16850 15519 15497 15615 15952 15668 15616 	 (avg 15421.70 time 356.635 s)
+pa-sorted-nw-mix-alt-row:	 9874  9902  9827  9675  9666 10283  9791  9619  9951 10345 	 (avg 9893.30 time 305.309 s)
+pa-sorted-nw-mix-alt-col:	 9874  9881 10400  9719  9772  9820  9715  9481  9591 10268 	 (avg 9852.10 time 344.191 s)
+pa-sorted-nw-mix-spr-row:	 9874 10450 10251  9551  9600  9386  9796  9737  9428  9772 	 (avg 9784.50 time 215.507 s)
+pa-sorted-nw-mix-spr-col:	 9874  9802  9584  9572 10311  9831 10288 10190 10240 10347 	 (avg 10003.90 time 225.705 s)
+
+pa-sorted-w-simple:		 9874  9732  9647 10286  9590  9778  9524  9533  9814  9632 	 (avg 9741.00 time 220.408 s)
+pa-sorted-w-random:		 9874 16807 16680 15584 15990 17496 15569 16354 15373 15656 	 (avg 15538.30 time 303.31 s)
+pa-sorted-w-mix-alt-row:	 9874  9824 10543  9668 10381  9734  9851  9658  9665  9528 	 (avg 9872.60 time 363.641 s)
+pa-sorted-w-mix-alt-col:	 9874  9889  9699  9720  9626  9749  9663  9818  9546  9632 	 (avg 9721.60 time 314.715 s)
+pa-sorted-w-mix-spr-row:	 9874  9661  9606  9518  9663  9598  9368  9495  9570  9580 	 (avg 9593.30 time 256.525 s)
+pa-sorted-w-mix-spr-col:	 9874  9801  9585  9704  9536  9871  9651  9650  9470  9461 	 (avg 9660.30 time 291.872 s)
+[?1l>
