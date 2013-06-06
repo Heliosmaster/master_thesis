@@ -1,0 +1,150 @@
+[?1h=
+                                                                                     < M A T L A B (R) >
+                                                                           Copyright 1984-2011 The MathWorks, Inc.
+                                                                            R2011b (7.13.0.564) 64-bit (glnxa64)
+                                                                                       August 13, 2011
+
+ 
+To get started, type one of these: helpwin, helpdesk, or demo.
+For product information, visit www.mathworks.com.
+ 
+{Warning: Name is nonexistent or not a directory: /home/students/3776123/mthesis/Mondriaan3.11/tools.} 
+{> In path at 110
+  In addpath at 87
+  In startup at 4
+  In matlabrc at 199} 
+
+stanford.mtx
+
+pa-unsorted-simple-row:		 348  3033  3925 Attempt to restart MATLAB? [y or n]>>n[Please exit and restart MATLAB]>>
+------------------------------------------------------------------------
+       Segmentation violation detected at Wed Jun  5 19:21:55 2013
+------------------------------------------------------------------------
+
+Configuration:
+  Crash Decoding  : Disabled
+  Current Visual  : None
+  Default Encoding: UTF-8
+  GNU C Library   : 2.15 stable
+  MATLAB Root     : /usr/local/MATLAB/R2011b
+  MATLAB Version  : 7.13.0.564 (R2011b)
+  Operating System: Linux 3.2.0-45-generic #70-Ubuntu SMP Wed May 29 20:12:06 UTC 2013 x86_64
+  Processor ID    : x86 Family 6 Model 5 Stepping 5, GenuineIntel
+  Window System   : No active display
+
+Fault Count: 1
+
+
+
+Abnormal termination:
+Segmentation violation
+
+Register State (from fault):
+  RAX = 00007f094fceb230  RBX = 00007f0aca79d650
+  RCX = 00007f0acae112d0  RDX = fffffffe93ceb200
+  RSP = 00007f0b01bb6820  RBP = 00007f0b01bb6820
+  RSI = 00007f0acae112d0  RDI = 00007f0b01bbbcd0
+
+   R8 = 00007f0ab2349350   R9 = 0000000040000000
+  R10 = 0000000000106451  R11 = 00000000000089a6
+  R12 = 00007f0b01bba7c0  R13 = 00007f0b01bc0380
+  R14 = 00007f0ae42778e0  R15 = 00007f0b01bbfdb0
+
+  RIP = 00007f0af20bef9d  EFL = 0000000000010207
+
+   CS = 0033   FS = 0000   GS = 0000
+
+
+Stack Trace (from fault):
+[  0] 0x00007f0b15e605de    /usr/local/MATLAB/R2011b/bin/glnxa64/libmwfl.so+00210398 _ZN2fl4diag15stacktrace_base7captureERKNS0_14thread_contextEm+000158
+[  1] 0x00007f0b15e6262d    /usr/local/MATLAB/R2011b/bin/glnxa64/libmwfl.so+00218669
+[  2] 0x00007f0b15e628f5    /usr/local/MATLAB/R2011b/bin/glnxa64/libmwfl.so+00219381 _ZN2fl4diag13terminate_logEPKcRKNS0_14thread_contextEb+000165
+[  3] 0x00007f0b14e684f5   /usr/local/MATLAB/R2011b/bin/glnxa64/libmwmcr.so+00447733 _ZN2fl4diag13terminate_logEPKcPK8ucontextb+000085
+[  4] 0x00007f0b14e655b4   /usr/local/MATLAB/R2011b/bin/glnxa64/libmwmcr.so+00435636
+[  5] 0x00007f0b14e66333   /usr/local/MATLAB/R2011b/bin/glnxa64/libmwmcr.so+00439091
+[  6] 0x00007f0b14e664c7   /usr/local/MATLAB/R2011b/bin/glnxa64/libmwmcr.so+00439495
+[  7] 0x00007f0b14e6785f   /usr/local/MATLAB/R2011b/bin/glnxa64/libmwmcr.so+00444511
+[  8] 0x00007f0b14e67a15   /usr/local/MATLAB/R2011b/bin/glnxa64/libmwmcr.so+00444949
+[  9] 0x00007f0b138c9cb0              /lib/x86_64-linux-gnu/libpthread.so.0+00064688
+[ 10] 0x00007f0af20bef9d /home/davide/projects/mthesis/iter_partitioning/hot_restart/MatlabOverpaint.mexa64+00012189
+[ 11] 0x00007f0af20bda01 /home/davide/projects/mthesis/iter_partitioning/hot_restart/MatlabOverpaint.mexa64+00006657
+[ 12] 0x00007f0af20bd767 /home/davide/projects/mthesis/iter_partitioning/hot_restart/MatlabOverpaint.mexa64+00005991 mexFunction+000311
+[ 13] 0x00007f0b0e3dd21a     /usr/local/MATLAB/R2011b/bin/glnxa64/libmex.so+00049690 mexRunMexFile+000090
+[ 14] 0x00007f0b0e3da0c9     /usr/local/MATLAB/R2011b/bin/glnxa64/libmex.so+00037065
+[ 15] 0x00007f0b0e3dad8e     /usr/local/MATLAB/R2011b/bin/glnxa64/libmex.so+00040334
+[ 16] 0x00007f0b14bd5027 /usr/local/MATLAB/R2011b/bin/glnxa64/libmwm_dispatcher.so+00430119 _ZN8Mfh_file11dispatch_fhEiPP11mxArray_tagiS2_+000519
+[ 17] 0x00007f0b144b3df3 /usr/local/MATLAB/R2011b/bin/glnxa64/libmwm_interpreter.so+01854963
+[ 18] 0x00007f0b1444a4b7 /usr/local/MATLAB/R2011b/bin/glnxa64/libmwm_interpreter.so+01422519
+[ 19] 0x00007f0b144687b6 /usr/local/MATLAB/R2011b/bin/glnxa64/libmwm_interpreter.so+01546166
+[ 20] 0x00007f0b1446dc9c /usr/local/MATLAB/R2011b/bin/glnxa64/libmwm_interpreter.so+01567900
+[ 21] 0x00007f0b1446b262 /usr/local/MATLAB/R2011b/bin/glnxa64/libmwm_interpreter.so+01557090
+[ 22] 0x00007f0b1446bea1 /usr/local/MATLAB/R2011b/bin/glnxa64/libmwm_interpreter.so+01560225
+[ 23] 0x00007f0b144ce973 /usr/local/MATLAB/R2011b/bin/glnxa64/libmwm_interpreter.so+01964403
+[ 24] 0x00007f0b14bd5027 /usr/local/MATLAB/R2011b/bin/glnxa64/libmwm_dispatcher.so+00430119 _ZN8Mfh_file11dispatch_fhEiPP11mxArray_tagiS2_+000519
+[ 25] 0x00007f0b14684b13 /usr/local/MATLAB/R2011b/bin/glnxa64/libmwm_interpreter.so+03758867
+[ 26] 0x00007f0b1468527b /usr/local/MATLAB/R2011b/bin/glnxa64/libmwm_interpreter.so+03760763
+[ 27] 0x00007f0b14685df4 /usr/local/MATLAB/R2011b/bin/glnxa64/libmwm_interpreter.so+03763700
+[ 28] 0x00007f0b144feb9f /usr/local/MATLAB/R2011b/bin/glnxa64/libmwm_interpreter.so+02161567
+[ 29] 0x00007f0b1452a24e /usr/local/MATLAB/R2011b/bin/glnxa64/libmwm_interpreter.so+02339406
+[ 30] 0x00007f0b1452a343 /usr/local/MATLAB/R2011b/bin/glnxa64/libmwm_interpreter.so+02339651
+[ 31] 0x00007f0b14632619 /usr/local/MATLAB/R2011b/bin/glnxa64/libmwm_interpreter.so+03421721
+[ 32] 0x00007f0b1446c044 /usr/local/MATLAB/R2011b/bin/glnxa64/libmwm_interpreter.so+01560644
+[ 33] 0x00007f0b144ce973 /usr/local/MATLAB/R2011b/bin/glnxa64/libmwm_interpreter.so+01964403
+[ 34] 0x00007f0b14bd5027 /usr/local/MATLAB/R2011b/bin/glnxa64/libmwm_dispatcher.so+00430119 _ZN8Mfh_file11dispatch_fhEiPP11mxArray_tagiS2_+000519
+[ 35] 0x00007f0b144b3df3 /usr/local/MATLAB/R2011b/bin/glnxa64/libmwm_interpreter.so+01854963
+[ 36] 0x00007f0b1444a4b7 /usr/local/MATLAB/R2011b/bin/glnxa64/libmwm_interpreter.so+01422519
+[ 37] 0x00007f0b144687b6 /usr/local/MATLAB/R2011b/bin/glnxa64/libmwm_interpreter.so+01546166
+[ 38] 0x00007f0b1446dc9c /usr/local/MATLAB/R2011b/bin/glnxa64/libmwm_interpreter.so+01567900
+[ 39] 0x00007f0b1446b262 /usr/local/MATLAB/R2011b/bin/glnxa64/libmwm_interpreter.so+01557090
+[ 40] 0x00007f0b1446bea1 /usr/local/MATLAB/R2011b/bin/glnxa64/libmwm_interpreter.so+01560225
+[ 41] 0x00007f0b144ce973 /usr/local/MATLAB/R2011b/bin/glnxa64/libmwm_interpreter.so+01964403
+[ 42] 0x00007f0b14bd5027 /usr/local/MATLAB/R2011b/bin/glnxa64/libmwm_dispatcher.so+00430119 _ZN8Mfh_file11dispatch_fhEiPP11mxArray_tagiS2_+000519
+[ 43] 0x00007f0b144a4192 /usr/local/MATLAB/R2011b/bin/glnxa64/libmwm_interpreter.so+01790354
+[ 44] 0x00007f0b1446213b /usr/local/MATLAB/R2011b/bin/glnxa64/libmwm_interpreter.so+01519931
+[ 45] 0x00007f0b1445fb56 /usr/local/MATLAB/R2011b/bin/glnxa64/libmwm_interpreter.so+01510230
+[ 46] 0x00007f0b14460087 /usr/local/MATLAB/R2011b/bin/glnxa64/libmwm_interpreter.so+01511559
+[ 47] 0x00007f0b1445ca9f /usr/local/MATLAB/R2011b/bin/glnxa64/libmwm_interpreter.so+01497759
+[ 48] 0x00007f0b0e8ea0e8   /usr/local/MATLAB/R2011b/bin/glnxa64/libmwiqm.so+01073384 _ZNK3iqm18InternalEvalPlugin24inEvalCmdWithLocalReturnEPKcP15inWorkSpace_tag+000088
+[ 49] 0x00007f0b0e8eb453   /usr/local/MATLAB/R2011b/bin/glnxa64/libmwiqm.so+01078355 _ZN3iqm18InternalEvalPlugin7executeEP15inWorkSpace_tagRN5boost10shared_ptrIN14cmddistributor17IIPCompletedEventEEE+000131
+[ 50] 0x00007f0b14e41095   /usr/local/MATLAB/R2011b/bin/glnxa64/libmwmcr.so+00286869
+[ 51] 0x00007f0b0e87ba16   /usr/local/MATLAB/R2011b/bin/glnxa64/libmwiqm.so+00621078
+[ 52] 0x00007f0b0e86acba   /usr/local/MATLAB/R2011b/bin/glnxa64/libmwiqm.so+00552122
+[ 53] 0x00007f0b150a8a72 /usr/local/MATLAB/R2011b/bin/glnxa64/libmwbridge.so+00100978
+[ 54] 0x00007f0b150a9036 /usr/local/MATLAB/R2011b/bin/glnxa64/libmwbridge.so+00102454 _Z10ioReadLinebP8_IO_FILEPcS1_iPbRKN5boost8optionalIKP15inWorkSpace_tagEEb+000134
+[ 55] 0x00007f0b150a9165 /usr/local/MATLAB/R2011b/bin/glnxa64/libmwbridge.so+00102757
+[ 56] 0x00007f0b150ad49a /usr/local/MATLAB/R2011b/bin/glnxa64/libmwbridge.so+00119962
+[ 57] 0x00007f0b150ad904 /usr/local/MATLAB/R2011b/bin/glnxa64/libmwbridge.so+00121092
+[ 58] 0x00007f0b150ae22e /usr/local/MATLAB/R2011b/bin/glnxa64/libmwbridge.so+00123438 mnParser+000702
+[ 59] 0x00007f0b14e4ed79   /usr/local/MATLAB/R2011b/bin/glnxa64/libmwmcr.so+00343417 _ZN11mcrInstance30mnParser_on_interpreter_threadEv+000041
+[ 60] 0x00007f0b14e2e23e   /usr/local/MATLAB/R2011b/bin/glnxa64/libmwmcr.so+00209470
+[ 61] 0x00007f0b14e2e2b9   /usr/local/MATLAB/R2011b/bin/glnxa64/libmwmcr.so+00209593
+[ 62] 0x00007f0b155ad933 /usr/local/MATLAB/R2011b/bin/glnxa64/libmwservices.so+00481587
+[ 63] 0x00007f0b155adb45 /usr/local/MATLAB/R2011b/bin/glnxa64/libmwservices.so+00482117
+[ 64] 0x00007f0b155abba8 /usr/local/MATLAB/R2011b/bin/glnxa64/libmwservices.so+00474024
+[ 65] 0x00007f0b0ab74cd5   /usr/local/MATLAB/R2011b/bin/glnxa64/libmwuix.so+00486613
+[ 66] 0x00007f0b0b5d802f     /usr/local/MATLAB/R2011b/bin/glnxa64/libuij.so+00237615 _ZSt8for_eachIN9__gnu_cxx17__normal_iteratorIPN5boost8weak_ptrIN4sysq10ws_ppeHookEEESt6vectorIS6_SaIS6_EEEENS4_6wait_FIS6_NS2_10shared_ptrIS5_EEEEET0_T_SH_SG_+000063
+[ 67] 0x00007f0b0b5d8b52     /usr/local/MATLAB/R2011b/bin/glnxa64/libuij.so+00240466
+[ 68] 0x00007f0b0b5d6192     /usr/local/MATLAB/R2011b/bin/glnxa64/libuij.so+00229778 _Z25svWS_ProcessPendingEventsiib+000578
+[ 69] 0x00007f0b14e2d6cf   /usr/local/MATLAB/R2011b/bin/glnxa64/libmwmcr.so+00206543
+[ 70] 0x00007f0b14e2d9ae   /usr/local/MATLAB/R2011b/bin/glnxa64/libmwmcr.so+00207278
+[ 71] 0x00007f0b14e2db1a   /usr/local/MATLAB/R2011b/bin/glnxa64/libmwmcr.so+00207642
+[ 72] 0x00007f0b138c1e9a              /lib/x86_64-linux-gnu/libpthread.so.0+00032410
+[ 73] 0x00007f0b135eeccd                    /lib/x86_64-linux-gnu/libc.so.6+00998605 clone+000109
+
+
+
+This error was detected while a MEX-file was running. If the MEX-file
+is not an official MathWorks function, please examine its source code
+for errors. Please consult the External Interfaces Guide for information
+on debugging MEX-files.
+
+If this problem is reproducible, please submit a Service Request via:
+    http://www.mathworks.com/support/contact_us/
+
+A technical support engineer might contact you with further information.
+
+Thank you for your help.** This crash report has been saved to disk as /home/davide/matlab_crash_dump.6887-1 **
+
+
+
+MATLAB is exiting because of fatal error
