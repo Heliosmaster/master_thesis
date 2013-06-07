@@ -34,13 +34,24 @@ for k=1:length(d)
         %%%%%%%%%%% pa-unsorted
 
         for j=1:5
-            fprintf('pa-unsorted-simple-row:\t\t ');
+            
             tic;
-            v = pa_simple(I,'row');
+            if m>n 
+                fprintf('pa-unsorted-simple-row:\t\t ');
+                v = pa_simple(I,'row');
+            else
+                fprintf('pa-unsorted-simple-col:\t\t ');
+                v = pa_simple(I,'col');
+            end
             fprintf('%g ',results(1)); [Ac,Ar] = MatlabOverpaint(I,v);
             for i=2:iter
                inner_loop;
-               v = pa_simple(A2,'row');
+            if m>n
+                v = pa_simple(A2,'row');
+            else
+                
+                v = pa_simple(A2,'col');
+            end
                [Ac,Ar] = MatlabOverpaint(A2,v);
             end
             elapsedTime = toc;
