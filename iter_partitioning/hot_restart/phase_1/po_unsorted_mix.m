@@ -1,6 +1,6 @@
 % dim=0 row
 % dim=1 col
-function v=po_mix(A,strategy,varargin)
+function v=po_unsorted_mix(A,strategy,varargin)
 [m,n]=size(A);
 if nargin < 2
     ord = 0;

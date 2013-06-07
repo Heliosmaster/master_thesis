@@ -1,4 +1,4 @@
-function [v,l]=pa_sort_simple(A,varargin)
+function [v,l]=pa_sorted_simple(A,varargin)
 if nargin < 2
     widow = 1;
 else

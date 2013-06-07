@@ -1,4 +1,4 @@
-function [v] = po_sort_mix(A,strategy,varargin)
+function [v] = po_sorted_mix(A,strategy,varargin)
 if nargin < 3
     widow = 1;
     colFirst = 0;

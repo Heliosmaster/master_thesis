@@ -1,4 +1,4 @@
-function v=po_simple(A,varargin)
+function v=po_unsorted_concat(A,varargin)
 if nargin < 2
     ord = 'row';
 else

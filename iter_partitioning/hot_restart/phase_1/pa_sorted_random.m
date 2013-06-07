@@ -1,4 +1,4 @@
-function [v,l] = pa_sort_random(A,varargin)
+function [v,l] = pa_sorted_random(A,varargin)
 if nargin < 2
     widow = 1;
 else

@@ -1,4 +1,4 @@
-function [v,l]=pa_simple(A,varargin)
+function [v,l]=pa_unsorted_concat(A,varargin)
 if nargin < 2
     ord = 'row';
 else

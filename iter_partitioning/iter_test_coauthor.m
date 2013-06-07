@@ -38,11 +38,11 @@ for k=1:length(d)
         for j=1:inneriter
             fprintf('pa-unsorted-mix-alt-row:\t ');
             tic;
-            v = pa_mix(I,0,0);
+            v = pa_unsorted_mix(I,0,0);
             fprintf('%g ',results(1)); [Ac,Ar] = MatlabOverpaint(I,v);
             for i=2:iter
                 inner_loop;
-                v = pa_mix(A2,0,0);
+                v = pa_unsorted_mix(A2,0,0);
                 [Ac,Ar] = MatlabOverpaint(A2,v);
             end
             elapsedTime = toc;
@@ -55,11 +55,11 @@ for k=1:length(d)
 %          for j=1:inneriter
 %             fprintf('pa-unsorted-mix-spr-col:\t ');
 %             tic;
-%             v = pa_mix(I,1,1);
+%             v = pa_unsorted_mix(I,1,1);
 %             fprintf('%g ',results(1)); [Ac,Ar] = MatlabOverpaint(I,v);
 %             for i=2:iter
 %                 inner_loop;
-%                 v = pa_mix(A2,1,1);
+%                 v = pa_unsorted_mix(A2,1,1);
 %                 [Ac,Ar] = MatlabOverpaint(A2,v);
 %             end
 %             elapsedTime = toc;

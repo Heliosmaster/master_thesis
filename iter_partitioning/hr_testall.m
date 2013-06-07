@@ -14,7 +14,7 @@ for k=1:length(d)
     clear str
 
     %iteration number
-    iter = 10;
+    iter = 3;
     i=1;
     results = zeros(1,iter);
 
@@ -29,13 +29,13 @@ for k=1:length(d)
 %     
 %     %%%%%%%%%%% po-unsorted
 % 
-%     fprintf('po-unsorted-simple-row:\t\t ');
+%     fprintf('po-unsorted-concat-row:\t\t ');
 %     tic;
-%     v = po_simple(I,'row');
+%     v = po_unsorted_concat(I,'row');
 %     fprintf('%g ',results(1)); [Ac,Ar] = MatlabOverpaint(I,v);
 %     for i=2:iter
 %        inner_loop;
-%        v = po_simple(A2,'row');
+%        v = po_unsorted_concat(A2,'row');
 %        [Ac,Ar] = MatlabOverpaint(A2,v);
 %     end
 %     elapsedTime = toc;
@@ -43,13 +43,13 @@ for k=1:length(d)
 %     fprintf('\n');
 %     
 %     
-%     fprintf('po-unsorted-simple-col:\t\t ');
+%     fprintf('po-unsorted-concat-col:\t\t ');
 %     tic;
-%     v = po_simple(I,'col');
+%     v = po_unsorted_concat(I,'col');
 %     fprintf('%g ',results(1)); [Ac,Ar] = MatlabOverpaint(I,v);
 %     for i=2:iter
 %        inner_loop;
-%        v = po_simple(A2,'col');
+%        v = po_unsorted_concat(A2,'col');
 %        [Ac,Ar] = MatlabOverpaint(A2,v);
 %     end
 %     elapsedTime = toc;
@@ -59,11 +59,11 @@ for k=1:length(d)
 %     
 %     fprintf('po-unsorted-random:\t\t ');
 %     tic;
-%     v = po_random(I);
+%     v = po_unsorted_random(I);
 %     fprintf('%g ',results(1)); [Ac,Ar] = MatlabOverpaint(I,v);
 %     for i=2:iter
 %        inner_loop;
-%        v = po_random(A2);
+%        v = po_unsorted_random(A2);
 %        [Ac,Ar] = MatlabOverpaint(A2,v);
 %     end
 %     elapsedTime = toc;
@@ -73,11 +73,11 @@ for k=1:length(d)
 %     
 %     fprintf('po-unsorted-mix-alt-row:\t ');
 %     tic;
-%     v = po_mix(I,0,0);
+%     v = po_unsorted_mix(I,0,0);
 %     fprintf('%g ',results(1)); [Ac,Ar] = MatlabOverpaint(I,v);
 %     for i=2:iter
 %        inner_loop;
-%        v = po_mix(A2,0,0);
+%        v = po_unsorted_mix(A2,0,0);
 %        [Ac,Ar] = MatlabOverpaint(A2,v);
 %     end
 %     elapsedTime = toc;
@@ -87,11 +87,11 @@ for k=1:length(d)
 %     
 %     fprintf('po-unsorted-mix-alt-col:\t ');
 %     tic;
-%     v = po_mix(I,0,1);
+%     v = po_unsorted_mix(I,0,1);
 %     fprintf('%g ',results(1)); [Ac,Ar] = MatlabOverpaint(I,v);
 %     for i=2:iter
 %        inner_loop;
-%        v = po_mix(A2,0,1);
+%        v = po_unsorted_mix(A2,0,1);
 %        [Ac,Ar] = MatlabOverpaint(A2,v);
 %     end
 %     elapsedTime = toc;
@@ -100,11 +100,11 @@ for k=1:length(d)
 %     
 %     fprintf('po-unsorted-mix-spr-row:\t ');
 %     tic;
-%     v = po_mix(I,1,0);
+%     v = po_unsorted_mix(I,1,0);
 %     fprintf('%g ',results(1)); [Ac,Ar] = MatlabOverpaint(I,v);
 %     for i=2:iter
 %        inner_loop;
-%        v = po_mix(A2,1,0);
+%        v = po_unsorted_mix(A2,1,0);
 %        [Ac,Ar] = MatlabOverpaint(A2,v);
 %     end
 %     elapsedTime = toc;
@@ -114,11 +114,11 @@ for k=1:length(d)
 %     
 %     fprintf('po-unsorted-mix-spr-col:\t ');
 %     tic;
-%     v = po_mix(I,1,1);
+%     v = po_unsorted_mix(I,1,1);
 %     fprintf('%g ',results(1)); [Ac,Ar] = MatlabOverpaint(I,v);
 %     for i=2:iter
 %        inner_loop;
-%        v = po_mix(A2,1,1);
+%        v = po_unsorted_mix(A2,1,1);
 %        [Ac,Ar] = MatlabOverpaint(A2,v);
 %     end
 %     elapsedTime = toc;
@@ -130,11 +130,11 @@ for k=1:length(d)
 %     
 %     fprintf('po-sorted-nw-simple:\t\t ');
 %     tic;
-%     v = po_sort_simple(I,0);
+%     v = po_sorted_simple(I,0);
 %     fprintf('%g ',results(1)); [Ac,Ar] = MatlabOverpaint(I,v);
 %     for i=2:iter
 %        inner_loop;
-%       v = po_sort_simple(A2,0);
+%       v = po_sorted_simple(A2,0);
 %        [Ac,Ar] = MatlabOverpaint(A2,v);
 %     end
 %     elapsedTime = toc;
@@ -144,11 +144,11 @@ for k=1:length(d)
 %     
 %     fprintf('po-sorted-nw-random:\t\t ');
 %     tic;
-%     v = po_sort_random(I,0);
+%     v = po_sorted_random(I,0);
 %     fprintf('%g ',results(1)); [Ac,Ar] = MatlabOverpaint(I,v);
 %     for i=2:iter
 %        inner_loop;
-%        v = po_sort_random(A2,0);
+%        v = po_sorted_random(A2,0);
 %        [Ac,Ar] = MatlabOverpaint(A2,v);
 %     end
 %     elapsedTime = toc;
@@ -158,11 +158,11 @@ for k=1:length(d)
 %     
 %     fprintf('po-sorted-nw-mix-alt-row:\t ');
 %     tic;
-%     v = po_sort_mix(I,0,0,0);
+%     v = po_sorted_mix(I,0,0,0);
 %     fprintf('%g ',results(1)); [Ac,Ar] = MatlabOverpaint(I,v);
 %     for i=2:iter
 %        inner_loop;
-%        v = po_sort_mix(A2,0,0,0);
+%        v = po_sorted_mix(A2,0,0,0);
 %        [Ac,Ar] = MatlabOverpaint(A2,v);
 %     end
 %     elapsedTime = toc;
@@ -172,11 +172,11 @@ for k=1:length(d)
 %     
 %     fprintf('po-sorted-nw-mix-alt-col:\t ');
 %     tic;
-%     v = po_sort_mix(I,0,0,1);
+%     v = po_sorted_mix(I,0,0,1);
 %     fprintf('%g ',results(1)); [Ac,Ar] = MatlabOverpaint(I,v);
 %     for i=2:iter
 %        inner_loop;
-%        v = po_sort_mix(A2,0,0,1);
+%        v = po_sorted_mix(A2,0,0,1);
 %        [Ac,Ar] = MatlabOverpaint(A2,v);
 %     end
 %     elapsedTime = toc;
@@ -185,11 +185,11 @@ for k=1:length(d)
 %     
 %     fprintf('po-sorted-nw-mix-spr-row:\t ');
 %     tic;
-%     v = po_sort_mix(I,0,1,0);
+%     v = po_sorted_mix(I,0,1,0);
 %     fprintf('%g ',results(1)); [Ac,Ar] = MatlabOverpaint(I,v);
 %     for i=2:iter
 %        inner_loop;
-%        v = po_sort_mix(A2,0,1,0);
+%        v = po_sorted_mix(A2,0,1,0);
 %        [Ac,Ar] = MatlabOverpaint(A2,v);
 %     end
 %     elapsedTime = toc;
@@ -199,11 +199,11 @@ for k=1:length(d)
 %     
 %     fprintf('po-sorted-nw-mix-spr-col:\t ');
 %     tic;
-%     v = po_sort_mix(I,0,1,1);
+%     v = po_sorted_mix(I,0,1,1);
 %     fprintf('%g ',results(1)); [Ac,Ar] = MatlabOverpaint(I,v);
 %     for i=2:iter
 %        inner_loop;
-%        v = po_sort_mix(A2,0,1,1);
+%        v = po_sorted_mix(A2,0,1,1);
 %        [Ac,Ar] = MatlabOverpaint(A2,v);
 %     end
 %     elapsedTime = toc;
@@ -215,11 +215,11 @@ for k=1:length(d)
 %     
 %     fprintf('po-sorted-w-simple:\t\t ');
 %     tic;
-%     v = po_sort_simple(I,1);
+%     v = po_sorted_simple(I,1);
 %     fprintf('%g ',results(1)); [Ac,Ar] = MatlabOverpaint(I,v);
 %     for i=2:iter
 %        inner_loop;
-%        v = po_sort_simple(A2,1);
+%        v = po_sorted_simple(A2,1);
 %        [Ac,Ar] = MatlabOverpaint(A2,v);
 %     end
 %     elapsedTime = toc;
@@ -229,11 +229,11 @@ for k=1:length(d)
 %     
 %     fprintf('po-sorted-w-random:\t\t ');
 %     tic;
-%     v = po_sort_random(I,1);
+%     v = po_sorted_random(I,1);
 %     fprintf('%g ',results(1)); [Ac,Ar] = MatlabOverpaint(I,v);
 %     for i=2:iter
 %        inner_loop;
-%        v = po_sort_random(A2,1);
+%        v = po_sorted_random(A2,1);
 %        [Ac,Ar] = MatlabOverpaint(A2,v);
 %     end
 %     elapsedTime = toc;
@@ -243,11 +243,11 @@ for k=1:length(d)
 %     
 %     fprintf('po-sorted-w-mix-alt-row:\t ');
 %     tic;
-%     v = po_sort_mix(I,1,0,0);
+%     v = po_sorted_mix(I,1,0,0);
 %     fprintf('%g ',results(1)); [Ac,Ar] = MatlabOverpaint(I,v);
 %     for i=2:iter
 %        inner_loop;
-%        v = po_sort_mix(A2,1,0,0);
+%        v = po_sorted_mix(A2,1,0,0);
 %        [Ac,Ar] = MatlabOverpaint(A2,v);
 %     end
 %     elapsedTime = toc;
@@ -257,11 +257,11 @@ for k=1:length(d)
 %     
 %     fprintf('po-sorted-w-mix-alt-col:\t ');
 %     tic;
-%     v = po_sort_mix(I,1,0,1);
+%     v = po_sorted_mix(I,1,0,1);
 %     fprintf('%g ',results(1)); [Ac,Ar] = MatlabOverpaint(I,v);
 %     for i=2:iter
 %        inner_loop;
-%        v = po_sort_mix(A2,1,0,1);
+%        v = po_sorted_mix(A2,1,0,1);
 %        [Ac,Ar] = MatlabOverpaint(A2,v);
 %     end
 %     elapsedTime = toc;
@@ -270,11 +270,11 @@ for k=1:length(d)
 %     
 %     fprintf('po-sorted-w-mix-spr-row:\t ');
 %     tic;
-%     v = po_sort_mix(I,1,1,0);
+%     v = po_sorted_mix(I,1,1,0);
 %     fprintf('%g ',results(1)); [Ac,Ar] = MatlabOverpaint(I,v);
 %     for i=2:iter
 %        inner_loop;
-%        v = po_sort_mix(A2,1,1,0);
+%        v = po_sorted_mix(A2,1,1,0);
 %        [Ac,Ar] = MatlabOverpaint(A2,v);
 %     end
 %     elapsedTime = toc;
@@ -284,11 +284,11 @@ for k=1:length(d)
 %     
 %     fprintf('po-sorted-w-mix-spr-col:\t ');
 %     tic;
-%     v = po_sort_mix(I,1,1,1);
+%     v = po_sorted_mix(I,1,1,1);
 %     fprintf('%g ',results(1)); [Ac,Ar] = MatlabOverpaint(I,v);
 %     for i=2:iter
 %        inner_loop;
-%        v = po_sort_mix(A2,1,1,1);
+%        v = po_sorted_mix(A2,1,1,1);
 %        [Ac,Ar] = MatlabOverpaint(A2,v);
 %     end
 %     elapsedTime = toc;
@@ -300,13 +300,13 @@ for k=1:length(d)
     
     %%%%%%%%%%% pa-unsorted
 
-    fprintf('pa-unsorted-simple-row:\t\t ');
+    fprintf('pa-unsorted-concat-row:\t\t ');
     tic;
-    v = pa_simple(I,'row');
+    v = pa_unsorted_concat(I,'row');
     fprintf('%g ',results(1)); [Ac,Ar] = MatlabOverpaint(I,v);
     for i=2:iter
        inner_loop;
-       v = pa_simple(A2,'row');
+       v = pa_unsorted_concat(A2,'row');
        [Ac,Ar] = MatlabOverpaint(A2,v);
     end
     elapsedTime = toc;
@@ -314,13 +314,13 @@ for k=1:length(d)
     fprintf('\n');
     
     
-    fprintf('pa-unsorted-simple-col:\t\t ');
+    fprintf('pa-unsorted-concat-col:\t\t ');
     tic;
-    v = pa_simple(I,'col');
+    v = pa_unsorted_concat(I,'col');
     fprintf('%g ',results(1)); [Ac,Ar] = MatlabOverpaint(I,v);
     for i=2:iter
        inner_loop;
-       v = pa_simple(A2,'col');
+       v = pa_unsorted_concat(A2,'col');
        [Ac,Ar] = MatlabOverpaint(A2,v);
     end
     elapsedTime = toc;
@@ -330,11 +330,11 @@ for k=1:length(d)
     
     fprintf('pa-unsorted-random:\t\t ');
     tic;
-    v = pa_random(I);
+    v = pa_unsorted_random(I);
     fprintf('%g ',results(1)); [Ac,Ar] = MatlabOverpaint(I,v);
     for i=2:iter
        inner_loop;
-       v = pa_random(A2);
+       v = pa_unsorted_random(A2);
        [Ac,Ar] = MatlabOverpaint(A2,v);
     end
     elapsedTime = toc;
@@ -344,11 +344,11 @@ for k=1:length(d)
     
     fprintf('pa-unsorted-mix-alt-row:\t ');
     tic;
-    v = pa_mix(I,0,0);
+    v = pa_unsorted_mix(I,0,0);
     fprintf('%g ',results(1)); [Ac,Ar] = MatlabOverpaint(I,v);
     for i=2:iter
        inner_loop;
-       v = pa_mix(A2,0,0);
+       v = pa_unsorted_mix(A2,0,0);
        [Ac,Ar] = MatlabOverpaint(A2,v);
     end
     elapsedTime = toc;
@@ -358,11 +358,11 @@ for k=1:length(d)
     
     fprintf('pa-unsorted-mix-alt-col:\t ');
     tic;
-    v = pa_mix(I,0,1);
+    v = pa_unsorted_mix(I,0,1);
     fprintf('%g ',results(1)); [Ac,Ar] = MatlabOverpaint(I,v);
     for i=2:iter
        inner_loop;
-       v = pa_mix(A2,0,1);
+       v = pa_unsorted_mix(A2,0,1);
        [Ac,Ar] = MatlabOverpaint(A2,v);
     end
     elapsedTime = toc;
@@ -371,11 +371,11 @@ for k=1:length(d)
     
     fprintf('pa-unsorted-mix-spr-row:\t ');
     tic;
-    v = pa_mix(I,1,0);
+    v = pa_unsorted_mix(I,1,0);
     fprintf('%g ',results(1)); [Ac,Ar] = MatlabOverpaint(I,v);
     for i=2:iter
        inner_loop;
-       v = pa_mix(A2,1,0);
+       v = pa_unsorted_mix(A2,1,0);
        [Ac,Ar] = MatlabOverpaint(A2,v);
     end
     elapsedTime = toc;
@@ -385,11 +385,11 @@ for k=1:length(d)
     
     fprintf('pa-unsorted-mix-spr-col:\t ');
     tic;
-    v = pa_mix(I,1,1);
+    v = pa_unsorted_mix(I,1,1);
     fprintf('%g ',results(1)); [Ac,Ar] = MatlabOverpaint(I,v);
     for i=2:iter
        inner_loop;
-       v = pa_mix(A2,1,1);
+       v = pa_unsorted_mix(A2,1,1);
        [Ac,Ar] = MatlabOverpaint(A2,v);
     end
     elapsedTime = toc;
@@ -401,11 +401,11 @@ for k=1:length(d)
     
     fprintf('pa-sorted-nw-simple:\t\t ');
     tic;
-    v = pa_sort_simple(I,0);
+    v = pa_sorted_simple(I,0);
     fprintf('%g ',results(1)); [Ac,Ar] = MatlabOverpaint(I,v);
     for i=2:iter
        inner_loop;
-      v = pa_sort_simple(A2,0);
+      v = pa_sorted_simple(A2,0);
        [Ac,Ar] = MatlabOverpaint(A2,v);
     end
     elapsedTime = toc;
@@ -415,11 +415,11 @@ for k=1:length(d)
     
     fprintf('pa-sorted-nw-random:\t\t ');
     tic;
-    v = pa_sort_random(I,0);
+    v = pa_sorted_random(I,0);
     fprintf('%g ',results(1)); [Ac,Ar] = MatlabOverpaint(I,v);
     for i=2:iter
        inner_loop;
-       v = pa_sort_random(A2,0);
+       v = pa_sorted_random(A2,0);
        [Ac,Ar] = MatlabOverpaint(A2,v);
     end
     elapsedTime = toc;
@@ -429,11 +429,11 @@ for k=1:length(d)
     
     fprintf('pa-sorted-nw-mix-alt-row:\t ');
     tic;
-    v = pa_sort_mix(I,0,0,0);
+    v = pa_sorted_mix(I,0,0,0);
     fprintf('%g ',results(1)); [Ac,Ar] = MatlabOverpaint(I,v);
     for i=2:iter
        inner_loop;
-       v = pa_sort_mix(A2,0,0,0);
+       v = pa_sorted_mix(A2,0,0,0);
        [Ac,Ar] = MatlabOverpaint(A2,v);
     end
     elapsedTime = toc;
@@ -443,11 +443,11 @@ for k=1:length(d)
     
     fprintf('pa-sorted-nw-mix-alt-col:\t ');
     tic;
-    v = pa_sort_mix(I,0,0,1);
+    v = pa_sorted_mix(I,0,0,1);
     fprintf('%g ',results(1)); [Ac,Ar] = MatlabOverpaint(I,v);
     for i=2:iter
        inner_loop;
-       v = pa_sort_mix(A2,0,0,1);
+       v = pa_sorted_mix(A2,0,0,1);
        [Ac,Ar] = MatlabOverpaint(A2,v);
     end
     elapsedTime = toc;
@@ -456,11 +456,11 @@ for k=1:length(d)
     
     fprintf('pa-sorted-nw-mix-spr-row:\t ');
     tic;
-    v = pa_sort_mix(I,0,1,0);
+    v = pa_sorted_mix(I,0,1,0);
     fprintf('%g ',results(1)); [Ac,Ar] = MatlabOverpaint(I,v);
     for i=2:iter
        inner_loop;
-       v = pa_sort_mix(A2,0,1,0);
+       v = pa_sorted_mix(A2,0,1,0);
        [Ac,Ar] = MatlabOverpaint(A2,v);
     end
     elapsedTime = toc;
@@ -470,11 +470,11 @@ for k=1:length(d)
     
     fprintf('pa-sorted-nw-mix-spr-col:\t ');
     tic;
-    v = pa_sort_mix(I,0,1,1);
+    v = pa_sorted_mix(I,0,1,1);
     fprintf('%g ',results(1)); [Ac,Ar] = MatlabOverpaint(I,v);
     for i=2:iter
        inner_loop;
-       v = pa_sort_mix(A2,0,1,1);
+       v = pa_sorted_mix(A2,0,1,1);
        [Ac,Ar] = MatlabOverpaint(A2,v);
     end
     elapsedTime = toc;
@@ -487,11 +487,11 @@ for k=1:length(d)
     
     fprintf('pa-sorted-w-simple:\t\t ');
     tic;
-    v = pa_sort_simple(I,1);
+    v = pa_sorted_simple(I,1);
     fprintf('%g ',results(1)); [Ac,Ar] = MatlabOverpaint(I,v);
     for i=2:iter
        inner_loop;
-       v = pa_sort_simple(A2,1);
+       v = pa_sorted_simple(A2,1);
        [Ac,Ar] = MatlabOverpaint(A2,v);
     end
     elapsedTime = toc;
@@ -501,11 +501,11 @@ for k=1:length(d)
     
     fprintf('pa-sorted-w-random:\t\t ');
     tic;
-    v = pa_sort_random(I,1);
+    v = pa_sorted_random(I,1);
     fprintf('%g ',results(1)); [Ac,Ar] = MatlabOverpaint(I,v);
     for i=2:iter
        inner_loop;
-       v = pa_sort_random(A2,1);
+       v = pa_sorted_random(A2,1);
        [Ac,Ar] = MatlabOverpaint(A2,v);
     end
     elapsedTime = toc;
@@ -515,11 +515,11 @@ for k=1:length(d)
     
     fprintf('pa-sorted-w-mix-alt-row:\t ');
     tic;
-    v = pa_sort_mix(I,1,0,0);
+    v = pa_sorted_mix(I,1,0,0);
     fprintf('%g ',results(1)); [Ac,Ar] = MatlabOverpaint(I,v);
     for i=2:iter
        inner_loop;
-       v = pa_sort_mix(A2,1,0,0);
+       v = pa_sorted_mix(A2,1,0,0);
        [Ac,Ar] = MatlabOverpaint(A2,v);
     end
     elapsedTime = toc;
@@ -529,11 +529,11 @@ for k=1:length(d)
     
     fprintf('pa-sorted-w-mix-alt-col:\t ');
     tic;
-    v = pa_sort_mix(I,1,0,1);
+    v = pa_sorted_mix(I,1,0,1);
     fprintf('%g ',results(1)); [Ac,Ar] = MatlabOverpaint(I,v);
     for i=2:iter
        inner_loop;
-       v = pa_sort_mix(A2,1,0,1);
+       v = pa_sorted_mix(A2,1,0,1);
        [Ac,Ar] = MatlabOverpaint(A2,v);
     end
     elapsedTime = toc;
@@ -542,11 +542,11 @@ for k=1:length(d)
     
     fprintf('pa-sorted-w-mix-spr-row:\t ');
     tic;
-    v = pa_sort_mix(I,1,1,0);
+    v = pa_sorted_mix(I,1,1,0);
     fprintf('%g ',results(1)); [Ac,Ar] = MatlabOverpaint(I,v);
     for i=2:iter
        inner_loop;
-       v = pa_sort_mix(A2,1,1,0);
+       v = pa_sorted_mix(A2,1,1,0);
        [Ac,Ar] = MatlabOverpaint(A2,v);
     end
     elapsedTime = toc;
@@ -556,11 +556,11 @@ for k=1:length(d)
     
     fprintf('pa-sorted-w-mix-spr-col:\t ');
     tic;
-    v = pa_sort_mix(I,1,1,1);
+    v = pa_sorted_mix(I,1,1,1);
     fprintf('%g ',results(1)); [Ac,Ar] = MatlabOverpaint(I,v);
     for i=2:iter
        inner_loop;
-       v = pa_sort_mix(A2,1,1,1);
+       v = pa_sorted_mix(A2,1,1,1);
        [Ac,Ar] = MatlabOverpaint(A2,v);
     end
     elapsedTime = toc;

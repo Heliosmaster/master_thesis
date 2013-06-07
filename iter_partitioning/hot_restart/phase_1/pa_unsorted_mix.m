@@ -1,4 +1,4 @@
-function [v,l]=pa_mix(A,strategy,varargin)
+function [v,l]=pa_unsorted_mix(A,strategy,varargin)
 [uncut,cut]=uncut_before_cut(A);
 l =length(uncut);
 [m,~] = size(A);

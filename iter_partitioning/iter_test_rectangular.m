@@ -27,30 +27,26 @@ for k=1:length(d)
         %separating the two parts as S1 and S2
         [m,n] = size(A);
 
-
-
         %%%%%%%%%%%%%%%%%%%%%%%% PA
-
         %%%%%%%%%%% pa-unsorted
 
         for j=1:5
             
             tic;
             if m>n 
-                fprintf('pa-unsorted-simple-row:\t\t ');
-                v = pa_simple(I,'row');
+                fprintf('pa-unsorted-concat-row:\t\t ');
+                v = pa_unsorted_concat(I,'row');
             else
-                fprintf('pa-unsorted-simple-col:\t\t ');
-                v = pa_simple(I,'col');
+                fprintf('pa-unsorted-concat-col:\t\t ');
+                v = pa_unsorted_concat(I,'col');
             end
             fprintf('%g ',results(1)); [Ac,Ar] = MatlabOverpaint(I,v);
             for i=2:iter
                inner_loop;
             if m>n
-                v = pa_simple(A2,'row');
+                v = pa_unsorted_concat(A2,'row');
             else
-                
-                v = pa_simple(A2,'col');
+                v = pa_unsorted_concat(A2,'col');
             end
                [Ac,Ar] = MatlabOverpaint(A2,v);
             end
@@ -59,8 +55,5 @@ for k=1:length(d)
             fprintf('\n');
         end
     end
-    
     fprintf('------\n');
-    
-   
 end

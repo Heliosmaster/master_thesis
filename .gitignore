@@ -17,5 +17,6 @@ Overpaint
 test_csort
 test_reorder
 *.swp
+*-swp
 test_*
 !*.c
