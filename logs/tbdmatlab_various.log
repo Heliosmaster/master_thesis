@@ -1,0 +1,113 @@
+Mondriaan 3.11
+
+tbdmatlab.mtx
+
+pa-unsorted-concat-row:	 4372 |  3781  3794  3788  3774  3776 
+pa-unsorted-concat-row:	 4088 |  3520  3522  3540  3554  3602 
+pa-unsorted-concat-row:	 4163 |  3633  3624  3635  3636  3639 
+pa-unsorted-concat-row:	 4180 |  3564  3580  3573  3567  3637 
+pa-unsorted-concat-row:	 4163 |  3641  3620  3632  3642  3650 
+pa-unsorted-concat-row:	 4172 |  3563  3567  3560  3568  3577 
+pa-unsorted-concat-row:	 4144 |  3607  3678  3604  3692  3637 
+pa-unsorted-concat-row:	 4576 |  4325  4314  4318  4309  4326 
+pa-unsorted-concat-row:	 4163 |  3548  3548  3588  3564  3566 
+pa-unsorted-concat-row:	 4421 |  3829  3845  3821  3824  3815 
+pa-unsorted-concat-row:	 4186 |  3578  3574  3542  3568  3561 
+pa-unsorted-concat-row:	 4239 |  3659  3665  3670  3682  3697 
+pa-unsorted-concat-row:	 4524 |  4157  4157  4181  4176  4157 
+pa-unsorted-concat-row:	 4250 |  3694  3664  3614  3732  3681 
+pa-unsorted-concat-row:	 4578 |  4293  4284  4279  4301  4275 
+pa-unsorted-concat-row:	 4137 |  3672  3629  3664  3636  3684 
+pa-unsorted-concat-row:	 4606 |  4364  4355  4341  4343  4330 
+pa-unsorted-concat-row:	 4185 |  3659  3679  3647  3675  3702 
+pa-unsorted-concat-row:	 4558 |  4225  4254  4227  4277  4038 
+pa-unsorted-concat-row:	 4604 |  4332  4309  4337  4362  4325 
+------
+mean initials 4315.45, mean final 3834.24, time 439.39 s (mean 3.69518 s)
+
+------------------------------------------------------------
+
+Mondriaan4RC
+
+tbdmatlab.mtx
+
+pa-unsorted-concat-row:	 4106 |  4129  4126  4120  4125  4120 
+pa-unsorted-concat-row:	 3730 |  3727  3684  3709  3713  3705 
+pa-unsorted-concat-row:	 3794 |  3625  3626  3663  3688  3667 
+pa-unsorted-concat-row:	 4082 |  3659  3747  3691  3742  3774 
+pa-unsorted-concat-row:	 3816 |  3517  3557  3583  3538  3552 
+pa-unsorted-concat-row:	 3948 |  3590  3577  3588  3584  3594 
+pa-unsorted-concat-row:	 3886 |  3549  3546  3526  3534  3542 
+pa-unsorted-concat-row:	 3735 |  3666  3669  3620  3642  3632 
+pa-unsorted-concat-row:	 3840 |  3526  3564  3548  3579  3539 
+pa-unsorted-concat-row:	 3967 |  3565  3554  3571  3586  3606 
+pa-unsorted-concat-row:	 3737 |  3656  3687  3688  3654  3684 
+pa-unsorted-concat-row:	 3887 |  3566  3540  3532  3597  3578 
+pa-unsorted-concat-row:	 3929 |  3572  3584  3583  3599  3559 
+pa-unsorted-concat-row:	 3677 |  3630  3600  3600  3620  3560 
+pa-unsorted-concat-row:	 3989 |  3584  3742  3712  3678  3720 
+pa-unsorted-concat-row:	 4109 |  4050  4096  4048  4102  4081 
+pa-unsorted-concat-row:	 3673 |  3669  3653  3666  3671  3667 
+pa-unsorted-concat-row:	 4160 |  4128  4120  4111  4130  4148 
+pa-unsorted-concat-row:	 3703 |  3675  3653  3630  3654  3628 
+pa-unsorted-concat-row:	 3641 |  3695  3672  3706  3670  3676 
+------
+mean initials 3870.45, mean final 3695.04, time 502.752 s (mean 4.05903 s)
+
+------------------------------------------------------------
+
+Mondriaan 3.11 + patoh
+
+tbdmatlab.mtx
+
+pa-unsorted-concat-row:	 4183 |  3730  3733  3765  3707  3716 
+pa-unsorted-concat-row:	 4115 |  3745  3688  3700  3724  3746 
+pa-unsorted-concat-row:	 4430 |  4166  4143  4113  4015  4132 
+pa-unsorted-concat-row:	 4411 |  4194  4171  4206  4157  4162 
+pa-unsorted-concat-row:	 4416 |  4111  4122  4134  4146  4129 
+pa-unsorted-concat-row:	 4366 |  3877  3884  3845  3887  3970 
+pa-unsorted-concat-row:	 4263 |  3896  3833  3841  3860  3909 
+pa-unsorted-concat-row:	 4090 |  3702  3666  3684  3688  3682 
+pa-unsorted-concat-row:	 4296 |  3972  3919  3824  4002  3867 
+pa-unsorted-concat-row:	 4191 |  3754  3758  3740  3763  3802 
+pa-unsorted-concat-row:	 4237 |  3824  3773  3785  3848  3812 
+pa-unsorted-concat-row:	 4418 |  4141  4022  4165  4105  4141 
+pa-unsorted-concat-row:	 4181 |  3731  3810  3727  3718  3743 
+pa-unsorted-concat-row:	 4308 |  3836  3892  3849  3850  3937 
+pa-unsorted-concat-row:	 4323 |  3978  3944  3926  3964  3887 
+pa-unsorted-concat-row:	 4404 |  4129  4141  4125  4122  4132 
+pa-unsorted-concat-row:	 4277 |  3785  3841  3894  3974  3827 
+pa-unsorted-concat-row:	 4367 |  4113  3877  4043  4321  4114 
+pa-unsorted-concat-row:	 4268 |  3830  3862  3920  3889  3860 
+pa-unsorted-concat-row:	 4390 |  4076  3964  4080  4097  4078 
+------
+mean initials 4296.7, mean final 3924.82, time 294.143 s (mean 2.60465 s)
+
+------------------------------------------------------------
+
+Mondriaan4RC + patoh
+
+tbdmatlab.mtx
+
+pa-unsorted-concat-row:	 3790 |  3812  3711  3776  3955  3837 
+pa-unsorted-concat-row:	 4001 |  4212  3988  4045  3977  3951 
+pa-unsorted-concat-row:	 4021 |  4007  3999  4002  4095  4004 
+pa-unsorted-concat-row:	 3903 |  4493  3727  3742  3684  3735 
+pa-unsorted-concat-row:	 4007 |  3963  3951  3976  3978  3964 
+pa-unsorted-concat-row:	 4194 |  3864  4256  4328  4030  3961 
+pa-unsorted-concat-row:	 3950 |  3920  3958  3950  3933  3948 
+pa-unsorted-concat-row:	 4037 |  4025  3991  4050  4027  4047 
+pa-unsorted-concat-row:	 3902 |  3905  3839  3788  3787  3919 
+pa-unsorted-concat-row:	 3956 |  3976  3855  3996  3818  4318 
+pa-unsorted-concat-row:	 3964 |  3937  3920  4255  3979  3843 
+pa-unsorted-concat-row:	 4008 |  4001  3998  3999  3990  4002 
+pa-unsorted-concat-row:	 3906 |  3810  3906  3871  3883  3829 
+pa-unsorted-concat-row:	 3896 |  3883  3850  3848  4200  3887 
+pa-unsorted-concat-row:	 4010 |  3994  3982  3992  4002  3992 
+pa-unsorted-concat-row:	 3982 |  3973  3955  4109  4003  3981 
+pa-unsorted-concat-row:	 4069 |  4077  4026  4054  4021  4037 
+pa-unsorted-concat-row:	 3817 |  3749  3836  3855  3743  3882 
+pa-unsorted-concat-row:	 3956 |  3733  3753  3662  3667  3687 
+pa-unsorted-concat-row:	 3967 |  4005  3997  4026  3999  3986 
+------
+mean initials 3966.8, mean final 3918.54, time 303.21 s (mean 2.61483 s)

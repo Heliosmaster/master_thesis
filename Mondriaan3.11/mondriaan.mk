@@ -31,7 +31,7 @@ MEXSUFFIX := mexa64
 
 #PATOHHOMEDIR := /usr/local/patoh
 #PATOHHOMEDIR := /home/davide/projects/mthesis/patoh/build/Linux-x86_64/
-#PATOHHOMEDIR := /home/students/3776123/mthesis/patoh/build/Linux-x86_64/
+PATOHHOMEDIR := /home/students/3776123/mthesis/patoh/build/Linux-x86_64/
 
 
 # ==== Compiler flags ====

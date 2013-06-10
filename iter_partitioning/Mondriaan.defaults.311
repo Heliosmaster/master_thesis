@@ -32,6 +32,6 @@ VectorPartition_MaxNrLoops                     10
 VectorPartition_MaxNrGreedyImproves            10 
 OutputFormat                                   original 
 OutputMode                                     original 
-Seed                                           99 
-Permute                                        none 
+Seed                                           -1
+Permute                                        SBD 
 EnforceSymmetricPermutation                    no 
