@@ -1,0 +1,23 @@
+dfl001.mtx
+
+pa-unsorted-simple-row:		 608   640   641   722   719   753   721   891   801   805 	 (avg 730.10 time 8.22635 s)
+pa-unsorted-simple-col:		 608   546   584   589   599   599   582   602   604   604 	 (avg 591.70 time 7.0357 s)
+pa-unsorted-random:		 608   629   627   606   587   608   609   605   605   612 	 (avg 609.60 time 8.95392 s)
+pa-unsorted-mix-alt-row:	 608   649   626   621   629   617   627   626   609   613 	 (avg 622.50 time 9.46245 s)
+pa-unsorted-mix-alt-col:	 608   646   621   640   622   617   622   617   622   625 	 (avg 624.00 time 8.27061 s)
+pa-unsorted-mix-spr-row:	 608   627   621   665   613   600   598   655   605   601 	 (avg 619.30 time 8.89301 s)
+pa-unsorted-mix-spr-col:	 608   663   660   656   611   613   600   604   586   595 	 (avg 619.60 time 8.21722 s)
+
+pa-sorted-nw-simple:		 608   607   589   622   599   602   613   602   550   589 	 (avg 598.10 time 9.22717 s)
+pa-sorted-nw-random:		 608  1478  1459  1484  1494  1463  1443  1495  1483  1477 	 (avg 1388.40 time 14.6397 s)
+pa-sorted-nw-mix-alt-row:	 608   606   604   615   596   574   573   610   573   609 	 (avg 596.80 time 9.95056 s)
+pa-sorted-nw-mix-alt-col:	 608   543   601   540   572   580   545   607   606   607 	 (avg 580.90 time 9.70327 s)
+pa-sorted-nw-mix-spr-row:	 608   594   570   580   550   613   543   570   594   586 	 (avg 580.80 time 9.94827 s)
+pa-sorted-nw-mix-spr-col:	 608   578   584   547   574   577   602   551   605   606 	 (avg 583.20 time 10.1525 s)
+
+pa-sorted-w-simple:		 608   588   601   604   623   611   615   605   600   608 	 (avg 606.30 time 9.21196 s)
+pa-sorted-w-random:		 608  1495  1467  1484  1502  1502  1471  1491  1502  1467 	 (avg 1398.90 time 14.9807 s)
+pa-sorted-w-mix-alt-row:	 608   548   595   589   598   600   597   605   607   603 	 (avg 595.00 time 10.315 s)
+pa-sorted-w-mix-alt-col:	 608   603   584   584   573   599   607   587   607   610 	 (avg 596.20 time 10.2349 s)
+pa-sorted-w-mix-spr-row:	 608   591   604   604   560   599   584   602   569   598 	 (avg 591.90 time 9.87423 s)
+pa-sorted-w-mix-spr-col:	 608   600   571   611   604   585   605   601   607   572 	 (avg 596.40 time 10.0734 s)

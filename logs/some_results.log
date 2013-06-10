@@ -1,0 +1,154 @@
+coAuthorsCiteseer.mtx
+
+pa-unsorted-simple-row:		 9874  9658 10020 10398 10758 11069 11258 11063 12563 12491 	 (avg 10915.20 time 247.843 s)
+pa-unsorted-simple-col:		 9874  9842 10030 11444 11473 11036 11431 11639 11777 11873 	 (avg 11041.90 time 254.79 s)
+pa-unsorted-random:		 9874 10178  9896  9637 10409  9717  9458  9441  9248  9680 	 (avg 9753.80 time 192.876 s)
+pa-unsorted-mix-alt-row:	 9874  9879  9582  9355  9596  9257  9409  9213  9183  9165 	 (avg 9451.30 time 203.341 s)
+pa-unsorted-mix-alt-col:	 9874  9692  9691  9406  9651  9582  9318 10363 10074 10108 	 (avg 9775.90 time 168.453 s)
+pa-unsorted-mix-spr-row:	 9874 10053  9670  9613  9538  9321  9267  9297  9318 10348 	 (avg 9629.90 time 283.954 s)
+pa-unsorted-mix-spr-col:	 9874  9967  9739  9519  9381  9750  9329  9355  9189  9192 	 (avg 9529.50 time 182.129 s)
+
+pa-sorted-nw-simple:		 9874  9725  9720  9597  9951 10502  9761  9545  9809  9841 	 (avg 9832.50 time 178.207 s)
+pa-sorted-nw-random:		 9874 16522 17104 16850 15519 15497 15615 15952 15668 15616 	 (avg 15421.70 time 356.635 s)
+pa-sorted-nw-mix-alt-row:	 9874  9902  9827  9675  9666 10283  9791  9619  9951 10345 	 (avg 9893.30 time 305.309 s)
+pa-sorted-nw-mix-alt-col:	 9874  9881 10400  9719  9772  9820  9715  9481  9591 10268 	 (avg 9852.10 time 344.191 s)
+pa-sorted-nw-mix-spr-row:	 9874 10450 10251  9551  9600  9386  9796  9737  9428  9772 	 (avg 9784.50 time 215.507 s)
+pa-sorted-nw-mix-spr-col:	 9874  9802  9584  9572 10311  9831 10288 10190 10240 10347 	 (avg 10003.90 time 225.705 s)
+
+pa-sorted-w-simple:		 9874  9732  9647 10286  9590  9778  9524  9533  9814  9632 	 (avg 9741.00 time 220.408 s)
+pa-sorted-w-random:		 9874 16807 16680 15584 15990 17496 15569 16354 15373 15656 	 (avg 15538.30 time 303.31 s)
+pa-sorted-w-mix-alt-row:	 9874  9824 10543  9668 10381  9734  9851  9658  9665  9528 	 (avg 9872.60 time 363.641 s)
+pa-sorted-w-mix-alt-col:	 9874  9889  9699  9720  9626  9749  9663  9818  9546  9632 	 (avg 9721.60 time 314.715 s)
+pa-sorted-w-mix-spr-row:	 9874  9661  9606  9518  9663  9598  9368  9495  9570  9580 	 (avg 9593.30 time 256.525 s)
+pa-sorted-w-mix-spr-col:	 9874  9801  9585  9704  9536  9871  9651  9650  9470  9461 	 (avg 9660.30 time 291.872 s)
+
+----------------------------------------------------------
+
+cre_b.mtx
+
+pa-unsorted-simple-row:		 633   988   878   955  1116  1821  1781  2217  2235  2098 	 (avg 1472.20 time 27.2257 s)
+pa-unsorted-simple-col:		 633   657   702   685   568   563   568   557   663   681 	 (avg 627.70 time 19.0583 s)
+pa-unsorted-random:		 633   691   780   715   704   757   684   765   741   806 	 (avg 727.60 time 24.2463 s)
+pa-unsorted-mix-alt-row:	 633   917  1084  1145   725  1196  1038   923   692  1051 	 (avg 940.40 time 27.0063 s)
+pa-unsorted-mix-alt-col:	 633   773  1175  1469  1156  1924  1056  1075  1283  1715 	 (avg 1225.90 time 27.3037 s)
+pa-unsorted-mix-spr-row:	 633   641   752   733   706   697   705   732   740   701 	 (avg 704.00 time 27.2278 s)
+pa-unsorted-mix-spr-col:	 633   772   709   717   781   740   696   716   732   701 	 (avg 719.70 time 26.5561 s)
+
+pa-sorted-nw-simple:		 633   599   667   675   627   667   561   588   611   620 	 (avg 624.80 time 24.9138 s)
+pa-sorted-nw-random:		 633 15681 19840 15970 15528 15824 15331 19602 19552 15645 	 (avg 15360.60 time 30.5226 s)
+pa-sorted-nw-mix-alt-row:	 633   597   600   690   647   710   602   611   613   624 	 (avg 632.70 time 24.0922 s)
+pa-sorted-nw-mix-alt-col:	 633   688   658   657   623   654   630   651   662   616 	 (avg 647.20 time 24.169 s)
+pa-sorted-nw-mix-spr-row:	 633   600   659   607   588   566   621   645   651   603 	 (avg 617.30 time 26.7015 s)
+pa-sorted-nw-mix-spr-col:	 633   692   705   720   612   667   638   725   622   609 	 (avg 662.30 time 25.1615 s)
+
+pa-sorted-w-simple:		 633   662   609   560   676   580   585   628   660   644 	 (avg 623.70 time 22.8999 s)
+pa-sorted-w-random:		 633 19861 19157 19605 19801 14328 20204 19864 19740 19487 	 (avg 17268.00 time 29.2655 s)
+pa-sorted-w-mix-alt-row:	 633   667   644   661   522   620   652   637   623   528 	 (avg 618.70 time 24.428 s)
+pa-sorted-w-mix-alt-col:	 633   605   659   602   541   531   572   594   621   585 	 (avg 594.30 time 24.5494 s)
+pa-sorted-w-mix-spr-row:	 633   654   663   720   576   644   646   595   613   690 	 (avg 643.40 time 24.537 s)
+pa-sorted-w-mix-spr-col:	 633   631   705   544   602   698   599   617   732   629 	 (avg 639.00 time 24.6183 s)
+
+---------------------------------------------------------------
+
+delaunay_n15.mtx
+
+pa-unsorted-simple-row:		 320   367   349   363   353   361   349   346   351   350 	 (avg 350.90 time 12.924 s)
+pa-unsorted-simple-col:		 320   361   361   351   342   383   359   347   346   352 	 (avg 352.20 time 25.1268 s)
+pa-unsorted-random:		 320   367   391   404   411   387   412   417   402   394 	 (avg 390.50 time 30.1329 s)
+pa-unsorted-mix-alt-row:	 320   427   418   387   412   387   416   412   382   394 	 (avg 395.50 time 33.848 s)
+pa-unsorted-mix-alt-col:	 320   398   392   386   414   393   410   414   394   406 	 (avg 392.70 time 33.9767 s)
+pa-unsorted-mix-spr-row:	 320   414   392   399   374   434   408   426   391   404 	 (avg 396.20 time 24.9339 s)
+pa-unsorted-mix-spr-col:	 320   372   370   411   380   388   401   409   375   434 	 (avg 386.00 time 25.556 s)
+
+pa-sorted-nw-simple:		 320   325   343   323   321   340   331   323   346   341 	 (avg 331.30 time 18.5056 s)
+pa-sorted-nw-random:		 320   370   352   349   339   344   343   345   333   337 	 (avg 343.20 time 31.1831 s)
+pa-sorted-nw-mix-alt-row:	 320   325   332   324   332   312   338   329   329   322 	 (avg 326.30 time 20.2847 s)
+pa-sorted-nw-mix-alt-col:	 320   322   320   325   333   344   358   335   340   332 	 (avg 332.90 time 20.3416 s)
+pa-sorted-nw-mix-spr-row:	 320   336   330   331   300   309   336   352   336   350 	 (avg 330.00 time 20.1388 s)
+pa-sorted-nw-mix-spr-col:	 320   309   338   353   327   324   337   319   321   340 	 (avg 328.80 time 19.9185 s)
+
+pa-sorted-w-simple:		 320   343   338   327   336   314   341   346   316   328 	 (avg 330.90 time 18.0955 s)
+pa-sorted-w-random:		 320   353   352   352   368   378   351   356   344   339 	 (avg 351.30 time 25.2998 s)
+pa-sorted-w-mix-alt-row:	 320   334   343   339   325   321   345   342   318   301 	 (avg 328.80 time 20.1733 s)
+pa-sorted-w-mix-alt-col:	 320   320   352   325   333   372   341   317   345   330 	 (avg 335.50 time 23.8585 s)
+pa-sorted-w-mix-spr-row:	 320   340   311   332   303   320   342   317   351   330 	 (avg 326.60 time 20.518 s)
+pa-sorted-w-mix-spr-col:	 320   330   322   351   333   341   339   320   335   334 	 (avg 332.50 time 21.8777 s)
+
+---------------------------------------------------------------
+
+dfl001.mtx
+
+pa-unsorted-simple-row:		 608   640   641   722   719   753   721   891   801   805 	 (avg 730.10 time 8.22635 s)
+pa-unsorted-simple-col:		 608   546   584   589   599   599   582   602   604   604 	 (avg 591.70 time 7.0357 s)
+pa-unsorted-random:		 608   629   627   606   587   608   609   605   605   612 	 (avg 609.60 time 8.95392 s)
+pa-unsorted-mix-alt-row:	 608   649   626   621   629   617   627   626   609   613 	 (avg 622.50 time 9.46245 s)
+pa-unsorted-mix-alt-col:	 608   646   621   640   622   617   622   617   622   625 	 (avg 624.00 time 8.27061 s)
+pa-unsorted-mix-spr-row:	 608   627   621   665   613   600   598   655   605   601 	 (avg 619.30 time 8.89301 s)
+pa-unsorted-mix-spr-col:	 608   663   660   656   611   613   600   604   586   595 	 (avg 619.60 time 8.21722 s)
+
+pa-sorted-nw-simple:		 608   607   589   622   599   602   613   602   550   589 	 (avg 598.10 time 9.22717 s)
+pa-sorted-nw-random:		 608  1478  1459  1484  1494  1463  1443  1495  1483  1477 	 (avg 1388.40 time 14.6397 s)
+pa-sorted-nw-mix-alt-row:	 608   606   604   615   596   574   573   610   573   609 	 (avg 596.80 time 9.95056 s)
+pa-sorted-nw-mix-alt-col:	 608   543   601   540   572   580   545   607   606   607 	 (avg 580.90 time 9.70327 s)
+pa-sorted-nw-mix-spr-row:	 608   594   570   580   550   613   543   570   594   586 	 (avg 580.80 time 9.94827 s)
+pa-sorted-nw-mix-spr-col:	 608   578   584   547   574   577   602   551   605   606 	 (avg 583.20 time 10.1525 s)
+
+pa-sorted-w-simple:		 608   588   601   604   623   611   615   605   600   608 	 (avg 606.30 time 9.21196 s)
+pa-sorted-w-random:		 608  1495  1467  1484  1502  1502  1471  1491  1502  1467 	 (avg 1398.90 time 14.9807 s)
+pa-sorted-w-mix-alt-row:	 608   548   595   589   598   600   597   605   607   603 	 (avg 595.00 time 10.315 s)
+pa-sorted-w-mix-alt-col:	 608   603   584   584   573   599   607   587   607   610 	 (avg 596.20 time 10.2349 s)
+pa-sorted-w-mix-spr-row:	 608   591   604   604   560   599   584   602   569   598 	 (avg 591.90 time 9.87423 s)
+pa-sorted-w-mix-spr-col:	 608   600   571   611   604   585   605   601   607   572 	 (avg 596.40 time 10.0734 s)
+
+---------------------------------------------------------------
+
+polyDFT.mtx
+
+pa-unsorted-simple-row:		 3756  3516  3576  3576  3581  3581  3581  3587  3590  3592 	 (avg 3593.60 time 192.534 s)
+pa-unsorted-simple-col:		 3756  3516  3456  3456  3456  3456  3456  3456  3456  3456 	 (avg 3492.00 time 166.62 s)
+pa-unsorted-random:		 3756  3563  3520  3520  3520  3520  3520  3520  3520  3520 	 (avg 3547.90 time 243.161 s)
+pa-unsorted-mix-alt-row:	 3756  3516  3516  3516  3516  3516  3516  3516  3516  3516 	 (avg 3540.00 time 257.565 s)
+pa-unsorted-mix-alt-col:	 3756  3516  3516  3516  3516  3516  3517  3517  3517  3517 	 (avg 3540.40 time 220.982 s)
+pa-unsorted-mix-spr-row:	 3756  3516  3516  3516  3516  3516  3516  3516  3516  3516 	 (avg 3540.00 time 189.129 s)
+pa-unsorted-mix-spr-col:	 3756  3516  3516  3516  3516  3516  3516  3516  3516  3517 	 (avg 3540.10 time 208.484 s)
+
+pa-sorted-nw-simple:		 3756  3516  3516  3516  3516  3516  3516  3516  3576  3516 	 (avg 3546.00 time 251.348 s)
+pa-sorted-nw-random:		 3756  3504  3531  3504  3531  3504  3531  3531  3504  3531 	 (avg 3542.70 time 226.558 s)
+pa-sorted-nw-mix-alt-row:	 3756  3636  3684  3516  3516  3516  3516  3516  3516  3516 	 (avg 3568.80 time 256.966 s)
+pa-sorted-nw-mix-alt-col:	 3756  3636  3636  3872  3522  3522  3522  3522  3522  3522 	 (avg 3603.20 time 346.298 s)
+pa-sorted-nw-mix-spr-row:	 3756  3636  3516  3516  3516  3516  3516  3516  3516  3516 	 (avg 3552.00 time 418.008 s)
+pa-sorted-nw-mix-spr-col:	 3756  3516  3516  3516  3516  3516  3636  3552  3545  3545 	 (avg 3561.40 time 318.629 s)
+
+pa-sorted-w-simple:		 3756  3516  3516  3516  3516  3516  3516  3516  3516  3516 	 (avg 3540.00 time 167.123 s)
+pa-sorted-w-random:		 3756  3504  3531  3531  3504  3531  3531  3504  3531  3504 	 (avg 3542.70 time 148.748 s)
+pa-sorted-w-mix-alt-row:	 3756  3516  3516  3516  3516  3516  3516  3516  3516  3516 	 (avg 3540.00 time 210.586 s)
+pa-sorted-w-mix-alt-col:	 3756  3516  3516  3516  3924  3534  3534  3534  3534  3534 	 (avg 3589.80 time 332.465 s)
+pa-sorted-w-mix-spr-row:	 3756  3516  3516  3516  3516  3516  3516  3516  3516  3516 	 (avg 3540.00 time 322.251 s)
+pa-sorted-w-mix-spr-col:	 3756  3516  3516  3516  3516  3516  3622  3539  3522  3522 	 (avg 3554.10 time 279.425 s)
+
+---------------------------------------------------------------
+
+tbdmatlab.mtx
+
+pa-unsorted-simple-row:		 4148  3544  3749  3777  3812  3897  3937  4038  4071  4519 	 (avg 3949.20 time 44.5203 s)
+pa-unsorted-simple-col:		 4148  4143  4053  4008  4035  4061  4083  4088  4123  4120 	 (avg 4086.20 time 55.9335 s)
+pa-unsorted-random:		 4148  4143  4134  4145  4127  4094  4087  4071  4048  4041 	 (avg 4103.80 time 68.1354 s)
+pa-unsorted-mix-alt-row:	 4148  4173  4205  4257  4290  4253  4244  4207  4214  4212 	 (avg 4220.30 time 76.9713 s)
+pa-unsorted-mix-alt-col:	 4148  4211  4225  4209  4252  4234  4203  4218  4184  4203 	 (avg 4208.70 time 63.9755 s)
+pa-unsorted-mix-spr-row:	 4148  4146  4191  4156  4098  4043  4021  3996  4024  4026 	 (avg 4084.90 time 62.6072 s)
+pa-unsorted-mix-spr-col:	 4148  4136  4159  4106  4167  4158  4140  4108  4069  4058 	 (avg 4124.90 time 70.8891 s)
+
+pa-sorted-nw-simple:		 4148  4054  4059  4026  4013  3999  3997  3980  4126  4030 	 (avg 4043.20 time 76.5057 s)
+pa-sorted-nw-random:		 4148  4744  4739  4712  4739  4704  4792  4691  4749  4745 	 (avg 4676.30 time 73.8669 s)
+pa-sorted-nw-mix-alt-row:	 4148  4133  4051  4020  4033  4005  4029  4032  4007  4066 	 (avg 4052.40 time 62.3435 s)
+pa-sorted-nw-mix-alt-col:	 4148  4068  4130  4093  4114  4029  4051  4069  4012  3991 	 (avg 4070.50 time 52.2254 s)
+pa-sorted-nw-mix-spr-row:	 4148  4186  4071  4025  4034  4026  3983  4052  4088  4003 	 (avg 4061.60 time 52.9623 s)
+pa-sorted-nw-mix-spr-col:	 4148  4069  4034  4013  3995  4044  3971  3970  3989  3994 	 (avg 4022.70 time 51.641 s)
+
+pa-sorted-w-simple:		 4148  4028  4213  4085  4023  4134  4021  3995  4005  3974 	 (avg 4062.60 time 51.8775 s)
+pa-sorted-w-random:		 4148  4741  4748  4704  4733  4751  4744  4740  4751  4797 	 (avg 4685.70 time 42.7376 s)
+pa-sorted-w-mix-alt-row:	 4148  4047  4214  4065  4109  4054  4012  3999  3980  4010 	 (avg 4063.80 time 57.1391 s)
+pa-sorted-w-mix-alt-col:	 4148  4063  4182  4095  4085  4058  3987  3970  3964  3994 	 (avg 4054.60 time 90.4709 s)
+pa-sorted-w-mix-spr-row:	 4148  4046  4021  4148  4124  4041  3990  3987  4029  3962 	 (avg 4049.60 time 92.0567 s)
+pa-sorted-w-mix-spr-col:	 4148  4063  4059  3951  4483  4321  4307  4288  4515  4386 	 (avg 4252.10 time 98.942 s)
+

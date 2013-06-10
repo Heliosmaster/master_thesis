@@ -1,0 +1,45 @@
+[?1h=
+                                                                                     < M A T L A B (R) >
+                                                                           Copyright 1984-2010 The MathWorks, Inc.
+                                                                         Version 7.12.0.635 (R2011a) 64-bit (glnxa64)
+                                                                                        March 18, 2011
+
+ 
+  To get started, type one of these: helpwin, helpdesk, or demo.
+  For product information, visit www.mathworks.com.
+ 
+{Warning: Name is nonexistent or not a directory: /home/davide/projects/mthesis/Mondriaan3.11/tools.} 
+> In path at 110
+  In addpath at 87
+  In startup at 2
+  In matlabrc at 222
+
+stanford.mtx
+
+pa-unsorted-simple-row:		 80  6432  6047  6153 	 (avg 4678.00 time 96.6447 s)
+pa-unsorted-simple-row:		 80  5542  4395  5002 	 (avg 3754.75 time 75.2322 s)
+pa-unsorted-simple-row:		 80  7537  3777  7495 	 (avg 4722.25 time 84.247 s)
+pa-unsorted-simple-row:		 80  2063  5385  2525 	 (avg 2513.25 time 89.4863 s)
+pa-unsorted-simple-row:		 80  4473  4249  6951 	 (avg 3938.25 time 143.13 s)
+pa-unsorted-simple-row:		 216  5906  4152  4866 	 (avg 3785.00 time 125.083 s)
+pa-unsorted-simple-row:		 216  5286  4138  5810 	 (avg 3862.50 time 144.464 s)
+pa-unsorted-simple-row:		 216  4394  4132  2537 	 (avg 2819.75 time 122.543 s)
+pa-unsorted-simple-row:		 216  3311  1173  1618 	 (avg 1579.50 time 113.16 s)
+pa-unsorted-simple-row:		 216  1800  2567  6860 	 (avg 2860.75 time 85.2601 s)
+pa-unsorted-simple-row:		 827  4317  4499  3117 	 (avg 3190.00 time 69.4142 s)
+pa-unsorted-simple-row:		 827  4540  5263  5780 	 (avg 4102.50 time 77.3159 s)
+pa-unsorted-simple-row:		 827  2069  4133  4766 	 (avg 2948.75 time 69.3723 s)
+pa-unsorted-simple-row:		 827  4134  4897  2951 	 (avg 3202.25 time 68.6376 s)
+pa-unsorted-simple-row:		 827  5806  5764  5271 	 (avg 4417.00 time 84.4581 s)
+pa-unsorted-simple-row:		 134  6577  5392  6540 	 (avg 4660.75 time 87.9487 s)
+pa-unsorted-simple-row:		 134  4586  4718  2823 	 (avg 3065.25 time 104.707 s)
+pa-unsorted-simple-row:		 134  3747  6373  1902 	 (avg 3039.00 time 70.3509 s)
+pa-unsorted-simple-row:		 134  3070  9881  2419 	 (avg 3876.00 time 67.6865 s)
+pa-unsorted-simple-row:		 134  5243  3654  4681 	 (avg 3428.00 time 67.9285 s)
+pa-unsorted-simple-row:		 75  6652  1595  1268 	 (avg 2397.50 time 106.665 s)
+pa-unsorted-simple-row:		 75  5983  5022  6096 	 (avg 4294.00 time 68.4806 s)
+pa-unsorted-simple-row:		 75  4376  1634  7263 	 (avg 3337.00 time 67.5477 s)
+pa-unsorted-simple-row:		 75  4662  5628  1664 	 (avg 3007.25 time 67.7702 s)
+pa-unsorted-simple-row:		 75  6884  1631  3056 	 (avg 2911.50 time 72.1991 s)
+------
+[?1l>
