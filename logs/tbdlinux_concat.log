@@ -1,0 +1,24 @@
+tbdlinux.mtx
+
+pa-unsorted-concat-row:  8015 |  7261  7364  7283  7423  7307
+pa-unsorted-concat-row:  7949 |  7243  7193  7253  7289  7274
+pa-unsorted-concat-row:  8009 |  7229  7411  7277  7274  7319
+pa-unsorted-concat-row:  7941 |  7302  7259  7265  7260  7252
+pa-unsorted-concat-row:  8060 |  7503  7410  7434  7261  7369
+pa-unsorted-concat-row:  7986 |  7368  7243  7249  7369  7309
+pa-unsorted-concat-row:  8019 |  7397  7424  7359  7444  7323
+pa-unsorted-concat-row:  7975 |  7320  7398  7369  7388  7368
+pa-unsorted-concat-row:  8002 |  7355  7320  7433  7307  7324
+pa-unsorted-concat-row:  8007 |  7401  7374  7347  7277  7384
+pa-unsorted-concat-row:  7981 |  7240  7369  7348  7265  7342
+pa-unsorted-concat-row:  7904 |  7377  7329  7392  7432  7371
+pa-unsorted-concat-row:  8013 |  7301  7314  7306  7313  7258
+pa-unsorted-concat-row:  7993 |  7255  7395  7280  7292  7329
+pa-unsorted-concat-row:  8108 |  7472  7514  7507  7499  7461
+pa-unsorted-concat-row:  8062 |  7282  7326  7262  7292  7339
+pa-unsorted-concat-row:  8068 |  7290  7385  7367  7330  7299
+pa-unsorted-concat-row:  8074 |  7398  7299  7256  7356  7337
+pa-unsorted-concat-row:  8004 |  7321  7321  7297  7384  7286
+pa-unsorted-concat-row:  8007 |  7339  7388  7337  7364  7361
+------
+mean initials 8008.85, mean final 7337.42, time 33870.9 s (mean 271.033 s)

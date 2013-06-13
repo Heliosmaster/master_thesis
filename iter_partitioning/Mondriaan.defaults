@@ -4,7 +4,7 @@ LoadbalanceAdjust                              yes
 SplitStrategy                                  mediumgrain 
 Alternate_FirstDirection                       ratio 
 SplitMethod                                    KLFM 
-Partitioner                                    patoh
+Partitioner                                    mondriaan
 Metric                                         lambda1 
 Discard_Free_Nets                              yes 
 SquareMatrix_DistributeVectorsEqual            no 
