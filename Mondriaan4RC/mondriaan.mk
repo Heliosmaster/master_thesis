@@ -24,7 +24,7 @@ MEXSUFFIX := mexa64
 # To enable PaToH support, please uncomment the following line and insert the correct (global) PaToH home directory.
 #
 
-PATOHHOMEDIR := /home/students/3776123/mthesis/patoh/build/Linux-x86_64/
+#PATOHHOMEDIR := /home/students/3776123/mthesis/patoh/build/Linux-x86_64/
 
 # ==== Compiler flags ====
 # Debug/verbose, standard (default), performance flags.

@@ -33,22 +33,17 @@ for k=1:length(d)
     for z=1:outeriter
         [I, s, ~, ~ , ~, ~, ~, ~, ~, ~, ~] = mondriaan(A,2,0.03,2,0,8);
         results(1) = s(4);
-        %separating the two parts as S1 and S2
         [m,n] = size(A);      
-       
         
         fprintf(['localview:\t ']);
                        
         fprintf('%g | ',results(1));
         total_initials(z)=results(1);
 
-        %%%%%%%%%%%%%%%%%%%%%%%% PA
-        %%%%%%%%%%% pa-unsorted
-
         for j=1:inneriter
             counter = counter+1;
             innerStart = tic;         
-            [Ac,Ar] = MatlabLocalview(A);
+            [Ac,Ar] = MatlabLocalview(I);
             for i=2:iter
                 inner_loop;
                 [Ac,Ar] = MatlabLocalview(A2);

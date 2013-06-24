@@ -11,6 +11,10 @@ all: test_overpaint matlab_overpaint
 test_overpaint: overpaint.o test_overpaint.o ../utils/utils.o
 	@echo "* Building overpaint"
 	${CC} -o $@ overpaint.o test_overpaint.o ../utils/utils.o ${CFLAGS}
+
+hot_restart: hot_restart.o overpaint.o ../utils/utils.o ../utils/createB.o
+	@echo "* Building hot_restart"
+	${CC} -o $@ $^ ${CFLAGS}
 	
 %.mex.o: %.c
 	${CC} ${MATLABCFLAGS} -c $< -o $@
