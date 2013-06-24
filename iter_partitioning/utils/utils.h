@@ -44,6 +44,7 @@ struct sparsematrixplus {
 };
 
 long* nnz(long* input, int NrNzElts, int size);
+long* get_cut(struct sparsematrix A, struct sparsematrix B);
 long* CSortVec(long* J, long length, long maxval);
 struct sparsematrixplus reorder_row_incr(struct sparsematrix* matrix);
 struct sparsematrixplus reorder_col_incr(struct sparsematrix* matrix);

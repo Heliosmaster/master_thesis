@@ -164,7 +164,7 @@ void print_vec_to_file(char* name, long* vec, int length){
 
 
 /*
-* methods to find out which rows/cols 
+* method to find out which rows/cols 
 * (depending on whether the input vector is i or j)
 * are empty / nonempty (and how many nonzeros they have)
 *
@@ -188,6 +188,29 @@ long* nnz(long* input, int NrNzElts, int size){
     index++;
   }
   return nonz;
+}
+
+/**
+ * method that returns a logical vector of length m+n
+ * 1 if the row/column is split, 0 otherwise
+ *
+ * input = A,B (respectively the two partitioned parts, A1 A2)
+ * of size mxn
+ */
+long* get_cut(struct sparsematrix A, struct sparsematrix B){
+	int m = A.m;
+	int n = A.n;
+	long* nnzAi = nnz(A.i,A.NrNzElts,m);
+	long* nnzAj = nnz(A.j,A.NrNzElts,n);
+	long* nnzBi = nnz(B.i,B.NrNzElts,m);
+	long* nnzBj = nnz(B.j,B.NrNzElts,n);
+
+  long* split = vecallocl(m+n);
+
+	int i;
+	for(i=0;i<m;i++) split[i] = nnzAi[i] && nnzBi[i];
+	for(i=0;i<n;i++) split[m+i] = nnzAj[i] && nnzBj[i];
+	return split;
 }
 
 /*

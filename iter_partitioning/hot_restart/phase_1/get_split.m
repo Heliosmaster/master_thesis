@@ -20,5 +20,3 @@ v = zeros(1,m+n);
 for i=1:m+n
     v(i) = (nz1(i)) && (nz2(i));
 end
-
-
