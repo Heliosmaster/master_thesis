@@ -30,4 +30,5 @@ int main(){
   MMDeleteSparseMatrix(&B);
   MMDeleteSparseMatrix(&Bplus.matrix);
   vecfreel(Bplus.perm);
+	return 0;
 }

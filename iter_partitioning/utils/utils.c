@@ -197,7 +197,7 @@ long* nnz(long* input, int NrNzElts, int size){
  * input = A,B (respectively the two partitioned parts, A1 A2)
  * of size mxn
  */
-long* get_cut(struct sparsematrix A, struct sparsematrix B){
+long* cut_vector(struct sparsematrix A, struct sparsematrix B){
 	int m = A.m;
 	int n = A.n;
 	long* nnzAi = nnz(A.i,A.NrNzElts,m);
@@ -205,13 +205,47 @@ long* get_cut(struct sparsematrix A, struct sparsematrix B){
 	long* nnzBi = nnz(B.i,B.NrNzElts,m);
 	long* nnzBj = nnz(B.j,B.NrNzElts,n);
 
-  long* split = vecallocl(m+n);
+  long* cut= vecallocl(m+n);
 
 	int i;
-	for(i=0;i<m;i++) split[i] = nnzAi[i] && nnzBi[i];
-	for(i=0;i<n;i++) split[m+i] = nnzAj[i] && nnzBj[i];
-	return split;
+	for(i=0;i<m;i++) cut[i] = nnzAi[i] && nnzBi[i];
+	for(i=0;i<n;i++) cut[m+i] = nnzAj[i] && nnzBj[i];
+	return cut;
 }
+
+/*
+ * method that returns a vector with either the cut/uncut indices of the partitioned matrix
+ * flag = 0 => uncut part
+ * flag = 1 => cut part
+ */
+long* cut_uncut_part(long* cut_vec, int length, int flag, int* output_length){
+	int i;
+	int n_cut=0;
+	for(i=0;i<length;i++) n_cut+=cut_vec[i];
+	long* output;
+	int index = 0;
+	if(!flag){
+		/* uncut part */
+		*output_length=length-n_cut;
+		output = vecallocl(length-n_cut);
+		for(i=0;i<length;i++){
+			if(cut_vec[i]==0){
+				output[index] = i;
+				index++;
+			}
+		}
+	} else {
+		/* cut part */ 
+		*output_length=n_cut;
+		output = vecallocl(n_cut);
+		for(i=0;i<length;i++) if(cut_vec[i]){
+			output[index] = i;
+			index++;
+		}
+	}
+	return output;
+}
+
 
 /*
 * This function sorts all the items of J by increasing value val, using a counting sort.

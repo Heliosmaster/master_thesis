@@ -23,4 +23,5 @@ int main(int argc, char* argv[]){
 	File = fopen(outputname, "w");
 	for(k=0;k<matrix.NrNzElts;k++) fprintf(File,"%ld %ld\n",matrix.i[k],matrix.m+matrix.j[k]);
 	fclose(File);
+	return 0;
 }

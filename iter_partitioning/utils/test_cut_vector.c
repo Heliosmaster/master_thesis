@@ -21,7 +21,7 @@ int main(){
   printf("------------\n");
   print_matrix(two.Ac);
 
-	long* split = get_cut(two.Ar,two.Ac);
+	long* split = cut_vector(two.Ar,two.Ac);
 
 	int i=0;
 	for(i=0;i<matrix.m;i++)printf("%ld ",split[i]);

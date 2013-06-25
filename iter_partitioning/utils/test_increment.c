@@ -27,5 +27,5 @@ int main(){
   MMDeleteSparseMatrix(&matrix2);
   vecfreel(m2plus.perm);
   vecfreel(increment);
-
+	return 0;
 }

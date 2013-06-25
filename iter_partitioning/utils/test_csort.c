@@ -57,5 +57,6 @@ int main(){
 	vecfreel(vec);
 	vecfreel(indices);
 	vecfreel(indices2);
+	return 0;
 }
 

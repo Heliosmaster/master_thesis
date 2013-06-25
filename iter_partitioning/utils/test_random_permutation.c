@@ -8,13 +8,13 @@
 #include "utils.h"
 
 int main(){
-   srand(time(NULL));
+	srand(time(NULL));
 
-   int i;
-   for(i=0;i<5;i++){
-	long* vec = random_permutation(10);
-	print_vec_inline(vec,10);
-	vecfreel(vec);
-   } 
-  
+	int i;
+	for(i=0;i<5;i++){
+		long* vec = random_permutation(10);
+		print_vec_inline(vec,10);
+		vecfreel(vec);
+	} 
+	return 0; 
 }

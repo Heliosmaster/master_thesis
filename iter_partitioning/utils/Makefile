@@ -2,7 +2,7 @@ include ../init.mk
 
 CFLAGS:= ${CFLAGS} -fPIC
 
-all: test_create_B test_csort test_increment test_random_permutation test_reorder test_split test_update_matrix matlab_createB MatlabHelper.mex.o matlab_convert cnv mtx2edges
+all: test_create_B test_csort test_increment test_random_permutation test_cut_uncut test_cut_vector test_reorder test_split test_update_matrix matlab_createB MatlabHelper.mex.o matlab_convert cnv mtx2edges
 
 cnv: MondriaanToMatlab MatlabToMondriaan MatlabToMondriaanToMatlab
 
@@ -14,7 +14,7 @@ test_create_B: createB.o test_create_B.o utils.o
 
 test_%: test_%.o utils.o
 	@echo "* Building $@"
-	${CC} -o $@ $< utils.o ${CFLAGS}
+	${CC} -o $@ $^ ${CFLAGS}
 
 %.mex.o: %.c
 	${CC} ${MATLABCFLAGS} -g -c $< -o $@
