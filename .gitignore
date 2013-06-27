@@ -19,5 +19,6 @@ test_reorder
 *.swp
 *-swp
 test_*
+!*.m
 !*.c
 mtx2edges
