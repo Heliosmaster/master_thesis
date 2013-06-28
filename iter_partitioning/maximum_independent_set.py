@@ -80,12 +80,13 @@ def read_mtx_file_as_graph(filename):
     f = open(filename,'r')
     for line in f:
         if not line.startswith('%'):
-            number_of_nodes = int(line.split()[0])
+            number_of_rows = int(line.split()[0])
+            number_of_columns = int(line.split()[1])
             break
     graph = defaultdict(list)
     [graph[int(line.split()[0])].append(int(line.split()[1])) for line in f]
     f.close()
-    return number_of_nodes, graph
+    return graph,number_of_rows,number_of_columns
 
 def write_independent_set_to_file(filename,A,B,offset):
     f = open(filename, 'w')
@@ -123,22 +124,39 @@ def get_subgraph(graph,list):
                 del graph2[i]
     return graph2
 
+def subgraph(graph,list,m,n):
+    helper = [0]*(m+n+1)
+    for i in list:
+        helper[i] = 1
+    graph2 = copy.deepcopy(graph)
+    for i in graph:
+        if not helper[i]:
+            del graph2[i]
+            continue
+        else:
+            for j in graph[i]:
+                if not helper[m+j]:
+                    graph2[i].remove(j)
+            if not graph2[i]:
+                del graph2[i]
+    return graph2
+
 if __name__ == "__main__":
     #input_matrix = 'tbdmatlab'
     input_filename = sys.argv[1]
     output_filename = input_filename + '.set'
-    print("Reading graph")
-    number_of_nodes, graph = read_mtx_file_as_graph(input_filename)
+    #print("Reading graph")
+    graph,m,n = read_mtx_file_as_graph(input_filename)
     #print(graph)
-    print("Reading list")
+    #print("Reading list")
     l = read_list_from_file('matlab_temp.txt')
     #print(l)
-    print("Getting subgraph")
-    graph2 = get_subgraph(graph,l)
-    #print(graph2)
-    print("Computing independent set")
+    #print("Getting subgraph")
+    graph2 = subgraph(graph,l,m,n)
+    #print(graph3)
+    #print("Computing independent set")
     M, A, B = bipartiteMatch(graph2)
     A.sort()
     B.sort()
-    write_independent_set_to_file(output_filename, A, B,len(graph))
+    write_independent_set_to_file(output_filename,A,B,m)
     #print_independent_set(A,B,len(graph))
