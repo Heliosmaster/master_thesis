@@ -1,7 +1,9 @@
-\documentclass[a4paper]{article}
+\documentclass[a4paper,utf8]{report}
 \usepackage{fullpage}
 \usepackage[english]{babel}
 \usepackage[utf8]{inputenc}
+\usepackage[babel]{csquotes}
+\usepackage[backref,hyperref,sorting=none]{biblatex}
 \usepackage{amsmath}
 \usepackage{amsthm}
 \usepackage{mathtools}
@@ -10,8 +12,10 @@
 \usepackage{enumerate}
 \usepackage[boxed]{algorithm}
 \usepackage{algorithmic}
-\usepackage{hyperref}
+\usepackage[pdftex]{hyperref}
 \usepackage{tikz}
+%\usepackage{natbib}
+
 \usetikzlibrary{matrix}
 \usetikzlibrary{chains,scopes}
 
@@ -28,6 +32,16 @@
 \setlength\parindent{0pt}
 \setlength{\parskip}{6pt} %%distanza fra i paragrafi
 
+\bibliography{bib}
+
+\DefineBibliographyStrings{english}{%
+    backrefpage  = {cited on page}, % for single page number
+    backrefpages = {cited on pages} % for multiple page numbers
+}
+%\DeclareFieldFormat{journaltitle}{#1,} % italic journal title with comma
+\DeclareFieldFormat[article,unpublished]{title}{``\mkbibemph{#1}'',} % italic journal title with comma
+%\bibliographystyle{unsrt}
+
 \begin{document}
 
 \clearpage
@@ -40,6 +54,15 @@
 
 \pagenumbering{arabic}
 
+AA\cite{mondriaan}
+
+B\cite{mediumgrain}
+\include{introduction}
+
+\include{local_assignment}
 \include{hot_restart}
+\include{independent_set}
+
+\printbibliography[heading=bibintoc]
 
 \end{document} 

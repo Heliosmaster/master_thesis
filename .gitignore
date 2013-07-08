@@ -22,3 +22,7 @@ test_*
 !*.m
 !*.c
 mtx2edges
+*.bcf
+*.run.xml
+*-blx.bib
+*.dvi
