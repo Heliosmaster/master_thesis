@@ -3,7 +3,7 @@ include ../init.mk
 CFLAGS:=${CFLAGS} -fPIC
 
 all: test_overpaint matlab_overpaint
-	
+hr: hot_restart	
 
 .c.o:
 	${CC} ${CFLAGS} -c $< -o $@
@@ -25,6 +25,6 @@ matlab_overpaint: MatlabOverpaint.mex.o ../utils/utils.o overpaint.o ../utils/Ma
 
 clean:
 	@echo "* Cleaning up overpaint"
-	rm -f test_overpaint MatlabOverpaint.mexa64 *.o
+	rm -f hot_restart test_overpaint MatlabOverpaint.mexa64 *.o
 
 

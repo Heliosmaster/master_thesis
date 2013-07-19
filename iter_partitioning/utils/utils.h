@@ -56,6 +56,8 @@ void update_rows(struct sparsematrix* A, long* increment_rows, long i, double va
 void update_cols(struct sparsematrix* A, long* increment_cols, long i, double value);
 void update_rows_link(struct sparsematrix* A, struct sparsematrix* B, long* increment_rows, long i, double value, long* link);
 void update_cols_link(struct sparsematrix* A, struct sparsematrix* B, long* increment_cols, long i, double value, long* link);
+struct sparsematrix assignMatrix(struct sparsematrix* matrix, int id);
+void copyHeader(struct sparsematrix* input, struct sparsematrix* output);
 
 /* misc */
 long* double_array_to_long(double* input, int length);
