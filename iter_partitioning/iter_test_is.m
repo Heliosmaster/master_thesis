@@ -2,7 +2,7 @@ clear all; close all; clc;
 
 printIteration = 0;
 % read the input sparse matrix
-matrix ='nug30.mtx';
+matrix ='mri1.mtx';
 str = ['../matrices/' matrix];
 A = mmread(str);
 
