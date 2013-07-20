@@ -46,6 +46,7 @@ struct sparsematrixplus {
 long* nnz(long* input, int NrNzElts, int size);
 long* cut_vector(struct sparsematrix A, struct sparsematrix B);
 long* cut_uncut_part(long* cut_vector, int length, int flag, int* output_length);
+void cut_and_uncut(long* input, int length, long* cut_part, int* cut_length, long* uncut_part, int* uncut_length);
 long* CSortVec(long* J, long length, long maxval);
 struct sparsematrixplus reorder_row_incr(struct sparsematrix* matrix);
 struct sparsematrixplus reorder_col_incr(struct sparsematrix* matrix);

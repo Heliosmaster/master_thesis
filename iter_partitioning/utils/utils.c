@@ -245,6 +245,32 @@ long* cut_uncut_part(long* cut_vec, int length, int flag, int* output_length){
 	}
 	return output;
 }
+/*
+ * method that returns both cut and uncut indices vector of the partitioned matrix
+ * input: logical vector (1 cut, 0 uncut)
+ */
+
+void cut_and_uncut(long* input, int length, long* cut_part, int* cut_length, long* uncut_part, int* uncut_length){
+	int i;
+	int n_cut=0;
+	
+	for(i=0;i<length;i++) n_cut+=input[i];
+/*	*cut_part = vecallocl(n_cut);
+	*uncut_part = vecallocl(length-n_cut);*/
+	*cut_length = n_cut;
+	*uncut_length = length-n_cut;
+	int index_cut = 0;
+	int index_uncut = 0;
+	for(i=0;i<length;i++){
+		if(input[i]==1){
+			cut_part[index_cut] = i;
+			index_cut++;
+		} else {
+			uncut_part[index_uncut] = i;
+			index_uncut++;
+		}	
+	}
+}
 
 
 /*
@@ -585,11 +611,11 @@ struct sparsematrix assignMatrix(struct sparsematrix* matrix, int id){
 	output.m = matrix->m;
 	output.n = matrix->n;
 	output.NrNzElts = matrix->Pstart[id]-matrix->Pstart[id-1];
-	
+
 	output.i = vecallocl(output.NrNzElts);
 	output.j = vecallocl(output.NrNzElts);
 	output.ReValue = vecallocd(output.NrNzElts);
-	
+
 	int start = matrix->Pstart[id-1];
 	int k;
 	for(k=0;k<output.NrNzElts;k++){
