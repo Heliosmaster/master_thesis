@@ -16,27 +16,14 @@ int main(){
 	if (!MMReadSparseMatrix(File, &matrix)) printf("Unable to read input matrix!\n");
 	fclose(File);
 
-	struct twomatrices two = split_matrix(&matrix,1.0,2.0);
-
-	printf("Initial split matrix:\n\n");
-	print_matrix(two.Ar);
-	printf("---\n");
-	print_matrix(two.Ac);
-
-	long* split = cut_vector(two.Ar,two.Ac);
-
-	printf("\nvector of splits:\n");
-	int i=0;
-	for(i=0;i<matrix.m;i++)printf("%ld ",split[i]);
-	printf("| ");
-	for(;i<matrix.m+matrix.n;i++) printf("%ld ",split[i]);
-	printf("\n\n");
 
 	int len,len2;
-	long* cut_vec =vecallocl(matrix.m+matrix.n);
+	/*long* cut_vec =vecallocl(matrix.m+matrix.n);
 	long* uncut_vec = vecallocl(matrix.m+matrix.n);
-
-	cut_and_uncut(split,matrix.m+matrix.n,cut_vec,&len,uncut_vec,&len2);
+*/
+	long* cut_vec;
+	long* uncut_vec;
+	cut_and_uncut(&matrix,&cut_vec,&len,&uncut_vec,&len2);
 
 	
 	printf("cut indices:\t ");	print_vec_inline(cut_vec,len);
@@ -44,9 +31,6 @@ int main(){
 
 	vecfreel(uncut_vec);
 	vecfreel(cut_vec);
-	vecfreel(split);
 	MMDeleteSparseMatrix(&matrix);
-	MMDeleteSparseMatrix(&two.Ar);
-	MMDeleteSparseMatrix(&two.Ac);
 	return 0;
 }

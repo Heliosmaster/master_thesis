@@ -250,26 +250,33 @@ long* cut_uncut_part(long* cut_vec, int length, int flag, int* output_length){
  * input: logical vector (1 cut, 0 uncut)
  */
 
-void cut_and_uncut(long* input, int length, long* cut_part, int* cut_length, long* uncut_part, int* uncut_length){
+void cut_and_uncut(struct sparsematrix *A, long** cut_part, int* cut_length, long** uncut_part, int* uncut_length){
+	struct twomatrices two = split_matrix(A,1.0,2.0);
+	long* split = cut_vector(two.Ar,two.Ac);
+	int length = A->m+A->n;
 	int i;
-	int n_cut=0;
-	
-	for(i=0;i<length;i++) n_cut+=input[i];
-/*	*cut_part = vecallocl(n_cut);
-	*uncut_part = vecallocl(length-n_cut);*/
+	int n_cut=0;	
+	for(i=0;i<length;i++) n_cut+=split[i];
+	*cut_part = vecallocl(n_cut);
+	*uncut_part = vecallocl(length-n_cut);
 	*cut_length = n_cut;
 	*uncut_length = length-n_cut;
+	long* cut = *cut_part;
+	long* uncut = *uncut_part;
 	int index_cut = 0;
 	int index_uncut = 0;
 	for(i=0;i<length;i++){
-		if(input[i]==1){
-			cut_part[index_cut] = i;
+		if(split[i]==1){
+			cut[index_cut] = i;
 			index_cut++;
 		} else {
-			uncut_part[index_uncut] = i;
+			uncut[index_uncut] = i;
 			index_uncut++;
 		}	
 	}
+	vecfreel(split);
+	MMDeleteSparseMatrix(&two.Ar);
+	MMDeleteSparseMatrix(&two.Ac);
 }
 
 

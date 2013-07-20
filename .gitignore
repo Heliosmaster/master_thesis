@@ -19,7 +19,7 @@ test_reorder
 *.swp
 *-swp
 test_*
-hot_restart
+iter_partitioning/hot_restart/hot_restart
 !*.m
 !*.c
 mtx2edges
