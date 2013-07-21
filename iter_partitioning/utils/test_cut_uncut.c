@@ -23,7 +23,7 @@ int main(){
 	printf("---\n");
 	print_matrix(two.Ac);
 
-	long* split = cut_vector(two.Ar,two.Ac);
+	long* split = cut_vector(&two.Ar,&two.Ac);
 
 	printf("\nvector of splits:\n");
 	int i=0;

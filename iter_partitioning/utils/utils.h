@@ -13,8 +13,8 @@
 
 #ifndef UTILS_H
 #define UTILS_H
-/* memory part */
 
+/* memory part */
 double* vecallocd(int n);
 int* vecalloci(int n); 
 long* vecallocl(int n);
@@ -44,9 +44,10 @@ struct sparsematrixplus {
 };
 
 long* nnz(long* input, int NrNzElts, int size);
-long* cut_vector(struct sparsematrix A, struct sparsematrix B);
+long* cut_vector(struct sparsematrix* A, struct sparsematrix* B);
 long* cut_uncut_part(long* cut_vector, int length, int flag, int* output_length);
 void cut_and_uncut(struct sparsematrix* A, long** cut_part, int* cut_length, long** uncut_part, int* uncut_length);
+long* number_nonzeros(struct sparsematrix* A);
 long* CSortVec(long* J, long length, long maxval);
 struct sparsematrixplus reorder_row_incr(struct sparsematrix* matrix);
 struct sparsematrixplus reorder_col_incr(struct sparsematrix* matrix);
@@ -66,5 +67,7 @@ long* random_permutation(long length);
 int randi(int bound);
 int xor(int a, int b);
 long* reverse_perm(long* input, int length);
-
+void reverse_vector(long** input, int length);
+int check_vector(long* vector, int length);
+long max_element(long* vector, int length);
 #endif /* UTILS_H*/

@@ -2,8 +2,7 @@ include ../init.mk
 
 CFLAGS:=${CFLAGS} -fPIC
 
-all: test_overpaint matlab_overpaint
-hr: hot_restart	
+all: test_overpaint matlab_overpaint test_priority_vector hot_restart
 
 .c.o:
 	${CC} ${CFLAGS} -c $< -o $@
@@ -15,7 +14,12 @@ test_overpaint: overpaint.o test_overpaint.o ../utils/utils.o
 hot_restart: hot_restart.o overpaint.o ../utils/utils.o ../utils/createB.o
 	@echo "* Building hot_restart"
 	${CC} -o $@ $^ ${CFLAGS}
-	
+
+
+test_priority_vector: test_priority_vector.o priority_vector.o ../utils/utils.o
+	@echo "* Building test_priority_vector"
+	${CC} -o $@ $^ ${CFLAGS}
+
 %.mex.o: %.c
 	${CC} ${MATLABCFLAGS} -c $< -o $@
 
@@ -25,6 +29,6 @@ matlab_overpaint: MatlabOverpaint.mex.o ../utils/utils.o overpaint.o ../utils/Ma
 
 clean:
 	@echo "* Cleaning up overpaint"
-	rm -f hot_restart test_overpaint MatlabOverpaint.mexa64 *.o
+	rm -f hot_restart test_overpaint MatlabOverpaint.mexa64 *.o test_priority_vector
 
 

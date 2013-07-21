@@ -1,9 +1,9 @@
 #include "utils.h"
 
-
-/* These functions can be used to allocate and deallocate vectors and matrices.
-	 If not enough memory available, one processor halts them all.
-	 */
+/* 
+ * These functions can be used to allocate and deallocate vectors and matrices.
+ * If not enough memory available, one processor halts them all.
+ */
 
 double *vecallocd(int n){
 	/* This function allocates a vector of doubles of length n */
@@ -132,7 +132,7 @@ void print_cplx_matrix(struct sparsematrix matrix){
 void print_vec(long* vec, int length){
 	int i;
 	for(i=0;i<length;i++)
-		printf("%d: %ld",i+1,vec[i]);
+		printf("%d: %ld\n",i,vec[i]);
 }
 
 void print_vec_inline(long* vec, int length){
@@ -178,15 +178,11 @@ long* nnz(long* input, int NrNzElts, int size){
 
 	/* filling out the vector with 0s (o/w MATLAB does not empty it) */
 	int index;
-	for(index=0;index<size;index++)
-		nonz[index] = 0;
+	for(index=0;index<size;index++) nonz[index] = 0;
 
 	/* sweep of the input vector: increased the counter for every index found */
 	index = 0;
-	while(index<NrNzElts){
-		nonz[input[index]]++;
-		index++;
-	}
+	while(index<NrNzElts)	nonz[input[index++]]++;
 	return nonz;
 }
 
@@ -197,20 +193,25 @@ long* nnz(long* input, int NrNzElts, int size){
  * input = A,B (respectively the two partitioned parts, A1 A2)
  * of size mxn
  */
-long* cut_vector(struct sparsematrix A, struct sparsematrix B){
-	int m = A.m;
-	int n = A.n;
-	long* nnzAi = nnz(A.i,A.NrNzElts,m);
-	long* nnzAj = nnz(A.j,A.NrNzElts,n);
-	long* nnzBi = nnz(B.i,B.NrNzElts,m);
-	long* nnzBj = nnz(B.j,B.NrNzElts,n);
+long* cut_vector(struct sparsematrix* A, struct sparsematrix* B){
+	int m = A->m;
+	int n = A->n;
+	long* nnzAi = nnz(A->i,A->NrNzElts,m);
+	long* nnzAj = nnz(A->j,A->NrNzElts,n);
+	long* nnzBi = nnz(B->i,B->NrNzElts,m);
+	long* nnzBj = nnz(B->j,B->NrNzElts,n);
 
 	long* cut= vecallocl(m+n);
-
 	int i;
 	for(i=0;i<m;i++) cut[i] = nnzAi[i] && nnzBi[i];
 	for(i=0;i<n;i++) cut[m+i] = nnzAj[i] && nnzBj[i];
+	
+	vecfreel(nnzAi);
+	vecfreel(nnzAj);
+	vecfreel(nnzBi);
+	vecfreel(nnzBj);
 	return cut;
+
 }
 
 /*
@@ -245,40 +246,61 @@ long* cut_uncut_part(long* cut_vec, int length, int flag, int* output_length){
 	}
 	return output;
 }
+
 /*
  * method that returns both cut and uncut indices vector of the partitioned matrix
- * input: logical vector (1 cut, 0 uncut)
+ * input: logical vector (1 cut, 0 uncut). Usage:
+ *
+ *	long *cut_vec, *uncut_vec;
+ *	int len, len2;
+ *	cut_and_uncut(&matrix,&cut_vec,&len,&uncut_vec,&len2);
  */
-
 void cut_and_uncut(struct sparsematrix *A, long** cut_part, int* cut_length, long** uncut_part, int* uncut_length){
 	struct twomatrices two = split_matrix(A,1.0,2.0);
-	long* split = cut_vector(two.Ar,two.Ac);
+	long* split = cut_vector(&two.Ar,&two.Ac);
 	int length = A->m+A->n;
-	int i;
-	int n_cut=0;	
+	
+	int i, n_cut=0;	
 	for(i=0;i<length;i++) n_cut+=split[i];
+
 	*cut_part = vecallocl(n_cut);
 	*uncut_part = vecallocl(length-n_cut);
 	*cut_length = n_cut;
 	*uncut_length = length-n_cut;
 	long* cut = *cut_part;
 	long* uncut = *uncut_part;
-	int index_cut = 0;
-	int index_uncut = 0;
+	
+	int index_cut = 0, index_uncut=0;
 	for(i=0;i<length;i++){
-		if(split[i]==1){
-			cut[index_cut] = i;
-			index_cut++;
-		} else {
-			uncut[index_uncut] = i;
-			index_uncut++;
-		}	
+		if(split[i]==1) cut[index_cut++] = i;
+		else uncut[index_uncut++] = i;	
 	}
+	
 	vecfreel(split);
 	MMDeleteSparseMatrix(&two.Ar);
 	MMDeleteSparseMatrix(&two.Ac);
 }
 
+/*
+ * This function returns a vector of length m+n with the number of nonzeros of the matrix A
+ * where the first m elements corresponds to the row, while the other n to the cols.
+ */
+long* number_nonzeros(struct sparsematrix* A){
+	int m = A->m;
+	int n = A->n;
+
+	long* nzi = nnz(A->i,A->NrNzElts,m);
+	long* nzj = nnz(A->j,A->NrNzElts,n);
+
+	long* output = vecallocl(m+n);
+	int i;
+	for(i=0;i<m;i++) output[i] = nzi[i];
+	for(i=0;i<n;i++) output[m+i] = nzj[i];
+	
+	vecfreel(nzi);
+	vecfreel(nzj);
+	return output;
+}
 
 /*
  * This function sorts all the items of J by increasing value val, using a counting sort.
@@ -323,7 +345,7 @@ long* CSortVec(long *J, long length, long maxval) {
 		j = J[t];	
 		C[start[j]]= j;
 		indices[start[j]]=t;
-		/*indexes[t]=start[j]; -- this to have the reverse permutation */
+		/*indices[t]=start[j]; -- this to have the reverse permutation */
 		start[j]++;
 	}
 
@@ -646,8 +668,6 @@ void copyHeader(struct sparsematrix* input, struct sparsematrix* output){
 	output->ViewType = input->ViewType;
 }
 
-
-
 /*
  * method that converts an array of doubles to an array of long
  */
@@ -660,7 +680,7 @@ long* double_array_to_long(double* input, int length){
 }
 
 /*
- * method that creates a random permutation of 0,...,length
+ * method that creates a random permutation of 0,...,length-1
  */
 long* random_permutation(long length){
 	long* a = vecallocl(length);
@@ -698,3 +718,25 @@ long* reverse_perm(long* input, int length){
 	return output;
 }
 
+/* in-place reversal of an array */
+void reverse_vector(long** input, int length){
+	long* tmp = vecallocl(length);
+	long* vec = *input;
+	int i;
+	for(i=0;i<length;i++) tmp[i] = vec[length-i-1];
+	for(i=0;i<length;i++) vec[i] = tmp[i];
+	vecfreel(tmp);
+}
+
+int check_vector(long* vector, int length){
+	int i, sum =0;
+	for(i=0;i<length;i++) sum+=vector[i];
+	return (sum == length*(length-1)/2);
+}
+
+long max_element(long* vector, int length){
+	long max = vector[0];
+	int i;
+	for(i=1;i<length;i++) if(vector[i]>max) max=vector[i];
+	return max;
+}
