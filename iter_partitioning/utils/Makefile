@@ -2,7 +2,7 @@ include ../init.mk
 
 CFLAGS:= ${CFLAGS} -fPIC
 
-all: test_number_nonzeros test_reverse_vector test_cut_and_uncut test_create_B test_csort test_increment test_random_permutation test_cut_uncut test_cut_vector test_reorder test_split test_update_matrix matlab_createB MatlabHelper.mex.o matlab_convert cnv mtx2edges
+all: test_mix test_number_nonzeros test_reverse_vector test_cut_and_uncut test_create_B test_csort test_increment test_random_permutation test_cut_uncut test_cut_vector test_reorder test_split test_update_matrix matlab_createB MatlabHelper.mex.o matlab_convert cnv mtx2edges
 
 cnv: MondriaanToMatlab MatlabToMondriaan MatlabToMondriaanToMatlab
 

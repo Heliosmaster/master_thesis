@@ -205,7 +205,7 @@ long* cut_vector(struct sparsematrix* A, struct sparsematrix* B){
 	int i;
 	for(i=0;i<m;i++) cut[i] = nnzAi[i] && nnzBi[i];
 	for(i=0;i<n;i++) cut[m+i] = nnzAj[i] && nnzBj[i];
-	
+
 	vecfreel(nnzAi);
 	vecfreel(nnzAj);
 	vecfreel(nnzBi);
@@ -259,7 +259,7 @@ void cut_and_uncut(struct sparsematrix *A, long** cut_part, int* cut_length, lon
 	struct twomatrices two = split_matrix(A,1.0,2.0);
 	long* split = cut_vector(&two.Ar,&two.Ac);
 	int length = A->m+A->n;
-	
+
 	int i, n_cut=0;	
 	for(i=0;i<length;i++) n_cut+=split[i];
 
@@ -269,13 +269,13 @@ void cut_and_uncut(struct sparsematrix *A, long** cut_part, int* cut_length, lon
 	*uncut_length = length-n_cut;
 	long* cut = *cut_part;
 	long* uncut = *uncut_part;
-	
+
 	int index_cut = 0, index_uncut=0;
 	for(i=0;i<length;i++){
 		if(split[i]==1) cut[index_cut++] = i;
 		else uncut[index_uncut++] = i;	
 	}
-	
+
 	vecfreel(split);
 	MMDeleteSparseMatrix(&two.Ar);
 	MMDeleteSparseMatrix(&two.Ac);
@@ -296,7 +296,7 @@ long* number_nonzeros(struct sparsematrix* A){
 	int i;
 	for(i=0;i<m;i++) output[i] = nzi[i];
 	for(i=0;i<n;i++) output[m+i] = nzj[i];
-	
+
 	vecfreel(nzi);
 	vecfreel(nzj);
 	return output;
@@ -740,3 +740,65 @@ long max_element(long* vector, int length){
 	for(i=1;i<length;i++) if(vector[i]>max) max=vector[i];
 	return max;
 }
+
+long* mix_alternate(long* first, int length_first, long* second, int length_second){
+	long* vec_short, *vec_long;
+	int length_short;
+
+	if(length_first < length_second){
+		vec_short = first;
+		vec_long = second;
+		length_short = length_first;
+	} else {
+		vec_short = second;
+		vec_long = first;
+		length_short = length_second;
+	}
+	int length_long = length_first+length_second-length_short;
+	long* output = vecallocl(length_first+length_second);
+	int i,	index_output = 0;
+	for(i=0;i<length_short;i++){
+		output[index_output++] = vec_long[i];
+		output[index_output++] = vec_short[i];
+	}
+	for(i=0;i<length_long-length_short;i++) output[index_output++] = vec_long[length_short+i];
+
+	return output;
+}
+
+long* mix_spread(long* first, int length_first, long* second, int length_second){
+	long* vec_short, *vec_long;
+	int length_short;
+	if(length_first < length_second){
+		vec_short = first;
+		vec_long = second;
+		length_short = length_first;
+	} else {
+		vec_short = second;
+		vec_long = first;
+		length_short = length_second;
+	}
+
+
+	int length_long = length_first+length_second-length_short;
+	int i,j;
+
+	int q = (int) length_long/length_short;
+	int r = length_long%length_short;
+
+	long* output = vecallocl(length_first+length_second);
+	int index_short = 0, index_long = 0;
+	int	index_output = 0;
+	for(i=0;i<length_short;i++){
+		for(j=0;j<q;j++) output[index_output++] = vec_long[index_long++];
+		output[index_output++] = vec_short[index_short++];
+	}
+
+	for(i=0;i<r;i++) output[index_output++] = vec_long[index_long++];
+
+	return output;
+
+}
+
+
+

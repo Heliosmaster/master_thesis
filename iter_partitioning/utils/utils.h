@@ -70,4 +70,7 @@ long* reverse_perm(long* input, int length);
 void reverse_vector(long** input, int length);
 int check_vector(long* vector, int length);
 long max_element(long* vector, int length);
+long* mix_alternate(long* first, int length_first, long* second, int length_second);
+long* mix_spread(long* first, int length_first, long* second, int length_second);
+
 #endif /* UTILS_H*/
