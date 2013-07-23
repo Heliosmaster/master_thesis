@@ -630,7 +630,7 @@ void update_cols_link(struct sparsematrix* A, struct sparsematrix* B, long* incr
 		k++;
 	}
 }
-/* from partitioned matring, obtaining subpart
+/* from partitioned matrix, obtaining subpart
  * id = 1 or 2
  */
 struct sparsematrix assignMatrix(struct sparsematrix* matrix, int id){
