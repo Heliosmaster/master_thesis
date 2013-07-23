@@ -1,5 +1,8 @@
 #include "priority_vector.h"
 
+/*
+ * function to retrieve the cut/uncut rows/column with their respective length.
+ */
 void get_pa_unsorted(struct sparsematrix* A, long** cut_rows, int* length_cut_rows, long** cut_cols, int* length_cut_cols, long** uncut_rows, int* length_uncut_rows, long** uncut_cols, int* length_uncut_cols){
 	int cut_length, uncut_length;
 	long *cut_part, *uncut_part;
@@ -18,9 +21,7 @@ void get_pa_unsorted(struct sparsematrix* A, long** cut_rows, int* length_cut_ro
 	}
 	int index_uncut_rows = 0, index_uncut_cols = 0;
 	for(i=0;i<uncut_length;i++){
-		if (uncut_part[i]<A->m){
-			unct_rows[index_uncut_rows++] = uncut_part[i];
-		}
+		if (uncut_part[i]<A->m)	unct_rows[index_uncut_rows++] = uncut_part[i];
 		else unct_cols[index_uncut_cols++] = uncut_part[i];
 	}
 
@@ -38,6 +39,9 @@ void get_pa_unsorted(struct sparsematrix* A, long** cut_rows, int* length_cut_ro
 	vecfreel(uncut_part);
 }
 
+/*
+ * function to retrieve the sorted cut/uncut rows/columns (with also the widow parameter).
+ */
 void get_pa_sorted(struct sparsematrix* A, int widow, long** sorted_cut_rows, int* length_cut_rows, long** sorted_cut_cols, int* length_cut_cols, long** sorted_uncut_rows, int* length_uncut_rows, long** sorted_uncut_cols, int* length_uncut_cols){
 	long* num_nnz = number_nonzeros(A);
 	int m = A->m, i;
@@ -56,9 +60,7 @@ void get_pa_sorted(struct sparsematrix* A, int widow, long** sorted_cut_rows, in
 	}
 	int index_uncut_rows = 0, index_uncut_cols = 0;
 	for(i=0;i<uncut_length;i++){
-		if (uncut_part[i]<m){
-			uncut_rows[index_uncut_rows++] = uncut_part[i];
-		}
+		if (uncut_part[i]<m)uncut_rows[index_uncut_rows++] = uncut_part[i];
 		else uncut_cols[index_uncut_cols++] = uncut_part[i];
 	}
 	vecfreel(cut_part);
@@ -128,7 +130,6 @@ void get_pa_sorted(struct sparsematrix* A, int widow, long** sorted_cut_rows, in
 	vecfreel(nnz_uncut_rows);
 	vecfreel(nnz_uncut_cols);
 
-
 	*sorted_cut_rows = vecallocl(*length_cut_rows);
 	*sorted_cut_cols = vecallocl(*length_cut_cols);
 	*sorted_uncut_rows = vecallocl(*length_uncut_rows);
@@ -154,6 +155,9 @@ void get_pa_sorted(struct sparsematrix* A, int widow, long** sorted_cut_rows, in
 	vecfreel(indices_uncut_cols);
 }
 
+/*
+ * function to get the sorted rows/columns (according to widow parameter)
+ */
 void get_po_sorted(struct sparsematrix* A, int widow, long** sorted_rows, long** sorted_cols){
 	long* num_nnz = number_nonzeros(A);
 	int m = A->m;
@@ -198,7 +202,7 @@ void get_po_sorted(struct sparsematrix* A, int widow, long** sorted_rows, long**
 
 
 /*
- * flag = 0 => row, else column
+ * computes a vector that is simply [rows, columns] (if flag=0), or [columns,rows] (flag=1)
  */
 long* po_unsorted_concat(struct sparsematrix* A, int flag){
 	int i;
@@ -212,7 +216,7 @@ long* po_unsorted_concat(struct sparsematrix* A, int flag){
 }
 
 /*
- * flag=0 => row (ascending order sort), else column (descending order sort)
+ * computes a vector that is [cut_rows,cut_cols,uncut_rows,uncut_cols) (flag=0) or [cut_cols,cut_rows,uncut_cols,uncut_rows] (flag=1)
  */
 long* pa_unsorted_concat(struct sparsematrix* A, int flag){
 	int i;
@@ -222,11 +226,13 @@ long* pa_unsorted_concat(struct sparsematrix* A, int flag){
 	long *cut_part, *uncut_part;
 
 	cut_and_uncut(A,&cut_part,&cut_length,&uncut_part,&uncut_length);
-	long* vec = vecallocl(m+n);
+	
 	if(flag){
 		reverse_vector(&cut_part,cut_length);
 		reverse_vector(&uncut_part,uncut_length);
 	}
+
+	long* vec = vecallocl(m+n);
 	for(i=0;i<cut_length;i++) vec[i] = cut_part[i];
 	for(i=0;i<uncut_length;i++) vec[cut_length+i] = uncut_part[i];
 
@@ -236,10 +242,16 @@ long* pa_unsorted_concat(struct sparsematrix* A, int flag){
 	return vec;
 }
 
+/*
+ * computes a vector that is just the random permutation of the rows/columns indices
+ */
 long* po_unsorted_random(struct sparsematrix* A){
 	return random_permutation(A->m+A->n);
 }
 
+/*
+ * computes a vector that is [uncut,cut] and each part is randomly permuted
+ */
 long* pa_unsorted_random(struct sparsematrix* A){
 	int i;
 	int cut_length, uncut_length;
@@ -252,9 +264,10 @@ long* pa_unsorted_random(struct sparsematrix* A){
 
 	int m = A->m, n=A->n;
 	long* vec = vecallocl(m+n);
+	int index_vec = 0;
 
-	for(i=0;i<cut_length;i++) vec[i] = cut_part[cut_perm[i]];
-	for(i=0;i<uncut_length;i++) vec[cut_length+i] = uncut_part[uncut_perm[i]];
+	for(i=0;i<uncut_length;i++) vec[index_vec++] = uncut_part[uncut_perm[i]];
+	for(i=0;i<cut_length;i++) vec[index_vec++] = cut_part[cut_perm[i]];
 
 	vecfreel(cut_part);
 	vecfreel(cut_perm);
@@ -263,20 +276,22 @@ long* pa_unsorted_random(struct sparsematrix* A){
 	return vec;
 }
 
-long* po_sorted_simple(struct sparsematrix* A,int widow){
+/*
+ * computes a vector with indices sorted by increasing number of nonzeros (and widow parameter)
+ */
+long* po_sorted_simple(struct sparsematrix* A, int widow){
 	long* num_nnz = number_nonzeros(A);
 	int m = A->m;
 	int n = A->n;
 	long max = max_element(num_nnz,m+n);
+	int i;
 
 	long* indices = CSortVec(num_nnz,m+n,max);
-	int i;
 	long* vec;
 	vecfreel(num_nnz);
 	num_nnz = number_nonzeros(A);
-	if(!widow){
-		vec = indices;
-	}	else{
+	if(!widow) vec = indices;
+	else{
 		vec = vecallocl(m+n);
 		int index_vec = 0;
 		for(i=0;i<m+n;i++) if(num_nnz[indices[i]] != 1) vec[index_vec++] = indices[i];
@@ -287,6 +302,9 @@ long* po_sorted_simple(struct sparsematrix* A,int widow){
 	return vec;
 }
 
+/*
+ * computes a vector [uncut,cut] in which each part is sorted by increasing number of nonzeros (with widow parameter)
+ */
 long* pa_sorted_simple(struct sparsematrix* A, int widow){
 	int i;
 	int cut_length, uncut_length;
@@ -301,43 +319,53 @@ long* pa_sorted_simple(struct sparsematrix* A, int widow){
 	long* nz_cut = vecallocl(cut_length);
 	long* nz_uncut = vecallocl(uncut_length);
 
-	int index_cut = 0, index_uncut = 0;
-	for(i=0;i<cut_length;i++) nz_cut[index_cut++] = num_nnz[cut_part[i]];
-	for(i=0;i<uncut_length;i++) nz_uncut[index_uncut++] = num_nnz[uncut_part[i]];
+	for(i=0;i<cut_length;i++) nz_cut[i] = num_nnz[cut_part[i]];
+	for(i=0;i<uncut_length;i++) nz_uncut[i] = num_nnz[uncut_part[i]];
 
 
 	long max_cut = max_element(nz_cut,cut_length);
 	long max_uncut = max_element(nz_uncut,uncut_length);
 
-	long* indices_cut_sort = CSortVec(nz_cut,cut_length,max_cut);
-	long* indices_uncut_sort = CSortVec(nz_uncut,uncut_length,max_uncut);
+	long* indices_cut = CSortVec(nz_cut,cut_length,max_cut);
+	long* indices_uncut = CSortVec(nz_uncut,uncut_length,max_uncut);
+	for(i=0;i<cut_length;i++) nz_cut[i] = num_nnz[cut_part[i]];
+	for(i=0;i<uncut_length;i++) nz_uncut[i] = num_nnz[uncut_part[i]];
 
-	long* indices = vecallocl(m+n);
-	for(i=0;i<cut_length;i++) indices[i] = cut_part[indices_cut_sort[i]];
-	for(i=0;i<uncut_length;i++) indices[cut_length+i] = uncut_part[indices_uncut_sort[i]];
+	if(widow){
+		long* tmp_cut = vecallocl(cut_length);
+		long* tmp_uncut = vecallocl(uncut_length);
 
-	long* vec;
-	if(!widow){
-		vec = indices;
-	}	else {
-		vec = vecallocl(m+n);
-		int index_output = 0;
-		for(i=0;i<m+n;i++) if(num_nnz[indices[i]] != 1) vec[index_output++] = indices[i];
-		for(i=0;i<m+n;i++) if(num_nnz[indices[i]] == 1) vec[index_output++] = indices[i];
-		vecfreel(indices);
+		int index_cut = 0, index_uncut = 0;
+
+		for(i=0;i<cut_length;i++) if (nz_cut[indices_cut[i]] != 1) tmp_cut[index_cut++] = indices_cut[i];
+		for(i=0;i<cut_length;i++) if (nz_cut[indices_cut[i]] == 1) tmp_cut[index_cut++] = indices_cut[i];
+		for(i=0;i<uncut_length;i++) if (nz_uncut[indices_uncut[i]] != 1) tmp_uncut[index_uncut++] = indices_uncut[i];
+		for(i=0;i<uncut_length;i++) if (nz_uncut[indices_uncut[i]] == 1) tmp_uncut[index_uncut++] = indices_uncut[i];
+		vecfreel(indices_cut);
+		vecfreel(indices_uncut);
+		indices_cut = tmp_cut;
+		indices_uncut = tmp_uncut;
 	}
+	
+	long* vec = vecallocl(m+n);
+	int index_vec = 0;
+	for(i=0;i<uncut_length;i++) vec[index_vec++] = uncut_part[indices_uncut[i]];
+	for(i=0;i<cut_length;i++) vec[index_vec++] = cut_part[indices_cut[i]];
+
 	vecfreel(cut_part);
 	vecfreel(uncut_part);
 	vecfreel(nz_cut);
 	vecfreel(nz_uncut);
-	vecfreel(indices_cut_sort);
-	vecfreel(indices_uncut_sort);
+	vecfreel(indices_cut);
+	vecfreel(indices_uncut);
 	vecfreel(num_nnz);
 	return vec;
 }
 
-/* splitstrategy = 0 => mix alternate, else mix spread */
-long* po_unsorted_mix(struct sparsematrix* A, int splitstrategy){
+/*
+ * computes a vector in which rows and column are mixed (alternatively with splitstrategy=0, spread otherwise)
+ */
+ long* po_unsorted_mix(struct sparsematrix* A, int splitstrategy){
 	long* vec;
 	long* rows = vecallocl(A->m);
 	long* cols = vecallocl(A->n);
@@ -356,6 +384,9 @@ long* po_unsorted_mix(struct sparsematrix* A, int splitstrategy){
 
 }
 
+/*
+ * computes a vector [uncut,cut] in which each part has rows and column mixed
+ */
 long* pa_unsorted_mix(struct sparsematrix* A, int splitstrategy){
 
 	long* cut_rows, *cut_cols, *uncut_rows, *uncut_cols;
@@ -375,32 +406,42 @@ long* pa_unsorted_mix(struct sparsematrix* A, int splitstrategy){
 
 	long* vec = vecallocl(A->m+A->n);
 	int index_vec = 0;
-	for(i=0;i<length_cut_rows+length_cut_cols;i++) vec[index_vec++] = cut[i];
-	for(i=0;i<length_uncut_rows+length_uncut_cols;i++) vec[index_vec++] = uncut[i];
 
+	for(i=0;i<length_uncut_rows+length_uncut_cols;i++) vec[index_vec++] = uncut[i];
+	for(i=0;i<length_cut_rows+length_cut_cols;i++) vec[index_vec++] = cut[i];
+	
 	vecfreel(uncut);
 	vecfreel(cut);
 	vecfreel(cut_rows);
 	vecfreel(uncut_rows);
 	vecfreel(cut_cols);
 	vecfreel(uncut_cols);
+	
 	return vec;
 }
 
+/*
+ * computes a vector in which rows and columns are sorted (with widow param) and mixed
+ */
 long* po_sorted_mix(struct sparsematrix* A, int splitstrategy, int widow){
 	long* sorted_rows, *sorted_cols;
-
 	get_po_sorted(A,widow,&sorted_rows,&sorted_cols);
+
 	int i, m = A->m, n = A->n;
+
 	long* vec;
 	if(!splitstrategy) vec = mix_alternate(sorted_rows,m,sorted_cols,n);
 	else	vec = mix_spread(sorted_rows,m,sorted_cols,n);
 
 	vecfreel(sorted_rows);
 	vecfreel(sorted_cols);
+
 	return vec;
 }
 
+/* 
+ * computes a vector [uncut,cut] in which rows and columns are first sorted (independently) and then mixed
+ */
 long* pa_sorted_mix(struct sparsematrix* A, int splitstrategy, int widow){
 	long* sorted_cut_rows, *sorted_cut_cols, *sorted_uncut_rows, *sorted_uncut_cols;
 	int length_cut_rows, length_cut_cols, length_uncut_rows, length_uncut_cols;
@@ -427,15 +468,20 @@ long* pa_sorted_mix(struct sparsematrix* A, int splitstrategy, int widow){
 	vecfreel(sorted_uncut_rows);
 	vecfreel(sorted_uncut_cols);
 
-	long* output = vecallocl(A->m+A->n);
-	for(i=0;i<cut_length;i++) output[i] = cut[i];
-	for(i=0;i<uncut_length;i++) output[cut_length+i] = uncut[i];
-
+	long* vec = vecallocl(A->m+A->n);
+	int index_vec = 0;
+	
+	for(i=0;i<uncut_length;i++) vec[index_vec++] = uncut[i];
+	for(i=0;i<cut_length;i++) vec[index_vec++] = cut[i];
+	
 	vecfreel(uncut);
 	vecfreel(cut);
-	return output;
+	return vec;
 }
 
+/*
+ * computes a vector in which rows and columns are sorted independently and then put consecutively
+ */
 long* po_sorted_concat(struct sparsematrix* A, int widow, int flag){
 	long* sorted_rows, *sorted_cols;
 
@@ -458,6 +504,9 @@ long* po_sorted_concat(struct sparsematrix* A, int widow, int flag){
 	return vec;
 }
 
+/*
+ * computes a vector in which cut/uncut rows/columns are sorted independently and then put consecutively according to flag
+ */
 long* pa_sorted_concat(struct sparsematrix *A, int widow, int flag){
 	long* sorted_cut_rows, *sorted_cut_cols, *sorted_uncut_rows, *sorted_uncut_cols;
 	int length_cut_rows, length_cut_cols, length_uncut_rows, length_uncut_cols;
