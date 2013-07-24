@@ -837,6 +837,18 @@ long max_element(long* vector, int length){
 	return max;
 }
 
+double ar_mean(long* vector, int length){
+	int i,sum = 0;
+	for(i=0;i<length;i++) sum+=vector[i];
+	return 1.0*sum/length;
+}
+
+double geo_mean(long* vector, int length){
+	int i,prod=1;
+	for(i=0;i<length;i++) prod*=vector[i];
+	return pow(prod,1.0/length);
+}
+
 long* mix_alternate(long* first, int length_first, long* second, int length_second){
 	long* vec_short, *vec_long;
 	int length_short;
