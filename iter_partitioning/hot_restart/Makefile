@@ -11,7 +11,7 @@ test_overpaint: overpaint.o test_overpaint.o ../utils/utils.o
 	@echo "* Building overpaint"
 	${CC} -o $@ overpaint.o test_overpaint.o ../utils/utils.o ${CFLAGS}
 
-hot_restart: hot_restart.o overpaint.o ../utils/utils.o ../utils/createB.o
+hot_restart: hot_restart.o overpaint.o ../utils/utils.o ../utils/createB.o priority_vector.o
 	@echo "* Building hot_restart"
 	${CC} -o $@ $^ ${CFLAGS}
 

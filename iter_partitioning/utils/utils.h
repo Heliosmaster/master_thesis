@@ -59,7 +59,9 @@ void update_cols(struct sparsematrix* A, long* increment_cols, long i, double va
 void update_rows_link(struct sparsematrix* A, struct sparsematrix* B, long* increment_rows, long i, double value, long* link);
 void update_cols_link(struct sparsematrix* A, struct sparsematrix* B, long* increment_cols, long i, double value, long* link);
 struct sparsematrix assignMatrix(struct sparsematrix* matrix, int id);
+struct sparsematrix partition_to_matrix(struct sparsematrix* A);
 void copyHeader(struct sparsematrix* input, struct sparsematrix* output);
+struct sparsematrix ExecuteMondriaan(struct sparsematrix* matrix, int SplitStrategy, struct opts* Options, int* comm_value);
 
 /* misc */
 long* double_array_to_long(double* input, int length);

@@ -656,6 +656,47 @@ struct sparsematrix assignMatrix(struct sparsematrix* matrix, int id){
 }
 
 /*
+ * function that given the partitioned matrix A, creates a new matrix with nonzero values replaced by processor indices of the partitioning. The matrix is then reordered with the rows incremental.
+ */
+
+struct sparsematrix partition_to_matrix(struct sparsematrix* A){
+	struct sparsematrix A1 = assignMatrix(A,1);
+	struct sparsematrix A2 = assignMatrix(A,2);
+
+	struct sparsematrix B;
+	MMSparseMatrixInit(&B);
+
+	B.m = A->m;
+	B.n = A->n;
+	B.NrNzElts = A->NrNzElts;
+
+	B.i = vecallocl(B.NrNzElts);
+	B.j = vecallocl(B.NrNzElts);
+	B.ReValue = vecallocd(B.NrNzElts);
+
+	int index_B = 0, i;
+	for(i=0;i<A1.NrNzElts;i++){
+		B.i[index_B] = A1.i[i];
+		B.j[index_B] = A1.j[i];
+		B.ReValue[index_B++] = 1.0;
+	}
+	for(i=0;i<A2.NrNzElts;i++){
+		B.i[index_B] = A2.i[i];
+		B.j[index_B] = A2.j[i];
+		B.ReValue[index_B++] = 2.0;
+	}
+
+	MMDeleteSparseMatrix(&A1);
+	MMDeleteSparseMatrix(&A2);
+
+	struct sparsematrixplus plus = reorder_row_incr(&B);
+	MMDeleteSparseMatrix(&B);
+	vecfreel(plus.perm);
+	return plus.matrix;
+
+}
+
+/*
  * method that copies the header from matrix input to matrix output
  */
 void copyHeader(struct sparsematrix* input, struct sparsematrix* output){
@@ -667,6 +708,61 @@ void copyHeader(struct sparsematrix* input, struct sparsematrix* output){
 	strcpy(output->Banner,input->Banner);
 	output->ViewType = input->ViewType;
 }
+
+/*
+ * function that executes the partitioning using mondriaan and the given split strategy
+ */
+
+struct sparsematrix ExecuteMondriaan(struct sparsematrix* matrix, int SplitStrategy, struct opts* Options, int* comm_value){
+	if (SplitStrategy == 5) Options->SplitStrategy = OneDimCol;
+	else if (SplitStrategy == 8) Options->SplitStrategy = MediumGrain;
+	else if (SplitStrategy == -1){}
+	else{
+		printf("Wrong Split Strategy!\n");
+		exit(1);
+	}
+	if (!ApplyOptions(Options)){
+		printf("Invalid options!\n");
+		exit(1);
+	}
+	PstartInit(matrix,2);
+	if(!DistributeMatrixMondriaan(matrix, 2, 0.03, Options, NULL)){
+		printf("uh oh\n");
+		exit(1);
+	}
+
+	/* Variables used for calculating the communication volume. */
+	long ComVolumeRow, ComVolumeCol, Dummy;
+
+	/* Calculate the communication volume. */
+	CalcCom(matrix, NULL, ROW, &ComVolumeRow, &Dummy, &Dummy, &Dummy, &Dummy);
+	CalcCom(matrix, NULL, COL, &ComVolumeCol, &Dummy, &Dummy, &Dummy, &Dummy);
+	*comm_value = ComVolumeRow+ComVolumeCol;
+
+	struct sparsematrix new_matrix = partition_to_matrix(matrix);
+/*	struct sparsematrix output = *matrix;
+
+	print_matrix(output);
+
+	long* newI = vecallocl(matrix->NrNzElts);
+	long* newJ = vecallocl(matrix->NrNzElts);
+	double* newValues = vecallocd(matrix->NrNzElts);
+
+	memcpy(newI,new_matrix.i,matrix->NrNzElts*SZLONG);
+	memcpy(newJ,new_matrix.j,matrix->NrNzElts*SZLONG);
+	memcpy(newValues,new_matrix.ReValue,matrix->NrNzElts*SZDBL);
+	MMDeleteSparseMatrix(&new_matrix); 
+	vecfreel(output.i);
+	vecfreel(output.j);
+	vecfreed(output.ReValue);
+
+	output.i = newI;
+	output.j = newJ,
+	output.ReValue = newValues;
+*/
+	return new_matrix;
+}
+
 
 /*
  * method that converts an array of doubles to an array of long

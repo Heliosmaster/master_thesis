@@ -1,5 +1,79 @@
 #include "priority_vector.h"
 
+long* choose_vector(int index, struct sparsematrix* A, int option1, int option2){
+	switch(index){
+		case 0:
+			return po_unsorted_concat(A,option1);
+		case 1:
+			return pa_unsorted_concat(A,option1);
+		case 2:
+			return po_unsorted_random(A);
+		case 3:
+			return pa_unsorted_random(A);
+		case 4:
+			return po_unsorted_mix(A,option1);
+		case 5:
+			return pa_unsorted_mix(A,option1);
+		case 6:
+			return po_sorted_simple(A,option1);
+		case 7:
+			return pa_sorted_simple(A,option1);
+		case 8:
+			return po_sorted_concat(A,option1,option2);
+		case 9:
+			return pa_sorted_concat(A,option1,option2);
+		case 10:
+			return po_sorted_mix(A,option1,option2);
+		case 11:
+			return pa_sorted_mix(A,option1,option2);
+		default:
+			printf("Wrong index for priority vector\n");
+			exit(1);
+	}
+}
+
+void print_label_vector(int index,int option1, int option2){
+	switch(index){
+		case 0:
+			printf("po_unsorted_concat %d:\n",option1);
+			break;
+		case 1:
+			printf("pa_unsorted_concat %d:\n",option1);
+			break;
+		case 2:
+			printf("po_unsorted_random:\n");
+			break;
+		case 3:
+			printf("pa_unsorted_random:\n");
+			break;
+		case 4:
+			printf("po_unsorted_mix %d:\n",option1);
+			break;
+		case 5:
+			printf("pa_unsorted_mix %d:\n", option1);
+			break;
+		case 6:
+			printf("po_sorted_simple %d:\n",option1);
+			break;
+		case 7:
+			printf("pa_sorted_simple %d:\n",option1);
+			break;
+		case 8:
+			printf("po_sorted_concat %d %d:\n",option1,option2);
+			break;
+		case 9:
+			printf("pa_sorted_concat %d %d:\n",option1,option2);
+			break;
+		case 10:
+			printf("po_sorted_mix %d %d:\n",option1,option2);
+			break;
+		case 11:
+			printf("pa_sorted_mix %d %d:\n",option1,option2);
+			break;
+		default:
+			printf("Wrong index for priority vector\n");
+}
+}
 /*
  * function to retrieve the cut/uncut rows/column with their respective length.
  */
@@ -226,7 +300,7 @@ long* pa_unsorted_concat(struct sparsematrix* A, int flag){
 	long *cut_part, *uncut_part;
 
 	cut_and_uncut(A,&cut_part,&cut_length,&uncut_part,&uncut_length);
-	
+
 	if(flag){
 		reverse_vector(&cut_part,cut_length);
 		reverse_vector(&uncut_part,uncut_length);
@@ -346,7 +420,7 @@ long* pa_sorted_simple(struct sparsematrix* A, int widow){
 		indices_cut = tmp_cut;
 		indices_uncut = tmp_uncut;
 	}
-	
+
 	long* vec = vecallocl(m+n);
 	int index_vec = 0;
 	for(i=0;i<uncut_length;i++) vec[index_vec++] = uncut_part[indices_uncut[i]];
@@ -365,7 +439,7 @@ long* pa_sorted_simple(struct sparsematrix* A, int widow){
 /*
  * computes a vector in which rows and column are mixed (alternatively with splitstrategy=0, spread otherwise)
  */
- long* po_unsorted_mix(struct sparsematrix* A, int splitstrategy){
+long* po_unsorted_mix(struct sparsematrix* A, int splitstrategy){
 	long* vec;
 	long* rows = vecallocl(A->m);
 	long* cols = vecallocl(A->n);
@@ -409,14 +483,14 @@ long* pa_unsorted_mix(struct sparsematrix* A, int splitstrategy){
 
 	for(i=0;i<length_uncut_rows+length_uncut_cols;i++) vec[index_vec++] = uncut[i];
 	for(i=0;i<length_cut_rows+length_cut_cols;i++) vec[index_vec++] = cut[i];
-	
+
 	vecfreel(uncut);
 	vecfreel(cut);
 	vecfreel(cut_rows);
 	vecfreel(uncut_rows);
 	vecfreel(cut_cols);
 	vecfreel(uncut_cols);
-	
+
 	return vec;
 }
 
@@ -427,7 +501,7 @@ long* po_sorted_mix(struct sparsematrix* A, int splitstrategy, int widow){
 	long* sorted_rows, *sorted_cols;
 	get_po_sorted(A,widow,&sorted_rows,&sorted_cols);
 
-	int i, m = A->m, n = A->n;
+	int m = A->m, n = A->n;
 
 	long* vec;
 	if(!splitstrategy) vec = mix_alternate(sorted_rows,m,sorted_cols,n);
@@ -470,10 +544,10 @@ long* pa_sorted_mix(struct sparsematrix* A, int splitstrategy, int widow){
 
 	long* vec = vecallocl(A->m+A->n);
 	int index_vec = 0;
-	
+
 	for(i=0;i<uncut_length;i++) vec[index_vec++] = uncut[i];
 	for(i=0;i<cut_length;i++) vec[index_vec++] = cut[i];
-	
+
 	vecfreel(uncut);
 	vecfreel(cut);
 	return vec;
