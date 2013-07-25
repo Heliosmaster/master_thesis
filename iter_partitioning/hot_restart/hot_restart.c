@@ -7,8 +7,46 @@
 
 int main(int argc, char* argv[]){
 	char input[100];
-	if (argc > 1) strcpy(input,argv[1]);
-	else strcpy(input,"../../matrices/test_matrix.mtx");
+	int method;
+	int option1;
+	int option2;
+	switch(argc){
+		case 1:
+			strcpy(input,"../../matrices/test_matrix.mtx");
+			method = 0;
+			option1 = 0;
+			option2 = 0;
+			break;
+		case 2:
+			strcpy(input,argv[1]);
+			method = 0;
+			option1 = 0;
+			option2 = 0;
+			break;
+		case 3:
+			strcpy(input,argv[1]);
+			method = atoi(argv[2]);
+			option1 = 0;
+			option2 = 0;
+			break;
+		case 4:
+			strcpy(input,argv[1]);
+			method = atoi(argv[2]);
+			option1 = atoi(argv[3]);
+			option2 = 0;
+			break;
+		case 5:
+			strcpy(input,argv[1]);
+			method = atoi(argv[2]);
+			option1 = atoi(argv[3]);
+			option2 = atoi(argv[4]);
+			break;
+		default:
+			strcpy(input,"../../matrices/test_matrix.mtx");
+			method = 0;
+			option1 = 0;
+			option2 = 0;
+	}
 	char temp_name[100] = "tmp.mtx";
 	FILE* File;
 	struct sparsematrix matrix;
@@ -24,19 +62,22 @@ int main(int argc, char* argv[]){
 	srand(time(NULL));
 
 	struct opts Options;
-	print_label_vector(1,1,0);
+	print_label_vector(method,option1,option2);
 	SetOptionsFromFile(&Options,"Mondriaan.defaults");
 	int i;
 	int outer_iter = 10;
 	int inner_iter = 5;
 
 	long* outer_vec = vecallocl(outer_iter);
+	long* initial_vec = vecallocl(outer_iter);
 
 	for(i=0;i<outer_iter;i++){
 		struct sparsematrix temp_matrix = matrix;
 
 		int comm_value;
-		struct sparsematrix init_part = ExecuteMondriaan(&temp_matrix,-1,&Options,&comm_value); 
+		struct sparsematrix init_part = ExecuteMondriaan(&temp_matrix,8,&Options,&comm_value);
+		printf("%d \t|\t",comm_value);	
+		initial_vec[i] = comm_value;
 		copyHeader(&matrix,&init_part);
 
 		int k;
@@ -44,7 +85,7 @@ int main(int argc, char* argv[]){
 		long* inner_vec = vecallocl(inner_iter);
 		for(k=0;k<inner_iter;k++){
 
-			long* vec = choose_vector(1,&init_part,1,0);
+			long* vec = choose_vector(method,&init_part,option1,option2);
 			struct twomatrices one = overpaint(&init_part,vec);
 			struct sparsematrix B = createB(&(one.Ac),&(one.Ar));
 			copyHeader(&matrix,&B);
@@ -79,7 +120,7 @@ int main(int argc, char* argv[]){
 		MMDeleteSparseMatrix(&init_part);
 		/*		sleep(1);*/
 	}
-	printf("total average: %5.2f\n",ar_mean(outer_vec,outer_iter));
+	printf("average initials %5.2f\t average finals: %5.2f\n",ar_mean(initial_vec,outer_iter),ar_mean(outer_vec,outer_iter));
 	MMDeleteSparseMatrix(&matrix);
 	return 0;
 }
