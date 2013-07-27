@@ -887,10 +887,8 @@ long* mix_spread(long* first, int length_first, long* second, int length_second)
 		length_short = length_second;
 	}
 
-
 	int length_long = length_first+length_second-length_short;
 	int i,j;
-
 	int q = (int) length_long/length_short;
 	int r = length_long%length_short;
 

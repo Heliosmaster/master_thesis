@@ -65,8 +65,8 @@ int main(int argc, char* argv[]){
 	print_label_vector(method,option1,option2);
 	SetOptionsFromFile(&Options,"Mondriaan.defaults");
 	int i;
-	int outer_iter = 10;
-	int inner_iter = 5;
+	int outer_iter = 1;
+	int inner_iter = 3;
 
 	long* outer_vec = vecallocl(outer_iter);
 	long* initial_vec = vecallocl(outer_iter);
@@ -76,7 +76,7 @@ int main(int argc, char* argv[]){
 
 		int comm_value;
 		struct sparsematrix init_part = ExecuteMondriaan(&temp_matrix,8,&Options,&comm_value);
-		printf("%d \t|\t",comm_value);	
+		printf("%d \t|\t",comm_value);fflush(stdout);	
 		initial_vec[i] = comm_value;
 		copyHeader(&matrix,&init_part);
 
@@ -91,6 +91,7 @@ int main(int argc, char* argv[]){
 			copyHeader(&matrix,&B);
 
 			File = fopen(temp_name, "w");
+			
 			if (!MMWriteSparseMatrix(&B,File,NULL,&Options)) printf("Unable to write input matrix!\n");
 			fclose(File);
 
@@ -115,7 +116,7 @@ int main(int argc, char* argv[]){
 		}
 		double mean = ar_mean(inner_vec,inner_iter);
 		outer_vec[i]=mean;
-		printf("| \t avg: %5.2f\n",mean);
+		printf("| \t avg: %5.2f\n",mean); fflush(stdout);
 		/*		MMDeleteSparseMatrix(&temp_matrix);*/
 		MMDeleteSparseMatrix(&init_part);
 		/*		sleep(1);*/

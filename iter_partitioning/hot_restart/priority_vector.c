@@ -122,7 +122,6 @@ void get_pa_sorted(struct sparsematrix* A, int widow, long** sorted_cut_rows, in
 	int cut_length, uncut_length;
 	long *cut_part, *uncut_part;
 	cut_and_uncut(A,&cut_part,&cut_length,&uncut_part,&uncut_length);
-
 	long* cut_rows = vecallocl(cut_length);
 	long* cut_cols = vecallocl(cut_length);
 	long* uncut_rows = vecallocl(uncut_length);
@@ -145,88 +144,113 @@ void get_pa_sorted(struct sparsematrix* A, int widow, long** sorted_cut_rows, in
 	*length_uncut_rows = index_uncut_rows;
 	*length_uncut_cols = uncut_length-*length_uncut_rows;
 
-	long* nnz_cut_rows = vecallocl(*length_cut_rows);
-	long* nnz_cut_cols = vecallocl(*length_cut_cols);
-	long* nnz_uncut_rows = vecallocl(*length_uncut_rows);
-	long* nnz_uncut_cols = vecallocl(*length_uncut_cols);
 
-	for(i=0;i<*length_cut_rows;i++) nnz_cut_rows[i] = num_nnz[cut_rows[i]];
-	for(i=0;i<*length_cut_cols;i++) nnz_cut_cols[i] = num_nnz[cut_cols[i]];
-	for(i=0;i<*length_uncut_rows;i++) nnz_uncut_rows[i] = num_nnz[uncut_rows[i]];
-	for(i=0;i<*length_uncut_cols;i++) nnz_uncut_cols[i] = num_nnz[uncut_cols[i]];
+	long* nnz_cut_rows;
+	long max_cut_rows;
+	long* indices_cut_rows;
+	long* nnz_cut_cols;
+	long max_cut_cols;
+	long* indices_cut_cols;
+	long* nnz_uncut_rows;
+	long max_uncut_rows;
+	long* indices_uncut_rows;
+	long* nnz_uncut_cols;
+	long max_uncut_cols;
+	long* indices_uncut_cols;
+	
+	if(*length_cut_rows){
+		nnz_cut_rows = vecallocl(*length_cut_rows);
+		for(i=0;i<*length_cut_rows;i++) nnz_cut_rows[i] = num_nnz[cut_rows[i]];
+		max_cut_rows = max_element(nnz_cut_rows,*length_cut_rows);
+		indices_cut_rows = CSortVec(nnz_cut_rows,*length_cut_rows,max_cut_rows);
+		for(i=0;i<*length_cut_rows;i++) nnz_cut_rows[i] = num_nnz[cut_rows[i]];
 
-	long max_cut_rows = max_element(nnz_cut_rows,*length_cut_rows);
-	long max_cut_cols = max_element(nnz_cut_cols,*length_cut_cols);
-	long max_uncut_rows = max_element(nnz_uncut_rows,*length_uncut_rows);
-	long max_uncut_cols = max_element(nnz_uncut_cols,*length_uncut_cols);
-
-	long* indices_cut_rows = CSortVec(nnz_cut_rows,*length_cut_rows,max_cut_rows);
-	long* indices_cut_cols = CSortVec(nnz_cut_cols,*length_cut_cols,max_cut_cols);
-	long* indices_uncut_rows = CSortVec(nnz_uncut_rows,*length_uncut_rows,max_uncut_rows);
-	long* indices_uncut_cols = CSortVec(nnz_uncut_cols,*length_uncut_cols,max_uncut_cols);
-	for(i=0;i<*length_cut_rows;i++) nnz_cut_rows[i] = num_nnz[cut_rows[i]];
-	for(i=0;i<*length_cut_cols;i++) nnz_cut_cols[i] = num_nnz[cut_cols[i]];
-	for(i=0;i<*length_uncut_rows;i++) nnz_uncut_rows[i] = num_nnz[uncut_rows[i]];
-	for(i=0;i<*length_uncut_cols;i++) nnz_uncut_cols[i] = num_nnz[uncut_cols[i]];
-
-	vecfreel(num_nnz);
-
-	if(widow){
-		long* tmp_cut_rows = vecallocl(*length_cut_rows);
-		long* tmp_cut_cols = vecallocl(*length_cut_cols);
-		long* tmp_uncut_rows = vecallocl(*length_uncut_rows);
-		long* tmp_uncut_cols = vecallocl(*length_uncut_cols);
-		index_cut_rows = 0;
-		index_cut_cols = 0;
-		index_uncut_rows = 0;
-		index_uncut_cols = 0;
-
-		for(i=0;i<*length_cut_rows;i++) if(nnz_cut_rows[indices_cut_rows[i]] != 1) tmp_cut_rows[index_cut_rows++] = indices_cut_rows[i];
-		for(i=0;i<*length_cut_rows;i++) if(nnz_cut_rows[indices_cut_rows[i]] == 1) tmp_cut_rows[index_cut_rows++] = indices_cut_rows[i];
-		for(i=0;i<*length_cut_cols;i++) if(nnz_cut_cols[indices_cut_cols[i]] != 1) tmp_cut_cols[index_cut_cols++] = indices_cut_cols[i];
-		for(i=0;i<*length_cut_cols;i++) if(nnz_cut_cols[indices_cut_cols[i]] == 1) tmp_cut_cols[index_cut_cols++] = indices_cut_cols[i];
-		for(i=0;i<*length_uncut_rows;i++) if(nnz_uncut_rows[indices_uncut_rows[i]] != 1) tmp_uncut_rows[index_uncut_rows++] = indices_uncut_rows[i];
-		for(i=0;i<*length_uncut_rows;i++) if(nnz_uncut_rows[indices_uncut_rows[i]] == 1) tmp_uncut_rows[index_uncut_rows++] = indices_uncut_rows[i];
-		for(i=0;i<*length_uncut_cols;i++) if(nnz_uncut_cols[indices_uncut_cols[i]] != 1) tmp_uncut_cols[index_uncut_cols++] = indices_uncut_cols[i];
-		for(i=0;i<*length_uncut_cols;i++) if(nnz_uncut_cols[indices_uncut_cols[i]] == 1) tmp_uncut_cols[index_uncut_cols++] = indices_uncut_cols[i];
-
+		if(widow){
+			long* tmp_cut_rows = vecallocl(*length_cut_rows);
+			index_cut_rows = 0;
+			for(i=0;i<*length_cut_rows;i++) if(nnz_cut_rows[indices_cut_rows[i]] != 1) tmp_cut_rows[index_cut_rows++] = indices_cut_rows[i];
+			for(i=0;i<*length_cut_rows;i++) if(nnz_cut_rows[indices_cut_rows[i]] == 1) tmp_cut_rows[index_cut_rows++] = indices_cut_rows[i];
+			vecfreel(indices_cut_rows);
+			indices_cut_rows = tmp_cut_rows;
+		}
+		vecfreel(nnz_cut_rows);
+		*sorted_cut_rows = vecallocl(*length_cut_rows);
+		long* srt_cut_rows = *sorted_cut_rows;
+		for(i=0;i<*length_cut_rows;i++) srt_cut_rows[i] = cut_rows[indices_cut_rows[i]];
+		vecfreel(cut_rows);
 		vecfreel(indices_cut_rows);
-		vecfreel(indices_cut_cols);
-		vecfreel(indices_uncut_rows);
-		vecfreel(indices_uncut_cols);
-		indices_cut_rows = tmp_cut_rows;
-		indices_cut_cols = tmp_cut_cols;
-		indices_uncut_rows = tmp_uncut_rows;
-		indices_uncut_cols = tmp_uncut_cols;
 	}
-	vecfreel(nnz_cut_rows);
-	vecfreel(nnz_cut_cols);
-	vecfreel(nnz_uncut_rows);
-	vecfreel(nnz_uncut_cols);
 
-	*sorted_cut_rows = vecallocl(*length_cut_rows);
-	*sorted_cut_cols = vecallocl(*length_cut_cols);
-	*sorted_uncut_rows = vecallocl(*length_uncut_rows);
-	*sorted_uncut_cols = vecallocl(*length_uncut_cols);
+	if(*length_cut_cols){
+		nnz_cut_cols = vecallocl(*length_cut_cols);
+		for(i=0;i<*length_cut_cols;i++) nnz_cut_cols[i] = num_nnz[cut_cols[i]];
+		max_cut_cols = max_element(nnz_cut_cols,*length_cut_cols);
+		indices_cut_cols = CSortVec(nnz_cut_cols,*length_cut_cols,max_cut_cols);
+		for(i=0;i<*length_cut_cols;i++) nnz_cut_cols[i] = num_nnz[cut_cols[i]];
 
-	long* srt_cut_rows = *sorted_cut_rows;
-	long* srt_cut_cols = *sorted_cut_cols;
-	long* srt_uncut_rows = *sorted_uncut_rows;
-	long* srt_uncut_cols = *sorted_uncut_cols;
+		if(widow){
+			long* tmp_cut_cols = vecallocl(*length_cut_cols);
+			index_cut_cols = 0;
+			for(i=0;i<*length_cut_cols;i++) if(nnz_cut_cols[indices_cut_cols[i]] != 1) tmp_cut_cols[index_cut_cols++] = indices_cut_cols[i];
+			for(i=0;i<*length_cut_cols;i++) if(nnz_cut_cols[indices_cut_cols[i]] == 1) tmp_cut_cols[index_cut_cols++] = indices_cut_cols[i];
+			vecfreel(indices_cut_cols);
+			indices_cut_cols = tmp_cut_cols;
+		}
+		vecfreel(nnz_cut_cols);
+		*sorted_cut_cols = vecallocl(*length_cut_cols);
+		long* srt_cut_cols = *sorted_cut_cols;
+		for(i=0;i<*length_cut_cols;i++) srt_cut_cols[i] = cut_cols[indices_cut_cols[i]];
+		vecfreel(cut_cols);
+		vecfreel(indices_cut_cols);
+	}
+	
+		if(*length_uncut_rows){
+		nnz_uncut_rows = vecallocl(*length_uncut_rows);
+		for(i=0;i<*length_uncut_rows;i++) nnz_uncut_rows[i] = num_nnz[uncut_rows[i]];
+		max_uncut_rows = max_element(nnz_uncut_rows,*length_uncut_rows);
+		indices_uncut_rows = CSortVec(nnz_uncut_rows,*length_uncut_rows,max_uncut_rows);
+		for(i=0;i<*length_uncut_rows;i++) nnz_uncut_rows[i] = num_nnz[uncut_rows[i]];
 
-	for(i=0;i<*length_cut_rows;i++) srt_cut_rows[i] = cut_rows[indices_cut_rows[i]];
-	for(i=0;i<*length_cut_cols;i++) srt_cut_cols[i] = cut_cols[indices_cut_cols[i]];
-	for(i=0;i<*length_uncut_rows;i++) srt_uncut_rows[i] = uncut_rows[indices_uncut_rows[i]];
-	for(i=0;i<*length_uncut_cols;i++) srt_uncut_cols[i] = uncut_cols[indices_uncut_cols[i]];
+		if(widow){
+			long* tmp_uncut_rows = vecallocl(*length_uncut_rows);
+			index_uncut_rows = 0;
+			for(i=0;i<*length_uncut_rows;i++) if(nnz_uncut_rows[indices_uncut_rows[i]] != 1) tmp_uncut_rows[index_uncut_rows++] = indices_uncut_rows[i];
+			for(i=0;i<*length_uncut_rows;i++) if(nnz_uncut_rows[indices_uncut_rows[i]] == 1) tmp_uncut_rows[index_uncut_rows++] = indices_uncut_rows[i];
+			vecfreel(indices_uncut_rows);
+			indices_uncut_rows = tmp_uncut_rows;
+		}
+		vecfreel(nnz_uncut_rows);
+		*sorted_uncut_rows = vecallocl(*length_uncut_rows);
+		long* srt_uncut_rows = *sorted_uncut_rows;
+		for(i=0;i<*length_uncut_rows;i++) srt_uncut_rows[i] = uncut_rows[indices_uncut_rows[i]];
+		vecfreel(uncut_rows);
+		vecfreel(indices_uncut_rows);
+	}
 
-	vecfreel(cut_rows);
-	vecfreel(uncut_rows);
-	vecfreel(cut_cols);
-	vecfreel(uncut_cols);
-	vecfreel(indices_cut_rows);
-	vecfreel(indices_cut_cols);
-	vecfreel(indices_uncut_rows);
-	vecfreel(indices_uncut_cols);
+	if(*length_uncut_cols){
+		nnz_uncut_cols = vecallocl(*length_uncut_cols);
+		for(i=0;i<*length_uncut_cols;i++) nnz_uncut_cols[i] = num_nnz[uncut_cols[i]];
+		max_uncut_cols = max_element(nnz_uncut_cols,*length_uncut_cols);
+		indices_uncut_cols = CSortVec(nnz_uncut_cols,*length_uncut_cols,max_uncut_cols);
+		for(i=0;i<*length_uncut_cols;i++) nnz_uncut_cols[i] = num_nnz[uncut_cols[i]];
+
+		if(widow){
+			long* tmp_uncut_cols = vecallocl(*length_uncut_cols);
+			index_uncut_cols = 0;
+			for(i=0;i<*length_uncut_cols;i++) if(nnz_uncut_cols[indices_uncut_cols[i]] != 1) tmp_uncut_cols[index_uncut_cols++] = indices_uncut_cols[i];
+			for(i=0;i<*length_uncut_cols;i++) if(nnz_uncut_cols[indices_uncut_cols[i]] == 1) tmp_uncut_cols[index_uncut_cols++] = indices_uncut_cols[i];
+			vecfreel(indices_uncut_cols);
+			indices_uncut_cols = tmp_uncut_cols;
+		}
+		vecfreel(nnz_uncut_cols);
+		*sorted_uncut_cols = vecallocl(*length_uncut_cols);
+		long* srt_uncut_cols = *sorted_uncut_cols;
+		for(i=0;i<*length_uncut_cols;i++) srt_uncut_cols[i] = uncut_cols[indices_uncut_cols[i]];
+		vecfreel(uncut_cols);
+		vecfreel(indices_uncut_cols);
+	}
+	
+	vecfreel(num_nnz);
 }
 
 /*
@@ -385,40 +409,49 @@ long* pa_sorted_simple(struct sparsematrix* A, int widow){
 	long *cut_part, *uncut_part;
 
 	cut_and_uncut(A,&cut_part,&cut_length,&uncut_part,&uncut_length);
-
 	long* num_nnz = number_nonzeros(A);
 	int m = A->m;
 	int n = A->n;
 
-	long* nz_cut = vecallocl(cut_length);
-	long* nz_uncut = vecallocl(uncut_length);
+	long* nz_cut;
+	long max_cut;
+	long* indices_cut;
 
-	for(i=0;i<cut_length;i++) nz_cut[i] = num_nnz[cut_part[i]];
-	for(i=0;i<uncut_length;i++) nz_uncut[i] = num_nnz[uncut_part[i]];
+	long* nz_uncut;
+	long max_uncut;
+	long* indices_uncut;
 
+	if(cut_length){
+		nz_cut = vecallocl(cut_length);
+		for(i=0;i<cut_length;i++) nz_cut[i] = num_nnz[cut_part[i]];
+		max_cut = max_element(nz_cut,cut_length);
+		indices_cut = CSortVec(nz_cut,cut_length,max_cut);
+		for(i=0;i<cut_length;i++) nz_cut[i] = num_nnz[cut_part[i]];
 
-	long max_cut = max_element(nz_cut,cut_length);
-	long max_uncut = max_element(nz_uncut,uncut_length);
+		if(widow) {
+			long* tmp_cut = vecallocl(cut_length);
+			int index_cut = 0;
+			for(i=0;i<cut_length;i++) if (nz_cut[indices_cut[i]] != 1) tmp_cut[index_cut++] = indices_cut[i];
+			for(i=0;i<cut_length;i++) if (nz_cut[indices_cut[i]] == 1) tmp_cut[index_cut++] = indices_cut[i];
+			vecfreel(indices_cut);
+			indices_cut = tmp_cut;
+		}
+	}
 
-	long* indices_cut = CSortVec(nz_cut,cut_length,max_cut);
-	long* indices_uncut = CSortVec(nz_uncut,uncut_length,max_uncut);
-	for(i=0;i<cut_length;i++) nz_cut[i] = num_nnz[cut_part[i]];
-	for(i=0;i<uncut_length;i++) nz_uncut[i] = num_nnz[uncut_part[i]];
-
-	if(widow){
-		long* tmp_cut = vecallocl(cut_length);
-		long* tmp_uncut = vecallocl(uncut_length);
-
-		int index_cut = 0, index_uncut = 0;
-
-		for(i=0;i<cut_length;i++) if (nz_cut[indices_cut[i]] != 1) tmp_cut[index_cut++] = indices_cut[i];
-		for(i=0;i<cut_length;i++) if (nz_cut[indices_cut[i]] == 1) tmp_cut[index_cut++] = indices_cut[i];
-		for(i=0;i<uncut_length;i++) if (nz_uncut[indices_uncut[i]] != 1) tmp_uncut[index_uncut++] = indices_uncut[i];
-		for(i=0;i<uncut_length;i++) if (nz_uncut[indices_uncut[i]] == 1) tmp_uncut[index_uncut++] = indices_uncut[i];
-		vecfreel(indices_cut);
-		vecfreel(indices_uncut);
-		indices_cut = tmp_cut;
-		indices_uncut = tmp_uncut;
+	if(uncut_length){
+		nz_uncut = vecallocl(uncut_length);
+		for(i=0;i<uncut_length;i++) nz_uncut[i] = num_nnz[uncut_part[i]];
+		max_uncut = max_element(nz_uncut,uncut_length);
+		indices_uncut = CSortVec(nz_uncut,uncut_length,max_uncut);
+		for(i=0;i<uncut_length;i++) nz_uncut[i] = num_nnz[uncut_part[i]];
+		if(widow){
+			long* tmp_uncut = vecallocl(uncut_length);
+			int index_uncut = 0;
+			for(i=0;i<uncut_length;i++) if (nz_uncut[indices_uncut[i]] != 1) tmp_uncut[index_uncut++] = indices_uncut[i];
+			for(i=0;i<uncut_length;i++) if (nz_uncut[indices_uncut[i]] == 1) tmp_uncut[index_uncut++] = indices_uncut[i];
+			vecfreel(indices_uncut);
+			indices_uncut = tmp_uncut;
+		}
 	}
 
 	long* vec = vecallocl(m+n);
@@ -426,13 +459,17 @@ long* pa_sorted_simple(struct sparsematrix* A, int widow){
 	for(i=0;i<uncut_length;i++) vec[index_vec++] = uncut_part[indices_uncut[i]];
 	for(i=0;i<cut_length;i++) vec[index_vec++] = cut_part[indices_cut[i]];
 
-	vecfreel(cut_part);
-	vecfreel(uncut_part);
-	vecfreel(nz_cut);
-	vecfreel(nz_uncut);
-	vecfreel(indices_cut);
-	vecfreel(indices_uncut);
+	if(cut_length){
+		vecfreel(cut_part);
+		vecfreel(nz_cut);
+		vecfreel(indices_cut);
+	}
+	if(uncut_length) {
+		vecfreel(uncut_part);
+		vecfreel(nz_uncut);
+		vecfreel(indices_uncut);
 	vecfreel(num_nnz);
+	}
 	return vec;
 }
 
@@ -469,13 +506,26 @@ long* pa_unsorted_mix(struct sparsematrix* A, int splitstrategy){
 
 	long *cut, *uncut;
 
-	if(!splitstrategy){
+	if(length_cut_rows == 0){
+		cut = cut_cols;
+	} else if (length_cut_cols == 0) {
+		cut = cut_rows;
+	} else if(!splitstrategy) {
 		cut = mix_alternate(cut_rows,length_cut_rows,cut_cols,length_cut_cols);
-		uncut = mix_alternate(uncut_rows,length_uncut_rows,uncut_cols,length_uncut_cols);
 	} else {
 		cut = mix_spread(cut_rows,length_cut_rows,cut_cols,length_cut_cols);
+	}
+
+	if(length_uncut_rows == 0){
+		uncut = uncut_cols;
+	} else if (length_uncut_cols == 0) {
+		uncut = uncut_rows;
+	} else if(!splitstrategy) {
+		uncut = mix_alternate(uncut_rows,length_uncut_rows,uncut_cols,length_uncut_cols);
+	} else {
 		uncut = mix_spread(uncut_rows,length_uncut_rows,uncut_cols,length_uncut_cols);
 	}
+
 	int i;
 
 	long* vec = vecallocl(A->m+A->n);
@@ -484,13 +534,14 @@ long* pa_unsorted_mix(struct sparsematrix* A, int splitstrategy){
 	for(i=0;i<length_uncut_rows+length_uncut_cols;i++) vec[index_vec++] = uncut[i];
 	for(i=0;i<length_cut_rows+length_cut_cols;i++) vec[index_vec++] = cut[i];
 
-	vecfreel(uncut);
-	vecfreel(cut);
-	vecfreel(cut_rows);
-	vecfreel(uncut_rows);
-	vecfreel(cut_cols);
-	vecfreel(uncut_cols);
+	if(length_cut_rows)	vecfreel(cut_rows);
+	if(length_cut_cols)	vecfreel(cut_cols);
+	if(length_uncut_rows)	vecfreel(uncut_rows);
+	if(length_uncut_cols)	vecfreel(uncut_cols);
 
+
+	if(length_uncut_rows && length_uncut_cols) vecfreel(uncut);
+	if(length_cut_rows && length_cut_cols) vecfreel(cut);
 	return vec;
 }
 
@@ -529,27 +580,41 @@ long* pa_sorted_mix(struct sparsematrix* A, int splitstrategy, int widow){
 
 	long *cut, *uncut;
 
-	if(!splitstrategy){
+	if(!length_cut_rows){
+		cut = sorted_cut_cols;
+	} else if (!length_cut_cols) {
+		cut = sorted_cut_rows;
+	} else if(!splitstrategy) {
 		cut = mix_alternate(sorted_cut_rows,length_cut_rows,sorted_cut_cols,length_cut_cols);
-		uncut = mix_alternate(sorted_uncut_rows,length_uncut_rows,sorted_uncut_cols,length_uncut_cols);
-
 	} else {
 		cut = mix_spread(sorted_cut_rows,length_cut_rows,sorted_cut_cols,length_cut_cols);
+	}
+
+	if(!length_uncut_rows){
+		uncut = sorted_uncut_cols;
+	} else if (!length_uncut_cols) {
+		uncut = sorted_uncut_rows;
+	} else if(!splitstrategy) {
+		uncut = mix_alternate(sorted_uncut_rows,length_uncut_rows,sorted_uncut_cols,length_uncut_cols);
+	} else {
 		uncut = mix_spread(sorted_uncut_rows,length_uncut_rows,sorted_uncut_cols,length_uncut_cols);
 	}
-	vecfreel(sorted_cut_rows);
-	vecfreel(sorted_cut_cols);
-	vecfreel(sorted_uncut_rows);
-	vecfreel(sorted_uncut_cols);
 
 	long* vec = vecallocl(A->m+A->n);
 	int index_vec = 0;
 
+
 	for(i=0;i<uncut_length;i++) vec[index_vec++] = uncut[i];
 	for(i=0;i<cut_length;i++) vec[index_vec++] = cut[i];
 
-	vecfreel(uncut);
-	vecfreel(cut);
+	if(length_cut_rows)	vecfreel(sorted_cut_rows);
+	if(length_cut_cols)	vecfreel(sorted_cut_cols);
+	if(length_uncut_rows)	vecfreel(sorted_uncut_rows);
+	if(length_uncut_cols)	vecfreel(sorted_uncut_cols);
+
+
+	if(length_uncut_rows && length_uncut_cols) vecfreel(uncut);
+	if(length_cut_rows && length_cut_cols) vecfreel(cut);
 	return vec;
 }
 
@@ -584,7 +649,6 @@ long* po_sorted_concat(struct sparsematrix* A, int widow, int flag){
 long* pa_sorted_concat(struct sparsematrix *A, int widow, int flag){
 	long* sorted_cut_rows, *sorted_cut_cols, *sorted_uncut_rows, *sorted_uncut_cols;
 	int length_cut_rows, length_cut_cols, length_uncut_rows, length_uncut_cols;
-
 	get_pa_sorted(A,widow,&sorted_cut_rows,&length_cut_rows,&sorted_cut_cols,&length_cut_cols,&sorted_uncut_rows,&length_uncut_rows,&sorted_uncut_cols,&length_uncut_cols);
 
 	int i;
@@ -607,10 +671,10 @@ long* pa_sorted_concat(struct sparsematrix *A, int widow, int flag){
 		for(i=0;i<length_uncut_rows;i++) uncut[index_uncut++] = sorted_uncut_rows[i];
 	}
 
-	vecfreel(sorted_cut_rows);
-	vecfreel(sorted_cut_cols);
-	vecfreel(sorted_uncut_rows);
-	vecfreel(sorted_uncut_cols);
+	if(length_cut_rows) vecfreel(sorted_cut_rows);
+	if(length_cut_cols) vecfreel(sorted_cut_cols);
+	if(length_uncut_rows) vecfreel(sorted_uncut_rows);
+	if(length_uncut_cols) vecfreel(sorted_uncut_cols);
 
 	long* vec = vecallocl(A->m+A->n);
 	for(i=0;i<cut_length;i++) vec[i] = cut[i];
