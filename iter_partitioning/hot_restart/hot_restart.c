@@ -65,8 +65,8 @@ int main(int argc, char* argv[]){
 	print_label_vector(method,option1,option2);
 	SetOptionsFromFile(&Options,"Mondriaan.defaults");
 	int i;
-	int outer_iter = 1;
-	int inner_iter = 3;
+	int outer_iter = 20;
+	int inner_iter = 5;
 
 	long* outer_vec = vecallocl(outer_iter);
 	long* initial_vec = vecallocl(outer_iter);
