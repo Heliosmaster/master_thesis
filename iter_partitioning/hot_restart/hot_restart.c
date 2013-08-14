@@ -57,7 +57,7 @@ int main(int argc, char* argv[]){
 	if(matrix.ReValue == NULL){
 		matrix.ReValue = vecallocd(matrix.NrNzElts);
 		int j;
-		for(j=0;j<matrix.NrNzElts;j++) matrix.ReValue[j] = 0.0;
+		for(j=0;j<matrix.NrNzElts;j++) matrix.ReValue[j] = 1.0;
 	}
 	srand(time(NULL));
 
@@ -84,7 +84,6 @@ int main(int argc, char* argv[]){
 
 		long* inner_vec = vecallocl(inner_iter);
 		for(k=0;k<inner_iter;k++){
-
 			long* vec = choose_vector(method,&init_part,option1,option2);
 			struct twomatrices one = overpaint(&init_part,vec);
 			struct sparsematrix B = createB(&(one.Ac),&(one.Ar));
@@ -101,7 +100,7 @@ int main(int argc, char* argv[]){
 			if (!MMReadSparseMatrix(File, &B)) printf("Unable to read input matrix!\n");
 			fclose(File);
 			remove(temp_name);	
-
+			SetOptionsFromFile(&Options,"Mondriaan.defaults");
 			struct sparsematrix new_matrix = ExecuteMondriaan(&B,5,&Options,&comm_value);
 
 			inner_vec[k] = comm_value;
@@ -112,12 +111,10 @@ int main(int argc, char* argv[]){
 			MMDeleteSparseMatrix(&one.Ar);
 			MMDeleteSparseMatrix(&one.Ac);
 			vecfreel(vec);
-
 		}
 		double mean = ar_mean(inner_vec,inner_iter);
 		outer_vec[i]=mean;
 		printf("| \t avg: %5.2f\n",mean); fflush(stdout);
-		/*		MMDeleteSparseMatrix(&temp_matrix);*/
 		MMDeleteSparseMatrix(&init_part);
 		/*		sleep(1);*/
 	}

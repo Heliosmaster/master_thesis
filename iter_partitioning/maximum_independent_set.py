@@ -149,14 +149,22 @@ if __name__ == "__main__":
     graph,m,n = read_mtx_file_as_graph(input_filename)
     #print(graph)
     #print("Reading list")
-    l = read_list_from_file('matlab_temp.txt')
-    #print(l)
-    #print("Getting subgraph")
-    graph2 = subgraph(graph,l,m,n)
-    #print(graph3)
+    is_not_subgraph = sys.argv[2]
+    if is_not_subgraph:
+        graph2 = graph
+    else:
+        l = read_list_from_file('matlab_temp.txt')
+        #print(l)
+        graph2 = subgraph(graph,l,m,n)
+        #print("Getting subgraph")
     #print("Computing independent set")
+    #print(graph)
+    #print(graph2)
     M, A, B = bipartiteMatch(graph2)
     A.sort()
     B.sort()
     write_independent_set_to_file(output_filename,A,B,m)
+    #print(M);
+    #print(A);
+    #print(B);
     #print_independent_set(A,B,len(graph))

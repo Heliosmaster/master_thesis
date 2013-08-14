@@ -331,10 +331,10 @@ long* pa_unsorted_concat(struct sparsematrix* A, int flag){
 	}
 
 	long* vec = vecallocl(m+n);
-	for(i=0;i<cut_length;i++) vec[i] = cut_part[i];
 	for(i=0;i<uncut_length;i++) vec[cut_length+i] = uncut_part[i];
+	for(i=0;i<cut_length;i++) vec[i] = cut_part[i];
 
-	vecfreel(cut_part);
+		vecfreel(cut_part);
 	vecfreel(uncut_part);
 
 	return vec;
