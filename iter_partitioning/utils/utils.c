@@ -710,6 +710,29 @@ void copyHeader(struct sparsematrix* input, struct sparsematrix* output){
 }
 
 /*
+ * function that copies a matrix
+ */
+struct sparsematrix copyMatrix(struct sparsematrix* input){
+	struct sparsematrix output;
+	MMSparseMatrixInit(&output);
+	output.NrNzElts = input->NrNzElts;
+	output.m = input->m;
+	output.n = input->n;
+	copyHeader(input,&output);
+	output.i = vecallocl(output.NrNzElts);
+	output.j = vecallocl(output.NrNzElts);
+	output.ReValue = vecallocd(output.NrNzElts);
+	 memcpy(output.i,input->i,output.NrNzElts*SZLONG);
+	 memcpy(output.j,input->j,output.NrNzElts*SZLONG);
+	 memcpy(output.ReValue,input->ReValue,output.NrNzElts*SZDBL);
+	if(input->ImValue != NULL){
+		output.ImValue = vecallocd(output.NrNzElts);
+	 	memcpy(output.ImValue,input->ImValue,output.NrNzElts*SZDBL);
+	}
+	return output;
+}
+
+/*
  * function that executes the partitioning using mondriaan and the given split strategy
  */
 

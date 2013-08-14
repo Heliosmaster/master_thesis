@@ -47,7 +47,6 @@ int main(int argc, char* argv[]){
 			option1 = 0;
 			option2 = 0;
 	}
-	char temp_name[100] = "tmp.mtx";
 	FILE* File;
 	struct sparsematrix matrix;
 	File = fopen(input, "r");
@@ -84,23 +83,11 @@ int main(int argc, char* argv[]){
 
 		long* inner_vec = vecallocl(inner_iter);
 		for(k=0;k<inner_iter;k++){
+			struct sparsematrix init2 = copyMatrix(&init_part);
 			long* vec = choose_vector(method,&init_part,option1,option2);
-			struct twomatrices one = overpaint(&init_part,vec);
+			struct twomatrices one = overpaint(&init2,vec);
 			struct sparsematrix B = createB(&(one.Ac),&(one.Ar));
 			copyHeader(&matrix,&B);
-
-			File = fopen(temp_name, "w");
-			
-			if (!MMWriteSparseMatrix(&B,File,NULL,&Options)) printf("Unable to write input matrix!\n");
-			fclose(File);
-
-			MMDeleteSparseMatrix(&B);
-
-			File = fopen(temp_name, "r");
-			if (!MMReadSparseMatrix(File, &B)) printf("Unable to read input matrix!\n");
-			fclose(File);
-			remove(temp_name);	
-			SetOptionsFromFile(&Options,"Mondriaan.defaults");
 			struct sparsematrix new_matrix = ExecuteMondriaan(&B,5,&Options,&comm_value);
 
 			inner_vec[k] = comm_value;
@@ -110,15 +97,19 @@ int main(int argc, char* argv[]){
 			MMDeleteSparseMatrix(&B);
 			MMDeleteSparseMatrix(&one.Ar);
 			MMDeleteSparseMatrix(&one.Ac);
+			MMDeleteSparseMatrix(&init2);
 			vecfreel(vec);
 		}
 		double mean = ar_mean(inner_vec,inner_iter);
 		outer_vec[i]=mean;
 		printf("| \t avg: %5.2f\n",mean); fflush(stdout);
 		MMDeleteSparseMatrix(&init_part);
+		vecfreel(inner_vec);
 		/*		sleep(1);*/
 	}
 	printf("average initials %5.2f\t average finals: %5.2f\n",ar_mean(initial_vec,outer_iter),ar_mean(outer_vec,outer_iter));
+	vecfreel(outer_vec);
+	vecfreel(initial_vec);
 	MMDeleteSparseMatrix(&matrix);
 	return 0;
 }

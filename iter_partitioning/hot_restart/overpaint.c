@@ -10,11 +10,15 @@
 * The matrix A is supposed to be stored by increasing rows
 */
 
-struct twomatrices overpaint(struct sparsematrix* A, long* vec){
+struct twomatrices overpaint(struct sparsematrix* input, long* vec){
 
+	struct sparsematrix copy = copyMatrix(input);
+	struct sparsematrix* A = &copy;
   /* explicit storage of the matrix dimension in local variables */
   int m = A->m;
   int n = A->n;
+
+
 
   /* creation and storage of a copy of the matrix with increasing columns */
   struct sparsematrixplus matrixplus = reorder_col_incr(A);
@@ -49,5 +53,7 @@ struct twomatrices overpaint(struct sparsematrix* A, long* vec){
   vecfreel(incr_rows);
   vecfreel(incr_cols);
   MMDeleteSparseMatrix(B);
-  return split_matrix(A,10.0,11.0);
+	struct twomatrices two = split_matrix(A,10.0,11.0);
+	MMDeleteSparseMatrix(A);
+	return two;
 }

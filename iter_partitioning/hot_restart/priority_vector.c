@@ -72,7 +72,7 @@ void print_label_vector(int index,int option1, int option2){
 			break;
 		default:
 			printf("Wrong index for priority vector\n");
-}
+	}
 }
 /*
  * function to retrieve the cut/uncut rows/column with their respective length.
@@ -157,7 +157,7 @@ void get_pa_sorted(struct sparsematrix* A, int widow, long** sorted_cut_rows, in
 	long* nnz_uncut_cols;
 	long max_uncut_cols;
 	long* indices_uncut_cols;
-	
+
 	if(*length_cut_rows){
 		nnz_cut_rows = vecallocl(*length_cut_rows);
 		for(i=0;i<*length_cut_rows;i++) nnz_cut_rows[i] = num_nnz[cut_rows[i]];
@@ -203,8 +203,8 @@ void get_pa_sorted(struct sparsematrix* A, int widow, long** sorted_cut_rows, in
 		vecfreel(cut_cols);
 		vecfreel(indices_cut_cols);
 	}
-	
-		if(*length_uncut_rows){
+
+	if(*length_uncut_rows){
 		nnz_uncut_rows = vecallocl(*length_uncut_rows);
 		for(i=0;i<*length_uncut_rows;i++) nnz_uncut_rows[i] = num_nnz[uncut_rows[i]];
 		max_uncut_rows = max_element(nnz_uncut_rows,*length_uncut_rows);
@@ -249,7 +249,7 @@ void get_pa_sorted(struct sparsematrix* A, int widow, long** sorted_cut_rows, in
 		vecfreel(uncut_cols);
 		vecfreel(indices_uncut_cols);
 	}
-	
+
 	vecfreel(num_nnz);
 }
 
@@ -331,10 +331,11 @@ long* pa_unsorted_concat(struct sparsematrix* A, int flag){
 	}
 
 	long* vec = vecallocl(m+n);
-	for(i=0;i<uncut_length;i++) vec[cut_length+i] = uncut_part[i];
-	for(i=0;i<cut_length;i++) vec[i] = cut_part[i];
+	int index_vec = 0;
+	for(i=0;i<uncut_length;i++) vec[index_vec++] = uncut_part[i];
+	for(i=0;i<cut_length;i++) vec[index_vec++] = cut_part[i];
 
-		vecfreel(cut_part);
+	vecfreel(cut_part);
 	vecfreel(uncut_part);
 
 	return vec;
@@ -468,7 +469,7 @@ long* pa_sorted_simple(struct sparsematrix* A, int widow){
 		vecfreel(uncut_part);
 		vecfreel(nz_uncut);
 		vecfreel(indices_uncut);
-	vecfreel(num_nnz);
+		vecfreel(num_nnz);
 	}
 	return vec;
 }

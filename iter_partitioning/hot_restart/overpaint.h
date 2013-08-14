@@ -7,6 +7,4 @@
 #include <Mondriaan.h>
 #include "../utils/utils.h"
 
-struct twomatrices overpaint(struct sparsematrix* A, long* vec);
-
-
+struct twomatrices overpaint(struct sparsematrix* input, long* vec);

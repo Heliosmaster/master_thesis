@@ -21,14 +21,10 @@ int main(){
 
   /* creating the B matrix and printing it */
   struct sparsematrix B = createB(&(A.Ac),&(A.Ar));
-  struct sparsematrixplus Bplus = reorder_col_incr(&B);
-  print_matrix(Bplus.matrix);
-
+	print_matrix(B);
   MMDeleteSparseMatrix(&matrix);
   MMDeleteSparseMatrix(&A.Ac);
   MMDeleteSparseMatrix(&A.Ar);
   MMDeleteSparseMatrix(&B);
-  MMDeleteSparseMatrix(&Bplus.matrix);
-  vecfreel(Bplus.perm);
 	return 0;
 }

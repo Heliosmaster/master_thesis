@@ -70,30 +70,22 @@ struct sparsematrix createB(struct sparsematrix* Ac, struct sparsematrix* Ar){
     k++;
   }
 
-
-  /* compression of the vectors */
-  long* bi_n = vecallocl(k);
-  long* bj_n = vecallocl(k);
-
-  memcpy(bi_n,bi,k*SZLONG);
-  memcpy(bj_n,bj,k*SZLONG);
+	struct sparsematrix B;
+	MMSparseMatrixInit(&B);
+	B.m = m+n;
+	B.n = m+n;
+	B.NrNzElts = (long)k;
+	MMSparseMatrixAllocateMemory(&B);
+	
+  memcpy(B.i,bi,B.NrNzElts*SZLONG);
+  memcpy(B.j,bj,B.NrNzElts*SZLONG);
 
   vecfreel(bi);
   vecfreel(bj);
 
   /* creation of the (dummy) values */
-  double* bval = vecallocd(k);
 
-  for(i=0;i<k;i++) bval[i] = 1.0;
-
-  struct sparsematrix B;
-  MMSparseMatrixInit(&B);
-  B.i = bi_n;
-  B.m = m+n;
-  B.n = m+n;
-  B.j = bj_n;
-  B.ReValue = bval;
-  B.NrNzElts = (long)k;
+  for(i=0;i<k;i++) B.ReValue[i] = 1.0;
 
   return B;
 }
