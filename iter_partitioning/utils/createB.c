@@ -89,3 +89,35 @@ struct sparsematrix createB(struct sparsematrix* Ac, struct sparsematrix* Ar){
 
   return B;
 }
+
+/* function that from a partitioned B retrieves A with new partitioning */
+struct sparsematrix decomposeB(struct sparsematrix* B, int m, int n){
+	int index_B;
+	int index_A = 0;
+	int count=0;
+	for(index_B=0;index_B<B->NrNzElts;index_B++) if(B->i[index_B] != B->j[index_B]) count++;
+
+	struct sparsematrix A;
+	MMSparseMatrixInit(&A);
+	A.NrNzElts = (long)count;
+	A.m = m;
+	A.n = n;
+	MMSparseMatrixAllocateMemory(&A);
+	for(index_B = 0; index_B < B->NrNzElts; index_B++){
+		if(B->i[index_B] == B->j[index_B]) continue;
+		/* check whether the given nonzero is in the part of Ar^T or Ac */
+		if(B->i[index_B] < n) {
+			/* belong to Ar^T */
+			A.i[index_A] = B->j[index_B]-n;
+			A.j[index_A] = B->i[index_B];
+		}	
+		else {
+			A.i[index_A] = B->i[index_B]-n;
+			A.j[index_A] = B->j[index_B];
+			/* belongs to Ac */
+		}
+		A.ReValue[index_A] = B->ReValue[index_B];
+		index_A++;
+	}
+	return A;
+}

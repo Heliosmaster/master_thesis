@@ -17,11 +17,17 @@ int main(){
 
   /* splitting the matrix following the nonzero values (1 and 2) */
 
+	print_matrix(matrix);
+	printf("---------\n");
   struct twomatrices A = split_matrix(&matrix,1.0,2.0);
 
   /* creating the B matrix and printing it */
   struct sparsematrix B = createB(&(A.Ac),&(A.Ar));
 	print_matrix(B);
+	printf("---------\n");
+	struct sparsematrix A2 = decomposeB(&B,matrix.m,matrix.n);
+	print_matrix(A2);
+	MMDeleteSparseMatrix(&A2);
   MMDeleteSparseMatrix(&matrix);
   MMDeleteSparseMatrix(&A.Ac);
   MMDeleteSparseMatrix(&A.Ar);

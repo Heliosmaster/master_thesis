@@ -67,26 +67,14 @@ function [Ar,Ac]=sbdview(I,p,q,r,c)
     end
     
     %P2
-    if mi(1) > ni(2)
-       %rows are on avg shorter, assign to Ar
+        %assign to Ar
         ir = [ir; i2];
         jr = [jr; j2];
-    else
-        %assign to Ac
-        ic = [ic; i2];
-        jc = [jc; j2];
-    end
-    
-    %P3
-    if mi(2) > ni(1)
-       %rows are on avg shorter, assign to Ar
-        ir = [ir; i3];
-        jr = [jr; j3];
-    else
+        
         %assign to Ac
         ic = [ic; i3];
         jc = [jc; j3];
-    end
+    
     
     %P4 - localview is used for the innermost part, where red and green
     %nonzeros are mixed
@@ -104,28 +92,16 @@ function [Ar,Ac]=sbdview(I,p,q,r,c)
     ic = [ic; ic4];
     jc = [jc; jc4];
     
-    %P5
-    if mi(2) > ni(3)
-       %rows are on avg shorter, assign to Ar
-        ir = [ir; i5];
-        jr = [jr; j5];
-    else
+    %P5 
         %assign to Ac
         ic = [ic; i5];
         jc = [jc; j5];
-    end
     
     %P6
     
-    if mi(3) > ni(2)
        %rows are on avg shorter, assign to Ar
         ir = [ir; i6];
         jr = [jr; j6];
-    else
-        %assign to Ac
-        ic = [ic; i6];
-        jc = [jc; j6];
-    end
     
     %P7
     if mi(1) > ni(1)

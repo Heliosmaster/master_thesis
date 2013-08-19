@@ -2,7 +2,7 @@ include ../init.mk
 
 CFLAGS:=${CFLAGS} -fPIC
 
-all: test_overpaint matlab_overpaint test_priority_vector hot_restart
+all: iterations_hot_restart test_overpaint matlab_overpaint test_priority_vector hot_restart
 
 .c.o:
 	${CC} ${CFLAGS} -c $< -o $@
@@ -15,6 +15,9 @@ hot_restart: hot_restart.o overpaint.o ../utils/utils.o ../utils/createB.o prior
 	@echo "* Building hot_restart"
 	${CC} -o $@ $^ ${CFLAGS}
 
+iterations_hot_restart: iterations_hot_restart.o overpaint.o ../utils/utils.o ../utils/createB.o priority_vector.o
+	@echo "* Building iterations_hot_restart"
+	${CC} -o $@ $^ ${CFLAGS}
 
 test_priority_vector: test_priority_vector.o priority_vector.o ../utils/utils.o
 	@echo "* Building test_priority_vector"

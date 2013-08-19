@@ -8,4 +8,4 @@
 #include "utils.h"
 
 struct sparsematrix createB(struct sparsematrix* Ac, struct sparsematrix* Ar);
-
+struct sparsematrix decomposeB(struct sparsematrix* B, int m, int n);
