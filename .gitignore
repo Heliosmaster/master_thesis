@@ -10,6 +10,7 @@ Mondriaan*/tools/Profile
 Mondriaan*/tools/.*
 Mondriaan*/tools/MatlabMondriaan.mexa64
 matrices/*
+other_matrices/*
 Localview
 *.mexa64
 createB

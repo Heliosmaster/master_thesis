@@ -25,7 +25,7 @@ test_priority_vector: test_priority_vector.o priority_vector.o ../utils/utils.o
 
 matlab_overpaint: MatlabOverpaint.mex.o ../utils/utils.o overpaint.o ../utils/MatlabHelper.mex.o
 	@echo "* Building matlab_Overpaint"
-	${MATLABCC} -largeArrayDims -o MatlabOverpaint.mexa64 MatlabOverpaint.mex.o overpaint.o ../utils/utils.o ../utils/MatlabHelper.mex.o ${LIBFLAGS} -largeArrayDims
+	${MATLABCC} -o MatlabOverpaint.mexa64 $^ ${LIBFLAGS} -largeArrayDims
 
 clean:
 	@echo "* Cleaning up overpaint"

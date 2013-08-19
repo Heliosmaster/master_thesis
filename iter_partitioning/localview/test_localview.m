@@ -1,5 +1,5 @@
 close all; clc; clear all;
-matrix = 'tbdlinux';
+matrix = 'dfl001';
 str = ['../../matrices/' matrix '.mtx'];
 A = mmread(str);
 [Ac,Ar]=localview(A);
