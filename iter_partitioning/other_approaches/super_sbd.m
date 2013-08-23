@@ -1,7 +1,7 @@
 function [p,q,r,c]=super_sbd(I)
     
     %initial canonical SBD form
-    [p,q,r,c] = sbd(I);
+    [p,q,r,c] = sbdopt(I);
     [P1,P2,P3,P4,P5,P6,P7] = split_subparts(I,p,q,r,c);
 
     %getting the dimension of the subparts

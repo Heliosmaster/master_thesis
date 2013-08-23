@@ -78,7 +78,7 @@ function [Ar,Ac]=sbdview(I,p,q,r,c)
     
     %P4 - localview is used for the innermost part, where red and green
     %nonzeros are mixed
-    [Ac4,Ar4] = localview(P4);
+    [Ac4,Ar4] = MatlabLocalview(P4,1);
     [ir4,jr4,~] = find(Ar4);
     [ic4,jc4,~] = find(Ac4);
     

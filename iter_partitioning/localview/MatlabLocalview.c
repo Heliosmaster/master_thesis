@@ -34,7 +34,9 @@ void mexFunction(int nlhs, mxArray *plhs[], int nrhs, const mxArray *prhs[]) {
 	/* converting back from Mondriaan to Matlab */
 	plhs[0] = ConvertMondriaanToMatlab(&matrix);
 	plhs[1] = ConvertMondriaanToMatlab(&matrix2);
-
+	
+	MMDeleteSparseMatrix(&matrix);
+	MMDeleteSparseMatrix(&matrix2);
 	MMDeleteSparseMatrix(MondriaanMatrix);
 }
 

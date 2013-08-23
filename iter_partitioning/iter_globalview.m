@@ -2,7 +2,7 @@
 
 printIteration = 0;
 % read the input sparse matrix
-strdir = '../matrices_preliminary/';
+strdir = '../matrices_prel2/';
 d = dir([strdir '*.mtx']);
 %d = dir('../matrices/new_testbed/*.mtx');
 
@@ -40,7 +40,7 @@ for k=1:length(d)
 				%results(1) = s(4);
 				[m,n] = size(A);      
 
-				fprintf(['localview:\t ']);
+				fprintf(['globalview:\t ']);
 
 				fprintf('%g | ',s(4));
 				total_initials(z)=s(4);
@@ -50,6 +50,7 @@ for k=1:length(d)
 						[Ac,Ar] = MatlabLocalview(I,flag);
 						%					for i=2:iter
 						B = MatlabCreateB(Ac,Ar);
+						B = globalview(B,m,n);
 						[I2, s, ~, ~, ~, ~, ~, ~, ~, ~, ~] = mondriaan(B,2,0.03,0,0,5);
 						fprintf('%5g ',s(4));
 						%							Ar2 = I2(1:n,n+1:end)';

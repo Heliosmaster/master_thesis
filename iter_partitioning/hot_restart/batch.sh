@@ -16,7 +16,7 @@ do
 	if [ ! -d $output_dir ]; then
 		mkdir $output_dir
 	fi
-	for i in {1..11}
+	for i in {0..11}
 	do
 		for j in 0 1
 		do

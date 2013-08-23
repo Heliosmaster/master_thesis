@@ -4,13 +4,12 @@ printIteration = 0;
 % read the input sparse matrix
 strdir = '../matrices_preliminary/';
 d = dir([strdir '*.mtx']);
-%d = dir('../matrices/new_testbed/*.mtx');
 
 for k=1:length(d)
 		 matrix = d(k).name;
-		 %strdir = '../matrices2/';
-		 %matrix = 'nug30';
+%		 matrix = 'dfl001';
 		 str = [strdir matrix ];
+ %        str = [str '.mtx'];
 		 A = mmread(str);
 
 		 clear str
@@ -40,14 +39,15 @@ for k=1:length(d)
 				%results(1) = s(4);
 				[m,n] = size(A);      
 
-				fprintf(['localview:\t ']);
+				fprintf(['sbd2view:\t ']);
 
 				fprintf('%g | ',s(4));
 				total_initials(z)=s(4);
 
 				for j=1:inneriter
 						innerStart = tic;         
-						[Ac,Ar] = MatlabLocalview(I,flag);
+						[p,q,r,c] = sbd2opt(I); [Ac,Ar] = super_sbdview(I,p,q,r,c);
+	%					[Ac,Ar] = MatlabLocalview(I,flag);
 						%					for i=2:iter
 						B = MatlabCreateB(Ac,Ar);
 						[I2, s, ~, ~, ~, ~, ~, ~, ~, ~, ~] = mondriaan(B,2,0.03,0,0,5);
@@ -65,9 +65,9 @@ for k=1:length(d)
 				end
 				total_means(z) = mean(results);
 				total_times(z) = mean(times);
-				fprintf('\t avg: %g\t %g s\n',total_means(z),total_times(z));
+				fprintf('\t avg: %5.2f\t %5.2f s\n',total_means(z),total_times(z));
 	 end
 	 fprintf('------\n');
 	 totalTime = toc(tStart);
-	 fprintf('mean initials %g, mean final %g, time %g s (mean %g s)\n',mean(total_initials),mean(total_means),totalTime,mean(total_times));
- end
+	 fprintf('mean initials %5.2f, mean final %5.2f, time %g s (mean %g s)\n',mean(total_initials),mean(total_means),totalTime,mean(total_times));
+end

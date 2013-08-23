@@ -29,8 +29,8 @@ MEXSUFFIX := mexa64
 # ==== Compiler flags ====
 # Debug/verbose, standard (default), performance flags.
 
-CFLAGS := -Wall -Wextra -Wshadow -Wno-unused-parameter -ansi -pedantic -O2 -DTIME -DUNIX -DINFO -g -DMONDRIAANVERSION=\"${MONDRIAANCURRENTVERSION}\"
-#CFLAGS := -Wall -O2 -DMONDRIAANVERSION=\"${MONDRIAANCURRENTVERSION}\"
+#CFLAGS := -Wall -Wextra -Wshadow -Wno-unused-parameter -ansi -pedantic -O2 -DTIME -DUNIX -DINFO -g -DMONDRIAANVERSION=\"${MONDRIAANCURRENTVERSION}\"
+CFLAGS := -Wall -O2 -DMONDRIAANVERSION=\"${MONDRIAANCURRENTVERSION}\"
 #CFLAGS := -Wall -O3 -ffast-math -funroll-loops -fomit-frame-pointer -std=c99 -DMONDRIAANVERSION=\"${MONDRIAANCURRENTVERSION}\"
 
 
