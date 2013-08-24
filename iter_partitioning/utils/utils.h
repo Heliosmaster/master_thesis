@@ -62,7 +62,7 @@ struct sparsematrix assignMatrix(struct sparsematrix* matrix, int id);
 struct sparsematrix partition_to_matrix(struct sparsematrix* A);
 void copyHeader(struct sparsematrix* input, struct sparsematrix* output);
 struct sparsematrix copyMatrix(struct sparsematrix* input);
-struct sparsematrix ExecuteMondriaan(struct sparsematrix* matrix, int SplitStrategy, struct opts* Options, int* comm_value);
+struct sparsematrix ExecuteMondriaan(struct sparsematrix* matrix, int SplitStrategy, struct opts* Options, long* comm_value);
 
 /* misc */
 long* double_array_to_long(double* input, int length);

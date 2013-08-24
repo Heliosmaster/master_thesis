@@ -719,14 +719,15 @@ struct sparsematrix copyMatrix(struct sparsematrix* input){
 	output.m = input->m;
 	output.n = input->n;
 	copyHeader(input,&output);
-	output.i = vecallocl(output.NrNzElts);
-	output.j = vecallocl(output.NrNzElts);
-	output.ReValue = vecallocd(output.NrNzElts);
+	MMSparseMatrixAllocateMemory(&output);
+/*	output.i = vecallocl(output.NrNzElts);
+	output.j = vecallocl(output.NrNzElts);*/
+	if(input->ReValue!=NULL) {
+	 memcpy(output.ReValue,input->ReValue,output.NrNzElts*SZDBL);
+	}
 	 memcpy(output.i,input->i,output.NrNzElts*SZLONG);
 	 memcpy(output.j,input->j,output.NrNzElts*SZLONG);
-	 memcpy(output.ReValue,input->ReValue,output.NrNzElts*SZDBL);
 	if(input->ImValue != NULL){
-		output.ImValue = vecallocd(output.NrNzElts);
 	 	memcpy(output.ImValue,input->ImValue,output.NrNzElts*SZDBL);
 	}
 	return output;
@@ -736,7 +737,7 @@ struct sparsematrix copyMatrix(struct sparsematrix* input){
  * function that executes the partitioning using mondriaan and the given split strategy
  */
 
-struct sparsematrix ExecuteMondriaan(struct sparsematrix* matrix, int SplitStrategy, struct opts* Options, int* comm_value){
+struct sparsematrix ExecuteMondriaan(struct sparsematrix* matrix, int SplitStrategy, struct opts* Options, long* comm_value){
 	if (SplitStrategy == 5) Options->SplitStrategy = OneDimCol;
 	else if (SplitStrategy == 8) Options->SplitStrategy = MediumGrain;
 	else if (SplitStrategy == -1){}
@@ -748,6 +749,8 @@ struct sparsematrix ExecuteMondriaan(struct sparsematrix* matrix, int SplitStrat
 		printf("Invalid options!\n");
 		exit(1);
 	}
+	/*printf("%s\n",matrix->MMTypeCode);*/
+/* if (!DoMondriaan(MondriaanMatrix, MondriaanU, MondriaanV, &Stats, NumProcessors, Imbalance, Permutation, Symm, SplitStrategy, MaxIterations)) */
 	PstartInit(matrix,2);
 	if(!DistributeMatrixMondriaan(matrix, 2, 0.03, Options, NULL)){
 		printf("uh oh\n");
@@ -760,6 +763,7 @@ struct sparsematrix ExecuteMondriaan(struct sparsematrix* matrix, int SplitStrat
 	/* Calculate the communication volume. */
 	CalcCom(matrix, NULL, ROW, &ComVolumeRow, &Dummy, &Dummy, &Dummy, &Dummy);
 	CalcCom(matrix, NULL, COL, &ComVolumeCol, &Dummy, &Dummy, &Dummy, &Dummy);
+	/* printf("comm: %ld, %ld\n", ComVolumeRow,ComVolumeCol);*/
 	*comm_value = ComVolumeRow+ComVolumeCol;
 
 	struct sparsematrix new_matrix = partition_to_matrix(matrix);
