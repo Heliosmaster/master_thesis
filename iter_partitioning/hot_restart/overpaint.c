@@ -18,8 +18,6 @@ struct twomatrices overpaint(struct sparsematrix* input, long* vec){
   int m = A->m;
   int n = A->n;
 
-
-
   /* creation and storage of a copy of the matrix with increasing columns */
   struct sparsematrixplus matrixplus = reorder_col_incr(A);
   struct sparsematrix* B = &(matrixplus.matrix);

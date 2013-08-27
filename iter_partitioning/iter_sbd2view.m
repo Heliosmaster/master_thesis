@@ -5,11 +5,11 @@ printIteration = 0;
 strdir = '../matrices_preliminary/';
 d = dir([strdir '*.mtx']);
 
-for k=1:length(d)
-		 matrix = d(k).name;
-%		 matrix = 'dfl001';
+%for k=1:length(d)
+%		 matrix = d(k).name;
+		 matrix = 'tbdlinux';
 		 str = [strdir matrix ];
- %        str = [str '.mtx'];
+        str = [str '.mtx'];
 		 A = mmread(str);
 
 		 clear str
@@ -70,4 +70,4 @@ for k=1:length(d)
 	 fprintf('------\n');
 	 totalTime = toc(tStart);
 	 fprintf('mean initials %5.2f, mean final %5.2f, time %g s (mean %g s)\n',mean(total_initials),mean(total_means),totalTime,mean(total_times));
-end
+%end

@@ -933,5 +933,129 @@ long* mix_spread(long* first, int length_first, long* second, int length_second)
 
 }
 
+long newMondriaan(struct sparsematrix* matrix, int SplitStrategy, struct sparsematrix* output) {
+	struct opts Options; /* The Mondriaan options */
+	struct sparsematrix A; /* The Matrix;-) */
+	long q;    
+	int symmetric; 
+
+	FILE *File = NULL;
+
+	/* Get the parameters from the command line and initialise Options */
+	SetDefaultOptions(&Options);
+
+	if (!SetOptionsFromFile(&Options, "Mondriaan.defaults")) {
+		fprintf(stderr, "main(): warning, cannot set options from 'Mondriaan.defaults', using default options and creating standard 'Mondriaan.defaults'!\n");
+
+		File = fopen("Mondriaan.defaults", "w");
+
+		if (File != NULL) {
+			ExportDefaultOptions(File);
+			SetDefaultOptions(&Options);
+			fclose(File);
+		}
+		else {
+			fprintf(stderr, "main(): Unable to create 'Mondriaan.defaults'!\n");
+		}
+	}
+	/*	Options.matrix = matrix;*/
+	Options.P = 2;
+	Options.eps = 0.03;
+	if(SplitStrategy == 8) Options.SplitStrategy = MediumGrain;
+	if(SplitStrategy == 5) Options.SplitStrategy = OneDimCol;
+
+	if (!ApplyOptions(&Options)) {
+		fprintf(stderr, "main(): could not apply given options!\n");
+		exit(-1);
+	}
+
+	A = *matrix;
+	/* Remove duplicate nonzeros by adding them */
+	if (!SparseMatrixRemoveDuplicates(&A)) {
+		fprintf(stderr, "main(): Unable to remove duplicates!\n");
+		exit(-1);
+	}
+
+	/* Check if matrix A is already distributed */
+	if (A.MMTypeCode[0] == 'D') {
+		/* Matrix will be partitioned again */
+		fprintf(stderr, "Warning: Matrix '%s' already distributed !\n", 
+				Options.matrix);
+		fprintf(stderr, "         (Ignoring current partitions)\n"); 
+
+		A.NrProcs = 0;
+		if (A.Pstart != NULL)
+			free(A.Pstart);
+		A.Pstart = NULL;
+	}
+
+	/* Register whether the input matrix was symmetric, since the symmetry type code will
+		 be changed by the conversion to full, to the code 'G' for a general matrix */
+	if (A.m == A.n && 
+			(A.MMTypeCode[3]=='S' || A.MMTypeCode[3]=='K' || A.MMTypeCode[3]=='H')) {
+		symmetric = TRUE; 
+	} else {
+		symmetric = FALSE;
+		if (Options.SplitStrategy == SFineGrain) {
+			fprintf(stderr, "Error: Symmetric finegrain can only be used on symmetric input matrices!\n");
+			exit(-1);
+		}
+	}
+
+	if (symmetric) {
+		if (Options.SymmetricMatrix_UseSingleEntry == SingleEntNo)
+			SparseMatrixSymmetric2Full(&A); 
+		else if (Options.SplitStrategy == SFineGrain)
+			SparseMatrixSymmetricRandom2Lower(&A);
+		else if (Options.SymmetricMatrix_SingleEntryType == ETypeRandom)
+			SparseMatrixSymmetricLower2Random(&A);
+	}
+
+	if (Options.SplitStrategy == SFineGrain && Options.SymmetricMatrix_SingleEntryType == ETypeRandom)
+		printf("Warning: Symmetric finegrain requires lower-triangular format of symmetric matrix;\n         Random single entry type option is overridden.\n");
+
+	/* If the matrix is square, add the dummies if requested.
+		 This may lead to an enhanced vector distribution in the case of
+		 an equal distribution of the input and output vectors.  */
+	if (A.m == A.n && 
+			Options.SquareMatrix_DistributeVectorsEqual == EqVecYes &&
+			Options.SquareMatrix_DistributeVectorsEqual_AddDummies == DumYes)
+		AddDummiesToSparseMatrix(&A);
+
+	/* Set the number of processors */
+	A.NrProcs = Options.P;
+
+	/* Initialise Pstart with all nonzeros in processor 0 */
+	A.Pstart = (long *) malloc((A.NrProcs+1) * sizeof(long));
+	if (A.Pstart == NULL) {
+		fprintf(stderr, "main(): Not enough memory for Pstart!\n");
+		exit(-1);
+	}
+
+	A.Pstart[0] = 0;
+	for (q = 1; q <= A.NrProcs; q++)
+		A.Pstart[q] = A.NrNzElts;
+
+	/**** Distribute the matrix (and time it) ****/
+
+	if (!DistributeMatrixMondriaan(&A, A.NrProcs, Options.eps, &Options, 0)) {
+		fprintf(stderr, "main(): Unable to distribute matrix!\n");
+		exit(-1);
+	}
+
+
+	long ComVolumeRow, ComVolumeCol, Dummy;
+
+	CalcCom(&A, NULL, ROW, &ComVolumeRow, &Dummy, &Dummy, &Dummy, &Dummy);
+	CalcCom(&A, NULL, COL, &ComVolumeCol, &Dummy, &Dummy, &Dummy, &Dummy);
+	long comm_value = ComVolumeRow+ComVolumeCol;
+	
+	MMInsertProcessorIndices(&A);
+
+	*output = copyMatrix(&A);
+
+	MMDeleteSparseMatrix(&A);
+	return comm_value;
+} /* end main */
 
 

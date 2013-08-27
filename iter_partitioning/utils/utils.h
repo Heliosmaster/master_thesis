@@ -79,4 +79,6 @@ double geo_mean(long* vector, int length);
 long* mix_alternate(long* first, int length_first, long* second, int length_second);
 long* mix_spread(long* first, int length_first, long* second, int length_second);
 
+long newMondriaan(struct sparsematrix* matrix, int SplitStrategy, struct sparsematrix* output);
+
 #endif /* UTILS_H*/

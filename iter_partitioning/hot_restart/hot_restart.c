@@ -53,16 +53,10 @@ int main(int argc, char* argv[]){
 	if (!MMReadSparseMatrix(File, &matrix)) printf("Unable to read input matrix!\n");
 	fclose(File);
 
-	if(matrix.ReValue == NULL){
-		matrix.ReValue = vecallocd(matrix.NrNzElts);
-		int j;
-		for(j=0;j<matrix.NrNzElts;j++) matrix.ReValue[j] = 1.0;
-	}
 	srand(time(NULL));
 
-	struct opts Options;
 	print_label_vector(method,option1,option2);
-	SetOptionsFromFile(&Options,"Mondriaan.defaults");
+
 	int i;
 	int outer_iter = 20;
 	int inner_iter = 5;
@@ -70,15 +64,17 @@ int main(int argc, char* argv[]){
 	long* outer_vec = vecallocl(outer_iter);
 	long* initial_vec = vecallocl(outer_iter);
 
+	struct sparsematrix temp_matrix;
 	for(i=0;i<outer_iter;i++){
-		struct sparsematrix temp_matrix = matrix;
+		temp_matrix = copyMatrix(&matrix);
+		struct sparsematrix init_part;
+		initial_vec[i] = newMondriaan(&temp_matrix,8,&init_part);
 
-		int comm_value;
-		struct sparsematrix init_part = ExecuteMondriaan(&temp_matrix,8,&Options,&comm_value);
-		printf("%d \t|\t",comm_value);fflush(stdout);	
-		initial_vec[i] = comm_value;
-		copyHeader(&matrix,&init_part);
-
+		printf("%ld \t|\t",initial_vec[i]);fflush(stdout);	
+		struct sparsematrixplus mplus = reorder_row_incr(&init_part);
+		MMDeleteSparseMatrix(&init_part);
+		init_part = mplus.matrix;
+		vecfreel(mplus.perm);
 		int k;
 
 		long* inner_vec = vecallocl(inner_iter);
@@ -86,18 +82,17 @@ int main(int argc, char* argv[]){
 			struct sparsematrix init2 = copyMatrix(&init_part);
 			long* vec = choose_vector(method,&init_part,option1,option2);
 			struct twomatrices one = overpaint(&init2,vec);
-			struct sparsematrix B = createB(&(one.Ac),&(one.Ar));
-			copyHeader(&matrix,&B);
-			struct sparsematrix new_matrix = ExecuteMondriaan(&B,5,&Options,&comm_value);
+						struct sparsematrix B = createB(&(one.Ac),&(one.Ar));
+			/*				copyHeader(&matrix,&B);
+							B.MMTypeCode[0] = 'M';*/
+							struct sparsematrix new_matrix;
+							inner_vec[k] = newMondriaan(&B,5,&new_matrix);
+							printf("%ld \t", inner_vec[k]); fflush(stdout);
 
-			inner_vec[k] = comm_value;
-			printf("%d \t", comm_value); fflush(stdout);
-
-			MMDeleteSparseMatrix(&new_matrix);
-			MMDeleteSparseMatrix(&B);
-			MMDeleteSparseMatrix(&one.Ar);
-			MMDeleteSparseMatrix(&one.Ac);
-			MMDeleteSparseMatrix(&init2);
+							MMDeleteSparseMatrix(&new_matrix);
+							MMDeleteSparseMatrix(&one.Ar);
+							MMDeleteSparseMatrix(&one.Ac); 
+							MMDeleteSparseMatrix(&init2);
 			vecfreel(vec);
 		}
 		double mean = ar_mean(inner_vec,inner_iter);

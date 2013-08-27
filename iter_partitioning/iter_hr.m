@@ -1,5 +1,5 @@
 %close all; clc; clear all;
-matrix = 'nug30';
+matrix = 'rgg_n_2_18_s0';
 str = ['../old_matrices/' matrix '.mtx'];
 A = mmread(str);
 
@@ -7,7 +7,7 @@ clear str
 
 %iteration number
 outeriter = 20;
-iter = 0;
+iter = 5;
 i=1;
 results = zeros(1,iter);
 values = zeros(1,outeriter);
@@ -26,8 +26,8 @@ for j=1:outeriter
 	fprintf('po_unsorted_concat:\t ');
 	fprintf('%5.2f | ',results(1));
 	initials(j) = s(4);
-	%v = po_unsorted_concat(I,'col');
-	%[Ac,Ar] = MatlabOverpaint(I,v);
+	v = po_unsorted_concat(I,'col');
+	[Ac,Ar] = MatlabOverpaint(I,v);
 	for i=2:iter+1
     inner_loop;
     results(i-1) = s(4);
