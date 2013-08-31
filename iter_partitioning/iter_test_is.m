@@ -2,8 +2,8 @@ clear all; close all; clc;
 
 printIteration = 0;
 % read the input sparse matrix
-matrix ='mri1.mtx';
-str = ['../matrices/' matrix];
+matrix ='tbdmatlab.mtx';
+str = ['../old_matrices/' matrix];
 A = mmread(str);
 
 %clear str
@@ -41,11 +41,11 @@ for z=1:outeriter
     for j=1:inneriter
         counter = counter+1;
         innerStart = tic;         
-        v =independent_set(str,I);
+        v =independent_set(str,I,1);
         [Ac,Ar] = MatlabOverpaint(I,v);
         for i=2:iter
             inner_loop;
-            v =independent_set(str,A2);
+            v =independent_set(str,A2,1);
             [Ac,Ar] = MatlabOverpaint(A2,v);
         end
         elapsedTime = toc(innerStart);

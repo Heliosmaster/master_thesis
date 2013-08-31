@@ -4,7 +4,7 @@ for i=1:size(set,2)
   fprintf(fid,'%g\n',set(i));
 end
 fclose(fid);
-python_cmd = ['python maximum_independent_set.py ' matrix ' 1'];
+python_cmd = ['python maximum_independent_set.py ' matrix];
 unix(python_cmd);
 delete('matlab_temp.txt');
 setfile = [matrix '.set'];

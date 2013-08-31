@@ -1,0 +1,361 @@
+[?1h=
+                                                                                     < M A T L A B (R) >
+                                                                           Copyright 1984-2010 The MathWorks, Inc.
+                                                                        Version 7.12.0.635 (R2011a) 64-bit (glnxa64)
+                                                                                       March 18, 2011
+
+ 
+  To get started, type one of these: helpwin, helpdesk, or demo.
+  For product information, visit www.mathworks.com.
+ 
+{Warning: Name is nonexistent or not a directory: /home/davide/projects/mthesis/Mondriaan4RC/tools.} 
+> In path at 110
+  In addpath at 87
+  In startup at 2
+  In matlabrc at 222
+
+bcsstk32.mtx - 0
+
+is_0:	  1093 | [?1h= 1135 [?1h=  961 [?1h=  925 [?1h=  768 [?1h=  954  avg: 	 948.6
+is_0:	   692 | [?1h= 1200 [?1h=  965 [?1h= 1229 [?1h= 1298 [?1h=  998  avg: 	  1138
+is_0:	   693 | [?1h= 1001 [?1h=  919 [?1h= 1153 [?1h= 1170 [?1h= 1284  avg: 	 1105.4
+is_0:	   767 | [?1h=  791 [?1h= 1335 [?1h= 1097 [?1h= 1241 [?1h= 1018  avg: 	 1096.4
+is_0:	   800 | [?1h= 1099 [?1h= 1237 [?1h= 1314 [?1h=  846 [?1h= 1000  avg: 	 1099.2
+is_0:	   886 | [?1h= 1046 [?1h= 1220 [?1h= 1043 [?1h=  804 [?1h=  794  avg: 	 981.4
+is_0:	   715 | [?1h= 1384 [?1h= 1248 [?1h= 1113 [?1h=  816 [?1h=  912  avg: 	 1094.6
+is_0:	   721 | [?1h= 1109 [?1h= 1284 [?1h= 1189 [?1h=  857 [?1h= 1230  avg: 	 1133.8
+is_0:	   769 | [?1h= 1099 [?1h= 1457 [?1h=  960 [?1h=  871 [?1h= 1020  avg: 	 1081.4
+is_0:	   864 | [?1h=  857 [?1h= 1087 [?1h=  883 [?1h=  921 [?1h=  806  avg: 	 910.8
+is_0:	   705 | [?1h= 1272 [?1h= 1034 [?1h= 1053 [?1h= 1376 [?1h= 1037  avg: 	 1154.4
+is_0:	   795 | [?1h=  839 [?1h= 1082 [?1h= 1060 [?1h=  864 [?1h=  998  avg: 	 968.6
+is_0:	   969 | [?1h=  774 [?1h= 1091 [?1h= 1057 [?1h= 1327 [?1h= 1071  avg: 	  1064
+is_0:	   703 | [?1h= 1185 [?1h= 1046 [?1h= 1082 [?1h= 1015 [?1h=  809  avg: 	 1027.4
+is_0:	   702 | [?1h= 1239 [?1h= 1200 [?1h= 1148 [?1h= 1044 [?1h= 1178  avg: 	 1161.8
+is_0:	   699 | [?1h= 1191 [?1h= 1070 [?1h= 1326 [?1h= 1152 [?1h= 1160  avg: 	 1179.8
+is_0:	   808 | [?1h= 1326 [?1h= 1011 [?1h= 1057 [?1h= 1143 [?1h= 1216  avg: 	 1150.6
+is_0:	  1060 | [?1h= 1029 [?1h= 1199 [?1h= 1134 [?1h= 1396 [?1h= 1024  avg: 	 1156.4
+is_0:	   744 | [?1h= 1571 [?1h=  915 [?1h=  913 [?1h=  807 [?1h= 1212  avg: 	 1083.6
+is_0:	  1086 | [?1h=  805 [?1h= 1461 [?1h= 1049 [?1h= 1081 [?1h= 1165  avg: 	 1112.2
+--------------------
+avg initials: 813.55 		 avg finals: 1082.42
+
+
+
+bcsstk32.mtx - 1
+
+is_1:	   783 | [?1h= 1085 [?1h= 1113 [?1h=  824 [?1h= 1070 [?1h=  822  avg: 	 982.8
+is_1:	  1257 | [?1h=  983 [?1h=  786 [?1h=  929 [?1h= 1184 [?1h= 1025  avg: 	 981.4
+is_1:	  1181 | [?1h=  873 [?1h= 1036 [?1h=  774 [?1h=  954 [?1h= 1022  avg: 	 931.8
+is_1:	   865 | [?1h=  861 [?1h=  894 [?1h=  914 [?1h= 1410 [?1h=  942  avg: 	 1004.2
+is_1:	  1125 | [?1h= 1050 [?1h=  826 [?1h=  908 [?1h=  998 [?1h= 1160  avg: 	 988.4
+is_1:	   924 | [?1h= 1110 [?1h= 1157 [?1h= 1111 [?1h=  984 [?1h= 1113  avg: 	  1095
+is_1:	  1138 | [?1h= 1109 [?1h=  949 [?1h=  917 [?1h=  802 [?1h= 1096  avg: 	 974.6
+is_1:	   815 | [?1h=  806 [?1h=  837 [?1h=  800 [?1h=  810 [?1h=  820  avg: 	 814.6
+is_1:	  1024 | [?1h=  983 [?1h= 1175 [?1h=  985 [?1h=  963 [?1h= 1112  avg: 	 1043.6
+is_1:	   789 | [?1h= 1051 [?1h= 1436 [?1h=  999 [?1h= 1018 [?1h= 1092  avg: 	 1119.2
+is_1:	   742 | [?1h= 1201 [?1h=  763 [?1h=  765 [?1h=  882 [?1h=  947  avg: 	 911.6
+is_1:	   852 | [?1h=  823 [?1h=  985 [?1h= 1039 [?1h=  857 [?1h= 1049  avg: 	 950.6
+is_1:	  1018 | [?1h= 1090 [?1h= 1235 [?1h= 1257 [?1h= 1251 [?1h= 1158  avg: 	 1198.2
+is_1:	   718 | [?1h= 1388 [?1h=  760 [?1h= 1169 [?1h= 1084 [?1h=  817  avg: 	 1043.6
+is_1:	   707 | [?1h= 1379 [?1h= 1206 [?1h=  977 [?1h= 1085 [?1h=  975  avg: 	 1124.4
+is_1:	   860 | [?1h= 1062 [?1h=  951 [?1h= 1019 [?1h= 1333 [?1h= 1261  avg: 	 1125.2
+is_1:	   967 | [?1h= 1209 [?1h= 1340 [?1h= 1169 [?1h=  907 [?1h= 1259  avg: 	 1176.8
+is_1:	   679 | [?1h= 1007 [?1h= 1499 [?1h= 1423 [?1h= 1274 [?1h=  758  avg: 	 1192.2
+is_1:	   922 | [?1h=  930 [?1h= 1093 [?1h= 1113 [?1h= 1158 [?1h= 1153  avg: 	 1089.4
+is_1:	   696 | [?1h=  744 [?1h=  720 [?1h=  822 [?1h= 1222 [?1h= 1503  avg: 	 1002.2
+--------------------
+avg initials: 903.1 		 avg finals: 1037.49
+
+
+
+bcsstk32.mtx - 3
+
+is_3:	   698 | [?1h=[?1h= 1088 [?1h=[?1h= 1020 [?1h=[?1h=  788 [?1h=[?1h=  865 [?1h=[?1h= 1115  avg: 	 975.2
+is_3:	   778 | [?1h=[?1h= 1161 [?1h=[?1h=  997 [?1h=[?1h=  781 [?1h=[?1h= 1188 [?1h=[?1h= 1015  avg: 	 1028.4
+is_3:	   921 | [?1h=[?1h=  822 [?1h=[?1h=  985 [?1h=[?1h= 1045 [?1h=[?1h= 1034 [?1h=[?1h=  811  avg: 	 939.4
+is_3:	   761 | [?1h=[?1h=  965 [?1h=[?1h=  764 [?1h=[?1h= 1054 [?1h=[?1h=  966 [?1h=[?1h=  746  avg: 	   899
+is_3:	   707 | [?1h=[?1h= 1011 [?1h=[?1h= 1037 [?1h=[?1h=  780 [?1h=[?1h= 1010 [?1h=[?1h=  763  avg: 	 920.2
+is_3:	   770 | [?1h=[?1h=  939 [?1h=[?1h=  830 [?1h=[?1h=  799 [?1h=[?1h=  744 [?1h=[?1h= 1506  avg: 	 963.6
+is_3:	   833 | [?1h=[?1h= 1119 [?1h=[?1h=  826 [?1h=[?1h=  991 [?1h=[?1h= 1046 [?1h=[?1h=  969  avg: 	 990.2
+is_3:	  1210 | [?1h=[?1h= 1192 [?1h=[?1h= 1307 [?1h=[?1h= 1647 [?1h=[?1h= 1330 [?1h=[?1h=  947  avg: 	 1284.6
+is_3:	   705 | [?1h=[?1h=  960 [?1h=[?1h= 1317 [?1h=[?1h=  768 [?1h=[?1h=  754 [?1h=[?1h=  757  avg: 	 911.2
+is_3:	   713 | [?1h=[?1h=  800 [?1h=[?1h= 1206 [?1h=[?1h= 1113 [?1h=[?1h=  857 [?1h=[?1h=  783  avg: 	 951.8
+is_3:	  1178 | [?1h=[?1h=  819 [?1h=[?1h= 1097 [?1h=[?1h=  873 [?1h=[?1h= 1050 [?1h=[?1h=  971  avg: 	   962
+is_3:	   724 | [?1h=[?1h= 1002 [?1h=[?1h= 1362 [?1h=[?1h= 1055 [?1h=[?1h= 1290 [?1h=[?1h= 1201  avg: 	  1182
+is_3:	   888 | [?1h=[?1h= 1182 [?1h=[?1h=  873 [?1h=[?1h= 1078 [?1h=[?1h=  921 [?1h=[?1h=  770  avg: 	 964.8
+is_3:	   812 | [?1h=[?1h= 1175 [?1h=[?1h= 1063 [?1h=[?1h=  813 [?1h=[?1h=  731 [?1h=[?1h=  727  avg: 	 901.8
+is_3:	   851 | [?1h=[?1h= 1021 [?1h=[?1h=  954 [?1h=[?1h= 1092 [?1h=[?1h=  906 [?1h=[?1h=  927  avg: 	   980
+is_3:	  1036 | [?1h=[?1h=  945 [?1h=[?1h=  890 [?1h=[?1h= 1508 [?1h=[?1h=  988 [?1h=[?1h=  836  avg: 	 1033.4
+is_3:	   852 | [?1h=[?1h=  963 [?1h=[?1h=  971 [?1h=[?1h= 1349 [?1h=[?1h=  944 [?1h=[?1h= 1215  avg: 	 1088.4
+is_3:	   687 | [?1h=[?1h= 1156 [?1h=[?1h=  970 [?1h=[?1h=  824 [?1h=[?1h= 1109 [?1h=[?1h= 1276  avg: 	  1067
+is_3:	   952 | [?1h=[?1h= 1019 [?1h=[?1h=  899 [?1h=[?1h= 1035 [?1h=[?1h=  888 [?1h=[?1h= 1035  avg: 	 975.2
+is_3:	   914 | [?1h=[?1h= 1407 [?1h=[?1h=  887 [?1h=[?1h=  904 [?1h=[?1h=  897 [?1h=[?1h= 1091  avg: 	 1037.2
+--------------------
+avg initials: 849.5 		 avg finals: 1002.77
+
+
+
+coAuthorsCiteseer.mtx - 0
+
+is_0:	  9393 | [?1h=15849 [?1h=15870 [?1h=17636 [?1h=15858 [?1h=17083  avg: 	 16459.2
+is_0:	  9107 | [?1h=15727 [?1h=15645 [?1h=17108 [?1h=15905 [?1h=17089  avg: 	 16294.8
+is_0:	  9964 | [?1h=16578 [?1h=15927 [?1h=16825 [?1h=15719 [?1h=17451  avg: 	 16500
+is_0:	  9294 | [?1h=15623 [?1h=17167 [?1h=16913 [?1h=15685 [?1h=15856  avg: 	 16248.8
+is_0:	  9500 | [?1h=16616 [?1h=15704 [?1h=15837 [?1h=16858 [?1h=15545  avg: 	 16112
+is_0:	  9582 | [?1h=16853 [?1h=15876 [?1h=16823 [?1h=15801 [?1h=15809  avg: 	 16232.4
+is_0:	  9480 | [?1h=16800 [?1h=15666 [?1h=17212 [?1h=16966 [?1h=15459  avg: 	 16420.6
+is_0:	  9187 | [?1h=16103 [?1h=16673 [?1h=17235 [?1h=15929 [?1h=15736  avg: 	 16335.2
+is_0:	  9372 | [?1h=15967 [?1h=16053 [?1h=16107 [?1h=15672 [?1h=16340  avg: 	 16027.8
+is_0:	  9347 | [?1h=15556 [?1h=16894 [?1h=16739 [?1h=16034 [?1h=17467  avg: 	 16538
+is_0:	  9264 | [?1h=17034 [?1h=15434 [?1h=17141 [?1h=15596 [?1h=16281  avg: 	 16297.2
+is_0:	  9357 | [?1h=15509 [?1h=15602 [?1h=15679 [?1h=15488 [?1h=15713  avg: 	 15598.2
+is_0:	  9272 | [?1h=15802 [?1h=16997 [?1h=15471 [?1h=15981 [?1h=16846  avg: 	 16219.4
+is_0:	  9385 | [?1h=16127 [?1h=15728 [?1h=17390 [?1h=15912 [?1h=16827  avg: 	 16396.8
+is_0:	  9367 | [?1h=16958 [?1h=15643 [?1h=17112 [?1h=15776 [?1h=15525  avg: 	 16202.8
+is_0:	  9296 | [?1h=15626 [?1h=15551 [?1h=15927 [?1h=16979 [?1h=16305  avg: 	 16077.6
+is_0:	 10019 | [?1h=17363 [?1h=15494 [?1h=16752 [?1h=15709 [?1h=15735  avg: 	 16210.6
+is_0:	  9875 | [?1h=15637 [?1h=15912 [?1h=15766 [?1h=16235 [?1h=15764  avg: 	 15862.8
+is_0:	 10022 | [?1h=15985 [?1h=16846 [?1h=16892 [?1h=15692 [?1h=16972  avg: 	 16477.4
+is_0:	 10093 | [?1h=15942 [?1h=15776 [?1h=15711 [?1h=15785 [?1h=15906  avg: 	 15824
+--------------------
+avg initials: 9508.8 		 avg finals: 16216.8
+
+
+
+coAuthorsCiteseer.mtx - 1
+
+is_1:	  9502 | [?1h= 9755 [?1h= 9996 [?1h=10015 [?1h= 9850 [?1h= 9635  avg: 	 9850.2
+is_1:	  9347 | [?1h= 9838 [?1h= 9694 [?1h= 9607 [?1h=10791 [?1h= 9619  avg: 	 9909.8
+is_1:	  9337 | [?1h= 9685 [?1h=10547 [?1h=10056 [?1h= 9753 [?1h= 9854  avg: 	  9979
+is_1:	  9368 | [?1h= 9768 [?1h= 9765 [?1h=10741 [?1h=10643 [?1h= 9760  avg: 	 10135.4
+is_1:	 10174 | [?1h= 9855 [?1h=10021 [?1h=10504 [?1h=10514 [?1h=10046  avg: 	 10188
+is_1:	 10162 | [?1h=10396 [?1h=10418 [?1h=10156 [?1h=10489 [?1h=10041  avg: 	 10300
+is_1:	  9301 | [?1h= 9713 [?1h= 9719 [?1h=10883 [?1h= 9754 [?1h=10715  avg: 	 10156.8
+is_1:	  9237 | [?1h= 9882 [?1h= 9645 [?1h= 9565 [?1h=10540 [?1h= 9679  avg: 	 9862.2
+is_1:	  9883 | [?1h= 9914 [?1h=10000 [?1h=10098 [?1h=10452 [?1h=10514  avg: 	 10195.6
+is_1:	  9266 | [?1h= 9721 [?1h= 9704 [?1h= 9661 [?1h= 9865 [?1h=10758  avg: 	 9941.8
+is_1:	  9189 | [?1h=10524 [?1h= 9704 [?1h= 9563 [?1h= 9780 [?1h= 9454  avg: 	  9805
+is_1:	  9359 | [?1h=11179 [?1h= 9795 [?1h=10610 [?1h= 9695 [?1h= 9747  avg: 	 10205.2
+is_1:	 10008 | [?1h=10317 [?1h=10531 [?1h=10270 [?1h= 9972 [?1h=10461  avg: 	 10310.2
+is_1:	  9397 | [?1h= 9866 [?1h= 9710 [?1h=10893 [?1h= 9828 [?1h= 9689  avg: 	 9997.2
+is_1:	  9282 | [?1h= 9664 [?1h= 9761 [?1h= 9749 [?1h= 9721 [?1h= 9588  avg: 	 9696.6
+is_1:	  9364 | [?1h=10029 [?1h= 9922 [?1h= 9758 [?1h=10722 [?1h= 9673  avg: 	 10020.8
+is_1:	  9375 | [?1h= 9625 [?1h= 9558 [?1h= 9694 [?1h= 9646 [?1h= 9626  avg: 	 9629.8
+is_1:	 10165 | [?1h=10364 [?1h=10600 [?1h=10617 [?1h=10428 [?1h=10138  avg: 	 10429.4
+is_1:	  9309 | [?1h=10795 [?1h= 9758 [?1h= 9769 [?1h= 9929 [?1h=10861  avg: 	 10222.4
+is_1:	  9436 | [?1h= 9953 [?1h=10743 [?1h= 9752 [?1h=10566 [?1h= 9692  avg: 	 10141.2
+--------------------
+avg initials: 9523.05 		 avg finals: 10048.8
+
+
+
+coAuthorsCiteseer.mtx - 3
+
+is_3:	  9331 | [?1h=[?1h=14368 [?1h=[?1h=14331 [?1h=[?1h=15448 [?1h=[?1h=14164 [?1h=[?1h=14188  avg: 	 14499.8
+is_3:	 10033 | [?1h=[?1h=15969 [?1h=[?1h=14275 [?1h=[?1h=14256 [?1h=[?1h=16316 [?1h=[?1h=15227  avg: 	 15208.6
+is_3:	  9418 | [?1h=[?1h=14446 [?1h=[?1h=14239 [?1h=[?1h=16030 [?1h=[?1h=13992 [?1h=[?1h=15720  avg: 	 14885.4
+is_3:	 10119 | [?1h=[?1h=15449 [?1h=[?1h=15569 [?1h=[?1h=15421 [?1h=[?1h=14542 [?1h=[?1h=15414  avg: 	 15279
+is_3:	  9311 | [?1h=[?1h=13986 [?1h=[?1h=14054 [?1h=[?1h=14357 [?1h=[?1h=14389 [?1h=[?1h=14166  avg: 	 14190.4
+is_3:	  9281 | [?1h=[?1h=14226 [?1h=[?1h=14110 [?1h=[?1h=15174 [?1h=[?1h=14277 [?1h=[?1h=14385  avg: 	 14434.4
+is_3:	  9392 | [?1h=[?1h=14154 [?1h=[?1h=14001 [?1h=[?1h=14419 [?1h=[?1h=14155 [?1h=[?1h=14436  avg: 	 14233
+is_3:	  9762 | [?1h=[?1h=14333 [?1h=[?1h=14601 [?1h=[?1h=15639 [?1h=[?1h=14181 [?1h=[?1h=14311  avg: 	 14613
+is_3:	  9854 | [?1h=[?1h=16119 [?1h=[?1h=15525 [?1h=[?1h=14411 [?1h=[?1h=14404 [?1h=[?1h=15599  avg: 	 15211.6
+is_3:	 10175 | [?1h=[?1h=14179 [?1h=[?1h=14570 [?1h=[?1h=14301 [?1h=[?1h=15699 [?1h=[?1h=14460  avg: 	 14641.8
+is_3:	  9359 | [?1h=[?1h=14533 [?1h=[?1h=14416 [?1h=[?1h=15947 [?1h=[?1h=15654 [?1h=[?1h=14521  avg: 	 15014.2
+is_3:	  9410 | [?1h=[?1h=14114 [?1h=[?1h=14581 [?1h=[?1h=15644 [?1h=[?1h=15880 [?1h=[?1h=15837  avg: 	 15211.2
+is_3:	  9488 | [?1h=[?1h=14309 [?1h=[?1h=14232 [?1h=[?1h=14248 [?1h=[?1h=15301 [?1h=[?1h=14309  avg: 	 14479.8
+is_3:	  9459 | [?1h=[?1h=14309 [?1h=[?1h=14150 [?1h=[?1h=15437 [?1h=[?1h=15551 [?1h=[?1h=14440  avg: 	 14777.4
+is_3:	  9176 | [?1h=[?1h=14413 [?1h=[?1h=14583 [?1h=[?1h=14355 [?1h=[?1h=14141 [?1h=[?1h=14613  avg: 	 14421
+is_3:	  9223 | [?1h=[?1h=14269 [?1h=[?1h=15662 [?1h=[?1h=14356 [?1h=[?1h=14077 [?1h=[?1h=14097  avg: 	 14492.2
+is_3:	 10045 | [?1h=[?1h=14443 [?1h=[?1h=14345 [?1h=[?1h=14515 [?1h=[?1h=15537 [?1h=[?1h=14390  avg: 	 14646
+is_3:	  9393 | [?1h=[?1h=14208 [?1h=[?1h=14179 [?1h=[?1h=14101 [?1h=[?1h=14363 [?1h=[?1h=15950  avg: 	 14560.2
+is_3:	  9266 | [?1h=[?1h=15268 [?1h=[?1h=14103 [?1h=[?1h=16185 [?1h=[?1h=15415 [?1h=[?1h=14149  avg: 	 15024
+is_3:	  9068 | [?1h=[?1h=14276 [?1h=[?1h=14433 [?1h=[?1h=15604 [?1h=[?1h=14205 [?1h=[?1h=16085  avg: 	 14920.6
+--------------------
+avg initials: 9528.15 		 avg finals: 14737.2
+
+
+
+cre_b.mtx - 0
+
+is_0:	   593 | [?1h=  613 [?1h=  654 [?1h=  708 [?1h=  597 [?1h=  506  avg: 	 615.6
+is_0:	   547 | [?1h=  573 [?1h=  746 [?1h=  661 [?1h=  589 [?1h=  562  avg: 	 626.2
+is_0:	   549 | [?1h=  708 [?1h=  577 [?1h=  705 [?1h=  570 [?1h=  672  avg: 	 646.4
+is_0:	   607 | [?1h=  654 [?1h=  700 [?1h=  590 [?1h=  733 [?1h=  696  avg: 	 674.6
+is_0:	   607 | [?1h=  588 [?1h=  634 [?1h=  552 [?1h=  593 [?1h=  651  avg: 	 603.6
+is_0:	   612 | [?1h=  581 [?1h=  571 [?1h=  716 [?1h=  549 [?1h=  593  avg: 	   602
+is_0:	   609 | [?1h=  518 [?1h=  622 [?1h=  563 [?1h=  577 [?1h=  617  avg: 	 579.4
+is_0:	   540 | [?1h=  574 [?1h=  656 [?1h=  610 [?1h=  610 [?1h=  664  avg: 	 622.8
+is_0:	   569 | [?1h=  541 [?1h=  607 [?1h=  579 [?1h=  700 [?1h=  595  avg: 	 604.4
+is_0:	   582 | [?1h=  615 [?1h=  613 [?1h=  532 [?1h=  710 [?1h=  576  avg: 	 609.2
+is_0:	   566 | [?1h=  664 [?1h=  620 [?1h=  542 [?1h=  682 [?1h=  585  avg: 	 618.6
+is_0:	   500 | [?1h=  710 [?1h=  642 [?1h=  635 [?1h=  623 [?1h=  667  avg: 	 655.4
+is_0:	   643 | [?1h=  697 [?1h=  580 [?1h=  649 [?1h=  619 [?1h=  587  avg: 	 626.4
+is_0:	   637 | [?1h=  653 [?1h=  692 [?1h=  624 [?1h=  618 [?1h=  671  avg: 	 651.6
+is_0:	   575 | [?1h=  711 [?1h=  591 [?1h=  667 [?1h=  700 [?1h=  599  avg: 	 653.6
+is_0:	   585 | [?1h=  624 [?1h=  703 [?1h=  605 [?1h=  717 [?1h=  678  avg: 	 665.4
+is_0:	   593 | [?1h=  546 [?1h=  627 [?1h=  564 [?1h=  603 [?1h=  690  avg: 	   606
+is_0:	   515 | [?1h=  600 [?1h=  621 [?1h=  716 [?1h=  686 [?1h=  654  avg: 	 655.4
+is_0:	   623 | [?1h=  659 [?1h=  589 [?1h=  721 [?1h=  656 [?1h=  692  avg: 	 663.4
+is_0:	   561 | [?1h=  586 [?1h=  639 [?1h=  673 [?1h=  702 [?1h=  687  avg: 	 657.4
+--------------------
+avg initials: 580.65 		 avg finals: 631.87
+
+
+
+cre_b.mtx - 1
+
+is_1:	   565 | [?1h=  551 [?1h=  687 [?1h=  703 [?1h=  575 [?1h=  588  avg: 	 620.8
+is_1:	   531 | [?1h=  652 [?1h=  699 [?1h=  581 [?1h=  668 [?1h=  628  avg: 	 645.6
+is_1:	   577 | [?1h=  668 [?1h=  607 [?1h=  620 [?1h=  572 [?1h=  656  avg: 	 624.6
+is_1:	   639 | [?1h=  562 [?1h=  664 [?1h=  685 [?1h=  579 [?1h=  663  avg: 	 630.6
+is_1:	   551 | [?1h=  695 [?1h=  655 [?1h=  607 [?1h=  606 [?1h=  643  avg: 	 641.2
+is_1:	   635 | [?1h=  692 [?1h=  671 [?1h=  635 [?1h=  642 [?1h=  608  avg: 	 649.6
+is_1:	   581 | [?1h=  688 [?1h=  672 [?1h=  714 [?1h=  702 [?1h=  643  avg: 	 683.8
+is_1:	   626 | [?1h=  617 [?1h=  689 [?1h=  659 [?1h=  639 [?1h=  561  avg: 	   633
+is_1:	   653 | [?1h=  666 [?1h=  543 [?1h=  623 [?1h=  707 [?1h=  657  avg: 	 639.2
+is_1:	   594 | [?1h=  651 [?1h=  632 [?1h=  726 [?1h=  693 [?1h=  646  avg: 	 669.6
+is_1:	   579 | [?1h=  625 [?1h=  602 [?1h=  659 [?1h=  617 [?1h=  640  avg: 	 628.6
+is_1:	   676 | [?1h=  757 [?1h=  601 [?1h=  580 [?1h=  618 [?1h=  583  avg: 	 627.8
+is_1:	   534 | [?1h=  690 [?1h=  641 [?1h=  657 [?1h=  687 [?1h=  637  avg: 	 662.4
+is_1:	   575 | [?1h=  588 [?1h=  638 [?1h=  684 [?1h=  609 [?1h=  624  avg: 	 628.6
+is_1:	   604 | [?1h=  730 [?1h=  598 [?1h=  600 [?1h=  544 [?1h=  564  avg: 	 607.2
+is_1:	   606 | [?1h=  783 [?1h=  627 [?1h=  724 [?1h=  670 [?1h=  750  avg: 	 710.8
+is_1:	   501 | [?1h=  671 [?1h=  731 [?1h=  629 [?1h=  674 [?1h=  603  avg: 	 661.6
+is_1:	   569 | [?1h=  625 [?1h=  677 [?1h=  539 [?1h=  638 [?1h=  716  avg: 	   639
+is_1:	   636 | [?1h=  701 [?1h=  771 [?1h=  762 [?1h=  595 [?1h=  743  avg: 	 714.4
+is_1:	   556 | [?1h=  607 [?1h=  674 [?1h=  629 [?1h=  686 [?1h=  718  avg: 	 662.8
+--------------------
+avg initials: 589.4 		 avg finals: 649.06
+
+
+
+cre_b.mtx - 3
+
+is_3:	   546 | [?1h=[?1h=  555 [?1h=[?1h=  615 [?1h=[?1h=  627 [?1h=[?1h=  707 [?1h=[?1h=  694  avg: 	 639.6
+is_3:	   639 | [?1h=[?1h=  564 [?1h=[?1h=  577 [?1h=[?1h=  680 [?1h=[?1h=  638 [?1h=[?1h=  680  avg: 	 627.8
+is_3:	   588 | [?1h=[?1h=  706 [?1h=[?1h=  666 [?1h=[?1h=  583 [?1h=[?1h=  617 [?1h=[?1h=  625  avg: 	 639.4
+is_3:	   590 | [?1h=[?1h=Attempt to restart MATLAB? [y or n]>>exity[Please exit and restart MATLAB]>>
+------------------------------------------------------------------------
+       Segmentation violation detected at Fri Aug 30 02:08:42 2013
+------------------------------------------------------------------------
+
+Configuration:
+  Crash Decoding  : Disabled
+  Current Visual  : None
+  Default Encoding: UTF-8
+  GNU C Library   : 2.5 stable
+  MATLAB License  : 3254
+  MATLAB Root     : /usr/local/MATLAB/R2011a
+  MATLAB Version  : 7.12.0.635 (R2011a)
+  Operating System: Linux 2.6.18-238.5.1.el5 #1 SMP Tue Mar 1 18:58:43 EST 2011 x86_64
+  Processor ID    : x86 Family 15 Model 4 Stepping 2, AuthenticAMD
+  Window System   : No active display
+
+Fault Count: 1
+
+
+
+Abnormal termination:
+Segmentation violation
+
+Register State (from fault):
+  RAX = fffffffc4dab5248  RBX = 000000001019a3f0
+  RCX = 0000000010df1820  RDX = fffffffc391d2388
+  RSP = 00002b56ea0ac020  RBP = 00002b56ea0ac020
+  RSI = 0000000010df1820  RDI = 00002b56ea0aff70
+
+   R8 = 000000000cefe700   R9 = 0000000000000003
+  R10 = 0000000000001419  R11 = 0000000000000000
+  R12 = 00002b56ea0b3ee0  R13 = 00002b56ea0b9a70
+  R14 = 0000000006609570  R15 = 00002b56ea0b94c0
+
+  RIP = 00002b56fc206437  EFL = 0000000000010286
+
+   CS = 0033   FS = 0000   GS = 0000
+
+
+Stack Trace (from fault):
+[  0] 0x00002b56d8763f49 /usr/local/MATLAB/R2011a/bin/glnxa64/../../bin/glnxa64/libmwfl.so+00474953 fl::sysdep::linux::unwind_stack(void const**, unsigned long, unsigned long, fl::diag::thread_context const&)+000009
+[  1] 0x00002b56d8719dc1 /usr/local/MATLAB/R2011a/bin/glnxa64/../../bin/glnxa64/libmwfl.so+00171457 fl::diag::stacktrace_base::capture(fl::diag::thread_context const&, unsigned long)+000161
+[  2] 0x00002b56d87230dd /usr/local/MATLAB/R2011a/bin/glnxa64/../../bin/glnxa64/libmwfl.so+00209117
+[  3] 0x00002b56d8723364 /usr/local/MATLAB/R2011a/bin/glnxa64/../../bin/glnxa64/libmwfl.so+00209764 fl::diag::terminate_log(char const*, fl::diag::thread_context const&, bool)+000100
+[  4] 0x00002b56d973fbe5 /usr/local/MATLAB/R2011a/bin/glnxa64/../../bin/glnxa64/libmwmcr.so+00420837 fl::diag::terminate_log(char const*, ucontext const*, bool)+000085
+[  5] 0x00002b56d973cb54 /usr/local/MATLAB/R2011a/bin/glnxa64/../../bin/glnxa64/libmwmcr.so+00408404
+[  6] 0x00002b56d973e03d /usr/local/MATLAB/R2011a/bin/glnxa64/../../bin/glnxa64/libmwmcr.so+00413757
+[  7] 0x00002b56d973e197 /usr/local/MATLAB/R2011a/bin/glnxa64/../../bin/glnxa64/libmwmcr.so+00414103
+[  8] 0x00002b56d973eb1d /usr/local/MATLAB/R2011a/bin/glnxa64/../../bin/glnxa64/libmwmcr.so+00416541
+[  9] 0x00002b56d973f435 /usr/local/MATLAB/R2011a/bin/glnxa64/../../bin/glnxa64/libmwmcr.so+00418869
+[ 10] 0x0000003e7b80eca0                             /lib64/libpthread.so.0+00060576
+[ 11] 0x00002b56fc206437 /home/students/3776123/mthesis/iter_partitioning/hot_restart/MatlabOverpaint.mexa64+00013367
+[ 12] 0x00002b56fc207c73 /home/students/3776123/mthesis/iter_partitioning/hot_restart/MatlabOverpaint.mexa64+00019571
+[ 13] 0x00002b56fc204955 /home/students/3776123/mthesis/iter_partitioning/hot_restart/MatlabOverpaint.mexa64+00006485 mexFunction+000565
+[ 14] 0x00002b56de9e9faa /usr/local/MATLAB/R2011a/bin/glnxa64/../../bin/glnxa64/../../bin/glnxa64/libmex.so+00049066 mexRunMexFile+000090
+[ 15] 0x00002b56de9e6f19 /usr/local/MATLAB/R2011a/bin/glnxa64/../../bin/glnxa64/../../bin/glnxa64/libmex.so+00036633
+[ 16] 0x00002b56de9e7bbe /usr/local/MATLAB/R2011a/bin/glnxa64/../../bin/glnxa64/../../bin/glnxa64/libmex.so+00039870
+[ 17] 0x00002b56d99c47ef /usr/local/MATLAB/R2011a/bin/glnxa64/../../bin/glnxa64/libmwm_dispatcher.so+00391151 Mfh_file::dispatch_fh(int, mxArray_tag**, int, mxArray_tag**)+000511
+[ 18] 0x00002b56d9d5f1f0 /usr/local/MATLAB/R2011a/bin/glnxa64/../../bin/glnxa64/libmwm_interpreter.so+01532400
+[ 19] 0x00002b56d9d00975 /usr/local/MATLAB/R2011a/bin/glnxa64/../../bin/glnxa64/libmwm_interpreter.so+01145205
+[ 20] 0x00002b56d9d1a96e /usr/local/MATLAB/R2011a/bin/glnxa64/../../bin/glnxa64/libmwm_interpreter.so+01251694
+[ 21] 0x00002b56d9d1f0ec /usr/local/MATLAB/R2011a/bin/glnxa64/../../bin/glnxa64/libmwm_interpreter.so+01269996
+[ 22] 0x00002b56d9d1cc7a /usr/local/MATLAB/R2011a/bin/glnxa64/../../bin/glnxa64/libmwm_interpreter.so+01260666
+[ 23] 0x00002b56d9d1d741 /usr/local/MATLAB/R2011a/bin/glnxa64/../../bin/glnxa64/libmwm_interpreter.so+01263425
+[ 24] 0x00002b56d9d767d9 /usr/local/MATLAB/R2011a/bin/glnxa64/../../bin/glnxa64/libmwm_interpreter.so+01628121
+[ 25] 0x00002b56d99c47ef /usr/local/MATLAB/R2011a/bin/glnxa64/../../bin/glnxa64/libmwm_dispatcher.so+00391151 Mfh_file::dispatch_fh(int, mxArray_tag**, int, mxArray_tag**)+000511
+[ 26] 0x00002b56d9d5f1f0 /usr/local/MATLAB/R2011a/bin/glnxa64/../../bin/glnxa64/libmwm_interpreter.so+01532400
+[ 27] 0x00002b56d9d00975 /usr/local/MATLAB/R2011a/bin/glnxa64/../../bin/glnxa64/libmwm_interpreter.so+01145205
+[ 28] 0x00002b56d9d1a96e /usr/local/MATLAB/R2011a/bin/glnxa64/../../bin/glnxa64/libmwm_interpreter.so+01251694
+[ 29] 0x00002b56d9d1f0ec /usr/local/MATLAB/R2011a/bin/glnxa64/../../bin/glnxa64/libmwm_interpreter.so+01269996
+[ 30] 0x00002b56d9d1cc7a /usr/local/MATLAB/R2011a/bin/glnxa64/../../bin/glnxa64/libmwm_interpreter.so+01260666
+[ 31] 0x00002b56d9d1d741 /usr/local/MATLAB/R2011a/bin/glnxa64/../../bin/glnxa64/libmwm_interpreter.so+01263425
+[ 32] 0x00002b56d9d767d9 /usr/local/MATLAB/R2011a/bin/glnxa64/../../bin/glnxa64/libmwm_interpreter.so+01628121
+[ 33] 0x00002b56d99c47ef /usr/local/MATLAB/R2011a/bin/glnxa64/../../bin/glnxa64/libmwm_dispatcher.so+00391151 Mfh_file::dispatch_fh(int, mxArray_tag**, int, mxArray_tag**)+000511
+[ 34] 0x00002b56d9d529b2 /usr/local/MATLAB/R2011a/bin/glnxa64/../../bin/glnxa64/libmwm_interpreter.so+01481138
+[ 35] 0x00002b56d9d14e13 /usr/local/MATLAB/R2011a/bin/glnxa64/../../bin/glnxa64/libmwm_interpreter.so+01228307
+[ 36] 0x00002b56d9d13eb7 /usr/local/MATLAB/R2011a/bin/glnxa64/../../bin/glnxa64/libmwm_interpreter.so+01224375
+[ 37] 0x00002b56d9d14397 /usr/local/MATLAB/R2011a/bin/glnxa64/../../bin/glnxa64/libmwm_interpreter.so+01225623
+[ 38] 0x00002b56d9ccea72 /usr/local/MATLAB/R2011a/bin/glnxa64/../../bin/glnxa64/libmwm_interpreter.so+00940658 inEvalCmdWithLocalReturnInDesiredWS(char const*, int*, bool, bool, inWorkSpace_tag*)+000098
+[ 39] 0x00002b56de596478 /usr/local/MATLAB/R2011a/bin/glnxa64/../../bin/glnxa64/../../bin/glnxa64/libmwiqm.so+00390264 iqm::InternalEvalPlugin::inEvalCmdWithLocalReturn(char const*, inWorkSpace_tag*) const+000088
+[ 40] 0x00002b56de59780a /usr/local/MATLAB/R2011a/bin/glnxa64/../../bin/glnxa64/../../bin/glnxa64/libmwiqm.so+00395274 iqm::InternalEvalPlugin::execute(inWorkSpace_tag*, boost::shared_ptr<cmddistributor::IIPCompletedEvent>&)+000122
+[ 41] 0x00002b56de57e8ef /usr/local/MATLAB/R2011a/bin/glnxa64/../../bin/glnxa64/../../bin/glnxa64/libmwiqm.so+00293103
+[ 42] 0x00002b56de56bdd5 /usr/local/MATLAB/R2011a/bin/glnxa64/../../bin/glnxa64/../../bin/glnxa64/libmwiqm.so+00216533
+[ 43] 0x00002b56d94c1282 /usr/local/MATLAB/R2011a/bin/glnxa64/../../bin/glnxa64/libmwbridge.so+00094850
+[ 44] 0x00002b56d94c1856 /usr/local/MATLAB/R2011a/bin/glnxa64/../../bin/glnxa64/libmwbridge.so+00096342 ioReadLine(bool, _IO_FILE*, char*, char*, int, bool*, boost::optional<inWorkSpace_tag* const> const&, bool)+000134
+[ 45] 0x00002b56d94c1985 /usr/local/MATLAB/R2011a/bin/glnxa64/../../bin/glnxa64/libmwbridge.so+00096645
+[ 46] 0x00002b56d94c4d3a /usr/local/MATLAB/R2011a/bin/glnxa64/../../bin/glnxa64/libmwbridge.so+00109882
+[ 47] 0x00002b56d94c4efd /usr/local/MATLAB/R2011a/bin/glnxa64/../../bin/glnxa64/libmwbridge.so+00110333
+[ 48] 0x00002b56d94c5503 /usr/local/MATLAB/R2011a/bin/glnxa64/../../bin/glnxa64/libmwbridge.so+00111875 mnParser+000707
+[ 49] 0x00002b56d9727d39 /usr/local/MATLAB/R2011a/bin/glnxa64/../../bin/glnxa64/libmwmcr.so+00322873 mcrInstance::mnParser_on_interpreter_thread()+000041
+[ 50] 0x00002b56d970adb2 /usr/local/MATLAB/R2011a/bin/glnxa64/../../bin/glnxa64/libmwmcr.so+00204210
+[ 51] 0x00002b56d970aec0 /usr/local/MATLAB/R2011a/bin/glnxa64/../../bin/glnxa64/libmwmcr.so+00204480
+[ 52] 0x00002b56d8ec7214 /usr/local/MATLAB/R2011a/bin/glnxa64/../../bin/glnxa64/libmwservices.so+00422420
+[ 53] 0x00002b56d8ec7405 /usr/local/MATLAB/R2011a/bin/glnxa64/../../bin/glnxa64/libmwservices.so+00422917
+[ 54] 0x00002b56d8ec5d08 /usr/local/MATLAB/R2011a/bin/glnxa64/../../bin/glnxa64/libmwservices.so+00417032
+[ 55] 0x00002b56e1b7b025 /usr/local/MATLAB/R2011a/bin/glnxa64/../../bin/glnxa64/../../bin/glnxa64/libmwuix.so+00475173
+[ 56] 0x00002b56e11f123a /usr/local/MATLAB/R2011a/bin/glnxa64/../../bin/glnxa64/../../bin/glnxa64/libuij.so+00217658 sysq::wait_F<boost::weak_ptr<sysq::ws_ppeHook>, boost::shared_ptr<sysq::ws_ppeHook> > std::for_each<__gnu_cxx::__normal_iterator<boost::weak_ptr<sysq::ws_ppeHook>*, std::vector<boost::weak_ptr<sysq::ws_ppeHook>, std::allocator<boost::weak_ptr<sysq::ws_ppeHook> > > >, sysq::wait_F<boost::weak_ptr<sysq::ws_ppeHook>, boost::shared_ptr<sysq::ws_ppeHook> > >(__gnu_cxx::__normal_iterator<boost::weak_ptr<sysq::ws_ppeHook>*, std::vector<boost::weak_ptr<sysq::ws_ppeHook>, std::allocator<boost::weak_ptr<sysq::ws_ppeHook> > > >, __gnu_cxx::__normal_iterator<boost::weak_ptr<sysq::ws_ppeHook>*, std::vector<boost::weak_ptr<sysq::ws_ppeHook>, std::allocator<boost::weak_ptr<sysq::ws_ppeHook> > > >, sysq::wait_F<boost::weak_ptr<sysq::ws_ppeHook>, boost::shared_ptr<sysq::ws_ppeHook> >)+000074
+[ 57] 0x00002b56e11f1ec2 /usr/local/MATLAB/R2011a/bin/glnxa64/../../bin/glnxa64/../../bin/glnxa64/libuij.so+00220866
+[ 58] 0x00002b56e11ef502 /usr/local/MATLAB/R2011a/bin/glnxa64/../../bin/glnxa64/../../bin/glnxa64/libuij.so+00210178 svWS_ProcessPendingEvents(int, int, bool)+000578
+[ 59] 0x00002b56d97091c7 /usr/local/MATLAB/R2011a/bin/glnxa64/../../bin/glnxa64/libmwmcr.so+00197063
+[ 60] 0x00002b56d970960a /usr/local/MATLAB/R2011a/bin/glnxa64/../../bin/glnxa64/libmwmcr.so+00198154
+[ 61] 0x00002b56d9709d6f /usr/local/MATLAB/R2011a/bin/glnxa64/../../bin/glnxa64/libmwmcr.so+00200047
+[ 62] 0x0000003e7b80683d                             /lib64/libpthread.so.0+00026685
+[ 63] 0x0000003e7acd4fad                                   /lib64/libc.so.6+00872365 clone+000109
+
+
+
+This error was detected while a MEX-file was running. If the MEX-file
+is not an official MathWorks function, please examine its source code
+for errors. Please consult the External Interfaces Guide for information
+on debugging MEX-files.
+
+If this problem is reproducible, please submit a Service Request via:
+    http://www.mathworks.com/support/contact_us/
+
+A technical support engineer might contact you with further information.
+
+Thank you for your help.** This crash report has been saved to disk as /home/students/3776123/matlab_crash_dump.19524-1 **
+
+
+[?1l>[Please exit and restart MATLAB]>>[?1h=
+[Please exit and restart MATLAB]>>exit
+[?1l>
