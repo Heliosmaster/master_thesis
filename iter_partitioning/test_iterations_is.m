@@ -1,10 +1,10 @@
 %close all; clc; clear all;
-strdir = '../matrices_preliminary/';
+strdir = '../matrices/';
 %d = dir([strdir '*.mtx']);
 
 %for k=1:length(d)
 	%matrix = d(k).name;
-	matrix = 'nug30';
+	matrix = 'delaunay_n15';
 	str = [strdir matrix ];
 	str = [str '.mtx'];
 	A  = mmread(str);

@@ -29,26 +29,26 @@ for k=1:length(d)
 	for j=1:outeriter
 		[I, s, ~, ~ , ~, ~, ~, ~, ~, ~, ~] = mondriaan(A,2,0.03,2,0,8);
 		[m,n] = size(A);
-		fprintf('pa_unsorted_concat:\t ');
+		fprintf('pa_sorted_w_simple:\t ');
 		fprintf('%4g | ',s(4));
 
 		values(j,1) = s(4);
-		v = pa_unsorted_concat(I,'row');
+		v = pa_sorted_simple(I,1);
 		[Ac,Ar] = MatlabOverpaint(I,v);
 
 		for i=2:iter+1
 			inner_loop;
 			values(j,i) = s(4);
-			v = pa_unsorted_concat(A2,'row');
+			v = pa_sorted_simple(A2,1);
 			[Ac,Ar] = MatlabOverpaint(A2,v);
 end
 fprintf('\n');
 end
 fprintf('--------------------\n');
 fprintf('\t\t');
-fprintf('%5.0f | ',mean(values(:,1)));
+fprintf('%5g | ',mean(values(:,1)));
 for i=2:iter+1
-		fprintf('%5.0f ',mean(values(:,i)));
+		fprintf('%5g ',mean(values(:,i)));
 end
 fprintf('\n');
 % fprintf('\t time %g s',elapsedTime); % (avg %5.2f

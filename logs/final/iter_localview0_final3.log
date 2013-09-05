@@ -1,0 +1,47 @@
+[?1h=
+                                                                                     < M A T L A B (R) >
+                                                                           Copyright 1984-2010 The MathWorks, Inc.
+                                                                        Version 7.12.0.635 (R2011a) 64-bit (glnxa64)
+                                                                                       March 18, 2011
+
+ 
+  To get started, type one of these: helpwin, helpdesk, or demo.
+  For product information, visit www.mathworks.com.
+ 
+{Warning: Name is nonexistent or not a directory: /home/davide/projects/mthesis/Mondriaan4RC/tools.} 
+> In path at 110
+  In addpath at 87
+  In startup at 2
+  In matlabrc at 222
+
+belgium_osm.mtx - 0
+
+localview_0:	 429 |   228   304   204   236   327 	 avg: 259.8	 18.4613 s
+localview_0:	 349 |   169   305   330   173   299 	 avg: 255.2	 18.6723 s
+localview_0:	 389 |   163   188   218   220   310 	 avg: 219.8	 21.012 s
+localview_0:	 304 |   168   351   352   192   315 	 avg: 275.6	 20.5518 s
+localview_0:	 230 |   308   216   303   339   324 	 avg: 298	 18.8961 s
+localview_0:	 329 |   426   304   302   220   173 	 avg: 285	 20.0972 s
+localview_0:	 166 |   345   332   316   293   227 	 avg: 302.6	 18.3362 s
+localview_0:	 261 |   164   333   200   264   320 	 avg: 256.2	 18.2881 s
+localview_0:	 237 |   283   225   228   241   291 	 avg: 253.6	 21.1042 s
+localview_0:	 167 |   234   277   226   230   167 	 avg: 226.8	 19.6976 s
+localview_0:	 206 |   422   296   202   338   223 	 avg: 296.2	 19.755 s
+localview_0:	 190 |   238   213   319   311   289 	 avg: 274	 20.6908 s
+localview_0:	 181 |   271   206   320   224   217 	 avg: 247.6	 17.7599 s
+localview_0:	 213 |   204   171   386   204   302 	 avg: 253.4	 17.6372 s
+localview_0:	 219 |   414   315   259   200   272 	 avg: 292	 19.7299 s
+localview_0:	 218 |   244   275   215   304   268 	 avg: 261.2	 21.8574 s
+localview_0:	 284 |   352   161   325   230   306 	 avg: 274.8	 21.1478 s
+localview_0:	 249 |   239   200   210   262   206 	 avg: 223.4	 19.7858 s
+localview_0:	 180 |   317   234   334   249   235 	 avg: 273.8	 17.7811 s
+localview_0:	 154 |   191   294   243   293   200 	 avg: 244.2	 18.0845 s
+------
+mean initials 247.75, mean final 263.66, time 2338.85 s (mean 19.4673 s)
+
+italy_osm.mtx - 0
+
+localview_0:	 260 |   444   185   292   376   289 	 avg: 317.2	 88.3362 s
+localview_0:	 447 |   181   144   384   350   405 	 avg: 292.8	 87.6588 s
+localview_0:	 181 |   302   399   320   210   355 	 avg: 317.2	 83.9489 s
+localview_0:	 280 |   124   239   171 

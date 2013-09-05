@@ -2,7 +2,7 @@
 
 printIteration = 0;
 % read the input sparse matrix
-strdir = '../matrices_preliminary/';
+strdir = '../matrices3/';
 d = dir([strdir '*.mtx']);
 %d = dir('../matrices/new_testbed/*.mtx');
 
@@ -19,7 +19,7 @@ for k=1:length(d)
 		 outeriter = 20;
 		 inneriter = 5;
 		 iter = 2;
-		 flag = 1;
+		 flag = 0;
 		 i=1;
 		 results = zeros(1,inneriter);
 		 times = zeros(1,inneriter);
@@ -40,7 +40,7 @@ for k=1:length(d)
 				%results(1) = s(4);
 				[m,n] = size(A);      
 
-				fprintf(['localview:\t ']);
+				fprintf('localview_%g:\t ',flag);
 
 				fprintf('%g | ',s(4));
 				total_initials(z)=s(4);

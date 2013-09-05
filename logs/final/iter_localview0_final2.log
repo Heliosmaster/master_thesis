@@ -1,0 +1,42 @@
+[?1h=
+                                                                        < M A T L A B (R) >
+                                                              Copyright 1984-2010 The MathWorks, Inc.
+                                                            Version 7.12.0.635 (R2011a) 64-bit (glnxa64)
+                                                                           March 18, 2011
+
+ 
+  To get started, type one of these: helpwin, helpdesk, or demo.
+  For product information, visit www.mathworks.com.
+ 
+{Warning: Name is nonexistent or not a directory: /home/davide/projects/mthesis/Mondriaan4RC/tools.} 
+> In path at 110
+  In addpath at 87
+  In startup at 2
+  In matlabrc at 222
+
+cage13.mtx - 0
+
+localview_0:	 43651 | 49374 49761 49083 52298 54757 	 avg: 51054.6	 87.2175 s
+localview_0:	 45506 | 53087 55236 49898 52758 50335 	 avg: 52262.8	 84.9464 s
+localview_0:	 43371 | 54360 48995 51930 54635 54338 	 avg: 52851.6	 86.4993 s
+localview_0:	 43608 | 54552 53397 50893 55210 49595 	 avg: 52729.4	 92.5084 s
+localview_0:	 46868 | 54728 49124 54452 55049 54419 	 avg: 53554.4	 88.037 s
+localview_0:	 46486 | 51772 50023 48776 50469 55493 	 avg: 51306.6	 95.4966 s
+localview_0:	 46057 | 53806 49279 48567 55802 48860 	 avg: 51262.8	 94.0794 s
+localview_0:	 46701 | 48607 52480 49120 52573 53714 	 avg: 51298.8	 95.1821 s
+localview_0:	 47022 | 54142 49481 54230 49853 54555 	 avg: 52452.2	 90.3228 s
+localview_0:	 46022 | 55033 49021 54851 50020 49649 	 avg: 51714.8	 90.2035 s
+localview_0:	 45788 | 54472 50245 49387 54334 48337 	 avg: 51355	 91.0439 s
+localview_0:	 43440 | 54991 54842 49358 49471 53553 	 avg: 52443	 92.6246 s
+localview_0:	 44731 | 54748 48642 49384 53958 53758 	 avg: 52098	 88.8817 s
+localview_0:	 46490 | 53635 54545 49510 51705 51505 	 avg: 52180	 91.4921 s
+localview_0:	 42929 | 50074 53045 48768 48683 53961 	 avg: 50906.2	 86.1537 s
+localview_0:	 43108 | 50749 56553 55095 49054 50155 	 avg: 52321.2	 86.9604 s
+localview_0:	 43611 | 49742 56377 53397 49038 55051 	 avg: 52721	 86.6857 s
+localview_0:	 46152 | 53907 54903 51030 54313 49093 	 avg: 52649.2	 87.4169 s
+localview_0:	 46808 | 54194 48694 50794 54373 53610 	 avg: 52333	 91.6542 s
+localview_0:	 46319 | 50235 53832 53650 51501 54261 	 avg: 52695.8	 84.0666 s
+------
+mean initials 45233.4, mean final 52109.5, time 10857.6 s (mean 89.5736 s)
+>> exit
+[?1l>

@@ -8,10 +8,11 @@ end
 l = length(uncut);
 nz=get_nnz(A);
 [valu,iu] = sort(nz(uncut),'ascend');
-[~,ic] = sort(nz(cut),'ascend');
+[valc,ic] = sort(nz(cut),'ascend');
 if widow
     ru = nnz(valu==1);
-    v = [uncut(iu(ru+1:end)) cut(ic) uncut(iu(1:ru))];
+		rc = nnz(valc==1);
+		v = [uncut(iu(ru+1:end)) cut(ic(rc+1:end)) uncut(iu(1:ru)) cut(ic(1:rc))];
 else
     v = [uncut(iu) cut(ic)];
 end

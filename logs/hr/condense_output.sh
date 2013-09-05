@@ -15,7 +15,6 @@ do
 done
 
 cd ../pa
-
 pa_dirs=`ls -l | grep -e '^d' | awk '{print $9}'`
 for dir in $pa_dirs
 do

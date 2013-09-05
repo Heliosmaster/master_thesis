@@ -1,14 +1,15 @@
+format long g;
 %close all; clc; clear all;
 %matrix = 'dfl001';
 %str = ['../matrices_preliminary/' matrix '.mtx'];
-strdir = '../matrices2/';
-d = dir([strdir '*.mtx']);
+strdir = '../matrices3/';
+%d = dir([strdir '*.mtx']);
 
-for k=1:length(d)
-	matrix = d(k).name;
-	%matrix = 'tbdlinux';
+%for k=1:length(d)
+	%matrix = d(k).name;
+	matrix = 'italy_osm';
 	str = [strdir matrix ];
-	%str = [str '.mtx'];
+	str = [str '.mtx'];
 	A  = mmread(str);
 
 	%clear str
@@ -48,4 +49,4 @@ for k=1:length(d)
 	fprintf('--------------------\n');
 	fprintf('avg initials: %5g \t\t avg finals: %5g\n\n\n',mean(initials),mean(values));
 end
-end
+%end

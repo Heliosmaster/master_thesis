@@ -11,7 +11,7 @@ long* choose_vector(int index, struct sparsematrix* A, int option1, int option2)
 void print_label_vector(int index, int option1, int option2);
 void get_pa_unsorted(struct sparsematrix* A, long** cut_rows, int* length_cut_rows, long** cut_cols, int* length_cut_cols, long** uncut_rows, int* length_uncut_rows, long** uncut_cols, int* length_uncut_cols);
 void get_po_sorted(struct sparsematrix* A, int widow, long** sorted_rows, long** sorted_cols);
-void get_pa_sorted(struct sparsematrix* A, int widow, long** sorted_cut_rows, int* length_cut_rows, long** sorted_cut_cols, int* length_cut_cols, long** sorted_uncut_rows, int* length_uncut_rows, long** sorted_uncut_cols, int* length_uncut_cols);
+void get_pa_sorted(struct sparsematrix* A, int widow, long** sorted_cut_rows, int* length_cut_rows, long** sorted_cut_cols, int* length_cut_cols, long** sorted_uncut_rows, int* length_uncut_rows, long** sorted_uncut_cols, int* length_uncut_cols, long** num_nnz2);
 
 long* po_unsorted_concat(struct sparsematrix* A, int flag);
 long* pa_unsorted_concat(struct sparsematrix* A, int flag);
