@@ -2,7 +2,7 @@
 
 # grep average * | sed -r 's/hr-([0-9][0-9]?-[0-1]-[0-1])\.log:average initials\s+([0-9]\.[0-9][0-9])\s+average finals:\s+([0-9]\.[0-9][0-9])/\1: \2 \3/g'
 
-matrix_dir="../../matrices4/"
+matrix_dir="../../matrices3/"
 results_dir="../../logs/hr_summary"
 if [ ! -d $results_dir]; then
 	mkdir $results_dir
@@ -31,8 +31,9 @@ do
 		mkdir $output_dir
 	fi
 
+#	./hot_restart $matrix 7 1 0 &> $output_dir/hr-7-1-0.log
 	./hot_restart $matrix 1 0 0 &> $output_dir/hr-1-0-0.log
-#	./hot_restart $matrix 1 1 0 &> $output_dir/hr-1-1-0.log
+	./hot_restart $matrix 1 1 0 &> $output_dir/hr-1-1-0.log
 #	./hot_restart $matrix 6 1 0 &> $output_dir/hr-6-1-0.log
 #	./hot_restart $matrix 5 0 0 &> $output_dir/hr-5-0-0.log
 #	./hot_restart $matrix 5 1 0 &> $output_dir/hr-5-1-0.log

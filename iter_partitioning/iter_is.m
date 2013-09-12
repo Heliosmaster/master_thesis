@@ -2,7 +2,7 @@ format long g;
 %close all; clc; clear all;
 %matrix = 'dfl001';
 %str = ['../matrices_preliminary/' matrix '.mtx'];
-strdir = '../matrices3/';
+strdir = '../matrices4/';
 %d = dir([strdir '*.mtx']);
 
 %for k=1:length(d)
