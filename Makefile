@@ -1,6 +1,6 @@
 .SILENT:
 
-all: iter
+all: mondriaan iter
 
 iter:
 	@echo == Building Iterative Partitioning ==
@@ -8,9 +8,9 @@ iter:
 
 mondriaan:
 	@echo == Building Mondriaan ==
-	(cd Mondriaan3.11; make all)
+	(cd Mondriaan4RC; make all)
 
 clean:
 	@echo == Cleaning ==
 	cd iter_partitioning; make clean;
-	cd Mondriaan3.11; make clean;
+	cd Mondriaan4RC; make veryclean;
