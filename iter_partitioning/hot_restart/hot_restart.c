@@ -1,5 +1,6 @@
 #include <string.h>
 #include <unistd.h>
+#include <math.h>
 #include "overpaint.h"
 #include "../utils/utils.h"
 #include "../utils/createB.h"
@@ -102,7 +103,7 @@ int main(int argc, char* argv[]){
 		vecfreel(inner_vec);
 		/*		sleep(1);*/
 	}
-	printf("average initials %5.2f\t average finals: %5.2f\n",ar_mean(initial_vec,outer_iter),ar_mean(outer_vec,outer_iter));
+	printf("average initials %5d\t average finals: %5d\n",(int)ar_mean(initial_vec,outer_iter),(int)ar_mean(outer_vec,outer_iter));
 	vecfreel(outer_vec);
 	vecfreel(initial_vec);
 	MMDeleteSparseMatrix(&matrix);

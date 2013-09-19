@@ -3,7 +3,7 @@
 
 cd po
 po_dirs=`ls -l | grep -e '^d' | awk '{print $9}'`
-results_dir="../../../hr_summary"
+results_dir="../../summary"
 
 for dir in $po_dirs
 do

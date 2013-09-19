@@ -2,14 +2,14 @@ format long g;
 %close all; clc; clear all;
 %matrix = 'dfl001';
 %str = ['../matrices_preliminary/' matrix '.mtx'];
-strdir = '../matrices4/';
-%d = dir([strdir '*.mtx']);
+strdir = '../matrices/';
+d = dir([strdir '*.mtx']);
 
-%for k=1:length(d)
-	%matrix = d(k).name;
-	matrix = 'italy_osm';
+for k=1:length(d)
+	matrix = d(k).name;
+	%	matrix = 'italy_osm';
 	str = [strdir matrix ];
-	str = [str '.mtx'];
+	%str = [str '.mtx'];
 	A  = mmread(str);
 
 	%clear str
@@ -35,7 +35,7 @@ strdir = '../matrices4/';
 			fprintf('%5g | ',s(4));
 			initials(j) = s(4);
 			for i=1:iter
-				v = independent_set(str,I,flag);
+				v = independent_set(str,I,flag,'1');
 				[Ac,Ar] = MatlabOverpaint(I,v);
 				B = MatlabCreateB(Ac,Ar);
 				[I2, s, ~, ~ , ~, ~, ~, ~, ~, ~, ~] = mondriaan(B,2,0.03,0,0,5);
@@ -49,4 +49,4 @@ strdir = '../matrices4/';
 	fprintf('--------------------\n');
 	fprintf('avg initials: %5g \t\t avg finals: %5g\n\n\n',mean(initials),mean(values));
 end
-%end
+end

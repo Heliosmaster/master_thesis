@@ -28,7 +28,7 @@ KLFM_InitPart_MaxNrLoops                       25
 KLFM_InitPart_MaxNrNoGainMoves                 200 
 KLFM_Refine_MaxNrLoops                         25 
 KLFM_Refine_MaxNrNoGainMoves                   200 
-Iterative_Refinement                           aftermg 
+Iterative_Refinement                           always 
 VectorPartition_Step3                          random 
 VectorPartition_MaxNrLoops                     10 
 VectorPartition_MaxNrGreedyImproves            10 

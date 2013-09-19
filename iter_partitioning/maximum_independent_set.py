@@ -144,12 +144,13 @@ def subgraph(graph,list,m,n):
 if __name__ == "__main__":
     #input_matrix = 'tbdmatlab'
     input_filename = sys.argv[1]
+    list_filename = sys.argv[2]
     output_filename = input_filename + '.set'
     #print("Reading graph")
     graph,m,n = read_mtx_file_as_graph(input_filename)
     #print(graph)
     #print("Reading list")
-    l = read_list_from_file('matlab_temp.txt')
+    l = read_list_from_file(list_filename)
     #print(l)
     #print("Getting subgraph")
     graph2 = subgraph(graph,l,m,n)
