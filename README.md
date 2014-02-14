@@ -1,6 +1,6 @@
 # Master thesis
 
-This repository contains all the code and the results of my Master Thesis "Iterative Sparse Matrix partitioning", written under the supervision of prof. Rob H. Bisseling at Utrecht University, The Netherlands.
+This repository contains all the code and the results of my Master Thesis "Iterative Sparse Matrix partitioning", written under the supervision of prof. Rob H. Bisseling at Utrecht University, The Netherlands. The actual implementation is found in the `iter_partitioning` folder.
 
 ### General information
 The material consists of MATLAB and C implementations of the various algorithm designed.
@@ -20,7 +20,7 @@ Moreover, there is the `patoh` folder which contains version 3.2 of the [PaToH](
 
 ### Structure
 
-* The folders `Mondriaan3.11`, `Mondriaan4RC` and `patoh` contain the needed s software to run the code.
+* The folders `Mondriaan3.11`, `Mondriaan4RC` and `patoh` contain the needed software to run the code.
 
 * The folder `iter_partitioning` contains the actual files written for the thesis. It is subdivided in
     * `hot_restart`, the material of Section 2.4
