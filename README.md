@@ -11,7 +11,7 @@ Giving `make` in the root directory builds both Mondriaan (the svn version) and 
 
 To clean up, `make clean` is sufficient.
 
-### Dependancies
+### Dependencies
 The software contains everything needed to reproduce the final results of the thesis. 
 
 It is written to run on top of the [Mondriaan](http://www.staff.science.uu.nl/~bisse101/Mondriaan/) software partitioner. In the root folder there are two different versions of Mondriaan used during development: 3.11 and the SVN version from June 2013, which can be considered a sort of 4beta.
